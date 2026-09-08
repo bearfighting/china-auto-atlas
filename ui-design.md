@@ -1,5 +1,7 @@
 # China Auto Atlas — UI Design System
 
+> Component strategy: Tailwind CSS + shadcn/ui first. Prefer composing existing primitives over writing new base components.
+
 > Version: 0.1  
 > Status: Initial Design Specification
 

@@ -899,10 +899,15 @@ Timeline
 ```text
 Next.js
 TypeScript
+Tailwind CSS
+shadcn/ui
 Markdown / MDX
 Structured JSON/YAML Data
 Static Generation
 ```
+
+UI 实现应优先复用 shadcn/ui 提供的基础组件和交互能力。只有在现有组件无法表达明确的汽车信息结构时，才新增领域组件；
+新增组件也应尽量组合现有 shadcn/ui primitives，而不是从零重复实现按钮、弹窗、表格、菜单、Tabs、Badge 等基础功能。
 
 新闻可以主要使用 Markdown / MDX。
 
@@ -924,7 +929,7 @@ Static Generation
 
 初期完全没有必要为了“未来可能有百万车型”提前设计复杂数据库。
 
-MVP 的结构化数据可以使用按实体拆分的 JSON 文件保存，但页面和业务逻辑不应直接依赖文件路径或 JSON 格式。
+MVP 的结构化数据使用按实体拆分的 YAML 文件维护，并在构建阶段生成 JSON 索引；页面和业务逻辑不应直接依赖文件路径或 JSON 格式。
 应用应通过稳定的数据访问接口读取 Manufacturer、Brand、Vehicle、Technology、Event、News 和 Source。
 未来切换数据库时，应替换数据访问实现，而不是重写页面和内容模型。
 

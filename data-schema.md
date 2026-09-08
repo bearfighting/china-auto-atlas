@@ -2190,7 +2190,7 @@ This provides:
 
 ## MVP Storage Decision
 
-The MVP should use JSON as the initial storage format.
+The MVP uses YAML as the canonical authoring format and generates JSON indexes during the build step.
 
 Each major object should normally have its own file:
 
@@ -2204,7 +2204,7 @@ data/
   sources/*.json
 ```
 
-Pages must not import these files directly. JSON is an implementation detail of the MVP storage adapter.
+Pages must not import source files directly. Generated JSON is an implementation detail of the MVP storage adapter.
 The application should access generated structured-data indexes through repository interfaces so that a future database
 adapter can replace the file-based adapter without changing page components.
 

@@ -2168,7 +2168,8 @@ That is the difference between a news archive and a living automotive knowledge 
 
 The content model is independent of the storage technology.
 
-During the MVP, entities, events, documents and sources may be stored as separate JSON files. This does not change their conceptual meaning or their relationships.
+During the MVP, entities, events, documents and sources are maintained as separate YAML/Markdown source files and normalized
+into generated JSON indexes for the application. This does not change their conceptual meaning or their relationships.
 
 The application should access them through a data-access boundary rather than coupling page rendering to file names or directory structure.
 
