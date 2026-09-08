@@ -1,0 +1,23 @@
+schema_version: 1
+type: data_manifest
+id: china-auto-atlas-mvp-seed
+status: active
+entity_paths:
+  - data/entities/manufacturers
+  - data/entities/organizations
+  - data/entities/brands
+  - data/entities/vehicles
+  - data/entities/platforms
+  - data/entities/technologies
+market_specification_paths:
+  - data/market-specifications
+relationship_paths:
+  - data/relationships
+event_paths:
+  - data/events
+source_paths:
+  - data/sources
+documentation_paths:
+  - data/docs
+source_registry_path: data/sources
+media_registry_path: data/media/media-items.yaml

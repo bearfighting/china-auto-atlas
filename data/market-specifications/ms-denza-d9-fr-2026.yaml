@@ -1,0 +1,44 @@
+schema_version: 1
+type: market_specification
+id: ms-denza-d9-fr-2026
+vehicle_id: denza-d9
+market: FR
+valid_from: '2026-06-29'
+status: orderable
+currency: EUR
+variants:
+- name: D9 DM-i Elegance
+  prices:
+  - amount: 78500
+    currency: EUR
+    price_type: msrp
+  powertrain_type: phev
+  range_ev:
+    value_km: 210
+    standard: WLTP
+    evidence_status: claimed
+  range_combined:
+    value_km: 950
+    standard: WLTP
+    evidence_status: claimed
+- name: D9 DM-i Ultimate
+  prices:
+  - amount: 83500
+    currency: EUR
+    price_type: msrp
+  powertrain_type: phev
+  range_ev:
+    value_km: 210
+    standard: WLTP
+    evidence_status: claimed
+  range_combined:
+    value_km: 950
+    standard: WLTP
+    evidence_status: claimed
+source_ids:
+- src-denza-d9-france-2026
+- src-denza-d9-europe-2026
+notes:
+- Battery capacity and detailed motor output intentionally omitted until a matching France/Europe official spec table is captured.
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

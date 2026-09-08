@@ -1,0 +1,58 @@
+schema_version: 1
+id: geely-short-blade-battery
+type: technology
+names:
+  en: Geely Short Blade Battery / Geely Golden Short Blade Battery
+  zh-CN: 吉利短刀电池 / 吉利神盾金砖短刀电池
+category: battery
+description:
+  en: Geely Auto's self-developed LFP short-blade traction-battery technology, designed around compact cell geometry,
+    fast charging, durability and safety.
+  zh-CN: 吉利汽车自研的磷酸铁锂短刀动力电池技术，以较短的刀片式电芯形态兼顾布置、快充、寿命与安全设计。
+problem_solved:
+- Improve LFP battery packaging flexibility
+- Improve charging speed and cycle life
+- Improve abuse tolerance and thermal safety
+technical_features:
+- LFP chemistry
+- Short-blade cell geometry
+- High-strength/high-thermal-stability separator
+- Self-Fusing electrode-surface safety technology
+advantages:
+- More flexible pack arrangement than very long blade-cell formats
+- Manufacturer reports fast charging and long cycle life
+- LFP chemistry offers strong thermal stability
+limitations:
+- Safety and lifetime superlatives in launch material are manufacturer test claims
+- LFP chemistry still trades some gravimetric energy density against many nickel-rich chemistries
+- 2025 'Golden Short Blade' branding may represent product evolution; generations should not be silently merged if specs
+  diverge
+developer_ids:
+- geely-auto-group
+supplier_ids:
+- geely-auto-group
+pending_reference_ids:
+- geely-auto-group
+brand_ids:
+- geely-auto
+vehicle_ids:
+- geely-ex5
+first_announced_at:
+  value: '2024-06-27'
+  precision: day
+  evidence_status: confirmed
+event_ids:
+- event-geely-short-blade-unveil-2024
+- event-geely-golden-short-blade-brand-2025
+source_ids:
+- src-geely-short-blade-2024
+- src-geely-ex5-tech
+- src-geely-golden-short-blade-2025
+claim_assessment:
+  manufacturer_claims:
+  - Best-in-class battery life, charging speed and safety at launch
+  - Extensive extreme-condition safety-test performance
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

@@ -1,0 +1,48 @@
+schema_version: 1
+id: denza
+type: brand
+names:
+  en: DENZA
+  zh-CN: 腾势
+aliases:
+- Denza
+- 腾势汽车
+status: active
+positioning:
+  en: Premium technology-oriented new-energy vehicle brand of BYD Group.
+  zh-CN: 比亚迪集团旗下高端、技术导向的新能源汽车品牌。
+powertrain_focus:
+- BEV
+- PHEV
+founded:
+  value: '2010'
+  precision: year
+  evidence_status: confirmed
+  source_ids:
+  - src-denza-brand-profile
+relationship_ids:
+- rel-byd-company-denza-owns
+market_codes:
+- CN
+seed_market_notes:
+- Official global launch occurred in Paris in April 2026; BYD said DENZA would be available in more than 30 European
+  countries by end-2026. Individual country availability should be verified separately.
+vehicle_ids: []
+seed_vehicle_names:
+- D9
+- N7
+- N8
+- Z9GT
+event_ids:
+- event-denza-founded-2010
+- event-denza-wholly-owned-byd
+- event-denza-global-launch-2026
+source_ids:
+- src-denza-brand-profile
+- src-denza-europe-history
+- src-denza-global-launch-2026
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- DENZA began as a BYD–Mercedes-Benz joint venture and is now wholly owned by BYD; ownership history must be represented
+  temporally.

@@ -1,0 +1,42 @@
+schema_version: 1
+sources:
+  - id: src-byd-brand-center
+    type: source
+    publisher: BYD Auto
+    title: 品牌中心
+    url: https://www.byd.com/cn/brand-center
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - BYD entered the automotive industry in 2003
+      - Dynasty and Ocean product matrix
+      - Multi-brand strategy including BYD, Denza, Yangwang and Fangchengbao
+    evidence_status: confirmed
+
+  - id: src-avatr-chn-launch
+    type: source
+    publisher: CATL
+    title: Changan Automobile, Huawei and CATL Jointly Launch the All New Smart Electric Vehicle Architecture CHN
+    url: https://www.catl.com/en/news/962.html
+    source_type: manufacturer
+    source_level: primary
+    published_at: "2022-06-25"
+    date_precision: day
+    accessed_at: "2026-09-08"
+    supports:
+      - Changan Automobile, Huawei and CATL jointly launched CHN
+      - AVATR 11 was the first model on the CHN platform
+      - The three organizations contribute complete-vehicle, intelligent-vehicle, and energy capabilities respectively
+      - CATL supports battery, motor drive, electronic control, energy management, and charging-network areas
+    evidence_status: confirmed
+
+  - id: src-geely-ex5-model
+    type: source
+    publisher: Geely Auto
+    title: GEELY EX5 model page
+    url: https://global.geely.com/en/models/ex5
+    source_type: manufacturer
+    source_level: primary
+    accessed_at: "2026-09-08"
+    evidence_status: confirmed

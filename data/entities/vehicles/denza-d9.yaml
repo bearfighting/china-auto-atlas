@@ -1,0 +1,59 @@
+schema_version: 1
+id: denza-d9
+type: vehicle
+names:
+  en: DENZA D9
+  zh-CN: 腾势D9
+aliases:
+- D9
+- 腾势 D9
+brand_id: denza
+manufacturer_ids:
+- byd-company
+segment: large-mpv
+body_style: mpv
+powertrain_types:
+  - phev
+  - bev
+status: active
+first_announced_at:
+  value: '2022-05-16'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-denza-brand-history
+first_launched_at:
+  value: '2022-08-23'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-denza-brand-history
+platform_id: null
+technology_ids:
+- byd-dm-i
+- byd-blade-battery
+market_spec_ids:
+- ms-denza-d9-fr-2026
+media_ids:
+- media-vehicle-denza-d9-hero
+timeline:
+  announcement_event_id: event-denza-d9-reveal-2022
+  preorder_event_id: null
+  launch_event_id: event-denza-d9-china-launch-2022
+  production_start_event_id: event-denza-d9-production-2022
+  delivery_start_event_id: event-denza-d9-delivery-2022
+  market_entry_event_ids:
+  - event-denza-d9-france-orders-2026
+event_ids:
+- event-denza-d9-reveal-2022
+- event-denza-d9-china-launch-2022
+- event-denza-d9-france-orders-2026
+news_ids: []
+source_ids:
+- src-denza-brand-history
+- src-denza-d9-europe-2026
+- src-denza-d9-france-2026
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- European 2026 D9 DM-i differs materially from earlier China-market D9 variants; market specifications must remain separate.

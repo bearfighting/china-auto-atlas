@@ -1,0 +1,55 @@
+schema_version: 1
+id: byd-dmo
+type: technology
+entity_role: platform-technology
+names:
+  en: DMO (Dual Mode Off-road) Super Hybrid Platform
+  zh-CN: DMO 超级混动越野平台
+category: powertrain
+secondary_categories:
+- vehicle-platform
+description:
+  en: BYD electric-centric plug-in-hybrid off-road architecture combining a dedicated hybrid engine, electric drive,
+    Blade Battery and chassis/battery integration for off-road vehicles.
+  zh-CN: 比亚迪面向越野车型的电驱导向插电混动架构，将混动专用发动机、电驱、刀片电池以及底盘/电池集成结合。
+problem_solved:
+- Provide strong low-speed and multi-axle electric torque for off-road use
+- Combine off-road capability with daily hybrid efficiency
+- Package battery protection into a body-on-frame/off-road architecture
+technical_features:
+- Electric-centric hybrid architecture
+- 1.5T engine applications
+- Multi-motor capability
+- Blade Battery
+- Integrated CTC battery chassis in official DMO description
+advantages:
+- Electric motors provide controllable low-speed torque
+- Hybrid energy supply reduces dependence on charging during long remote trips
+limitations:
+- Complex and heavy relative to simpler ICE or BEV drivetrains
+- Efficiency and capability vary substantially by vehicle implementation; DMO is not a single fixed specification
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- fangchengbao
+vehicle_ids:
+- fangchengbao-bao-5
+first_announced_at:
+  value: '2023-08-16'
+  precision: day
+  evidence_status: confirmed
+event_ids:
+- event-dmo-launch-2023
+source_ids:
+- src-byd-dmo-tech
+- src-byd-bao5-dmo-2023
+- src-byd-about-tech
+claim_assessment:
+  manufacturer_claims:
+  - Combines urban efficiency with robust off-road performance
+  - Integrated CTC improves structural protection
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

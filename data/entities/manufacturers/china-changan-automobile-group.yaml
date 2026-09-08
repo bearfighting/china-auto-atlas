@@ -1,0 +1,64 @@
+schema_version: 1
+id: china-changan-automobile-group
+type: manufacturer
+industry_role:
+  - corporate_group
+  - automotive_group
+status: active
+names:
+  en: "China Changan Automobile Group Co., Ltd."
+  zh-CN: "中国长安汽车集团有限公司"
+aliases:
+  - "China Changan Automobile"
+  - "中国长安汽车"
+founded:
+  value: "2025-07"
+  precision: month
+headquarters:
+  country: CN
+  region: Chongqing
+  city: Chongqing
+registered_capital:
+  amount: 20000000000
+  currency: CNY
+company_type:
+  - central_state_owned_enterprise_group
+  - automotive_group
+formation_basis:
+  note: >-
+    Created with State Council approval based on Changan Automobile, Chenzhi
+    Group, the finance company, Changan Auto Finance and other companies.
+seed_brand_portfolio:
+  - name: "AVATR"
+    portfolio_group: core_nev_brands
+  - name: "DEEPAL"
+    portfolio_group: core_nev_brands
+  - name: "CHANGAN NEVO"
+    portfolio_group: core_nev_brands
+  - name: "CHANGAN"
+    portfolio_group: broader_business_brands
+  - name: "CHANGAN KAICENE"
+    portfolio_group: broader_business_brands
+main_automotive_business:
+  - complete_vehicles
+  - automotive_components
+  - sales_and_service
+  - logistics
+  - financial_services
+  - motorcycles
+official_sites:
+  - label: group
+    language: zh-CN
+    url: "https://www.ccag.cn/"
+description: >-
+  Chongqing-headquartered central state-owned automotive group established
+  in July 2025. The group spans the automotive value chain and controls or
+  incorporates multiple listed and operating companies.
+source_ids:
+  - src-ccag-company-profile-2026
+  - src-ccag-global-brands-2026
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
+notes:
+  - "Do not merge this 2025 group entity with Chongqing Changan Automobile Co., Ltd."
+  - "The group page calls AVATR, DEEPAL and CHANGAN NEVO its three digital-intelligent NEV brands; a later official globalization article also names CHANGAN and CHANGAN KAICENE among five business brands."

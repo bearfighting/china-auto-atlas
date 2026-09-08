@@ -1,0 +1,50 @@
+schema_version: 1
+id: zeekr-golden-battery
+type: technology
+names:
+  en: Golden Battery
+  zh-CN: 金砖电池
+category: battery
+description:
+  en: ZEEKR-developed fast-charging traction-battery family associated with its high-voltage EV ecosystem; current 7X
+    applications include an LFP Golden Battery variant.
+  zh-CN: 极氪自研、面向高压快充体系的动力电池技术家族；当前7X部分版本采用磷酸铁锂金砖电池。
+problem_solved:
+- Increase DC fast-charging rate
+- Provide an in-house battery technology aligned with ZEEKR's high-voltage architecture
+technical_features:
+- Fast-charging focus
+- LFP application on ZEEKR 7X
+- Integrated with ZEEKR high-voltage ecosystem
+advantages:
+- Manufacturer reports very short 10–80% charging times on compatible models/chargers
+limitations:
+- Peak C-rate or headline charge time does not describe the full charging curve
+- Charging results depend on battery generation, SOC window, temperature and charger output
+- Do not generalize one Golden Battery generation's performance to every battery carrying the name
+developer_ids:
+- zeekr-group
+supplier_ids:
+- zeekr-group
+pending_reference_ids:
+- zeekr-group
+brand_ids:
+- zeekr
+vehicle_ids:
+- zeekr-7x
+first_announced_at:
+  value: null
+  evidence_status: unknown
+  note: ZEEKR Group confirms development/production; exact first-generation launch date should be sourced in a dedicated
+    historical pass.
+event_ids: []
+source_ids:
+- src-zeekr-group-tech
+- src-zeekr-7x
+claim_assessment:
+  manufacturer_claims:
+  - Industry-leading fast charging
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

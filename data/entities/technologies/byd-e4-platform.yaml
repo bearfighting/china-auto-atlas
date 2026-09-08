@@ -1,0 +1,52 @@
+schema_version: 1
+id: byd-e4-platform
+type: technology
+entity_role: platform-technology
+names:
+  en: e⁴ Platform
+  zh-CN: 易四方平台
+category: vehicle-platform
+secondary_categories:
+- powertrain
+- chassis
+description:
+  en: BYD/YANGWANG distributed four-motor drive platform that controls individual wheel torque through four independently
+    driven motors.
+  zh-CN: 比亚迪/仰望采用四电机独立驱动与轮端扭矩控制的分布式驱动平台。
+problem_solved:
+- Independent wheel-torque control
+- Vehicle maneuverability and stability when traction differs by wheel
+- High-output electrified propulsion for premium/off-road applications
+technical_features:
+- Four-motor distributed drive
+- Independent wheel torque control
+- Integrated perception, decision and execution control
+advantages:
+- Fine-grained wheel-torque control enables unusual maneuvering and traction-control strategies
+- Redundancy of multiple drive units can support special control modes
+limitations:
+- Four drive motors increase component count, mass, cost and control complexity
+- Special maneuvers do not imply improved efficiency in ordinary driving
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- yangwang
+vehicle_ids:
+- yangwang-u8
+first_announced_at:
+  value: '2023-01-08'
+  precision: day
+  evidence_status: confirmed
+event_ids:
+- event-e4-yangwang-unveil-2023
+source_ids:
+- src-byd-about-tech
+- src-byd-yangwang-u8-2023
+claim_assessment:
+  manufacturer_claims:
+  - Distributed drive improves control across multiple scenarios
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

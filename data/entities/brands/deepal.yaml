@@ -1,0 +1,48 @@
+schema_version: 1
+id: deepal
+type: brand
+names:
+  en: DEEPAL
+  zh-CN: 深蓝汽车
+aliases:
+- Deepal
+- 长安深蓝
+- 深蓝
+status: active
+positioning:
+  en: New-energy vehicle brand in the Changan automotive ecosystem, originally described by Changan as a young,
+    technology-oriented digital electric brand.
+  zh-CN: 长安汽车体系内的新能源品牌；长安早期资料将其定位为年轻、科技的数字纯电品牌。
+powertrain_focus:
+- BEV
+- EREV
+founded:
+  value: '2022'
+  precision: year
+  evidence_status: confirmed
+  note: Changan's 2022 reporting identifies 长安深蓝 as a newly released NEV brand; exact announcement day is left for
+    a later event-source pass.
+  source_ids:
+  - src-changan-annual-report-2022
+relationship_ids:
+- rel-changan-automobile-deepal-operates
+- rel-ccag-deepal-group-brand
+market_codes:
+- CN
+vehicle_ids: []
+seed_vehicle_names:
+- SL03
+- S07
+- S05
+- G318
+event_ids:
+- event-deepal-brand-launch-2022
+source_ids:
+- src-changan-annual-report-2022
+- src-changan-csr-2022
+- src-ccag-company-profile
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- Older official material uses 长安深蓝; current branding uses 深蓝/DEEPAL. Treat naming evolution as an event rather
+  than creating duplicate brands.

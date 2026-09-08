@@ -1,0 +1,177 @@
+schema_version: 1
+relationships:
+- schema_version: 1
+  type: relationship
+  id: rel-xiaomi-corporation-xiaomi-auto-operates
+  from_id: xiaomi-corporation
+  to_id: xiaomi-auto
+  relationship: operates
+  evidence_status: confirmed
+  source_ids:
+  - src-xiaomi-su7-launch-2024
+
+- schema_version: 1
+  type: relationship
+  id: rel-saic-motor-mg-operates
+  from_id: saic-motor
+  to_id: mg
+  relationship: operates
+  evidence_status: confirmed
+  source_ids:
+  - src-saic-mg4-cn-launch-2025
+
+- schema_version: 1
+  type: relationship
+  id: rel-byd-company-byd-brand-operates
+  from_id: byd-company
+  to_id: byd
+  relationship: operates
+  valid_from: null
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-brand-center
+- schema_version: 1
+  type: relationship
+  id: rel-byd-company-denza-owns
+  from_id: byd-company
+  to_id: denza
+  relationship: owns
+  valid_from: null
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-denza-europe-history
+  notes:
+  - Source confirms DENZA is now wholly owned by BYD; exact effective date should be added in a dedicated ownership-history
+    pass.
+- schema_version: 1
+  type: relationship
+  id: rel-byd-company-yangwang-operates
+  from_id: byd-company
+  to_id: yangwang
+  relationship: operates
+  valid_from: "2023-01"
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-yangwang-launch-2023
+- schema_version: 1
+  type: relationship
+  id: rel-byd-company-fangchengbao-operates
+  from_id: byd-company
+  to_id: fangchengbao
+  relationship: operates
+  valid_from: '2023-06-09'
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-fangchengbao-announcement-2023
+- schema_version: 1
+  type: relationship
+  id: rel-geely-auto-group-geely-auto-operates
+  from_id: geely-auto-group
+  to_id: geely-auto
+  reference_status: pending
+  relationship: operates
+  valid_from: null
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-geely-brand-page
+- schema_version: 1
+  type: relationship
+  id: rel-geely-auto-group-zeekr-manages
+  from_id: geely-auto-group
+  to_id: zeekr
+  reference_status: pending
+  relationship: operates
+  valid_from: "2021-04"
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-geely-brand-page
+  - src-geely-sustainability-2021
+  notes:
+  - Current legal/corporate operation also involves Zeekr Group; do not interpret this record as exhaustive ownership
+    structure.
+- schema_version: 1
+  type: relationship
+  id: rel-zeekr-group-zeekr-operates
+  from_id: zeekr-group
+  to_id: zeekr
+  reference_status: pending
+  relationship: operates
+  valid_from: null
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-investor-faq
+  notes:
+  - zeekr-group needs a formal corporate entity record.
+- schema_version: 1
+  type: relationship
+  id: rel-changan-automobile-deepal-operates
+  from_id: chongqing-changan-automobile
+  to_id: deepal
+  reference_status: pending
+  relationship: operates
+  valid_from: '2022'
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-changan-annual-report-2022
+  notes:
+  - chongqing-changan-automobile needs a formal corporate entity record.
+- schema_version: 1
+  type: relationship
+  id: rel-ccag-deepal-group-brand
+  from_id: china-changan-automobile-group
+  to_id: deepal
+  relationship: controls
+  valid_from: "2025-07"
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-ccag-company-profile
+- schema_version: 1
+  type: relationship
+  id: rel-changan-automobile-avatr-controls
+  from_id: chongqing-changan-automobile
+  to_id: avatr
+  reference_status: pending
+  relationship: controls
+  valid_from: null
+  valid_to: null
+  evidence_status: claimed
+  source_ids:
+  - src-avatr-financing-2022
+  notes:
+  - The source calls Changan Automobile one of AVATR's two leading shareholders; exact current equity percentage
+    is intentionally omitted in this pass.
+- schema_version: 1
+  type: relationship
+  id: rel-catl-avatr-invested-in
+  from_id: catl
+  to_id: avatr
+  reference_status: pending
+  relationship: invested_in
+  valid_from: '2022-03-29'
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-avatr-financing-2022
+  notes:
+  - Official source states CATL became second-largest shareholder with 23.99% at that financing milestone; current
+    percentage requires a fresh cap-table source.
+- schema_version: 1
+  type: relationship
+  id: rel-ccag-avatr-group-brand
+  from_id: china-changan-automobile-group
+  to_id: avatr
+  relationship: controls
+  valid_from: "2025-07"
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+  - src-avatr-ccag-2025

@@ -1,0 +1,111 @@
+schema_version: 1
+relationships:
+- schema_version: 1
+  type: relationship
+  id: rel-byd-e-platform-3-developed-by-byd
+  from_id: byd-e-platform-3
+  to_id: byd-company
+  relationship: developed_by
+  evidence_status: confirmed
+  source_ids:
+    - src-byd-eplatform-3
+
+- schema_version: 1
+  type: relationship
+  id: rel-geely-sea-developed-by-zgh
+  from_id: geely-sea
+  to_id: zhejiang-geely-holding
+  relationship: developed_by
+  evidence_status: confirmed
+  source_ids:
+    - src-geely-sea-platform
+
+- schema_version: 1
+  type: relationship
+  id: rel-geely-gea-developed-by-geely-auto-group
+  from_id: geely-gea
+  to_id: geely-auto-group
+  relationship: developed_by
+  evidence_status: confirmed
+  source_ids:
+    - src-geely-gea-ex5
+
+- schema_version: 1
+  type: relationship
+  id: rel-avatr-chn-jointly-developed
+  from_id: avatr-chn
+  to_id: avatr
+  relationship: developed_for
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch
+
+- schema_version: 1
+  type: relationship
+  id: rel-avatr-chn-developed-by-changan
+  from_id: avatr-chn
+  to_id: chongqing-changan-automobile
+  relationship: jointly_developed_by
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch
+
+- schema_version: 1
+  type: relationship
+  id: rel-avatr-chn-developed-by-huawei
+  from_id: avatr-chn
+  to_id: huawei
+  relationship: jointly_developed_by
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch
+
+- schema_version: 1
+  type: relationship
+  id: rel-avatr-chn-developed-by-catl
+  from_id: avatr-chn
+  to_id: catl
+  relationship: jointly_developed_by
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch
+
+- schema_version: 1
+  type: relationship
+  id: rel-byd-seal-based-on-e-platform-3
+  from_id: byd-seal
+  to_id: byd-e-platform-3
+  relationship: based_on
+  evidence_status: confirmed
+  source_ids:
+    - src-byd-eplatform-3
+
+- schema_version: 1
+  type: relationship
+  id: rel-zeekr-7x-based-on-sea
+  from_id: zeekr-7x
+  to_id: geely-sea
+  relationship: based_on
+  evidence_status: confirmed
+  source_ids:
+    - src-geely-sea-platform
+
+- schema_version: 1
+  type: relationship
+  id: rel-geely-ex5-based-on-gea
+  from_id: geely-ex5
+  to_id: geely-gea
+  relationship: based_on
+  evidence_status: confirmed
+  source_ids:
+    - src-geely-gea-ex5
+
+- schema_version: 1
+  type: relationship
+  id: rel-avatr-11-based-on-chn
+  from_id: avatr-11
+  to_id: avatr-chn
+  relationship: based_on
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch

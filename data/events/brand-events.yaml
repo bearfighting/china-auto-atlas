@@ -1,0 +1,181 @@
+schema_version: 1
+events:
+- schema_version: 1
+  type: event
+  event_type: business_entry
+  evidence_status: confirmed
+  id: event-byd-enters-automotive-2003
+  date: '2003'
+  date_precision: year
+  subject_ids:
+  - byd-company
+  - byd
+  summary: BYD entered the automotive industry.
+  source_ids:
+  - src-byd-brand-center
+- schema_version: 1
+  type: event
+  event_type: brand_established
+  evidence_status: confirmed
+  id: event-denza-founded-2010
+  date: '2010'
+  date_precision: year
+  subject_ids:
+  - denza
+  summary: DENZA was founded as a joint venture between BYD and Mercedes-Benz.
+  source_ids:
+  - src-denza-brand-profile
+  - src-denza-europe-history
+- schema_version: 1
+  type: event
+  event_type: ownership_change
+  evidence_status: confirmed
+  date_status: unresolved
+  id: event-denza-wholly-owned-byd
+  date: null
+  date_precision: null
+  subject_ids:
+  - denza
+  - byd-company
+  summary: DENZA became wholly owned by BYD.
+  source_ids:
+  - src-denza-europe-history
+- schema_version: 1
+  type: event
+  event_type: market_expansion
+  evidence_status: confirmed
+  id: event-denza-global-launch-2026
+  date: '2026-04-08'
+  date_precision: day
+  subject_ids:
+  - denza
+  summary: DENZA was officially launched as a worldwide brand in Paris.
+  source_ids:
+  - src-denza-global-launch-2026
+- schema_version: 1
+  type: event
+  event_type: brand_launch
+  evidence_status: confirmed
+  id: event-yangwang-unveiled-2023
+  date: '2023-01-08'
+  date_precision: day
+  subject_ids:
+  - yangwang
+  - byd-company
+  summary: BYD officially unveiled YANGWANG and debuted U8 and U9.
+  source_ids:
+  - src-yangwang-launch-2023
+- schema_version: 1
+  type: event
+  event_type: brand_announcement
+  evidence_status: confirmed
+  id: event-fangchengbao-announced-2023
+  date: '2023-06-09'
+  date_precision: day
+  subject_ids:
+  - fangchengbao
+  - byd-company
+  summary: BYD officially announced FANGCHENGBAO.
+  source_ids:
+  - src-fangchengbao-announcement-2023
+- schema_version: 1
+  type: event
+  event_type: product_technology_launch
+  evidence_status: confirmed
+  id: event-fangchengbao-bao5-dmo-2023
+  date: '2023-08-16'
+  date_precision: day
+  subject_ids:
+  - fangchengbao
+  summary: BYD introduced FANGCHENGBAO with BAO 5 and DMO technology.
+  source_ids:
+  - src-fangchengbao-bao5-2023
+- schema_version: 1
+  type: event
+  event_type: brand_launch
+  evidence_status: confirmed
+  id: event-zeekr-launched-2021
+  date: "2021-04"
+  date_precision: month
+  subject_ids:
+  - zeekr
+  summary: Geely launched the ZEEKR pure-electric brand.
+  source_ids:
+  - src-geely-sustainability-2021
+- schema_version: 1
+  type: event
+  event_type: first_vehicle_delivery
+  evidence_status: confirmed
+  id: event-zeekr-first-delivery-2021
+  date: "2021-10"
+  date_precision: month
+  subject_ids:
+  - zeekr
+  summary: ZEEKR began deliveries of ZEEKR 001.
+  source_ids:
+  - src-geely-financial-results-2021
+- schema_version: 1
+  type: event
+  event_type: market_expansion
+  evidence_status: confirmed
+  id: event-geely-auto-europe-expansion-2026
+  date: '2026-03-26'
+  date_precision: day
+  subject_ids:
+  - geely-auto
+  summary: Geely Auto completed a concentrated rollout across five European countries and reported coverage of nearly
+    20 mainstream European markets.
+  source_ids:
+  - src-geely-europe-expansion-2026
+- schema_version: 1
+  type: event
+  event_type: brand_launch
+  evidence_status: confirmed
+  id: event-deepal-brand-launch-2022
+  date: '2022'
+  date_precision: year
+  subject_ids:
+  - deepal
+  summary: Changan reported the release of its new digital electric brand 长安深蓝, now DEEPAL.
+  source_ids:
+  - src-changan-annual-report-2022
+  - src-changan-csr-2022
+- schema_version: 1
+  type: event
+  event_type: brand_corporate_naming
+  evidence_status: confirmed
+  id: event-avatr-named-2021
+  date: '2021-05-20'
+  date_precision: day
+  subject_ids:
+  - avatr
+  summary: AVATR Technology's registered entity name change became effective and AVATR was formally named.
+  source_ids:
+  - src-avatr-naming-2021
+- schema_version: 1
+  type: event
+  event_type: financing_ownership_change
+  evidence_status: confirmed
+  id: event-avatr-catl-financing-2022
+  date: '2022-03-29'
+  date_precision: day
+  subject_ids:
+  - avatr
+  summary: AVATR completed its first strategic financing delivery; CATL became second-largest shareholder at 23.99%
+    at that time.
+  source_ids:
+  - src-avatr-financing-2022
+- schema_version: 1
+  type: event
+  event_type: group_restructuring_context
+  evidence_status: confirmed
+  id: event-avatr-ccag-strategy-2025
+  date: '2025-07-30'
+  date_precision: day
+  subject_ids:
+  - avatr
+  - china-changan-automobile-group
+  summary: Following formation of China Changan Automobile Group, AVATR was identified as a high-end brand under
+    the new group strategy.
+  source_ids:
+  - src-avatr-ccag-2025

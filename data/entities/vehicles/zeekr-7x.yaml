@@ -1,0 +1,52 @@
+schema_version: 1
+id: zeekr-7x
+type: vehicle
+names:
+  en: ZEEKR 7X
+  zh-CN: 极氪7X
+aliases:
+- Zeekr 7X
+- 极氪 7X
+brand_id: zeekr
+manufacturer_ids:
+- zeekr-group
+segment: mid-size-suv
+body_style: suv
+powertrain_types:
+  - bev
+status: active
+first_announced_at:
+  value: null
+  evidence_status: unknown
+first_launched_at:
+  value: '2024-09-20'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-7x-delivery-update-2024
+platform_id: geely-sea
+technology_ids:
+- zeekr-800v-system
+- zeekr-golden-battery
+market_spec_ids:
+- ms-zeekr-7x-cn
+- ms-zeekr-7x-eu
+media_ids:
+- media-vehicle-zeekr-7x-hero
+timeline:
+  announcement_event_id: null
+  preorder_event_id: null
+  launch_event_id: event-zeekr-7x-china-launch-2024
+  production_start_event_id: null
+  delivery_start_event_id: event-zeekr-7x-china-delivery-2024
+  market_entry_event_ids: []
+event_ids:
+- event-zeekr-7x-china-launch-2024
+- event-zeekr-7x-china-delivery-2024
+news_ids: []
+source_ids:
+- src-zeekr-7x-cn
+- src-zeekr-7x-eu
+- src-zeekr-7x-delivery-update-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

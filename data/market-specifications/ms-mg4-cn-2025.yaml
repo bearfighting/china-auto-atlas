@@ -1,0 +1,40 @@
+schema_version: 1
+type: market_specification
+id: ms-mg4-cn-2025
+vehicle_id: mg4
+market: CN
+valid_from: "2025-08-29"
+status: available
+currency: CNY
+price_range:
+  min:
+    amount: 65800
+    currency: CNY
+    price_type: limited_offer
+  max:
+    amount: 99800
+    currency: CNY
+    price_type: limited_offer
+variants:
+  - name: 437 km range version
+    powertrain_type: bev
+    range:
+      value_km: 437
+      standard: CLTC
+  - name: 530 km range version
+    powertrain_type: bev
+    range:
+      value_km: 530
+      standard: CLTC
+  - name: Semi-solid battery version
+    powertrain_type: bev
+    battery_type: semi-solid
+  - name: Lineup common specification
+    system_power_kw: 120
+    max_torque_nm: 250
+    drive: RWD
+    battery_integration: CTB
+source_ids:
+  - src-saic-mg4-cn-launch-2025
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

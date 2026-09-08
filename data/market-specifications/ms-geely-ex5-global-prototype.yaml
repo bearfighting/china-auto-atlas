@@ -1,0 +1,21 @@
+schema_version: 1
+type: market_specification
+id: ms-geely-ex5-global-prototype
+vehicle_id: geely-ex5
+market: GLOBAL_REFERENCE
+status: reference_only
+variants:
+- name: Global EX5 reference
+  battery_type: LFP Short Blade Battery
+  max_power_kw: 160
+platform: GEA
+technology_ids:
+- geely-short-blade-battery
+- geely-11-in-1-electric-drive
+source_ids:
+- src-geely-ex5-global-unveil-2024
+- src-geely-ex5-model
+notes:
+- Do not use as a sale-market spec. Exact battery/range/pricing vary by market and should be stored in country-specific records.
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

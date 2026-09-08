@@ -1,0 +1,37 @@
+schema_version: 1
+id: avatr-chn
+type: platform
+names:
+  en: "CHN All New Smart Electric Vehicle Architecture"
+  zh-CN: "CHN 全新一代智能电动汽车技术平台"
+aliases:
+  - CHN platform
+status: active
+developer_ids:
+  - chongqing-changan-automobile
+  - huawei
+  - catl
+relationship_ids:
+  - rel-avatr-chn-jointly-developed
+  - rel-avatr-chn-developed-by-changan
+  - rel-avatr-chn-developed-by-huawei
+  - rel-avatr-chn-developed-by-catl
+  - rel-avatr-11-based-on-chn
+powertrain_types:
+  - bev
+  - erev
+technical_scope:
+  - complete-vehicle development
+  - intelligent vehicle solutions
+  - battery, motor drive, electronic control, and energy management
+  - high-voltage charging
+vehicle_ids:
+  - avatr-11
+pending_reference_ids:
+  - chongqing-changan-automobile
+  - huawei
+  - catl
+source_ids:
+  - src-avatr-chn-launch
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

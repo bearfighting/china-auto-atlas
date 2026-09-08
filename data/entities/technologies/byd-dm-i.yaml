@@ -1,0 +1,55 @@
+schema_version: 1
+id: byd-dm-i
+type: technology
+names:
+  en: DM-i Super Hybrid
+  zh-CN: DM-i 超级混动
+category: powertrain
+description:
+  en: BYD plug-in hybrid architecture optimized around electric drive and low fuel consumption, combining a traction
+    battery, electric motor system and dedicated high-efficiency gasoline engine.
+  zh-CN: 比亚迪以电驱和低油耗为主要目标的插电式混合动力体系，将动力电池、电机系统与高效率专用汽油发动机组合。
+problem_solved:
+- Reduce fuel consumption in plug-in hybrids
+- Allow substantial electric driving while retaining liquid-fuel range
+- Use the engine efficiently rather than making it the dominant traction source in all conditions
+technical_features:
+- Plug-in hybrid
+- Electric-centric operating strategy
+- Dedicated hybrid engine
+- Traction battery
+advantages:
+- Can combine EV-like urban operation with long-distance refueling convenience
+- Manufacturer reports low depleted-battery fuel consumption
+limitations:
+- Still carries both combustion and electric powertrains, adding mass and mechanical/system complexity compared with
+  a BEV
+- Fuel-consumption and total-range headline figures depend strongly on test cycle, battery SOC and model
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- byd
+- denza
+vehicle_ids:
+- denza-d9
+first_announced_at:
+  value: '2021'
+  precision: year
+  evidence_status: confirmed
+  note: BYD documentation identifies DM-i as a core 2021 technology; exact standalone technology-launch day remains to
+    be normalized.
+event_ids:
+- event-dmi-2021-market-introduction
+source_ids:
+- src-byd-about-tech
+- src-byd-2021-nev-results
+- src-byd-eplatform-2021
+claim_assessment:
+  manufacturer_claims:
+  - Very low depleted-SOC fuel consumption
+  - Long combined range
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

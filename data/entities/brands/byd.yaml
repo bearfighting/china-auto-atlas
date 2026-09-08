@@ -1,0 +1,46 @@
+schema_version: 1
+id: byd
+type: brand
+names:
+  en: BYD
+  zh-CN: 比亚迪
+aliases:
+- BYD Auto
+- 比亚迪汽车
+status: active
+positioning:
+  en: Mainstream new-energy vehicle brand of BYD Group, spanning battery-electric and plug-in hybrid passenger vehicles.
+  zh-CN: 比亚迪集团面向主流市场的新能源汽车品牌，覆盖纯电与插电式混合动力乘用车。
+powertrain_focus:
+- BEV
+- PHEV
+founded:
+  value: null
+  precision: null
+  evidence_status: unknown
+  note: BYD entered the automotive industry in 2003, but this seed does not equate that corporate milestone with
+    a legally precise brand-foundation date.
+relationship_ids:
+- rel-byd-company-byd-brand-operates
+market_codes: []
+market_status: unknown
+seed_market_notes:
+- Global brand; market-by-market operating status should be added as structured market records rather than inferred
+  from a global website.
+vehicle_ids: []
+seed_vehicle_names:
+- SEAL
+- DOLPHIN
+- ATTO 3
+- SEALION 7
+- HAN
+- TANG
+event_ids:
+- event-byd-enters-automotive-2003
+source_ids:
+- src-byd-brand-center
+- src-byd-media-models
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- Dynasty and Ocean should not be created as Brand entities in this pass; treat them as product-series candidates.

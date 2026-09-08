@@ -1,0 +1,284 @@
+schema_version: 1
+sources:
+- id: src-byd-seal-europe-2023
+  type: source
+  publisher: BYD
+  title: 'BYD Introduces Two New Full-electric Vehicles in Europe: BYD DOLPHIN and BYD SEAL'
+  url: https://www.byd.com/eu/news-list/BYD_Introduces_Two_New_Full-electric_Vehicles_in_Europe_BYD_DOLPHIN_and_BYD_SEAL
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-seal-spec-sheet
+  type: source
+  publisher: BYD
+  title: BYD SEAL Technical Data / Spec Sheet
+  url: https://www.byd.com/material/byd-site/sg/product/pdf/BYD%20Seal%20Spec%20Sheet-PREVIEW%20.pdf
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-seal-japan-2026
+  type: source
+  publisher: BYD Auto Japan
+  title: BYD SEAL
+  url: https://prod.byd.com/jp/lineup/seal
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-seal-hk-2023
+  type: source
+  publisher: BYD
+  title: BYD SEAL Debuts in Hong Kong
+  url: https://www.byd.com/us/news-list/BYD-SEAL-Debuts-in-Hong-Kong-A-Glimpse-into-the-Future-of-Sporty-Green-Mobility
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-denza-brand-history
+  type: source
+  publisher: DENZA
+  title: 品牌世界 / Brand History
+  url: https://www.denza.com/cn/brand
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-denza-d9-europe-2026
+  type: source
+  publisher: BYD / DENZA
+  title: DENZA brings Super Hybrid tech to MPV segment with D9 DM-i
+  url: https://media.byd.com/denza-brings-super-hybrid-tech-to-mpv-segment-with-d9-dm-i-475599/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-denza-d9-production-2022
+  type: source
+  publisher: DENZA
+  title: 腾势D9首台量产车正式下线 即将开启全国用户交付
+  url: https://www.denza.com/cn/denza-voice/detail9.html
+  published_at: '2022-10-21'
+  accessed_at: '2026-09-08'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - The first production DENZA D9 rolled off the line on 2022-10-20
+  - Nationwide deliveries were scheduled to begin on 2022-10-23
+  evidence_status: confirmed
+- id: src-denza-d9-france-2026
+  type: source
+  publisher: BYD / DENZA
+  title: DENZA opens orders for D9 DM-i in France
+  url: https://media.byd.com/denza-ouvre-les-commandes-du-d9-dm-i-son-monospace-super-hybride-en-france/?lang=fra
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-yangwang-u8-brand-unveil-2023
+  type: source
+  publisher: BYD
+  title: YANGWANG brand and U8/U9 debut
+  url: https://www.byd.com/sc/news-list/BYD-Debuted-First-Luxury-Off-road-SUV-U8-All-electric-Supercar-U9-Under-Premium-Brand-Yangwang
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-yangwang-u8-launch-2023
+  type: source
+  publisher: BYD
+  title: BYD Launched the U8 Premium Edition Under Its High-End Sub-Brand Yangwang
+  url: https://www.byd.com/us/news-list/BYD-Launched-the-U8-Premium-Edition-Under-Its-High-End-Sub-Brand-Yangwang
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-bao5-dmo-introduction-2023
+  type: source
+  publisher: BYD
+  title: BYD Launched BAO 5 under Its New Brand FANGCHENGBAO and the DMO Technology
+  url: https://euevents.byd.com/us/news-list/BYD-Launched-BAO-5-under-Its-New-Brand-FANGCHENGBAO-and-the-DMO-Technology
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-bao5-cn-config-2026
+  type: source
+  publisher: FANGCHENGBAO
+  title: 豹5智驾版参数配置
+  url: https://www.fangchengbao.com/disposition-bao5.html
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-bao5-long-range-config
+  type: source
+  publisher: FANGCHENGBAO
+  title: 豹5长续航版参数配置
+  url: https://www.fangchengbao.com/disposition-bao5cxh
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-geely-ex5-global-unveil-2024
+  type: source
+  publisher: Geely Auto
+  title: Geely Auto unveils the EX5, setting new electrification standards globally
+  url: https://global.geely.com/en/news/2024/geely-auto-unveils-ex5
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-geely-ex5-thailand-2024
+  type: source
+  publisher: Geely Auto
+  title: Geely EX5 debuts at Thailand International Motor Expo
+  url: https://global.geely.com/en/news/2024/geely-ex5-debuts-thailand-international-motor-expo
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-geely-ex5-adriatic-2025
+  type: source
+  publisher: Geely Auto
+  title: Geely Auto Introduces the Geely EX5 in Six Adriatic Countries
+  url: https://global.geely.com/en/news/2025/geely-auto-introduces-geely-ex5-six-adriatic-countries
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-zeekr-7x-cn
+  type: source
+  publisher: ZEEKR
+  title: ZEEKR 7X global/China reference page
+  url: https://www.zeekrlife.com/global/vehicles/7x
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-zeekr-7x-eu
+  type: source
+  publisher: ZEEKR Europe
+  title: ZEEKR 7X European model page
+  url: https://www.zeekr.eu/en-nl/models/7x
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-zeekr-7x-delivery-update-2024
+  type: source
+  publisher: ZEEKR Group
+  title: ZEEKR Announces September 2024 Delivery Update
+  url: https://ir.zeekrgroup.com/2024-09-30-ZEEKR-Announces-September-2024-Delivery-Update
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-zeekr-7x-official-timeline
+  type: source
+  publisher: ZEEKR Group
+  title: ZEEKR official brand timeline
+  url: https://www.zeekrgroup.com/en/about
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - ZEEKR 7X launched on 2024-09-20
+  evidence_status: confirmed
+- id: src-deepal-s07-mauritius
+  type: source
+  publisher: DEEPAL Mauritius
+  title: S07 Equipment & Technical Specifications
+  url: https://www.deepal.mu/sites/default/files/2025-04/deepal_s07_specification_sheet.pdf
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-deepal-s07-indonesia
+  type: source
+  publisher: CHANGAN Indonesia
+  title: Deepal S07
+  url: https://changan.co.id/en/models/deepal-s07
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-deepal-s07-debut-2023
+  type: source
+  publisher: Global CHANGAN
+  title: "Accelerating the Electric Era: DEEPAL brand makes debut at the Shanghai Auto Show"
+  url: https://www.changanuk.com/post/accelerating-the-electric-era-deepal-brand-makes-debut-at-the-shanghai-auto-show
+  published_at: '2023-05-18'
+  accessed_at: '2026-09-08'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - DEEPAL S07 debuted at the Shanghai Auto Show on 2023-04-18
+  evidence_status: confirmed
+- id: src-deepal-s07-thailand-launch-2023
+  type: source
+  publisher: Global CHANGAN
+  title: From Product Export to Brand Export
+  url: https://www.globalchangan.com/newsroom/from-product-export-to-brand-export-changan-automobile-leaps-into-the-chinese-automobile-export-4-era.html
+  accessed_at: '2026-09-08'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - DEEPAL S07 opened reservations in Thailand on 2023-11-27
+  - DEEPAL S07 launched at the Thailand Auto Expo on 2023-11-29
+  evidence_status: confirmed
+- id: src-deepal-s07-chile
+  type: source
+  publisher: DEEPAL Chile
+  title: S07
+  url: https://www.deepalautos.cl/vehiculo/s07
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-miit-2022
+  type: source
+  publisher: AVATR
+  title: AVATR 11 unveiled in MIIT Product Announcement
+  url: https://www.avatr.com/en/news?newsChId=b83e7cea8da0d8962df2b99d3b697561&newsEngId=318da12da1d2bd24a61f6ffdbe6333b1
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-preorder-2022
+  type: source
+  publisher: AVATR
+  title: AVATR 11 Available for Pre-order
+  url: https://www.avatr.com/en/news?newsChId=9c1c939151412a2ae0dcb2023d6a1c7a&newsEngId=c245273195455d4e8779b7ba11a4fc65
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-launch-2022
+  type: source
+  publisher: AVATR
+  title: 'A Moment We Meet: AVATR 11 & 011 Global Launch'
+  url: https://www.avatr.com/en/news?newsChId=26da322523dbf7d9ad58c1a3dc08eb2c&newsEngId=2ffefb18cf970042e6d5f3d123447567
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-production-2022
+  type: source
+  publisher: AVATR
+  title: AVATR 11 and 011 Series SUVs Officially off the Line
+  url: https://www.avatr.com/en/news?newsChId=c9aeb8089f4851b60f8fdbcaa77ebf62&newsEngId=39da950c612659f37e2cd884850e1c4f
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-current-config
+  type: source
+  publisher: AVATR
+  title: AVATR 11 Current Configuration Table
+  url: https://www.avatr.com/en/configuration?car=11
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed

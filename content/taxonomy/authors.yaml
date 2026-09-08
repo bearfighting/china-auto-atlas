@@ -1,0 +1,9 @@
+schema_version: 1
+type: author_registry
+authors:
+  - id: caa-editorial
+    names:
+      en: China Auto Atlas Editorial
+      zh-CN: 中国汽车图谱编辑部
+    short_name: CAA Editorial
+    role: editorial_team

@@ -1,0 +1,52 @@
+schema_version: 1
+id: geely-11-in-1-electric-drive
+type: technology
+names:
+  en: 11-in-1 Intelligent Electric Drive
+  zh-CN: 十一合一智能电驱
+category: powertrain
+description:
+  en: Geely integrated electric-drive unit that combines multiple propulsion and power-electronics functions into a compact
+    assembly; the EX5 application is rated at 160 kW peak power.
+  zh-CN: 吉利将多项电驱与功率电子功能集成为紧凑总成的“十一合一”智能电驱；EX5应用的峰值功率为160 kW。
+problem_solved:
+- Reduce packaging volume and component duplication
+- Improve integration of EV propulsion electronics
+- Simplify vehicle packaging
+technical_features:
+- 11-function integrated drive concept
+- 160 kW peak-power EX5 application
+- Integrated cooling/compact packaging
+advantages:
+- Higher integration can reduce wiring, connectors and packaging space
+- Can simplify assembly and thermal-system integration
+limitations:
+- '''11-in-1'' is a manufacturer-defined integration count, not a universal industry standard'
+- Integration can concentrate repair/replacement cost in a larger module
+- Peak motor power does not by itself establish whole-system efficiency
+developer_ids:
+- geely-auto-group
+pending_reference_ids:
+- geely-auto-group
+supplier_ids: []
+brand_ids:
+- geely-auto
+vehicle_ids:
+- geely-ex5
+first_announced_at:
+  value: '2024'
+  precision: year
+  evidence_status: confirmed
+  note: Confirmed with EX5 global unveiling; exact standalone technology debut date not established.
+event_ids:
+- event-geely-ex5-tech-unveil-2024
+source_ids:
+- src-geely-ex5-model
+- src-geely-ex5-tech
+claim_assessment:
+  manufacturer_claims:
+  - High efficiency, compact design and advanced cooling
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

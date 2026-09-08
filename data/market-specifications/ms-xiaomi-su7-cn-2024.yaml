@@ -1,0 +1,39 @@
+schema_version: 1
+type: market_specification
+id: ms-xiaomi-su7-cn-2024
+vehicle_id: xiaomi-su7
+market: CN
+valid_from: "2024-03-28"
+status: available
+currency: CNY
+variants:
+  - name: SU7 Standard
+    prices:
+      - amount: 215900
+        currency: CNY
+        price_type: msrp
+    powertrain_type: bev
+  - name: SU7 Pro
+    prices:
+      - amount: 245900
+        currency: CNY
+        price_type: msrp
+    powertrain_type: bev
+  - name: SU7 Max
+    prices:
+      - amount: 299900
+        currency: CNY
+        price_type: msrp
+    powertrain_type: bev
+    drive: AWD
+    range:
+      value_km: 800
+      standard: CLTC
+    max_power_hp: 673
+    max_torque_nm: 838
+    acceleration_0_100_s: 2.78
+    top_speed_kmh: 265
+source_ids:
+  - src-xiaomi-su7-launch-2024
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

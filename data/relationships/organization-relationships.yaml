@@ -1,0 +1,68 @@
+schema_version: 1
+relationships:
+- schema_version: 1
+  type: relationship
+  id: rel-avatr-technology-avatr-operates
+  from_id: avatr-technology
+  to_id: avatr
+  relationship: operates
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-about
+    - src-avatr-naming-2021
+
+- schema_version: 1
+  type: relationship
+  id: rel-zgh-geely-auto-group-parent
+  from_id: zhejiang-geely-holding
+  to_id: geely-auto-group
+  relationship: parent_of
+  evidence_status: confirmed
+  source_ids:
+    - src-geely-auto-group-profile
+
+- schema_version: 1
+  type: relationship
+  id: rel-zgh-zeekr-group-parent
+  from_id: zhejiang-geely-holding
+  to_id: zeekr-group
+  relationship: parent_of
+  evidence_status: confirmed
+  source_ids:
+    - src-zeekr-group-profile
+
+- schema_version: 1
+  type: relationship
+  id: rel-changan-group-chongqing-changan-associated
+  from_id: china-changan-automobile-group
+  to_id: chongqing-changan-automobile
+  relationship: controls
+  evidence_status: claimed
+  source_ids:
+    - src-ccag-company-profile
+  notes:
+    - "The group formation source identifies Changan Automobile as a basis of the group; the exact current legal control relationship should be verified separately."
+
+- schema_version: 1
+  type: relationship
+  id: rel-huawei-avatr-strategic-partner
+  from_id: huawei
+  to_id: avatr
+  relationship: strategic_partner_of
+  valid_from: "2022-06-25"
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch
+
+- schema_version: 1
+  type: relationship
+  id: rel-catl-avatr-battery-partner
+  from_id: catl
+  to_id: avatr
+  relationship: strategic_partner_of
+  valid_from: "2022-06-25"
+  valid_to: null
+  evidence_status: confirmed
+  source_ids:
+    - src-avatr-chn-launch

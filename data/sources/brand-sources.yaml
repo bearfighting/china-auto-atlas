@@ -1,0 +1,239 @@
+schema_version: 1
+sources:
+- id: src-byd-media-models
+  type: source
+  publisher: BYD Media Hub
+  title: Models / Brands
+  url: https://media.byd.com/section/models/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Current BYD model and brand presentation
+  evidence_status: confirmed
+- id: src-denza-brand-profile
+  type: source
+  publisher: BYD Media Hub
+  title: DENZA
+  url: https://media.byd.com/section/company/brands/denza/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - DENZA founded in 2010
+  - Premium/new-energy positioning
+  evidence_status: confirmed
+- id: src-denza-europe-history
+  type: source
+  publisher: BYD Media Hub
+  title: DENZA makes European debut / brand history
+  url: https://media.byd.com/denza-makes-uk-debut-at-goodwood-festival-of-speed/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Founded as BYD–Mercedes-Benz JV
+  - Now wholly owned by BYD
+  evidence_status: confirmed
+- id: src-denza-global-launch-2026
+  type: source
+  publisher: BYD Media Hub
+  title: DENZA goes global with Technology Drives Elegance
+  url: https://media.byd.com/denza-goes-global-with-technology-drives-elegance/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Worldwide launch in Paris
+  - Planned availability in 30+ European countries by end-2026
+  evidence_status: confirmed
+- id: src-yangwang-brand-profile
+  type: source
+  publisher: BYD Media Hub
+  title: YANGWANG
+  url: https://media.byd.com/section/company/brands/yangwang/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Luxury NEV positioning
+  - BYD technology relationship
+  evidence_status: confirmed
+- id: src-yangwang-launch-2023
+  type: source
+  publisher: BYD
+  title: BYD Debuted the First Luxury Off-road SUV U8 and All-electric Supercar U9 Under Its Premium Brand Yangwang
+  url: https://www.byd.com/sc/news-list/BYD-Debuted-First-Luxury-Off-road-SUV-U8-All-electric-Supercar-U9-Under-Premium-Brand-Yangwang
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - YANGWANG unveiled January 8 2023
+  - High-end sub-brand
+  - U8/U9 debut
+  evidence_status: confirmed
+- id: src-fangchengbao-announcement-2023
+  type: source
+  publisher: BYD
+  title: BYD Unleashes FANG CHENG BAO
+  url: https://www.byd.com/us/news-list/BYD-Unleashes-FANG-CHENG-BAO-A-New-Brand-that-Specializes-in-Professional-and-Personalized-Identities.html
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Brand announced June 9 2023
+  - Professional/personalized positioning
+  evidence_status: confirmed
+- id: src-fangchengbao-bao5-2023
+  type: source
+  publisher: BYD
+  title: BYD Launched BAO 5 under Its New Brand FANGCHENGBAO and the DMO Technology
+  url: https://euevents.byd.com/us/news-list/BYD-Launched-BAO-5-under-Its-New-Brand-FANGCHENGBAO-and-the-DMO-Technology
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - BAO 5 and DMO launch August 16 2023
+  evidence_status: confirmed
+- id: src-geely-brand-page
+  type: source
+  publisher: Geely Auto
+  title: Brand / Geely at a Glance
+  url: https://global.geely.com/en/brand
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Geely Auto Group identity
+  - Relationship to ZGH
+  - 'Brands managed: Geely Auto, Lynk & Co, ZEEKR'
+  evidence_status: confirmed
+- id: src-geely-sustainability-2021
+  type: source
+  publisher: Zhejiang Geely Holding Group
+  title: Sustainability Report 2021
+  url: https://global.geely.com/-/media/project/web-portal/2022/pdf-1030/geely-holding-group-sustainability-report-2021.pdf
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - ZEEKR launched April 2021
+  - First ZEEKR vehicle 001
+  evidence_status: confirmed
+- id: src-geely-financial-results-2021
+  type: source
+  publisher: Geely Auto
+  title: Geely Auto 2021 Financial Results Released
+  url: https://global.geely.com/en/news/2022/geely-auto-financial-results-2021
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - ZEEKR premium pure-electric positioning
+  - ZEEKR 001 deliveries began October 2021
+  evidence_status: confirmed
+- id: src-geely-europe-expansion-2026
+  type: source
+  publisher: Geely Auto
+  title: Geely E5 and Starray EM-i Debut in Five European Countries
+  url: https://global.geely.com/en/news/2026/geely-e5-starray-em-i-debut-five-european-countries
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Geely Auto European market rollout
+  - Nearly 20 mainstream European markets
+  evidence_status: confirmed
+- id: src-zeekr-investor-faq
+  type: source
+  publisher: Zeekr Group Intelligent Technology
+  title: Investor FAQs
+  url: https://ir.zeekrgroup.com/Investor-FAQs
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - 'Zeekr Group operates two brands: Lynk & Co and Zeekr'
+  - Group headquarters in Zhejiang
+  evidence_status: confirmed
+- id: src-changan-annual-report-2022
+  type: source
+  publisher: Chongqing Changan Automobile
+  title: 2022 Annual Report Summary
+  url: https://www.changan.com.cn/uploads/chan_investannouncereportfile/dbfe8697992d21200739dbc051462bed.pdf
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - 长安深蓝 and AVATR identified as new-energy brands
+  - 长安深蓝 positioning
+  evidence_status: confirmed
+- id: src-changan-csr-2022
+  type: source
+  publisher: Chongqing Changan Automobile
+  title: Changan Social Responsibility Report 2022
+  url: https://www.changan.com.cn/uploads_ueditor/file/20231019/1697685039698149.pdf
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Changan focused on Changan, DEEPAL and AVATR brands in 2022
+  evidence_status: confirmed
+- id: src-ccag-company-profile
+  type: source
+  publisher: China Changan Automobile Group
+  title: Company Profile
+  url: https://www.ccag.cn/about/introduce
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - AVATR, DEEPAL and CHANGAN NEVO as core digital-intelligent NEV brands under the group
+  evidence_status: confirmed
+- id: src-avatr-about
+  type: source
+  publisher: AVATR Technology
+  title: About Us
+  url: https://www.avatr.com/en/about
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Luxury intelligent EV positioning
+  - Company presence in Chongqing, Shanghai and Munich
+  evidence_status: confirmed
+- id: src-avatr-naming-2021
+  type: source
+  publisher: AVATR Technology
+  title: AVATR Technology Officially Named
+  url: https://www.avatr.com/en/news?newsChId=6cf339a165e4c151a0b4566d929317d0&newsEngId=9118cc5bf81d59077fb9d26db764b190
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - Registered entity naming effective May 20 2021
+  - Changan/Huawei/CATL partnership context
+  evidence_status: confirmed
+- id: src-avatr-financing-2022
+  type: source
+  publisher: AVATR Technology
+  title: AVATR Technology Completed the First Round of Financing Delivery
+  url: https://www.avatr.com/en/news?newsChId=c2b179716da2ba80ccf55bd019de050c&newsEngId=f5efdbbc227187625f02536d08628110
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - CATL became second-largest shareholder at 23.99% in 2022
+  - Changan Automobile and CATL described as leading shareholders
+  evidence_status: confirmed
+- id: src-avatr-ccag-2025
+  type: source
+  publisher: AVATR Technology
+  title: New China Changan strategy empowers AVATR
+  url: https://www.avatr.com/news?newsChId=8e4fd18baf8bab52ad802557d1482f80&newsEngId=
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  supports:
+  - AVATR positioned as high-end brand under newly formed China Changan Automobile Group
+  evidence_status: confirmed

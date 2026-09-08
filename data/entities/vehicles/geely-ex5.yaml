@@ -1,0 +1,62 @@
+schema_version: 1
+id: geely-ex5
+type: vehicle
+names:
+  en: GEELY EX5
+  zh-CN: 吉利EX5
+aliases:
+- Geely EX5
+- EX5
+- Geely E5
+- 银河E5
+brand_id: geely-auto
+manufacturer_ids:
+- geely-auto-group
+segment: compact-suv
+body_style: suv
+powertrain_types:
+  - bev
+status: active
+first_announced_at:
+  value: '2024-09-10'
+  precision: day
+  evidence_status: confirmed
+  note: Global EX5 unveiling in Frankfurt; the China-market E5 naming history should be modeled separately.
+  source_ids:
+  - src-geely-ex5-global-unveil-2024
+first_launched_at:
+  value: null
+  evidence_status: unknown
+  note: Global markets launched on different dates; use market-specific launch events.
+platform_id: geely-gea
+technology_ids:
+- geely-short-blade-battery
+- geely-11-in-1-electric-drive
+market_spec_ids:
+- ms-geely-ex5-global-prototype
+media_ids:
+- media-vehicle-geely-ex5-hero
+timeline:
+  announcement_event_id: event-geely-ex5-global-unveil-2024
+  preorder_event_id: null
+  launch_event_id: null
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids:
+  - event-geely-ex5-thailand-debut-2024
+  - event-geely-ex5-adriatic-launch-2025
+event_ids:
+- event-geely-ex5-global-unveil-2024
+- event-geely-ex5-thailand-debut-2024
+- event-geely-ex5-adriatic-launch-2025
+news_ids: []
+source_ids:
+- src-geely-ex5-global-unveil-2024
+- src-geely-ex5-model
+- src-geely-ex5-thailand-2024
+- src-geely-ex5-adriatic-2025
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- EX5/E5 naming is a strong alias-vs-market-name test. Do not create duplicate global and China vehicles until identity rules
+  are finalized.

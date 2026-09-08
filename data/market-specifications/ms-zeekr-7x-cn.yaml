@@ -1,0 +1,31 @@
+schema_version: 1
+type: market_specification
+id: ms-zeekr-7x-cn
+vehicle_id: zeekr-7x
+market: CN
+status: available
+currency: CNY
+variants:
+- name: 75 kWh Golden Battery family
+  battery_kwh: 75
+  battery_type: LFP
+  range:
+    value_km: 605
+    standard: CLTC
+    evidence_status: claimed
+  charge_10_80_min: 10.5
+- name: 100 kWh Qilin Battery family
+  battery_kwh: 100
+  battery_type: NMC
+  range:
+    value_km: 780
+    standard: CLTC
+    evidence_status: claimed
+architecture: 800V
+max_system_power_kw: 475
+max_system_torque_nm: 710
+best_acceleration_0_100_s: 3.8
+source_ids:
+- src-zeekr-7x-cn
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

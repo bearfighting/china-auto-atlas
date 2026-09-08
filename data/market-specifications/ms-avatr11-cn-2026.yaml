@@ -1,0 +1,58 @@
+schema_version: 1
+type: market_specification
+id: ms-avatr11-cn-2026
+vehicle_id: avatr-11
+market: CN
+status: available
+currency: CNY
+variants:
+- name: Max REEV
+  prices:
+  - amount: 289900
+    currency: CNY
+    price_type: msrp
+  powertrain_type: erev
+  battery_type: LFP CATL Freevoy
+  range_ev:
+    value_km: 225
+    standard: CLTC
+  range_combined:
+    value_km: 1065
+    standard: CLTC
+  drive: RWD
+  acceleration_0_100_s: 6.9
+  curb_weight_kg: 2240
+- name: Max EV
+  prices:
+  - amount: 309900
+    currency: CNY
+    price_type: msrp
+  powertrain_type: bev
+  range_ev:
+    value_km: 815
+    standard: CLTC
+  drive: RWD
+  acceleration_0_100_s: 6.5
+  curb_weight_kg: 2310
+- name: Ultra EV AWD
+  prices:
+  - amount: 369900
+    currency: CNY
+    price_type: msrp
+  powertrain_type: bev
+  range_ev:
+    value_km: 760
+    standard: CLTC
+  drive: AWD
+  acceleration_0_100_s: 3.9
+  curb_weight_kg: 2410
+dimensions_mm:
+  length: 4895
+  width: 1970
+  height: 1601
+  wheelbase: 2975
+architecture: 800V SiC
+source_ids:
+- src-avatr11-current-config
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

@@ -1,0 +1,39 @@
+schema_version: 1
+id: mg4
+type: vehicle
+names:
+  en: MG4
+  zh-CN: MG4
+aliases:
+  - MG4 Electric
+brand_id: mg
+manufacturer_ids:
+  - saic-motor
+segment: compact-hatchback
+body_style: hatchback
+powertrain_types:
+  - bev
+status: active
+first_launched_at:
+  value: "2025-08-29"
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+    - src-saic-mg4-cn-launch-2025
+market_spec_ids:
+  - ms-mg4-cn-2025
+media_ids:
+  - media-vehicle-mg4-hero
+timeline:
+  announcement_event_id: null
+  preorder_event_id: null
+  launch_event_id: event-mg4-cn-launch-2025
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+  - event-mg4-cn-launch-2025
+source_ids:
+  - src-saic-mg4-cn-launch-2025
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

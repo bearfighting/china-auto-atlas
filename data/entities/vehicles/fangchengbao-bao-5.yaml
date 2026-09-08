@@ -1,0 +1,57 @@
+schema_version: 1
+id: fangchengbao-bao-5
+type: vehicle
+names:
+  en: FANGCHENGBAO BAO 5
+  zh-CN: 方程豹豹5
+aliases:
+- BAO 5
+- Bao 5
+- 豹5
+brand_id: fangchengbao
+manufacturer_ids:
+- byd-company
+segment: mid-size-off-road-suv
+body_style: suv
+powertrain_types:
+  - phev
+status: active
+first_announced_at:
+  value: '2023-08-16'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-bao5-dmo-introduction-2023
+first_launched_at:
+  value: null
+  evidence_status: unknown
+  note: A stable primary launch-date page was not established in this pass.
+platform_id: byd-dmo
+technology_ids:
+- byd-dmo
+- byd-disus-p
+market_spec_ids:
+- ms-bao5-cn-2026-standard
+- ms-bao5-cn-2025-long-range
+media_ids:
+- media-vehicle-fangchengbao-bao-5-hero
+timeline:
+  announcement_event_id: event-bao5-dmo-introduction-2023
+  preorder_event_id: null
+  launch_event_id: event-bao5-dmo-introduction-2023
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-bao5-dmo-introduction-2023
+- event-bao5-long-range-current
+news_ids: []
+source_ids:
+- src-bao5-dmo-introduction-2023
+- src-bao5-cn-config-2026
+- src-bao5-long-range-config
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- Current China lineup contains both 31.8 kWh and 47.8 kWh long-range families; keep them as market/variant specs, not separate
+  Vehicle entities.

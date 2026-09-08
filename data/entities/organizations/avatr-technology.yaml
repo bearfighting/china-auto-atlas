@@ -1,0 +1,23 @@
+schema_version: 1
+id: avatr-technology
+type: organization
+organization_role:
+  - operating_company
+  - vehicle_developer
+  - brand_operator
+names:
+  en: "AVATR Technology (Chongqing) Co., Ltd."
+  zh-CN: "阿维塔科技（重庆）有限公司"
+aliases:
+  - "AVATR Technology"
+  - "阿维塔科技"
+status: active
+brand_ids:
+  - avatr
+relationship_ids:
+  - rel-avatr-technology-avatr-operates
+source_ids:
+  - src-avatr-about
+  - src-avatr-naming-2021
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

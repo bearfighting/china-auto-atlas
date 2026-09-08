@@ -1,0 +1,41 @@
+schema_version: 1
+sources:
+- id: src-byd-eplatform-3
+  type: source
+  publisher: BYD
+  title: "E-Platform 3.0"
+  url: "https://media.byd.com/section/technology/e-platform-3-0/?lang=eng"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "e-Platform 3.0 is a pure-electric vehicle architecture"
+    - "Supports front-, rear-, and four-wheel drive"
+    - "Supports 400V and 800V electrical systems"
+  evidence_status: confirmed
+
+- id: src-geely-sea-platform
+  type: source
+  publisher: Zhejiang Geely Holding Group
+  title: "Geely vehicle architecture overview"
+  url: "https://global.geely.com/en/brand"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "SEA is Geely's Sustainable Experience Architecture"
+    - "SEA is a pure-electric architecture"
+    - "SEA uses hardware, system, and ecosystem layers"
+  evidence_status: confirmed
+
+- id: src-geely-gea-ex5
+  type: source
+  publisher: Geely Auto
+  title: "GEELY EX5"
+  url: "https://global.geely.com/en/models/ex5"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "GEA is the architecture behind the GEELY EX5"
+  evidence_status: confirmed

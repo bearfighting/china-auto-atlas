@@ -1,0 +1,55 @@
+schema_version: 1
+id: yangwang-u8
+type: vehicle
+names:
+  en: YANGWANG U8
+  zh-CN: 仰望U8
+aliases:
+- Yangwang U8
+- 仰望 U8
+brand_id: yangwang
+manufacturer_ids:
+- byd-company
+segment: large-luxury-suv
+body_style: suv
+powertrain_types:
+  - phev
+status: active
+first_announced_at:
+  value: '2023-01-08'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-yangwang-u8-brand-unveil-2023
+first_launched_at:
+  value: '2023-09-20'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-yangwang-u8-launch-2023
+platform_id: byd-e4-platform
+technology_ids:
+- byd-e4-platform
+- byd-disus-p
+- byd-blade-battery
+- byd-ctc
+market_spec_ids:
+- ms-yangwang-u8-cn-2023
+media_ids:
+- media-vehicle-yangwang-u8-hero
+timeline:
+  announcement_event_id: event-yangwang-u8-unveiled-2023
+  preorder_event_id: null
+  launch_event_id: event-yangwang-u8-premium-launch-2023
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-yangwang-u8-unveiled-2023
+- event-yangwang-u8-premium-launch-2023
+news_ids: []
+source_ids:
+- src-yangwang-u8-brand-unveil-2023
+- src-yangwang-u8-launch-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

@@ -1,0 +1,26 @@
+schema_version: 1
+id: geely-sea
+type: platform
+names:
+  en: "Sustainable Experience Architecture"
+  zh-CN: "浩瀚架构"
+aliases:
+  - SEA
+status: active
+developer_ids:
+  - zhejiang-geely-holding
+relationship_ids:
+  - rel-geely-sea-developed-by-zgh
+  - rel-zeekr-7x-based-on-sea
+powertrain_types:
+  - bev
+technical_scope:
+  - modular pure-electric vehicle architecture
+  - hardware, system, and ecosystem layers
+  - vehicle sizes from segment A to segment E
+vehicle_ids:
+  - zeekr-7x
+source_ids:
+  - src-geely-sea-platform
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

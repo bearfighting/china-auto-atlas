@@ -1,0 +1,51 @@
+schema_version: 1
+type: market_specification
+id: ms-zeekr-7x-eu
+vehicle_id: zeekr-7x
+market: EU
+status: available
+currency: EUR
+variants:
+- name: Core RWD
+  battery_kwh: 75
+  battery_type: LFP
+  range:
+    value_km: 480
+    standard: WLTP
+  motors: 1
+  drive: RWD
+  max_power_kw: 310
+  acceleration_0_100_s: 6.0
+  charge_10_80_min: 13
+- name: Long Range RWD
+  battery_kwh: 100
+  battery_type: NMC
+  range:
+    value_km: 615
+    standard: WLTP
+  motors: 1
+  drive: RWD
+  max_power_kw: 310
+  acceleration_0_100_s: 6.0
+  charge_10_80_min: 16
+- name: Privilege AWD
+  battery_kwh: 100
+  battery_type: NMC
+  range:
+    value_km: 543
+    standard: WLTP
+  motors: 2
+  drive: AWD
+  max_power_kw: 475
+  max_torque_nm: 710
+  acceleration_0_100_s: 3.8
+  charge_10_80_min: 16
+dimensions_mm:
+  length: 4787
+  height: 1650
+  wheelbase: 2900
+architecture: 800V
+source_ids:
+- src-zeekr-7x-eu
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

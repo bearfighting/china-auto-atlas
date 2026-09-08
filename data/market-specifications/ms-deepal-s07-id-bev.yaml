@@ -1,0 +1,22 @@
+schema_version: 1
+type: market_specification
+id: ms-deepal-s07-id-bev
+vehicle_id: deepal-s07
+market: ID
+status: available
+currency: IDR
+prices:
+- amount: 619000000
+  price_type: otr
+  currency: IDR
+spec:
+  range:
+    value_km: 560
+    standard: NEDC
+  max_power_kw: 160
+  wheelbase_mm: 2900
+  dc_charge_30_80_min: 35
+source_ids:
+- src-deepal-s07-indonesia
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

@@ -1,0 +1,47 @@
+schema_version: 1
+id: byd-ctc
+type: technology
+names:
+  en: CTC (Cell-to-Chassis) integration
+  zh-CN: CTC 电池底盘一体化
+category: manufacturing
+secondary_categories:
+- battery
+- vehicle-platform
+description:
+  en: Battery-to-chassis structural integration used in BYD's DMO context, where the traction battery is integrated into
+    the chassis structure.
+  zh-CN: 比亚迪在 DMO 等场景中采用的电池—底盘结构集成方案，使动力电池成为底盘结构体系的一部分。
+problem_solved:
+- Improve battery packaging and underbody integration
+- Increase structural integration and battery protection in off-road architecture
+technical_features:
+- Battery integrated into chassis structure
+- Referenced by BYD as part of DMO's hybrid non-load-bearing frame
+advantages:
+- Potentially reduces duplicated structural layers
+- Can improve packaging and underbody protection
+limitations:
+- CTC is an architectural concept rather than a complete battery chemistry or charging technology
+- Structural integration can complicate repair/replacement boundaries
+- Do not treat BYD CTC and BYD CTB as synonyms without model-specific evidence
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- fangchengbao
+vehicle_ids:
+- yangwang-u8
+first_announced_at:
+  value: null
+  evidence_status: unknown
+event_ids: []
+source_ids:
+- src-byd-about-tech
+claim_assessment:
+  manufacturer_claims:
+  - Structural integration and safety benefits in DMO
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

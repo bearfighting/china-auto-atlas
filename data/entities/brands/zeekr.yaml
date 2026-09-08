@@ -1,0 +1,46 @@
+schema_version: 1
+id: zeekr
+type: brand
+names:
+  en: ZEEKR
+  zh-CN: 极氪
+aliases:
+- Zeekr
+- 极氪汽车
+status: active
+positioning:
+  en: Premium new-energy vehicle brand in the Geely ecosystem.
+  zh-CN: 吉利体系内的高端新能源汽车品牌。
+powertrain_focus:
+- BEV
+founded:
+  value: "2021-04"
+  precision: month
+  evidence_status: confirmed
+  source_ids:
+  - src-geely-sustainability-2021
+relationship_ids:
+- rel-geely-auto-group-zeekr-manages
+- rel-zeekr-group-zeekr-operates
+market_codes:
+- CN
+seed_market_notes:
+- Official sources document expansion into Europe, Latin America, the Middle East and Asia; country-level availability
+  should be collected separately.
+vehicle_ids: []
+seed_vehicle_names:
+- ZEEKR 001
+- ZEEKR 007
+- ZEEKR 7X
+event_ids:
+- event-zeekr-launched-2021
+- event-zeekr-first-delivery-2021
+source_ids:
+- src-geely-sustainability-2021
+- src-geely-financial-results-2021
+- src-zeekr-investor-faq
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- Current corporate structure includes Zeekr Group with both Lynk & Co and Zeekr; preserve historical relationship
+  changes instead of assuming the 2021 structure is unchanged.

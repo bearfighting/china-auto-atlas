@@ -1,0 +1,26 @@
+schema_version: 1
+id: zeekr-group
+type: manufacturer
+organization_role:
+  - operating_company
+  - automotive_group
+names:
+  en: "Zeekr Group"
+  zh-CN: "极氪科技集团"
+aliases:
+  - "ZEEKR Intelligent Technology Holding Limited"
+status: active
+headquarters:
+  country: CN
+  region: Zhejiang
+  evidence_status: confirmed
+parent_ids:
+  - zhejiang-geely-holding
+relationship_ids:
+  - rel-zgh-zeekr-group-parent
+brand_ids:
+  - zeekr
+source_ids:
+  - src-zeekr-group-profile
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

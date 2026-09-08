@@ -1,0 +1,67 @@
+schema_version: 1
+id: saic-motor
+type: manufacturer
+industry_role:
+  - corporate_group
+  - automotive_group
+relationship_ids:
+  - rel-saic-motor-mg-operates
+status: active
+names:
+  en: "SAIC Motor Corporation Limited"
+  zh-CN: "上海汽车集团股份有限公司"
+aliases:
+  - "SAIC Motor"
+  - "上汽集团"
+stock_listing:
+  exchange: "Shanghai Stock Exchange"
+  code: "600104"
+legal_entity_founded:
+  value: null
+  evidence_status: unknown
+  note: "Not assigned in this seed pass because industrial history, predecessor history, incorporation, and full-listing dates are distinct concepts."
+full_public_listing:
+  value: "2011"
+  precision: year
+headquarters:
+  country: CN
+  region: Shanghai
+  city: Shanghai
+  evidence_note: "Office address is No. 489 Weihai Road, Jing'an District, Shanghai; registered address differs."
+company_type:
+  - public_company
+  - automotive_group
+seed_brand_portfolio:
+  - name: "ROEWE"
+  - name: "MG"
+  - name: "IM"
+  - name: "MAXUS"
+  - name: "Wuling"
+  - name: "Baojun"
+main_automotive_business:
+  - complete_vehicles
+  - components
+  - mobility_services
+  - finance
+  - international_operations
+  - innovative_technology
+official_sites:
+  - label: corporate
+    language: zh-CN
+    url: "https://www.saicmotor.com/"
+  - label: corporate_en
+    language: en
+    url: "https://www.saicmotor.com/e/"
+description: >-
+  Shanghai-listed automotive group whose current businesses cover complete
+  vehicles, components, mobility services, finance, international operations,
+  and innovative technology.
+source_ids:
+  - src-saic-company-profile-2026
+  - src-saic-annual-report-2024
+  - src-saic-sales-2025
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
+notes:
+  - "Keep legal-entity founding date unresolved until a source explicitly supports the chosen date semantics."
+  - "Brand ownership/JV relationships require separate relationship records; this portfolio is only a first-pass association list."

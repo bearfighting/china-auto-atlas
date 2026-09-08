@@ -1,0 +1,28 @@
+schema_version: 1
+id: mg
+type: brand
+names:
+  en: MG
+  zh-CN: 名爵
+aliases:
+  - MG Motor
+status: active
+positioning:
+  en: Global automotive brand operated within the SAIC Motor group.
+  zh-CN: 上汽集团旗下的全球汽车品牌。
+powertrain_focus:
+  - ICE
+  - BEV
+  - PHEV
+relationship_ids:
+  - rel-saic-motor-mg-operates
+market_codes:
+  - CN
+vehicle_ids:
+  - mg4
+event_ids:
+  - event-mg4-cn-launch-2025
+source_ids:
+  - src-saic-mg4-cn-launch-2025
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

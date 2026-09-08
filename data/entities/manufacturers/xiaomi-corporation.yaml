@@ -1,0 +1,61 @@
+schema_version: 1
+id: xiaomi-corporation
+type: manufacturer
+industry_role:
+  - corporate_group
+  - technology_company
+status: active
+names:
+  en: "Xiaomi Corporation"
+  zh-CN: "小米集团"
+aliases:
+  - "Xiaomi"
+  - "小米"
+founded:
+  value: "2010-04-06"
+  precision: day
+stock_listing:
+  exchange: "Hong Kong Stock Exchange"
+  code: "1810.HK"
+  listed_on: "2018-07-09"
+headquarters:
+  country: CN
+  region: Beijing
+  city: Beijing
+  evidence_status: unknown
+  note: "Kept as unknown in this seed because the selected About/IR sources establish corporate identity but are not the preferred headquarters citation."
+company_type:
+  - public_company
+  - consumer_electronics_company
+  - smart_manufacturing_company
+smart_ev_strategy_announced:
+  value: "2021"
+  precision: year
+seed_brand_portfolio:
+  - name: "Xiaomi Auto"
+relationship_ids:
+  - rel-xiaomi-corporation-xiaomi-auto-operates
+main_business_context:
+  - smartphones
+  - electric_vehicles
+  - smart_hardware
+  - aiot
+official_sites:
+  - label: global
+    language: en
+    url: "https://www.mi.com/global/"
+  - label: investor_relations
+    language: en
+    url: "https://ir.mi.com/"
+description: >-
+  Consumer electronics and smart manufacturing company founded in 2010.
+  Xiaomi identifies smartphones, EVs and smart hardware connected by its
+  IoT platform as core businesses; its smart-EV strategy was announced in 2021.
+source_ids:
+  - src-xiaomi-global-about
+  - src-xiaomi-ir-company-profile
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
+notes:
+  - "Xiaomi Corporation should not automatically be treated as the legal vehicle manufacturer for every Xiaomi vehicle."
+  - "A separate operating/manufacturing entity record should be added when its legal role is sourced."

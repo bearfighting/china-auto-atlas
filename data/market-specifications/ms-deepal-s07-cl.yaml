@@ -1,0 +1,30 @@
+schema_version: 1
+type: market_specification
+id: ms-deepal-s07-cl
+vehicle_id: deepal-s07
+market: CL
+status: available
+currency: CLP
+variants:
+- name: S07 REEV
+  powertrain_type: erev
+  prices:
+  - amount: 29990000
+    currency: CLP
+    price_type: from_price
+  battery_kwh: 31.74
+  range:
+    value_km: 1170
+    standard: local_published
+  power_hp: 235
+- name: S07 BEV
+  powertrain_type: bev
+  battery_kwh: 79.97
+  range:
+    value_km: 560
+    standard: local_published
+  power_hp: 215
+source_ids:
+- src-deepal-s07-chile
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

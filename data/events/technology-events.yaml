@@ -1,0 +1,112 @@
+schema_version: 1
+events:
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-avatr-chn-platform-launch-2022
+  date: '2022-06-25'
+  date_precision: day
+  event_type: technology_launch
+  subject_ids:
+  - avatr-chn
+  - avatr-11
+  - chongqing-changan-automobile
+  - huawei
+  - catl
+  summary: Changan Automobile, Huawei and CATL jointly launched the CHN architecture, with AVATR 11 as its first model.
+  source_ids:
+  - src-avatr-chn-launch
+  related_document_ids:
+  - news-2022-06-25-chn-platform-launch
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-blade-battery-launch-2020
+  date: '2020-03-29'
+  event_type: technology_launch
+  subject_ids:
+  - byd-blade-battery
+  summary: BYD publicly launched the Blade Battery and presented its nail-penetration test demonstration.
+  source_ids:
+  - src-byd-blade-launch-2020
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-dmi-2021-market-introduction
+  date: '2021'
+  date_precision: year
+  event_type: technology_market_introduction
+  subject_ids:
+  - byd-dm-i
+  summary: DM-i became a core BYD production hybrid technology during 2021.
+  source_ids:
+  - src-byd-2021-nev-results
+  - src-byd-eplatform-2021
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-dmo-launch-2023
+  date: '2023-08-16'
+  event_type: technology_launch
+  subject_ids:
+  - byd-dmo
+  summary: BYD introduced DMO together with FANGCHENGBAO BAO 5.
+  source_ids:
+  - src-byd-bao5-dmo-2023
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-disus-launch-2023
+  date: '2023-04-10'
+  event_type: technology_launch
+  subject_ids:
+  - byd-disus-p
+  summary: BYD released the DiSus family, including hydraulic DiSus-P.
+  source_ids:
+  - src-byd-disus-launch-2023
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-e4-yangwang-unveil-2023
+  date: '2023-01-08'
+  event_type: technology_launch
+  subject_ids:
+  - byd-e4-platform
+  summary: The e⁴ platform debuted with YANGWANG U8/U9.
+  source_ids:
+  - src-byd-yangwang-u8-2023
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-geely-short-blade-unveil-2024
+  date: '2024-06-27'
+  event_type: technology_launch
+  subject_ids:
+  - geely-short-blade-battery
+  summary: Geely Auto unveiled its new self-developed Short Blade EV Battery Technology.
+  source_ids:
+  - src-geely-short-blade-2024
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-geely-golden-short-blade-brand-2025
+  date: '2025-04-23'
+  event_type: technology_brand_update
+  subject_ids:
+  - geely-short-blade-battery
+  summary: Geely announced the self-developed/self-produced Golden Short Blade Battery brand at Auto Shanghai 2025.
+  source_ids:
+  - src-geely-golden-short-blade-2025
+- schema_version: 1
+  type: event
+  evidence_status: confirmed
+  id: event-geely-ex5-tech-unveil-2024
+  date: '2024-09-10'
+  event_type: vehicle_technology_application
+  subject_ids:
+  - geely-11-in-1-electric-drive
+  - geely-short-blade-battery
+  - geely-ex5
+  summary: Global EX5 unveiling highlighted Short Blade Battery and 11-in-1 electric drive.
+  source_ids:
+  - src-geely-ex5-tech

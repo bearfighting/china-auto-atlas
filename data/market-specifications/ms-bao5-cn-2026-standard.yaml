@@ -1,0 +1,45 @@
+schema_version: 1
+type: market_specification
+id: ms-bao5-cn-2026-standard
+vehicle_id: fangchengbao-bao-5
+market: CN
+valid_from: null
+valid_to: null
+status: available
+currency: CNY
+variants:
+- name: 天神智驾Max版
+  prices:
+  - amount: 239800
+    currency: CNY
+    price_type: msrp
+- name: 天神智驾Ultra版
+  prices:
+  - amount: 259800
+    currency: CNY
+    price_type: msrp
+- name: 激光乾崑智驾版
+  prices:
+  - amount: 284800
+    currency: CNY
+    price_type: msrp
+- name: 云辇激光乾崑智驾版
+  prices:
+  - amount: 329800
+    currency: CNY
+    price_type: msrp
+common_specs:
+  battery_kwh: 31.8
+  system_power_kw: 505
+  system_torque_nm: 760
+  drive: electric_AWD
+  acceleration_0_100_s: 4.8
+  dimensions_mm:
+    length: 4890
+    width: 1970
+    height: 1920
+    wheelbase: 2800
+source_ids:
+- src-bao5-cn-config-2026
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

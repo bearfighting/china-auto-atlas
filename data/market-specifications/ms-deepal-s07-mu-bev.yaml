@@ -1,0 +1,23 @@
+schema_version: 1
+type: market_specification
+id: ms-deepal-s07-mu-bev
+vehicle_id: deepal-s07
+market: MU
+status: available
+powertrain_type: bev
+spec:
+  battery_kwh: 79.97
+  battery_type: ternary_lithium
+  range:
+    value_km: 475
+    standard: WLTP
+  motors: 1
+  drive: RWD
+  max_power_kw: 160
+  max_torque_nm: 320
+  acceleration_0_100_s: 7.9
+  max_dc_charge_kw: 92
+source_ids:
+- src-deepal-s07-mauritius
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

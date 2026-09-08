@@ -1,0 +1,60 @@
+schema_version: 1
+id: byd-blade-battery
+type: technology
+names:
+  en: Blade Battery
+  zh-CN: 刀片电池
+category: battery
+description:
+  en: BYD's lithium-iron-phosphate battery system using long, blade-like cells and pack-level structural integration
+    to improve packaging efficiency.
+  zh-CN: 比亚迪采用长条形“刀片”电芯的磷酸铁锂电池系统，并通过电池包结构设计提高空间利用率。
+problem_solved:
+- Improve battery-pack space utilization
+- Improve thermal stability and safety relative to higher-energy-density nickel-rich chemistries
+- Provide durable LFP-based traction batteries
+technical_features:
+- LFP chemistry
+- Long thin cell form factor
+- High pack-level packaging efficiency
+- Structural/honeycomb pack design
+advantages:
+- LFP chemistry avoids nickel and cobalt in the cathode
+- Manufacturer reports strong nail-penetration thermal-safety behavior
+- Packaging design can improve usable pack volume
+limitations:
+- LFP generally has lower cell-level energy density than high-nickel NMC chemistries; pack design can offset but does
+  not eliminate that chemistry-level trade-off
+- Nail-penetration performance is a safety test result, not proof that a complete vehicle battery is immune to fire in
+  all crash or abuse conditions
+developer_ids:
+- byd-company
+supplier_ids:
+- byd-company
+brand_ids:
+- byd
+- denza
+- yangwang
+- fangchengbao
+vehicle_ids:
+- byd-seal
+- yangwang-u8
+first_announced_at:
+  value: '2020-03-29'
+  precision: day
+  evidence_status: confirmed
+event_ids:
+- event-blade-battery-launch-2020
+source_ids:
+- src-byd-blade-launch-2020
+- src-byd-blade-tech
+claim_assessment:
+  manufacturer_claims:
+  - Improved safety, strength, range and charging capability
+  - Passed BYD's nail-penetration demonstration without fire/smoke
+  independent_verification:
+    status: not_established
+  note: The technology's existence, chemistry and design are confirmed by primary sources; broad superiority claims remain
+    manufacturer claims unless a matching independent test is attached.
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

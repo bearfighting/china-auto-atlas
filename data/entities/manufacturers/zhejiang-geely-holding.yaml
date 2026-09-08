@@ -1,0 +1,65 @@
+schema_version: 1
+id: zhejiang-geely-holding
+type: manufacturer
+industry_role:
+  - holding_group
+  - automotive_group
+  - technology_investment_group
+status: active
+names:
+  en: "Zhejiang Geely Holding Group"
+  zh-CN: "浙江吉利控股集团"
+aliases:
+  - "Geely Holding"
+  - "ZGH"
+founded:
+  value: "1986"
+  precision: year
+origin:
+  country: CN
+  region: Zhejiang
+  city: Taizhou
+headquarters:
+  country: CN
+  region: Zhejiang
+  city: Hangzhou
+company_type:
+  - private_holding_group
+  - automotive_group
+  - technology_investment_group
+automotive_business_started:
+  value: "1997"
+  precision: year
+seed_brand_portfolio:
+  - name: "Geely Auto"
+  - name: "Geely Galaxy"
+  - name: "Lynk & Co"
+  - name: "ZEEKR"
+  - name: "Volvo Cars"
+  - name: "Polestar"
+  - name: "Lotus"
+  - name: "Farizon Auto"
+main_automotive_business:
+  - vehicle_research_and_development
+  - vehicle_manufacturing
+  - vehicle_sales_and_service
+  - mobility_services
+official_sites:
+  - label: group
+    language: en
+    url: "https://www.zgh.com/"
+  - label: global_auto
+    language: en
+    url: "https://global.geely.com/"
+description: >-
+  Privately owned global automotive, technology and investment group founded
+  in 1986 in Taizhou, Zhejiang. It entered the automotive business in 1997
+  and is headquartered in Hangzhou.
+source_ids:
+  - src-geely-holding-2025-sustainability
+  - src-geely-brand-profile
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
+notes:
+  - "Geely Holding and Geely Auto Group must remain separate entities."
+  - "Official editor guidance explicitly warns against abbreviating both entities simply as 'Geely'."

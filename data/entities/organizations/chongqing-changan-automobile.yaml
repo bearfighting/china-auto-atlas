@@ -1,0 +1,26 @@
+schema_version: 1
+id: chongqing-changan-automobile
+type: manufacturer
+organization_role:
+  - operating_company
+  - automotive_manufacturer
+names:
+  en: "Chongqing Changan Automobile Co., Ltd."
+  zh-CN: "重庆长安汽车股份有限公司"
+aliases:
+  - "Changan Automobile"
+  - "长安汽车"
+status: active
+headquarters:
+  country: CN
+  region: Chongqing
+  city: Chongqing
+brand_ids:
+  - deepal
+  - avatr
+relationship_ids:
+  - rel-changan-group-chongqing-changan-associated
+source_ids:
+  - src-changan-company-profile
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

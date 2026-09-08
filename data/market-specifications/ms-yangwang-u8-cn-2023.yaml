@@ -1,0 +1,31 @@
+schema_version: 1
+type: market_specification
+id: ms-yangwang-u8-cn-2023
+vehicle_id: yangwang-u8
+market: CN
+valid_from: '2023-09-20'
+status: launched
+currency: CNY
+variants:
+- name: U8 Premium Edition
+  prices:
+  - amount: 1098000
+    currency: CNY
+    price_type: msrp
+  powertrain_type: phev
+  range_combined:
+    value_km: 1000
+    standard: CLTC
+    evidence_status: claimed
+  dc_charge_kw: 110
+technology_ids:
+- byd-e4-platform
+- byd-disus-p
+- byd-blade-battery
+- byd-ctc
+source_ids:
+- src-yangwang-u8-launch-2023
+notes:
+- Current 2026 pricing/spec should be refreshed separately; this record preserves the launch-state China spec.
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

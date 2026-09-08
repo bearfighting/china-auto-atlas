@@ -1,0 +1,50 @@
+schema_version: 1
+id: xiaomi-su7
+type: vehicle
+names:
+  en: Xiaomi SU7
+  zh-CN: 小米 SU7
+aliases:
+  - Xiaomi SU7 Series
+brand_id: xiaomi-auto
+manufacturer_ids:
+  - xiaomi-corporation
+segment: executive-sedan
+body_style: sedan
+powertrain_types:
+  - bev
+status: active
+first_announced_at:
+  value: "2023-12-28"
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+    - src-xiaomi-su7-prelaunch-2023
+first_launched_at:
+  value: "2024-03-28"
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+    - src-xiaomi-su7-launch-2024
+technology_ids: []
+market_spec_ids:
+  - ms-xiaomi-su7-cn-2024
+media_ids:
+  - media-vehicle-xiaomi-su7-hero
+timeline:
+  announcement_event_id: event-xiaomi-su7-prelaunch-2023
+  preorder_event_id: null
+  launch_event_id: event-xiaomi-su7-launch-2024
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+  - event-xiaomi-su7-prelaunch-2023
+  - event-xiaomi-su7-launch-2024
+source_ids:
+  - src-xiaomi-su7-prelaunch-2023
+  - src-xiaomi-su7-launch-2024
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
+notes:
+  - The original 2024 SU7 generation is modeled separately from the new-generation SU7 announced in 2026.

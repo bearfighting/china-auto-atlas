@@ -1,0 +1,39 @@
+schema_version: 1
+id: yangwang
+type: brand
+names:
+  en: YANGWANG
+  zh-CN: 仰望
+aliases:
+- Yangwang
+- 仰望汽车
+status: active
+positioning:
+  en: Luxury new-energy vehicle brand using BYD Group's highest-end technologies.
+  zh-CN: 比亚迪集团旗下以高端核心技术为主要特征的豪华新能源汽车品牌。
+powertrain_focus:
+- BEV
+- PHEV
+founded:
+  value: "2023-01"
+  precision: month
+  evidence_status: confirmed
+  note: Uses official public unveiling as the MVP brand-establishment milestone.
+  source_ids:
+  - src-yangwang-launch-2023
+relationship_ids:
+- rel-byd-company-yangwang-operates
+market_codes:
+- CN
+vehicle_ids: []
+seed_vehicle_names:
+- U8
+- U9
+- U7
+event_ids:
+- event-yangwang-unveiled-2023
+source_ids:
+- src-yangwang-brand-profile
+- src-yangwang-launch-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

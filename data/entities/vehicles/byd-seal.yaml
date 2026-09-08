@@ -1,0 +1,57 @@
+schema_version: 1
+id: byd-seal
+type: vehicle
+names:
+  en: BYD SEAL
+  zh-CN: 比亚迪海豹
+aliases:
+- SEAL
+- 海豹
+brand_id: byd
+manufacturer_ids:
+- byd-company
+segment: executive-sedan
+body_style: sedan
+powertrain_types:
+  - bev
+status: active
+first_announced_at:
+  value: null
+  evidence_status: unknown
+first_launched_at:
+  value: '2022'
+  precision: year
+  evidence_status: reported
+  note: China launch year retained at year precision pending a primary launch-day source in the next pass.
+platform_id: byd-e-platform-3
+technology_ids:
+- byd-blade-battery
+- byd-ctb
+market_spec_ids:
+- ms-byd-seal-eu-2023
+- ms-byd-seal-jp-2026
+media_ids:
+- media-vehicle-byd-seal-hero
+timeline:
+  announcement_event_id: null
+  preorder_event_id: null
+  launch_event_id: null
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids:
+  - event-byd-seal-europe-introduction-2023
+  - event-byd-seal-hong-kong-launch-2023
+event_ids:
+- event-byd-seal-europe-introduction-2023
+- event-byd-seal-hong-kong-launch-2023
+news_ids: []
+source_ids:
+- src-byd-seal-europe-2023
+- src-byd-seal-spec-sheet
+- src-byd-seal-japan-2026
+- src-byd-seal-hk-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- China-market current pricing/configuration should be added from a stable official China configuration source; do not reuse
+  overseas trim values as China specs.

@@ -1,0 +1,317 @@
+schema_version: 1
+media:
+  - id: media-vehicle-avatr-11-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: avatr-11
+    source_id: src-avatr11-current
+    source_page_url: https://www.avatr.com/en/11
+    source_asset_url: https://static.avatr.com/pc-website/images/reev11/knight/pc/banner.jpg?v=3
+    asset_path: assets/images/vehicles/avatr-11/hero.webp
+    alt: {en: AVATR 11, zh-CN: 阿维塔 11}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-vehicle-byd-seal-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: byd-seal
+    source_id: src-byd-seal-spec-sheet
+    source_page_url: https://www.byd.com/material/byd-site/sg/product/pdf/BYD%20Seal%20Spec%20Sheet-PREVIEW%20.pdf
+    asset_path: assets/images/vehicles/byd-seal/hero.webp
+    alt: {en: BYD SEAL, zh-CN: 比亚迪海豹}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-deepal-s07-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: deepal-s07
+    source_id: src-deepal-s07-indonesia
+    source_page_url: https://changan.co.id/en/models/deepal-s07
+    source_asset_url: https://api.changan.co.id/uploads/Resize_20_Banner_20_Product_20_Page_20_20_Deepal_20_S07_17e4234fb3_b07e4fbbaa.jpg
+    asset_path: assets/images/vehicles/deepal-s07/hero.webp
+    alt: {en: DEEPAL S07, zh-CN: 深蓝 S07}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-vehicle-denza-d9-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: denza-d9
+    source_id: src-denza-brand-history
+    source_page_url: https://www.denza.com/cn/brand
+    asset_path: assets/images/vehicles/denza-d9/hero.webp
+    alt: {en: DENZA D9, zh-CN: 腾势 D9}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-fangchengbao-bao-5-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: fangchengbao-bao-5
+    source_id: src-bao5-cn-config-2026
+    source_page_url: https://www.fangchengbao.com/disposition-bao5.html
+    asset_path: assets/images/vehicles/fangchengbao-bao-5/hero.webp
+    alt: {en: FANGCHENGBAO BAO 5, zh-CN: 方程豹 豹5}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-geely-ex5-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: geely-ex5
+    source_id: src-geely-ex5-model
+    source_page_url: https://global.geely.com/en/models/ex5
+    asset_path: assets/images/vehicles/geely-ex5/hero.webp
+    alt: {en: GEELY EX5, zh-CN: 吉利 EX5}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-mg4-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: mg4
+    source_id: src-saic-mg4-cn-launch-2025
+    source_page_url: https://www.saicmotor.com/m/xwzx/xwk/2025/62560.shtml
+    asset_path: assets/images/vehicles/mg4/hero.webp
+    alt: {en: MG4, zh-CN: MG4}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-xiaomi-su7-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: xiaomi-su7
+    source_id: src-xiaomi-su7-launch-2024
+    source_page_url: https://www.mi.com/global/discover/article/?id=3263
+    asset_path: assets/images/vehicles/xiaomi-su7/hero.webp
+    alt: {en: Xiaomi SU7, zh-CN: 小米 SU7}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-yangwang-u8-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: yangwang-u8
+    source_id: src-yangwang-u8-launch-2023
+    source_page_url: https://www.byd.com/us/news-list/BYD-Launched-the-U8-Premium-Edition-Under-Its-High-End-Sub-Brand-Yangwang
+    asset_path: assets/images/vehicles/yangwang-u8/hero.webp
+    alt: {en: YANGWANG U8, zh-CN: 仰望 U8}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-vehicle-zeekr-7x-hero
+    type: media
+    media_type: image
+    usage: vehicle_hero
+    entity_id: zeekr-7x
+    source_id: src-zeekr-7x-cn
+    source_page_url: https://www.zeekrlife.com/global/vehicles/7x
+    asset_path: assets/images/vehicles/zeekr-7x/hero.svg
+    alt: {en: ZEEKR 7X, zh-CN: 极氪 7X}
+    collection_status: downloaded
+    rights_status: needs_review
+
+  - id: media-brand-avatr-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: avatr
+    source_id: src-avatr-about
+    source_page_url: https://www.avatr.com/en/about
+    asset_path: assets/images/brands/avatr/logo-primary.webp
+    alt: {en: AVATR logo, zh-CN: 阿维塔标志}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-brand-byd-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: byd
+    source_id: src-byd-brand-center
+    source_page_url: https://www.byd.com/cn/brand-center
+    asset_path: assets/images/brands/byd/logo-primary.svg
+    alt: {en: BYD logo, zh-CN: 比亚迪标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-brand-deepal-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: deepal
+    source_id: src-changan-annual-report-2022
+    source_page_url: https://www.globalchangan.com/deepal.html
+    asset_path: assets/images/brands/deepal/logo-primary.webp
+    alt: {en: DEEPAL logo, zh-CN: 深蓝标志}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-brand-denza-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: denza
+    source_id: src-denza-brand-profile
+    source_page_url: https://www.denza.com/cn/brand
+    asset_path: assets/images/brands/denza/logo-primary.svg
+    alt: {en: DENZA logo, zh-CN: 腾势标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-brand-fangchengbao-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: fangchengbao
+    source_id: src-fangchengbao-announcement-2023
+    source_page_url: https://www.fangchengbao.com/
+    asset_path: assets/images/brands/fangchengbao/logo-primary.svg
+    alt: {en: FANGCHENGBAO logo, zh-CN: 方程豹标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-brand-geely-auto-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: geely-auto
+    source_id: src-geely-brand-page
+    source_page_url: https://global.geely.com/en/brand
+    asset_path: assets/images/brands/geely-auto/logo-primary.svg
+    alt: {en: Geely Auto logo, zh-CN: 吉利汽车标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-brand-mg-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: mg
+    source_id: src-saic-mg4-cn-launch-2025
+    source_page_url: https://www.saicmotor.com/m/xwzx/xwk/2025/62560.shtml
+    asset_path: assets/images/brands/mg/logo-primary.svg
+    alt: {en: MG logo, zh-CN: 名爵标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-brand-xiaomi-auto-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: xiaomi-auto
+    source_id: src-xiaomi-su7-launch-2024
+    source_page_url: https://www.mi.com/global/discover/article/?id=3263
+    asset_path: assets/images/brands/xiaomi-auto/logo-primary.webp
+    alt: {en: Xiaomi Auto logo, zh-CN: 小米汽车标志}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-brand-yangwang-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: yangwang
+    source_id: src-yangwang-launch-2023
+    source_page_url: https://www.byd.com/sc/news-list/BYD-Debuted-First-Luxury-Off-road-SUV-U8-All-electric-Supercar-U9-Under-Premium-Brand-Yangwang
+    asset_path: assets/images/brands/yangwang/logo-primary.svg
+    alt: {en: YANGWANG logo, zh-CN: 仰望标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-brand-zeekr-logo
+    type: media
+    media_type: image
+    usage: brand_logo
+    entity_id: zeekr
+    source_id: src-zeekr-group-profile
+    source_page_url: https://www.zeekrgroup.com/en/about
+    asset_path: assets/images/brands/zeekr/logo-primary.svg
+    alt: {en: ZEEKR logo, zh-CN: 极氪标志}
+    collection_status: source_identified
+    rights_status: needs_review
+
+  - id: media-organization-byd-company-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: byd-company
+    source_id: src-byd-company-profile-2021
+    source_page_url: https://www.byd.com/en/about-byd
+    asset_path: assets/images/organizations/byd-company/logo-primary.svg
+    alt: {en: BYD Company logo, zh-CN: 比亚迪公司标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-organization-zhejiang-geely-holding-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: zhejiang-geely-holding
+    source_id: src-geely-holding-2025-sustainability
+    source_page_url: https://global.geely.com/en/brand
+    asset_path: assets/images/organizations/zhejiang-geely-holding/logo-primary.svg
+    alt: {en: Zhejiang Geely Holding Group logo, zh-CN: 浙江吉利控股集团标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-organization-geely-auto-group-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: geely-auto-group
+    source_id: src-geely-auto-group-profile
+    source_page_url: https://global.geely.com/en/brand
+    asset_path: assets/images/organizations/geely-auto-group/logo-primary.svg
+    alt: {en: Geely Auto Group logo, zh-CN: 吉利汽车集团标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-organization-changan-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: chongqing-changan-automobile
+    source_id: src-changan-company-profile
+    source_page_url: https://www.changan.com.cn/
+    asset_path: assets/images/organizations/chongqing-changan-automobile/logo-primary.svg
+    alt: {en: Changan Automobile logo, zh-CN: 长安汽车标志}
+    collection_status: source_identified
+    rights_status: needs_review
+  - id: media-organization-catl-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: catl
+    source_id: src-catl-company-profile
+    source_page_url: https://www.catl.com/en/about/profile/
+    source_asset_url: https://www.catl.com/en/uploads/1/image/public/202603/20260330222913_ib0ntesj5w.png
+    asset_path: assets/images/organizations/catl/logo-primary.webp
+    alt: {en: CATL logo, zh-CN: 宁德时代标志}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-organization-huawei-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: huawei
+    source_id: src-avatr-chn-launch
+    source_page_url: https://www.huawei.com/en/
+    source_asset_url: https://www-file.huawei.com/-/media/corp/home/image/logo_400x200.png
+    asset_path: assets/images/organizations/huawei/logo-primary.webp
+    alt: {en: Huawei logo, zh-CN: 华为标志}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-organization-xiaomi-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: xiaomi-corporation
+    source_id: src-xiaomi-global-about
+    source_page_url: https://www.mi.com/global/about/
+    source_asset_url: https://i02.appmifile.com/mi-com-product/fly-birds/about-xiaomi/pc/icon-screen03-human-x-car-x-home-logo-v2.png
+    asset_path: assets/images/organizations/xiaomi-corporation/logo-primary.webp
+    alt: {en: Xiaomi Corporation logo, zh-CN: 小米集团标志}
+    collection_status: downloaded
+    rights_status: needs_review
+  - id: media-organization-saic-logo
+    type: media
+    media_type: image
+    usage: organization_logo
+    entity_id: saic-motor
+    source_id: src-saic-company-profile-2026
+    source_page_url: https://www.saicmotor.com/e/company_profile/about_us/index.shtml
+    asset_path: assets/images/organizations/saic-motor/logo-primary.svg
+    alt: {en: SAIC Motor logo, zh-CN: 上汽集团标志}
+    collection_status: source_identified
+    rights_status: needs_review

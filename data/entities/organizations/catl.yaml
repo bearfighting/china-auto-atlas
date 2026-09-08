@@ -1,0 +1,36 @@
+schema_version: 1
+id: catl
+type: supplier
+organization_role:
+  - battery_supplier
+  - energy_technology_company
+names:
+  en: "Contemporary Amperex Technology Co., Limited"
+  zh-CN: "宁德时代新能源科技股份有限公司"
+aliases:
+  - "CATL"
+  - "宁德时代"
+status: active
+relationship_ids:
+  - rel-catl-avatr-battery-partner
+  - rel-catl-avatr-invested-in
+founded:
+  value: "2011-12"
+  precision: month
+  evidence_status: confirmed
+headquarters:
+  country: CN
+  region: Fujian
+  city: Ningde
+stock_listing:
+  exchange: Shenzhen Stock Exchange
+  code: "300750.SZ"
+automotive_scope:
+  - electric_vehicle_batteries
+  - battery_systems
+  - energy_storage
+source_ids:
+  - src-catl-company-profile
+  - src-avatr-chn-launch
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

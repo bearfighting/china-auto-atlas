@@ -1,0 +1,31 @@
+schema_version: 1
+id: geely-auto-group
+type: manufacturer
+organization_role:
+  - operating_company
+  - automotive_group
+names:
+  en: "Geely Auto Group"
+  zh-CN: "吉利汽车集团"
+aliases:
+  - "Geely Auto"
+status: active
+founded:
+  value: "1997"
+  precision: year
+  evidence_status: confirmed
+headquarters:
+  country: CN
+  region: Zhejiang
+  city: Hangzhou
+parent_ids:
+  - zhejiang-geely-holding
+relationship_ids:
+  - rel-zgh-geely-auto-group-parent
+brand_ids:
+  - geely-auto
+  - zeekr
+source_ids:
+  - src-geely-auto-group-profile
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

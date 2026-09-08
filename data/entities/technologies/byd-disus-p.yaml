@@ -1,0 +1,52 @@
+schema_version: 1
+id: byd-disus-p
+type: technology
+names:
+  en: DiSus-P Intelligent Hydraulic Body Control System
+  zh-CN: 云辇-P 智能液压车身控制系统
+category: chassis
+description:
+  en: Hydraulic branch of BYD's DiSus intelligent body-control family, using active body-height and damping/body-motion
+    control for high-end and off-road NEVs.
+  zh-CN: 比亚迪云辇智能车身控制体系中的液压分支，通过主动高度及阻尼/车身运动控制服务于高端和越野新能源汽车。
+problem_solved:
+- Control vertical body motion
+- Improve body stability on uneven terrain and during dynamic maneuvers
+- Adjust body/chassis behavior for off-road scenarios
+technical_features:
+- Hydraulic body control
+- Part of DiSus perception-decision-execution architecture
+- Active vertical-motion control
+advantages:
+- Can adapt body behavior to changing road conditions
+- Manufacturer positions it as improving comfort, stability and off-road capability
+limitations:
+- Adds hydraulic/mechatronic hardware, cost, mass and service complexity
+- Claims of superior safety/comfort are system-level manufacturer claims and depend on vehicle calibration and tires/road
+  conditions
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- yangwang
+- fangchengbao
+vehicle_ids:
+- yangwang-u8
+- fangchengbao-bao-5
+first_announced_at:
+  value: '2023-04-10'
+  precision: day
+  evidence_status: confirmed
+event_ids:
+- event-disus-launch-2023
+source_ids:
+- src-byd-disus-launch-2023
+- src-byd-about-tech
+claim_assessment:
+  manufacturer_claims:
+  - Improves safety, stability and comfort
+  - Reduces rollover risk in challenging conditions
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

@@ -1,0 +1,35 @@
+schema_version: 1
+type: topic_registry
+topics:
+  - id: vehicle-launch
+    names: {en: Vehicle launch, zh-CN: 车型发布}
+  - id: vehicle-update
+    names: {en: Vehicle update, zh-CN: 车型更新}
+  - id: electric-vehicles
+    names: {en: Electric vehicles, zh-CN: 新能源汽车}
+  - id: vehicle-technology
+    names: {en: Vehicle technology, zh-CN: 汽车技术}
+  - id: platform
+    names: {en: Vehicle platform, zh-CN: 车型平台}
+  - id: battery
+    names: {en: Battery, zh-CN: 电池}
+  - id: charging
+    names: {en: Charging, zh-CN: 充电}
+  - id: safety
+    names: {en: Safety, zh-CN: 安全}
+  - id: intelligent-vehicles
+    names: {en: Intelligent vehicles, zh-CN: 智能汽车}
+  - id: global-expansion
+    names: {en: Global expansion, zh-CN: 全球化}
+  - id: market-entry
+    names: {en: Market entry, zh-CN: 市场进入}
+  - id: corporate-structure
+    names: {en: Corporate structure, zh-CN: 企业结构}
+  - id: partnership
+    names: {en: Partnership, zh-CN: 合作关系}
+  - id: ownership
+    names: {en: Ownership, zh-CN: 所有权}
+  - id: pricing
+    names: {en: Pricing, zh-CN: 价格}
+  - id: delivery
+    names: {en: Delivery, zh-CN: 交付}

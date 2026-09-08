@@ -1,0 +1,50 @@
+schema_version: 1
+id: byd-ctb
+type: technology
+names:
+  en: CTB (Cell-to-Body) Battery Body Integration Technology
+  zh-CN: CTB 电池车身一体化技术
+category: manufacturing
+secondary_categories:
+- vehicle-platform
+- battery
+description:
+  en: BYD structural-integration approach in which the battery system contributes to the vehicle body's structure instead
+    of remaining only a separately packaged energy-storage component.
+  zh-CN: 比亚迪将电池系统进一步参与车身结构承载的电池车身一体化方案，而不只是把电池作为独立封装的储能部件。
+problem_solved:
+- Reduce duplicated battery/body structure
+- Improve packaging efficiency
+- Increase body structural stiffness
+technical_features:
+- Battery integrated with body structure
+- Battery system serves both energy and structural roles
+advantages:
+- Potentially improves space utilization
+- Manufacturer reports higher torsional stiffness and stronger integrated body structure
+limitations:
+- Greater structural integration can make battery/body repair separation more complex after severe damage
+- A CTB label does not by itself specify cell chemistry, charging voltage or charging speed
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- byd
+vehicle_ids:
+- byd-seal
+first_announced_at:
+  value: null
+  evidence_status: unknown
+  note: Current BYD technical pages confirm the technology but this seed does not assign an exact first-publication date
+    without a stable launch archive.
+event_ids: []
+source_ids:
+- src-byd-about-tech
+claim_assessment:
+  manufacturer_claims:
+  - 40,500 Nm/° torsional stiffness
+  - Reduced vehicle height without sacrificing headroom
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

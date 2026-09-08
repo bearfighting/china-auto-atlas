@@ -1,0 +1,50 @@
+schema_version: 1
+id: avatr
+type: brand
+names:
+  en: AVATR
+  zh-CN: 阿维塔
+aliases:
+- Avatr
+- 阿维塔汽车
+status: active
+positioning:
+  en: Luxury intelligent electric vehicle brand centered on original design and intelligent technology.
+  zh-CN: 以原创设计和智能科技为核心的新豪华智能电动汽车品牌。
+powertrain_focus:
+- BEV
+- EREV
+founded:
+  value: '2021-05-20'
+  precision: day
+  evidence_status: confirmed
+  note: Uses the official AVATR Technology naming/business-registration milestone as the MVP establishment event.
+  source_ids:
+  - src-avatr-naming-2021
+relationship_ids:
+- rel-avatr-technology-avatr-operates
+- rel-changan-automobile-avatr-controls
+- rel-catl-avatr-invested-in
+- rel-ccag-avatr-group-brand
+market_codes:
+- CN
+seed_market_notes:
+- The company maintains an overseas-business function and describes a global ambition, but brand-level country availability
+  is not inferred from that alone.
+vehicle_ids: []
+seed_vehicle_names:
+- AVATR 11
+- AVATR 12
+- AVATR 07
+- AVATR 06
+event_ids:
+- event-avatr-named-2021
+- event-avatr-catl-financing-2022
+- event-avatr-ccag-strategy-2025
+source_ids:
+- src-avatr-about
+- src-avatr-naming-2021
+- src-avatr-financing-2022
+- src-avatr-ccag-2025
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

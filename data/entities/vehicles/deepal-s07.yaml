@@ -1,0 +1,55 @@
+schema_version: 1
+id: deepal-s07
+type: vehicle
+names:
+  en: DEEPAL S07
+  zh-CN: 深蓝S07
+aliases:
+- Deepal S07
+- S07
+- 深蓝 S07
+brand_id: deepal
+manufacturer_ids:
+- chongqing-changan-automobile
+segment: mid-size-suv
+body_style: suv
+powertrain_types:
+  - bev
+  - erev
+status: active
+first_announced_at:
+  value: null
+  evidence_status: unknown
+first_launched_at:
+  value: null
+  evidence_status: unknown
+  note: This pass prioritizes current official market specifications; China launch chronology should be verified from Deepal/Changan
+    primary archives.
+platform_id: null
+technology_ids: []
+market_spec_ids:
+- ms-deepal-s07-mu-bev
+- ms-deepal-s07-id-bev
+- ms-deepal-s07-cl
+media_ids:
+- media-vehicle-deepal-s07-hero
+timeline:
+  announcement_event_id: event-deepal-s07-debut-2023
+  preorder_event_id: event-deepal-s07-thailand-preorder-2023
+  launch_event_id: event-deepal-s07-thailand-launch-2023
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids:
+  - event-deepal-s07-thailand-launch-2023
+  - event-deepal-s07-indonesia-market
+event_ids:
+- event-deepal-s07-indonesia-market
+news_ids: []
+source_ids:
+- src-deepal-s07-mauritius
+- src-deepal-s07-indonesia
+- src-deepal-s07-chile
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- S07 is useful for testing one Vehicle with BEV and EREV market variants and different local test standards.

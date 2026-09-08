@@ -1,0 +1,63 @@
+schema_version: 1
+id: avatr-11
+type: vehicle
+names:
+  en: AVATR 11
+  zh-CN: 阿维塔11
+aliases:
+- Avatr 11
+- 阿维塔 11
+brand_id: avatr
+manufacturer_ids:
+- chongqing-changan-automobile
+segment: mid-size-suv
+body_style: suv
+powertrain_types:
+  - bev
+  - erev
+status: active
+first_announced_at:
+  value: '2022-03-14'
+  precision: day
+  evidence_status: confirmed
+  note: MIIT announcement appearance; pre-order began May 20.
+  source_ids:
+  - src-avatr11-miit-2022
+first_launched_at:
+  value: '2022-08-08'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-avatr11-launch-2022
+platform_id: avatr-chn
+technology_ids:
+- avatr-800v-sic
+market_spec_ids:
+- ms-avatr11-cn-2026
+media_ids:
+- media-vehicle-avatr-11-hero
+timeline:
+  announcement_event_id: event-avatr11-miit-2022
+  preorder_event_id: event-avatr11-preorder-2022
+  launch_event_id: event-avatr11-launch-2022
+  production_start_event_id: event-avatr11-production-2022
+  delivery_start_event_id: event-avatr11-delivery-2022
+  market_entry_event_ids: []
+event_ids:
+- event-avatr11-miit-2022
+- event-avatr11-preorder-2022
+- event-avatr11-launch-2022
+- event-avatr11-production-2022
+- event-avatr11-delivery-2022
+news_ids: []
+source_ids:
+- src-avatr11-miit-2022
+- src-avatr11-preorder-2022
+- src-avatr11-launch-2022
+- src-avatr11-production-2022
+- src-avatr11-current-config
+evidence_status: confirmed
+last_verified_at: '2026-09-08'
+notes:
+- Current 2026 China configuration includes both REEV and BEV; historical 2022 launch was BEV-only. This must be represented
+  as evolution, not overwritten history.

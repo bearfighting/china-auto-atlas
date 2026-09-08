@@ -1,0 +1,55 @@
+schema_version: 1
+id: avatr-800v-sic
+type: technology
+names:
+  en: Full-stack 800V SiC EV Platform
+  zh-CN: 全栈800V碳化硅高压平台
+category: electrical-architecture
+secondary_categories:
+- charging
+- powertrain
+description:
+  en: AVATR high-voltage EV electrical architecture using an 800V-class system and silicon-carbide power electronics,
+    paired on current AVATR 11 EV variants with Huawei DriveONE electric drive.
+  zh-CN: 阿维塔采用800V级高压系统与碳化硅功率器件的纯电电气架构；当前阿维塔11纯电版本与华为 DriveONE 800V SiC 电驱配套。
+problem_solved:
+- Reduce current for a given power level
+- Support higher-power fast charging and efficient high-output electric drive
+- Reduce electrical losses in high-voltage propulsion
+technical_features:
+- 800V-class architecture
+- SiC power electronics
+- Huawei DriveONE 800V SiC electric drive on AVATR 11
+advantages:
+- Higher voltage can reduce current and I²R losses at the same power
+- Creates headroom for higher charging and drive power when battery, charger and thermal system also support it
+limitations:
+- 800V architecture alone does not guarantee a specific charging speed
+- Real charging performance is limited by battery chemistry, charge curve, temperature, charger capability and thermal
+  management
+- SiC devices can be more costly than conventional silicon devices
+developer_ids:
+- avatr-technology
+supplier_ids:
+- huawei
+pending_reference_ids:
+- huawei
+brand_ids:
+- avatr
+vehicle_ids:
+- avatr-11
+first_announced_at:
+  value: null
+  evidence_status: unknown
+event_ids: []
+source_ids:
+- src-avatr11-current
+- src-avatr11-config
+claim_assessment:
+  manufacturer_claims:
+  - Platform supports AVATR's high-voltage performance/charging strategy
+  independent_verification:
+    status: not_established
+    note: Architecture is supported by primary sources; performance claims are not independently established in this seed.
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

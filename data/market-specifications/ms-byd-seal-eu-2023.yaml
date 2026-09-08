@@ -1,0 +1,45 @@
+schema_version: 1
+type: market_specification
+id: ms-byd-seal-eu-2023
+vehicle_id: byd-seal
+market: EU
+valid_from: '2023'
+status: available
+currency: null
+variants:
+- name: RWD 82 kWh
+  battery_kwh: 82.56
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 570
+    standard: WLTP
+    evidence_status: claimed
+  motors: 1
+  drive: RWD
+  max_power_kw: 230
+  max_torque_nm: 360
+  dc_charge_kw: 150
+  acceleration_0_100_s: 5.9
+- name: AWD 82 kWh
+  battery_kwh: 82.56
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 520
+    standard: WLTP
+    evidence_status: claimed
+  motors: 2
+  drive: AWD
+  max_power_kw: 390
+  max_torque_nm: 670
+  dc_charge_kw: 150
+  acceleration_0_100_s: 3.8
+dimensions_mm:
+  length: 4800
+  width: 1875
+  height: 1460
+  wheelbase: 2920
+source_ids:
+- src-byd-seal-europe-2023
+- src-byd-seal-spec-sheet
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

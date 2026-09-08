@@ -1,0 +1,52 @@
+schema_version: 1
+type: market_specification
+id: ms-byd-seal-jp-2026
+vehicle_id: byd-seal
+market: JP
+valid_from: '2026-06-27'
+status: available
+currency: JPY
+variants:
+- name: SEAL
+  prices:
+  - amount: 4950000
+    currency: JPY
+    price_type: msrp
+  battery_kwh: 82.56
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 640
+    standard: Japan official single-charge figure
+    evidence_status: claimed
+  motors: 1
+  drive: RWD
+  max_power_kw: 230
+  max_torque_nm: 360
+  acceleration_0_100_s: 5.9
+  curb_weight_kg: 2100
+- name: SEAL AWD
+  prices:
+  - amount: 5720000
+    currency: JPY
+    price_type: msrp
+  battery_kwh: 82.56
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 575
+    standard: Japan official single-charge figure
+    evidence_status: claimed
+  motors: 2
+  drive: AWD
+  max_power_kw: 390
+  max_torque_nm: 670
+  acceleration_0_100_s: 3.8
+  curb_weight_kg: 2210
+dimensions_mm:
+  length: 4800
+  width: 1875
+  height: 1460
+  wheelbase: 2920
+source_ids:
+- src-byd-seal-japan-2026
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

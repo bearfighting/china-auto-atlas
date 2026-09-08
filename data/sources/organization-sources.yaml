@@ -1,0 +1,57 @@
+schema_version: 1
+sources:
+- id: src-geely-auto-group-profile
+  type: source
+  publisher: Geely Auto
+  title: "Geely at a Glance"
+  url: "https://www.geely.com/en/brand"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "Geely Auto Group is based in Hangzhou"
+    - "Geely Auto Group was founded in 1997"
+    - "Geely Auto Group is a subsidiary of Zhejiang Geely Holding Group"
+    - "Geely Auto Group manages Geely Auto, Lynk & Co, and ZEEKR"
+  evidence_status: confirmed
+
+- id: src-zeekr-group-profile
+  type: source
+  publisher: Zeekr Group
+  title: "Company Profile"
+  url: "https://ir.zeekrgroup.com/Company-Profile"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "Zeekr Group is headquartered in Zhejiang, China"
+    - "Zeekr Group includes the Lynk & Co and Zeekr brands"
+    - "Zeekr Group develops software systems, e-powertrain, and EV supply-chain capabilities"
+  evidence_status: confirmed
+
+- id: src-changan-company-profile
+  type: source
+  publisher: Chongqing Changan Automobile
+  title: "Company information"
+  url: "https://www.changan.com.cn/"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "The legal English name is Chongqing Changan Automobile Co., Ltd."
+    - "Changan Automobile is an automotive manufacturer"
+  evidence_status: confirmed
+
+- id: src-catl-company-profile
+  type: source
+  publisher: CATL
+  title: "Company Profile"
+  url: "https://www.catl.com/en/about/profile/"
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: "2026-09-08"
+  supports:
+    - "CATL develops and supplies EV batteries and energy-storage products"
+    - "CATL was established in 2011"
+    - "CATL operates globally in new-energy technology"
+  evidence_status: confirmed

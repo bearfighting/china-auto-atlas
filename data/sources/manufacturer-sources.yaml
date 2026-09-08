@@ -1,0 +1,195 @@
+schema_version: 1
+sources:
+  - id: src-byd-company-profile-2021
+    type: source
+    publisher: "BYD"
+    title: "公司简介 / Company Profile"
+    url: "https://www.bydglobal.com/sites/Satellite?c=BydArticle&cid=1514442283840&d=Touch&pagename=BYD_CN%2FBydArticle%2FCommon%2FArticleDetails"
+    published_at: "2021-06-28"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "BYD Company Limited founded February 1995"
+      - "Headquarters in Shenzhen, Guangdong"
+      - "Business spans automobiles and other industries"
+    evidence_status: confirmed
+
+  - id: src-geely-holding-2025-sustainability
+    type: source
+    publisher: "Zhejiang Geely Holding Group"
+    title: "Geely Holding Releases 2025 Sustainability Report"
+    url: "https://global.geely.com/en/news/2026/geely-holding-group-sustainability-report-2025"
+    published_at: "2026"
+    date_precision: year
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Founded in 1986 in Taizhou, Zhejiang"
+      - "Automotive business launched in 1997"
+      - "Headquartered in Hangzhou"
+      - "Portfolio includes Geely Auto, Geely Galaxy, Lynk & Co, ZEEKR, Volvo Cars, Polestar, Lotus and Farizon Auto"
+      - "Geely Holding is distinct from Geely Auto Group"
+    evidence_status: confirmed
+
+  - id: src-geely-brand-profile
+    type: source
+    publisher: "Geely Auto"
+    title: "Brand / Geely at a Glance"
+    url: "https://global.geely.com/en/brand"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Geely Auto Group is a manufacturer based in Hangzhou"
+      - "Geely Auto Group is a subsidiary unit of Zhejiang Geely Holding Group"
+      - "Geely Auto Group manages Geely Auto, Lynk & Co and ZEEKR"
+    evidence_status: confirmed
+
+  - id: src-saic-company-profile-2026
+    type: source
+    publisher: "SAIC Motor"
+    title: "About Us"
+    url: "https://www.saicmotor.com/e/company_profile/about_us/index.shtml"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Legal English name and stock code 600104"
+      - "Full public listing in 2011"
+      - "Current major business areas"
+    evidence_status: confirmed
+
+  - id: src-saic-annual-report-2024
+    type: source
+    publisher: "SAIC Motor Corporation Limited"
+    title: "Annual Report 2024"
+    url: "https://www.saicmotor.com/english/images/investor_relations/annual_report/2025/5/30/A82D5D04C86944B6A245ACFD8A90FB95.pdf"
+    published_at: "2025"
+    date_precision: year
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Registered address in Shanghai"
+      - "Office address at No. 489 Weihai Road, Jing'an District, Shanghai"
+      - "Shanghai Stock Exchange code 600104"
+      - "Corporate website"
+    evidence_status: confirmed
+
+  - id: src-saic-sales-2025
+    type: source
+    publisher: "SAIC Motor"
+    title: "SAIC Motor reports record sales in 2025"
+    url: "https://www.saicmotor.com/e/latest_news/saic_motor/63550.shtml"
+    published_at: "2026-01-07"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Self-owned brand list includes ROEWE, MG, IM, MAXUS, Wuling and Baojun"
+    evidence_status: confirmed
+
+  - id: src-ccag-company-profile-2026
+    type: source
+    publisher: "China Changan Automobile Group"
+    title: "中国长安汽车集团有限公司简介"
+    url: "https://www.ccag.cn/about/introduce"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Group established July 2025"
+      - "Headquarters in Chongqing"
+      - "Registered capital RMB 20 billion"
+      - "Formation basis and business scope"
+      - "Three digital-intelligent NEV brands: AVATR, DEEPAL, CHANGAN NEVO"
+    evidence_status: confirmed
+
+  - id: src-ccag-global-brands-2026
+    type: source
+    publisher: "China Changan Automobile Group"
+    title: "Official globalization article naming five business brands"
+    url: "https://www.ccag.cn/newsDetails/2059081469246050304"
+    published_at: "2026"
+    date_precision: year
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Five business brands named AVATR, DEEPAL, CHANGAN NEVO, CHANGAN and CHANGAN KAICENE"
+    evidence_status: confirmed
+
+  - id: src-xiaomi-global-about
+    type: source
+    publisher: "Xiaomi Corporation"
+    title: "About Us"
+    url: "https://www.mi.com/global/about/"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Founded April 6, 2010"
+      - "Listed July 9, 2018 under 1810.HK"
+      - "EV is one of Xiaomi's core connected business categories"
+      - "Smart EV strategy announced in 2021"
+    evidence_status: confirmed
+
+  - id: src-xiaomi-ir-company-profile
+    type: source
+    publisher: "Xiaomi Corporation"
+    title: "Company Profile"
+    url: "https://ir.mi.com/corporate-information/company-profile"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Corporate identity"
+      - "Founded April 2010"
+      - "Hong Kong listing and stock code"
+    evidence_status: confirmed
+
+  - id: src-xiaomi-su7-prelaunch-2023
+    type: source
+    publisher: "Xiaomi Corporation"
+    title: "Xiaomi Unveils Five Core Automotive Technologies and Debuts Xiaomi SU7"
+    url: "https://www.mi.com/global/discover/article?id=3095"
+    published_at: "2023-12-28"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Xiaomi EV's five core technologies were unveiled"
+      - "Xiaomi SU7 was introduced as Xiaomi EV's first product"
+    evidence_status: confirmed
+
+  - id: src-xiaomi-su7-launch-2024
+    type: source
+    publisher: "Xiaomi Corporation"
+    title: "Xiaomi SU7: A Revolutionary EV Experience"
+    url: "https://www.mi.com/global/discover/article/?id=3263"
+    published_at: "2024-04-17"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "Xiaomi SU7 Standard, Pro and Max prices"
+      - "Xiaomi SU7 is available for ordering in mainland China"
+    evidence_status: confirmed
+
+  - id: src-saic-mg4-cn-launch-2025
+    type: source
+    publisher: "SAIC Motor"
+    title: "400公里性价比之王全新MG4售价6.58万元起"
+    url: "https://www.saicmotor.com/m/xwzx/xwk/2025/62560.shtml"
+    published_at: "2025-08-29"
+    accessed_at: "2026-09-08"
+    source_type: manufacturer
+    source_level: primary
+    supports:
+      - "New MG4 launched in China"
+      - "Limited-offer price range from RMB 65,800 to RMB 99,800"
+      - "437 km and 530 km range versions"
+      - "Semi-solid battery version"
+    evidence_status: confirmed

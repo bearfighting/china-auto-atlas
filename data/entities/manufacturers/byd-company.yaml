@@ -1,0 +1,57 @@
+schema_version: 1
+id: byd-company
+type: manufacturer
+industry_role:
+  - corporate_group
+  - automotive_group
+status: active
+names:
+  en: "BYD Company Limited"
+  zh-CN: "比亚迪股份有限公司"
+aliases:
+  - "BYD"
+  - "比亚迪"
+founded:
+  value: "1995-02"
+  precision: month
+headquarters:
+  country: CN
+  region: Guangdong
+  city: Shenzhen
+company_type:
+  - public_company
+  - diversified_manufacturing_group
+automotive_business_started:
+  value: "2003"
+  precision: year
+seed_brand_portfolio:
+  - name: "BYD"
+    note: "Passenger-car brand; Dynasty and Ocean are product/retail series rather than separate corporate manufacturers."
+  - name: "Denza"
+    zh-CN: "腾势"
+  - name: "Yangwang"
+    zh-CN: "仰望"
+  - name: "Fangchengbao"
+    zh-CN: "方程豹"
+main_automotive_business:
+  - passenger_vehicles
+  - commercial_vehicles
+  - new_energy_vehicles
+official_sites:
+  - label: corporate_global
+    language: en
+    url: "https://www.bydglobal.com/"
+  - label: automotive_cn
+    language: zh-CN
+    url: "https://www.byd.com/cn"
+description: >-
+  Shenzhen-headquartered diversified manufacturing group founded in 1995.
+  BYD entered the automotive industry in 2003 and now operates a multi-brand
+  new-energy-vehicle business alongside other businesses.
+source_ids:
+  - src-byd-company-profile-2021
+  - src-byd-brand-center
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
+notes:
+  - "Do not model Dynasty and Ocean as manufacturers. Their exact Brand-vs-Series treatment should be decided in the Brand schema."

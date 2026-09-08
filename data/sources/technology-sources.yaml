@@ -1,0 +1,146 @@
+schema_version: 1
+sources:
+- id: src-byd-blade-launch-2020
+  type: source
+  publisher: BYD
+  title: BYD's Blade Battery — redefining safety standards for the entire industry
+  url: https://www.byd.com/us/news-list/BYD-s-Blade-Battery-Redefining-Safety-Standards-for-the-Entire-Industry
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-blade-tech
+  type: source
+  publisher: BYD Media Hub
+  title: Blade Battery
+  url: https://media.byd.com/section/technology/blade-battery/?lang=eng
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-about-tech
+  type: source
+  publisher: BYD
+  title: About BYD — Technology sections
+  url: https://www.byd.com/en/about-byd
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-2021-nev-results
+  type: source
+  publisher: BYD
+  title: BYD Sold Nearly 100,000 Passenger Vehicles in December, Totaling Almost 600,000 Passenger NEVs in 2021
+  url: https://en.byd.com/news/byd-sold-nearly-100000-passenger-vehicles-in-december-totaling-almost-600000-passenger-nevs-in-2021/
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-eplatform-2021
+  type: source
+  publisher: BYD
+  title: BYD Debuts e-Platform 3.0
+  url: https://en.byd.com/news/byd-debuts-e-platform-3-0-leading-the-next-generation-of-smart-electric-vehicles/
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-dmo-tech
+  type: source
+  publisher: BYD Media Hub
+  title: DMO
+  url: https://media.byd.com/section/technology/dmo
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-bao5-dmo-2023
+  type: source
+  publisher: BYD
+  title: BYD Launched BAO 5 under Its New Brand FANGCHENGBAO and the DMO Technology
+  url: https://euevents.byd.com/us/news-list/BYD-Launched-BAO-5-under-Its-New-Brand-FANGCHENGBAO-and-the-DMO-Technology
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-disus-launch-2023
+  type: source
+  publisher: BYD
+  title: BYD Reveals DiSus Intelligent Body Control System
+  url: https://www.byd.com/sc/news-list/BYD-Reveals-DiSus-Intelligent-Body-Control-System-Exclusively-for-New-Energy-Vehicles
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-byd-yangwang-u8-2023
+  type: source
+  publisher: BYD
+  title: BYD Debuted U8 and U9 Under Premium Brand YANGWANG
+  url: https://www.byd.com/sc/news-list/BYD-Debuted-First-Luxury-Off-road-SUV-U8-All-electric-Supercar-U9-Under-Premium-Brand-Yangwang
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-current
+  type: source
+  publisher: AVATR
+  title: AVATR 11
+  url: https://www.avatr.com/en/11
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-avatr11-config
+  type: source
+  publisher: AVATR
+  title: AVATR 11 Configuration Table
+  url: https://www.avatr.com/en/configuration?car=11
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-zeekr-group-tech
+  type: source
+  publisher: Zeekr Group
+  title: EV Powertrain Technology
+  url: https://www.zeekrgroup.com/en
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-zeekr-7x
+  type: source
+  publisher: ZEEKR
+  title: ZEEKR 7X
+  url: https://www.zeekrlife.com/global/vehicles/7x
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-geely-short-blade-2024
+  type: source
+  publisher: Geely Auto
+  title: Geely Auto Group Unveils its New Short Blade EV Battery Technology
+  url: https://global.geely.com/en/news/2024/geely-auto-unveils-new-short-blade-ev-battery-technology
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-geely-ex5-tech
+  type: source
+  publisher: Geely Auto
+  title: Geely Auto unveils the EX5, setting new electrification standards globally
+  url: https://global.geely.com/en/news/2024/geely-auto-unveils-ex5
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed
+- id: src-geely-golden-short-blade-2025
+  type: source
+  publisher: Geely Auto
+  title: AI for All, All for Safety — Auto Shanghai 2025
+  url: https://global.geely.com/en/news/2025/geely-auto-innovations-tech-safety-auto-shanghai-2025
+  source_type: manufacturer
+  source_level: primary
+  accessed_at: '2026-09-08'
+  evidence_status: confirmed

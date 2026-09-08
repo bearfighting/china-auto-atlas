@@ -1,0 +1,41 @@
+schema_version: 1
+id: fangchengbao
+type: brand
+names:
+  en: FANGCHENGBAO
+  zh-CN: 方程豹
+aliases:
+- Fang Cheng Bao
+- FANG CHENG BAO
+- 方程豹汽车
+status: active
+positioning:
+  en: BYD sub-brand focused on professional and personalized new-energy vehicles.
+  zh-CN: 比亚迪旗下强调专业化与个性化的新能源汽车品牌。
+powertrain_focus:
+- PHEV
+- BEV
+founded:
+  value: '2023-06-09'
+  precision: day
+  evidence_status: confirmed
+  note: Official brand announcement date.
+  source_ids:
+  - src-fangchengbao-announcement-2023
+relationship_ids:
+- rel-byd-company-fangchengbao-operates
+market_codes:
+- CN
+vehicle_ids: []
+seed_vehicle_names:
+- BAO 5
+- BAO 8
+- TAI 3
+event_ids:
+- event-fangchengbao-announced-2023
+- event-fangchengbao-bao5-dmo-2023
+source_ids:
+- src-fangchengbao-announcement-2023
+- src-fangchengbao-bao5-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

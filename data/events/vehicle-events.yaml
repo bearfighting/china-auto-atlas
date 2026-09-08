@@ -1,0 +1,320 @@
+schema_version: 1
+events:
+- schema_version: 1
+  id: event-xiaomi-su7-prelaunch-2023
+  type: event
+  date: '2023-12-28'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - xiaomi-su7
+  summary: Xiaomi unveiled the SU7 as its first smart electric vehicle product.
+  source_ids:
+  - src-xiaomi-su7-prelaunch-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-xiaomi-su7-launch-2024
+  type: event
+  date: '2024-03-28'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - xiaomi-su7
+  summary: Xiaomi launched the SU7 series in China with Standard, Pro and Max versions.
+  source_ids:
+  - src-xiaomi-su7-launch-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-mg4-cn-launch-2025
+  type: event
+  date: '2025-08-29'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - mg4
+  summary: SAIC launched the new MG4 in China with several battery and range versions.
+  source_ids:
+  - src-saic-mg4-cn-launch-2025
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-seal-europe-introduction-2023
+  type: event
+  date: '2023-04-14'
+  event_type: market_entry_announced
+  subject_ids:
+  - byd-seal
+  summary: BYD introduced SEAL for Europe; stores from September and on-sale plan announced.
+  source_ids:
+  - src-byd-seal-europe-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-seal-hong-kong-launch-2023
+  type: event
+  date: '2023-10-11'
+  event_type: market_launch
+  subject_ids:
+  - byd-seal
+  summary: BYD SEAL launched for Hong Kong customers.
+  source_ids:
+  - src-byd-seal-hk-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-denza-d9-reveal-2022
+  type: event
+  date: '2022-05-16'
+  event_type: vehicle_reveal
+  subject_ids:
+  - denza-d9
+  summary: DENZA D9 officially revealed.
+  source_ids:
+  - src-denza-brand-history
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-denza-d9-china-launch-2022
+  type: event
+  date: '2022-08-23'
+  event_type: vehicle_launch
+  subject_ids:
+  - denza-d9
+  summary: DENZA D9 officially launched in China.
+  source_ids:
+  - src-denza-brand-history
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-denza-d9-france-orders-2026
+  type: event
+  date: '2026-06-29'
+  event_type: market_order_open
+  subject_ids:
+  - denza-d9
+  summary: Orders opened in France for D9 DM-i.
+  source_ids:
+  - src-denza-d9-france-2026
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-denza-d9-production-2022
+  type: event
+  date: '2022-10-20'
+  date_precision: day
+  event_type: production_start
+  subject_ids:
+  - denza-d9
+  summary: The first production DENZA D9 rolled off the line.
+  source_ids:
+  - src-denza-d9-production-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-denza-d9-delivery-2022
+  type: event
+  date: '2022-10-23'
+  date_precision: day
+  event_type: delivery_start
+  subject_ids:
+  - denza-d9
+  summary: DENZA announced the start of nationwide D9 deliveries after the first production vehicle rolled off the line.
+  source_ids:
+  - src-denza-d9-production-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-deepal-s07-debut-2023
+  type: event
+  date: '2023-04-18'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - deepal-s07
+  summary: DEEPAL S07 debuted at the Shanghai Auto Show as the brand's first SUV model.
+  source_ids:
+  - src-deepal-s07-debut-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-deepal-s07-thailand-preorder-2023
+  type: event
+  date: '2023-11-27'
+  date_precision: day
+  event_type: preorder_start
+  subject_ids:
+  - deepal-s07
+  summary: DEEPAL S07 opened reservations in Thailand.
+  source_ids:
+  - src-deepal-s07-thailand-launch-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-deepal-s07-thailand-launch-2023
+  type: event
+  date: '2023-11-29'
+  date_precision: day
+  event_type: market_launch
+  subject_ids:
+  - deepal-s07
+  summary: DEEPAL S07 launched in Thailand at the Thailand International Auto Expo.
+  source_ids:
+  - src-deepal-s07-thailand-launch-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-yangwang-u8-unveiled-2023
+  type: event
+  date: '2023-01-08'
+  event_type: vehicle_reveal
+  subject_ids:
+  - yangwang-u8
+  summary: U8 debuted with the YANGWANG brand.
+  source_ids:
+  - src-yangwang-u8-brand-unveil-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-yangwang-u8-premium-launch-2023
+  type: event
+  date: '2023-09-20'
+  event_type: vehicle_launch
+  subject_ids:
+  - yangwang-u8
+  summary: U8 Premium Edition launched at RMB 1,098,000; deliveries announced for October.
+  source_ids:
+  - src-yangwang-u8-launch-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-bao5-dmo-introduction-2023
+  type: event
+  date: '2023-08-16'
+  event_type: vehicle_reveal
+  subject_ids:
+  - fangchengbao-bao-5
+  summary: BAO 5 and DMO technology introduced.
+  source_ids:
+  - src-bao5-dmo-introduction-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-bao5-long-range-current
+  type: event
+  date: '2025-10-20'
+  event_type: vehicle_update
+  subject_ids:
+  - fangchengbao-bao-5
+  summary: Long-range BAO 5 family launched; current configuration source preserved.
+  source_ids:
+  - src-bao5-long-range-config
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-geely-ex5-global-unveil-2024
+  type: event
+  date: '2024-09-10'
+  event_type: vehicle_reveal
+  subject_ids:
+  - geely-ex5
+  summary: Geely EX5 global model unveiled in Frankfurt.
+  source_ids:
+  - src-geely-ex5-global-unveil-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-geely-ex5-thailand-debut-2024
+  type: event
+  date: '2024-11-28'
+  event_type: market_debut
+  subject_ids:
+  - geely-ex5
+  summary: EX5 debuted at Thailand International Motor Expo.
+  source_ids:
+  - src-geely-ex5-thailand-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-geely-ex5-adriatic-launch-2025
+  type: event
+  date: '2025-06-10'
+  event_type: market_launch
+  subject_ids:
+  - geely-ex5
+  summary: EX5 launched across six Adriatic markets.
+  source_ids:
+  - src-geely-ex5-adriatic-2025
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-zeekr-7x-china-launch-2024
+  type: event
+  date: '2024-09-20'
+  event_type: vehicle_launch
+  subject_ids:
+  - zeekr-7x
+  summary: ZEEKR 7X officially unveiled/launched.
+  source_ids:
+  - src-zeekr-7x-official-timeline
+  related_document_ids:
+  - news-2024-09-20-zeekr-7x-launch
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-zeekr-7x-china-delivery-2024
+  type: event
+  date: '2024-09-21'
+  event_type: delivery_start
+  subject_ids:
+  - zeekr-7x
+  summary: ZEEKR 7X deliveries commenced the day after launch.
+  source_ids:
+  - src-zeekr-7x-delivery-update-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-deepal-s07-indonesia-market
+  type: event
+  date: null
+  event_type: market_availability
+  subject_ids:
+  - deepal-s07
+  summary: S07 is listed for sale in Indonesia with local price and NEDC range.
+  source_ids:
+  - src-deepal-s07-indonesia
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr11-miit-2022
+  type: event
+  date: '2022-03-14'
+  event_type: regulatory_listing
+  subject_ids:
+  - avatr-11
+  summary: AVATR 11 appeared in MIIT product announcement.
+  source_ids:
+  - src-avatr11-miit-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr11-preorder-2022
+  type: event
+  date: '2022-05-20'
+  event_type: preorder_start
+  subject_ids:
+  - avatr-11
+  summary: AVATR 11 online pre-order started.
+  source_ids:
+  - src-avatr11-preorder-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr11-launch-2022
+  type: event
+  date: '2022-08-08'
+  event_type: vehicle_launch
+  subject_ids:
+  - avatr-11
+  summary: AVATR 11 globally launched with China prices.
+  source_ids:
+  - src-avatr11-launch-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr11-production-2022
+  type: event
+  date: '2022-12-20'
+  event_type: production_start
+  subject_ids:
+  - avatr-11
+  summary: Production AVATR 11 vehicles rolled off line.
+  source_ids:
+  - src-avatr11-production-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr11-delivery-2022
+  type: event
+  date: "2022-12"
+  event_type: delivery_start
+  subject_ids:
+  - avatr-11
+  summary: AVATR stated deliveries would officially begin by end of December 2022.
+  source_ids:
+  - src-avatr11-production-2022
+  evidence_status: confirmed

@@ -1,0 +1,29 @@
+schema_version: 1
+id: byd-e-platform-3
+type: platform
+names:
+  en: "BYD e-Platform 3.0"
+  zh-CN: "比亚迪 e 平台 3.0"
+aliases:
+  - "e-Platform 3.0"
+  - "e平台3.0"
+status: active
+developer_ids:
+  - byd-company
+relationship_ids:
+  - rel-byd-e-platform-3-developed-by-byd
+  - rel-byd-seal-based-on-e-platform-3
+powertrain_types:
+  - bev
+technical_scope:
+  - front-wheel drive
+  - rear-wheel drive
+  - all-wheel drive
+  - 400V and 800V electrical systems
+  - multiple motor configurations
+vehicle_ids:
+  - byd-seal
+source_ids:
+  - src-byd-eplatform-3
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

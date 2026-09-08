@@ -1,0 +1,53 @@
+schema_version: 1
+id: zeekr-800v-system
+type: technology
+names:
+  en: ZEEKR 800V / 3×800V Ecosystem
+  zh-CN: 极氪800V / 3×800V生态
+category: electrical-architecture
+secondary_categories:
+- charging
+- powertrain
+description:
+  en: ZEEKR high-voltage ecosystem integrating 800V-class battery, electric-drive/control and charging/energy infrastructure
+    technologies.
+  zh-CN: 极氪围绕800V级电池、电驱/控制以及充电与能源基础设施形成的高压电动技术体系。
+problem_solved:
+- Increase charging-power headroom
+- Improve high-power electric-drive efficiency
+- Coordinate vehicle and charging infrastructure around a common high-voltage architecture
+technical_features:
+- 800V-class vehicle systems
+- Integrated battery/controller/drive-system production context
+- Fast-charging ecosystem
+advantages:
+- Lower current at equal power can reduce resistive losses and cable/conductor burden
+- Supports high charging rates when paired with compatible battery and charger
+limitations:
+- 800V is not itself a charging-rate guarantee
+- Benefits vary by vehicle, battery, charger availability and thermal conditions
+- The '3×800V' label is manufacturer terminology rather than an industry-standard architecture definition
+developer_ids:
+- zeekr-group
+pending_reference_ids:
+- zeekr-group
+supplier_ids: []
+brand_ids:
+- zeekr
+vehicle_ids:
+- zeekr-7x
+first_announced_at:
+  value: null
+  evidence_status: unknown
+event_ids: []
+source_ids:
+- src-zeekr-group-tech
+- src-zeekr-7x
+claim_assessment:
+  manufacturer_claims:
+  - ZEEKR describes a world's-first '3×800V' ecosystem
+  independent_verification:
+    status: not_established
+  note: Atlas should describe the architecture but not repeat the 'world's first' superlative as confirmed fact.
+evidence_status: confirmed
+last_verified_at: '2026-09-08'

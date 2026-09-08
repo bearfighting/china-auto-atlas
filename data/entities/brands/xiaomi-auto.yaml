@@ -1,0 +1,27 @@
+schema_version: 1
+id: xiaomi-auto
+type: brand
+names:
+  en: Xiaomi Auto
+  zh-CN: 小米汽车
+aliases:
+  - Xiaomi EV
+  - 小米汽车科技
+status: active
+positioning:
+  en: Smart electric vehicle brand connected to Xiaomi's smart-device ecosystem.
+  zh-CN: 连接小米智能生态的智能电动汽车品牌。
+powertrain_focus:
+  - BEV
+relationship_ids:
+  - rel-xiaomi-corporation-xiaomi-auto-operates
+market_codes:
+  - CN
+vehicle_ids:
+  - xiaomi-su7
+event_ids:
+  - event-xiaomi-su7-launch-2024
+source_ids:
+  - src-xiaomi-su7-launch-2024
+evidence_status: confirmed
+last_verified_at: "2026-09-08"

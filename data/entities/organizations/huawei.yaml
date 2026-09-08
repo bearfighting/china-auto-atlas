@@ -1,0 +1,23 @@
+schema_version: 1
+id: huawei
+type: supplier
+organization_role:
+  - technology_partner
+  - automotive_solution_supplier
+names:
+  en: "Huawei"
+  zh-CN: "华为"
+aliases:
+  - "Huawei Technologies"
+status: active
+relationship_ids:
+  - rel-huawei-avatr-strategic-partner
+automotive_scope:
+  - intelligent_vehicle_solutions
+  - intelligent_driving
+  - vehicle_operating_systems
+  - electrical_and_electronic_architecture
+source_ids:
+  - src-avatr-chn-launch
+evidence_status: confirmed
+last_verified_at: "2026-09-08"
