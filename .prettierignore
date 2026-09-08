@@ -1,0 +1,9 @@
+build
+node_modules
+.next
+pnpm-lock.yaml
+data/
+content/
+*.md
+*.yaml
+*.yml

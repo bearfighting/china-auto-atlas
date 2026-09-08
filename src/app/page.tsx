@@ -1,0 +1,70 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { PageContainer } from "@/components/page-container";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { newsRepository } from "@/lib/data/repositories";
+
+export default function HomePage() {
+  const news = newsRepository.list();
+  return (
+    <PageContainer>
+      <div className="space-y-12">
+        <section className="max-w-3xl space-y-5">
+          <Badge variant="outline">China automotive knowledge platform</Badge>
+          <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
+            News is input. Knowledge is output.
+          </h1>
+          <p className="text-lg leading-8 text-muted-foreground">
+            China Auto Atlas records the vehicles, companies, technologies, events, markets and
+            sources behind China&apos;s changing automotive industry.
+          </p>
+          <Link
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+            href="/news"
+          >
+            Explore the latest news <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </section>
+        <section aria-labelledby="latest-news">
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground">Editorial feed</p>
+              <h2 id="latest-news" className="text-2xl font-semibold tracking-tight">
+                Latest news
+              </h2>
+            </div>
+            <Link
+              className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+              href="/news"
+            >
+              View all
+            </Link>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {news.slice(0, 4).map((item) => (
+              <Card key={item.id}>
+                <CardHeader>
+                  <div className="flex items-center justify-between gap-3">
+                    <Badge variant="muted">{item.evidence_status ?? "unknown"}</Badge>
+                    <time className="text-xs text-muted-foreground" dateTime={item.published_at}>
+                      {item.published_at}
+                    </time>
+                  </div>
+                  <CardTitle>
+                    <Link className="hover:underline" href={`/news/${item.slug}`}>
+                      {item.title}
+                    </Link>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="line-clamp-3 text-sm text-muted-foreground">{item.body}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      </div>
+    </PageContainer>
+  );
+}

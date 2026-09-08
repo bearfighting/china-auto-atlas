@@ -1,20 +1,23 @@
 # China Auto Atlas — Product Roadmap
 
 > Version: 0.2  
-> Status: MVP preflight in progress
+> Status: MVP implementation in progress
 
 ## Phase 0 — Foundation
 
 Finalize document responsibilities, visual tokens, core components, file-based schemas, validation, repository interfaces,
 the YAML-to-JSON build adapter, and the first seed dataset.
 
-Current status: data validation and build are passing; the seed dataset contains the MVP minimum content. Remaining work is
-to close the repository contract, media registry consistency, dependency setup, and the first application shell.
+Current status: data validation, build, typed repositories, the first application shell, the news-to-vehicle vertical slice,
+unit tests, and production builds are implemented. Vercel project setup and external preview verification remain release tasks.
 
 Exit criteria: `python3 scripts/data_pipeline.py validate` and `python3 scripts/data_pipeline.py build` pass, and one
-vehicle/news vertical slice renders through the repository adapter without direct access to `data/`.
+vehicle/news vertical slice renders through the repository adapter without direct access to `data/`. Vercel deployment is
+explicitly deferred to the final MVP release stage.
 
 ## Phase 1 — MVP Vertical Slice
+
+Detailed execution checklist: `mvp-execution-plan.md`.
 
 Prove the core loop:
 

@@ -154,9 +154,17 @@ def build() -> int:
     for path in sorted((CONTENT_ROOT / "news").glob("*.md")):
         parts = path.read_text(encoding="utf-8").split("---", 2)
         frontmatter = yaml.safe_load(parts[1]) or {}
-        frontmatter["body_path"] = str(path.relative_to(ROOT))
+        frontmatter["body"] = parts[2].strip()
         documents.append(frontmatter)
-    (BUILD_ROOT / "content-index.json").write_text(json.dumps({"schema_version": 1, "documents": documents}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    authors = load_yaml(CONTENT_ROOT / "taxonomy" / "authors.yaml").get("authors", [])
+    topics = load_yaml(CONTENT_ROOT / "taxonomy" / "topics.yaml").get("topics", [])
+    content_index = {
+        "schema_version": 1,
+        "authors": authors,
+        "topics": topics,
+        "documents": documents,
+    }
+    (BUILD_ROOT / "content-index.json").write_text(json.dumps(content_index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"BUILD OK: {len(index['entities'])} entities, {len(index['events'])} events, {len(documents)} documents, {len(index['media'])} media records")
     return 0
 
