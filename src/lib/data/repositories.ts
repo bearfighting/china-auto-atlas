@@ -24,11 +24,25 @@ import type {
   Topic,
   Technology,
   Vehicle,
+  NewsPage,
+  NewsPageOptions,
 } from "./types";
 import { authorsByIds, topicsByIds } from "./resolvers";
 
 function entitySources(entity: { source_ids?: string[] }): Source[] {
   return sourcesByIds(loadDataIndex(), entity.source_ids);
+}
+
+export function sortNewsDocuments(documents: NewsDocument[]): NewsDocument[] {
+  return [...documents].sort(
+    (a, b) => b.published_at.localeCompare(a.published_at) || a.id.localeCompare(b.id),
+  );
+}
+
+function positiveInteger(value: number | undefined, fallback: number): number {
+  return Number.isFinite(value) && value !== undefined && value >= 1
+    ? Math.floor(value)
+    : fallback;
 }
 
 function entityEvents(entity: { id: string; event_ids?: string[] }): Event[] {
@@ -81,7 +95,23 @@ function relatedEntityRepository<T extends Entity>(
 
 export const newsRepository = {
   list(): NewsDocument[] {
-    return [...loadContentIndex().documents].sort((a, b) => b.published_at.localeCompare(a.published_at));
+    return sortNewsDocuments(loadContentIndex().documents);
+  },
+  listPage(options: NewsPageOptions = {}): NewsPage {
+    const page = positiveInteger(options.page, 1);
+    const pageSize = positiveInteger(options.pageSize, 10);
+    const documents = this.list();
+    const total = documents.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+
+    return {
+      items: documents.slice(start, start + pageSize),
+      page,
+      pageSize,
+      total,
+      totalPages,
+    };
   },
   getById(id: string): NewsDocument | null {
     return loadContentIndex().documents.find((document) => document.id === id) ?? null;

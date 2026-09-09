@@ -146,6 +146,19 @@ export type NewsDocument = {
   body: string;
 };
 
+export type NewsPageOptions = {
+  page?: number;
+  pageSize?: number;
+};
+
+export type NewsPage = {
+  items: NewsDocument[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
 export type SearchResult = {
   id: string;
   type: string;

@@ -67,8 +67,81 @@ test("opens and closes the mobile navigation", async ({ page }) => {
   await expect(page.getByRole("dialog")).toBeHidden();
 });
 
+test("renders the complete news collection and shared shell", async ({ page }) => {
+  await page.goto("/news");
+  await expect(page.getByRole("heading", { name: "News", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: /ZEEKR launches the 7X/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Geely unveils the EX5/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /AVATR launches the AVATR 11/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /BYD introduces the Blade Battery/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /jointly launch the CHN/i })).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Breadcrumb" }).getByText("News"),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(page.getByRole("contentinfo")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+    await page.evaluate(() => document.documentElement.clientWidth),
+  );
+});
+
+test("renders metadata and relations for every news article", async ({ page }) => {
+  const articles = [
+    "zeekr-7x-launch",
+    "geely-ex5-global-unveil",
+    "avatr-11-global-launch",
+    "byd-blade-battery-launch",
+    "chn-platform-launch",
+  ];
+
+  for (const slug of articles) {
+    await page.goto(`/news/${slug}`);
+    await expect(page.locator("main article")).toBeVisible();
+    await expect(
+      page.getByRole("navigation", { name: "Breadcrumb" }).getByText("News"),
+    ).toHaveAttribute("href", "/news");
+    await expect(page).toHaveTitle(/.+/);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /.+/);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /.+/);
+    await expect(page.locator('meta[property="og:description"]')).toHaveAttribute("content", /.+/);
+    await expect(page.locator('meta[property="article:published_time"]')).toHaveAttribute(
+      "content",
+      /.+/,
+    );
+    await expect(page.locator('meta[property="article:modified_time"]')).toHaveAttribute(
+      "content",
+      /.+/,
+    );
+    await expect(page.locator('meta[name="author"]')).toHaveAttribute("content", /.+/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      new RegExp(`/news/${slug}$`),
+    );
+    await expect(page.getByText("Article context")).toBeVisible();
+    expect(await page.getByTestId("article-author").count()).toBeGreaterThan(0);
+    expect(await page.getByTestId("article-topic").count()).toBeGreaterThan(0);
+    expect(await page.getByTestId("related-entity").count()).toBeGreaterThan(0);
+    expect(await page.getByTestId("related-event").count()).toBeGreaterThan(0);
+    expect(await page.getByTestId("source-item").count()).toBeGreaterThan(0);
+    await expect(page.getByRole("heading", { name: "Related entities" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Related events" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Sources" })).toBeVisible();
+    await expect(page.getByText("CAA Editorial")).toBeVisible();
+    const bodyText = await page.locator("body").innerText();
+    expect(bodyText).not.toMatch(/\b(?:data|content|build|assets)\/[^\s`]+/);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      await page.evaluate(() => document.documentElement.clientWidth),
+    );
+  }
+});
+
 test("returns a not-found page for an unknown vehicle", async ({ page }) => {
   const response = await page.goto("/vehicles/not-a-real-vehicle");
+  expect(response?.status()).toBe(404);
+  await expect(page.getByText(/not found/i).first()).toBeVisible();
+});
+
+test("returns a not-found page for an unknown news article", async ({ page }) => {
+  const response = await page.goto("/news/not-a-real-article");
   expect(response?.status()).toBe(404);
   await expect(page.getByText(/not found/i).first()).toBeVisible();
 });

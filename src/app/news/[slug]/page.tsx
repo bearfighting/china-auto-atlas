@@ -14,6 +14,7 @@ import { displayName } from "@/lib/data/resolvers";
 export function generateStaticParams() {
   return newsRepository.list().map((item) => ({ slug: item.slug }));
 }
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -80,10 +81,12 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                 {entities.map((entity) =>
                   entity.type === "vehicle" ? (
                     <Link key={entity.id} href={`/vehicles/${entity.slug ?? entity.id}`}>
-                      <Badge variant="outline">{displayName(entity.names)}</Badge>
+                      <Badge data-testid="related-entity" variant="outline">
+                        {displayName(entity.names)}
+                      </Badge>
                     </Link>
                   ) : (
-                    <Badge key={entity.id} variant="outline">
+                    <Badge key={entity.id} data-testid="related-entity" variant="outline">
                       {displayName(entity.names)}
                     </Badge>
                   ),
@@ -97,7 +100,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
               {events.length ? (
                 <div className="space-y-3">
                   {events.map((event) => (
-                    <Card key={event!.id}>
+                    <Card key={event!.id} data-testid="related-event">
                       <CardContent className="space-y-1 p-4">
                         <p className="font-medium">{event!.date ?? "Unknown date"}</p>
                         <p className="text-sm text-muted-foreground">
@@ -116,14 +119,14 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
             <Card>
               <CardContent className="space-y-3 p-5">
                 <p className="text-sm font-semibold">Article context</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2" data-testid="article-context-tags">
                   {authors.map((author) => (
-                    <Badge key={author.id} variant="secondary">
+                    <Badge key={author.id} data-testid="article-author" variant="secondary">
                       {author.short_name ?? displayName(author.names)}
                     </Badge>
                   ))}
                   {topics.map((topic) => (
-                    <Badge key={topic.id} variant="outline">
+                    <Badge key={topic.id} data-testid="article-topic" variant="outline">
                       {displayName(topic.names)}
                     </Badge>
                   ))}

@@ -237,7 +237,7 @@ Acceptance criteria:
 Checklist:
 
 - [x] Add news route and static parameters.
-- [ ] Add news pagination strategy.
+- [x] Add news pagination strategy through a repository-level `listPage` contract; UI pagination remains deferred until the dataset requires it.
 - [x] Add article header.
 - [x] Add article body rendering for the current plain-text Markdown paragraphs.
 - [x] Add author and topic labels.

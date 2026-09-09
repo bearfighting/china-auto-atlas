@@ -17,7 +17,7 @@ export function SourceList({ sources }: { sources: Source[] }) {
   return (
     <div className="grid gap-3">
       {sources.map((source) => (
-        <Card key={source.id}>
+        <Card key={source.id} data-testid="source-item">
           <CardHeader className="gap-2 pb-3">
             <div className="flex items-start justify-between gap-4">
               <CardTitle className="text-base">{source.title ?? source.id}</CardTitle>

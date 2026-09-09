@@ -25,4 +25,4 @@ evidence_status: confirmed
 
 ZEEKR's official brand timeline records the launch of the 7X, a large five-seat electric SUV, on September 20, 2024. The Vehicle record links the model to Geely's SEA architecture.
 
-This article records the launch milestone only. Range, battery and charging figures remain market-specific data in `data/market-specifications/` rather than timeless global properties of the model.
+This article records the launch milestone only. Range, battery and charging figures remain market-specific records rather than timeless global properties of the model.

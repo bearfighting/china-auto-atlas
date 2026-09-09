@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadContentIndex, loadDataIndex } from "./load-index";
 import { displayName } from "./resolvers";
+import { sortNewsDocuments } from "./repositories";
 import {
   brandRepository,
   eventRepository,
@@ -13,6 +14,7 @@ import {
   technologyRepository,
   vehicleRepository,
 } from "./repositories";
+import type { NewsDocument } from "./types";
 
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
@@ -20,6 +22,44 @@ describe("generated data repositories", () => {
     expect(loadContentIndex().documents.length).toBe(5);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
+  });
+
+  it("lists news in stable chronological order", () => {
+    const news = newsRepository.list();
+    expect(news).toHaveLength(5);
+    expect(news.map((item) => item.slug)).toEqual([
+      "zeekr-7x-launch",
+      "geely-ex5-global-unveil",
+      "avatr-11-global-launch",
+      "chn-platform-launch",
+      "byd-blade-battery-launch",
+    ]);
+  });
+
+  it("uses the id as a deterministic tie-breaker for equal publication dates", () => {
+    const documents = [
+      { id: "news-b", published_at: "2024-01-01" },
+      { id: "news-a", published_at: "2024-01-01" },
+    ] as NewsDocument[];
+    expect(sortNewsDocuments(documents).map((item) => item.id)).toEqual(["news-a", "news-b"]);
+  });
+
+  it("provides a stable news pagination contract", () => {
+    expect(newsRepository.listPage()).toMatchObject({
+      page: 1,
+      pageSize: 10,
+      total: 5,
+      totalPages: 1,
+    });
+    expect(newsRepository.listPage({ page: 1, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "zeekr-7x-launch",
+      "geely-ex5-global-unveil",
+    ]);
+    expect(newsRepository.listPage({ page: 3, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-blade-battery-launch",
+    ]);
+    expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items).toEqual([]);
+    expect(newsRepository.listPage({ page: 0, pageSize: 0 })).toMatchObject({ page: 1, pageSize: 10 });
   });
 
   it("resolves the ZEEKR 7X by id and slug", () => {
