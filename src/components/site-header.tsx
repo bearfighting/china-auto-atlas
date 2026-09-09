@@ -13,7 +13,7 @@ const navigationItems = [
 ];
 
 export function SiteHeader() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const [searchOpen, setSearchOpen] = useState(false);
   const searchReturnFocusRef = useRef<HTMLElement | null>(null);
   return (

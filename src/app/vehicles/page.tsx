@@ -8,6 +8,12 @@ import { vehicleRepository } from "@/lib/data/repositories";
 export const metadata: Metadata = {
   title: "Vehicles",
   description: "Vehicle profiles and market specifications documented by China Auto Atlas.",
+  alternates: { canonical: "/vehicles" },
+  openGraph: {
+    title: "Vehicles",
+    description: "Vehicle profiles and market specifications documented by China Auto Atlas.",
+    url: "/vehicles",
+  },
 };
 
 export default function VehiclesIndexPage() {

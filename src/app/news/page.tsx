@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageContainer } from "@/components/page-container";
@@ -5,7 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { newsRepository } from "@/lib/data/repositories";
 
-export const metadata = { title: "News" };
+export const metadata: Metadata = {
+  title: "News",
+  description:
+    "Evidence-led reporting connected to the entities, events, and sources in the atlas.",
+  alternates: { canonical: "/news" },
+  openGraph: {
+    title: "News",
+    description:
+      "Evidence-led reporting connected to the entities, events, and sources in the atlas.",
+    url: "/news",
+  },
+};
 
 export default function NewsIndexPage() {
   const news = newsRepository.list();

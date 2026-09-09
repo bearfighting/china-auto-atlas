@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageContainer } from "@/components/page-container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { newsRepository } from "@/lib/data/repositories";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "China Auto Atlas",
+    description:
+      "An evidence-led automotive knowledge platform focused on China's automotive industry.",
+    url: "/",
+  },
+};
 
 export default function HomePage() {
   const news = newsRepository.list();

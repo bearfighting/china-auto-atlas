@@ -13,6 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { displayName, slugFor } from "@/lib/data/resolvers";
 import { vehicleRepository } from "@/lib/data/repositories";
+import { absoluteUrl } from "@/lib/site";
 
 export function generateStaticParams() {
   return vehicleRepository.list().map((vehicle) => ({ slug: slugFor(vehicle) }));
@@ -30,6 +31,12 @@ export async function generateMetadata({
     ? {
         title: displayName(vehicle.names),
         description: `${displayName(vehicle.names)} vehicle profile and market specifications.`,
+        alternates: { canonical: `/vehicles/${slugFor(vehicle)}` },
+        openGraph: {
+          title: displayName(vehicle.names),
+          description: `${displayName(vehicle.names)} vehicle profile and market specifications.`,
+          url: absoluteUrl(`/vehicles/${slugFor(vehicle)}`),
+        },
       }
     : {};
 }
