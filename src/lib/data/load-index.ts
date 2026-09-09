@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
-import type { ContentIndex, DataIndex } from "./types";
+import type { ContentIndex, DataIndex, SearchIndexEntry } from "./types";
 
 function readJson<T>(fileName: string): T {
   const filePath = path.join(process.cwd(), "build", fileName);
@@ -10,3 +10,4 @@ function readJson<T>(fileName: string): T {
 
 export const loadDataIndex = cache(() => readJson<DataIndex>("data-index.json"));
 export const loadContentIndex = cache(() => readJson<ContentIndex>("content-index.json"));
+export const loadSearchIndex = cache(() => readJson<SearchIndexEntry[]>("search-index.json"));

@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import type { MutableRefObject } from "react";
+import { useRef } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,12 +21,28 @@ const navigationItems = [
   { href: "/vehicles", label: "Vehicles" },
 ];
 
-export function MobileNavigation() {
+export function MobileNavigation({
+  onSearch,
+  searchOpen,
+  searchReturnFocusRef,
+}: {
+  onSearch: () => void;
+  searchOpen: boolean;
+  searchReturnFocusRef: MutableRefObject<HTMLElement | null>;
+}) {
   const pathname = usePathname();
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline" size="sm" className="md:hidden" aria-label="Open menu">
+        <Button
+          ref={menuTriggerRef}
+          variant="outline"
+          size="sm"
+          className="md:hidden"
+          aria-label="Open menu"
+          data-testid="mobile-menu-trigger"
+        >
           <Menu className="mr-2 h-4 w-4" aria-hidden="true" />
           Menu
         </Button>
@@ -49,10 +67,27 @@ export function MobileNavigation() {
               </SheetClose>
             );
           })}
-          <div className="mt-4 flex items-center gap-2 rounded-md border px-3 py-3 text-sm text-muted-foreground">
-            <Search className="h-4 w-4" aria-hidden="true" />
-            Search coming soon
-          </div>
+          <SheetClose asChild>
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-4 justify-start"
+              aria-label="Search"
+              aria-expanded={searchOpen}
+              aria-controls="global-search-dialog"
+              onFocus={() => {
+                searchReturnFocusRef.current = menuTriggerRef.current;
+              }}
+              onClick={() => {
+                searchReturnFocusRef.current = menuTriggerRef.current;
+                onSearch();
+              }}
+              data-testid="mobile-search-trigger"
+            >
+              <Search className="mr-2 h-4 w-4" aria-hidden="true" />
+              Search
+            </Button>
+          </SheetClose>
         </nav>
       </SheetContent>
     </Sheet>

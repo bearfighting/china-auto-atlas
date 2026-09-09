@@ -13,7 +13,7 @@
 | Shared application shell | Complete | Header, desktop/mobile navigation, collection entry points, breadcrumbs, footer, states, focus styles, and responsive checks are in place. |
 | News → vehicle → source slice | Complete | Five news documents build; the ZEEKR 7X path is covered by unit and E2E tests. |
 | Full entity expansion | Complete | Vehicle, brand, manufacturer, technology, and event detail pages are statically generated with repository-backed relationships. |
-| Search | Partial | Phase 1 basic SearchRepository is available; generated search index, ranking, and Command interface remain Phase 5 work. |
+| Search | Complete | Generated search index, deterministic ranking, local search API, `/search` results page, and Command interface are in place. |
 | Local release quality gate | Partial | Build and automated checks pass; manual accessibility/content/media review remains. |
 | Vercel deployment | Not started | Deliberately reserved for the final MVP phase. |
 
@@ -317,15 +317,15 @@ Acceptance criteria:
 
 Checklist:
 
-- [ ] Generate a search index during build.
-- [ ] Normalize Chinese/English names and aliases.
-- [ ] Extend the basic SearchRepository with a generated index and full Phase 5 ranking behavior.
-- [ ] Add shadcn/ui Command-based search interface.
-- [ ] Add keyboard navigation.
-- [ ] Add result type labels.
-- [ ] Add empty results state.
-- [ ] Add direct navigation to result pages.
-- [ ] Add search smoke tests.
+- [x] Generate a search index during build.
+- [x] Normalize Chinese/English names and aliases.
+- [x] Extend the basic SearchRepository with a generated index and full Phase 5 ranking behavior.
+- [x] Add shadcn/ui Command-based search interface.
+- [x] Add keyboard navigation.
+- [x] Add result type labels.
+- [x] Add empty results state.
+- [x] Add direct navigation to result pages.
+- [x] Add search smoke tests.
 
 ### Phase 6 — Quality, accessibility, SEO, and local release candidate
 

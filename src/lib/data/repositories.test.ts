@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadContentIndex, loadDataIndex } from "./load-index";
+import { loadContentIndex, loadDataIndex, loadSearchIndex } from "./load-index";
 import { approvedMedia, displayName } from "./resolvers";
 import { sortNewsDocuments } from "./repositories";
 import {
@@ -160,18 +160,31 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
+    expect(loadSearchIndex()).toHaveLength(45);
+    expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({
       id: "zeekr-7x",
       type: "vehicle",
       kind: "entity",
+      href: "/vehicles/zeekr-7x",
     });
-    expect(searchRepository.search("EX5")[0]).toMatchObject({ id: "geely-ex5", kind: "entity" });
+    expect(searchRepository.search("EX5")[0]).toMatchObject({
+      id: "geely-ex5",
+      kind: "entity",
+      href: "/vehicles/geely-ex5",
+    });
     expect(searchRepository.search("zeekr-7x-launch")[0]).toMatchObject({
       id: "news-2024-09-20-zeekr-7x-launch",
       type: "news",
       kind: "news",
+      href: "/news/zeekr-7x-launch",
     });
     expect(searchRepository.search("ZEEKR")[0]).toMatchObject({ id: "zeekr", type: "brand" });
+    expect(searchRepository.search("极氪汽车")[0]?.id).toBe("zeekr");
+    expect(searchRepository.search("zeekr", { type: "vehicle" }).every((item) => item.type === "vehicle")).toBe(true);
+    expect(() => searchRepository.search("zeekr", { type: "not-a-type" as never })).not.toThrow();
+    expect(searchRepository.search("zeekr", { limit: 1 })).toHaveLength(1);
+    expect(searchRepository.search("zeekr")).toEqual(searchRepository.search("zeekr"));
   });
 });

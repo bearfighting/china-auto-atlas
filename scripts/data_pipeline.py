@@ -169,12 +169,41 @@ def build() -> int:
             record.pop("_file", None)
     (BUILD_ROOT / "data-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
+    searchable_types = {"vehicle", "brand", "manufacturer", "technology"}
+    search_entries = []
+    for entity in index["entities"]:
+        if entity.get("type") not in searchable_types:
+            continue
+        names = entity.get("names") or {}
+        search_entries.append({
+            "kind": "entity",
+            "id": entity["id"],
+            "type": entity["type"],
+            "slug": entity.get("slug") or entity["id"],
+            "display_name": names.get("en") or names.get("zh-CN") or entity["id"],
+            "display_name_zh": names.get("zh-CN"),
+            "aliases": entity.get("aliases", []),
+        })
+
     documents = []
     for path in sorted((CONTENT_ROOT / "news").glob("*.md")):
         parts = path.read_text(encoding="utf-8").split("---", 2)
         frontmatter = yaml.safe_load(parts[1]) or {}
         frontmatter["body"] = parts[2].strip()
         documents.append(frontmatter)
+        search_entries.append({
+            "kind": "news",
+            "id": frontmatter["id"],
+            "type": "news",
+            "slug": frontmatter["slug"],
+            "display_name": frontmatter["title"],
+            "display_name_zh": frontmatter.get("title_zh"),
+            "aliases": [],
+        })
+    search_entries.sort(key=lambda entry: (entry["type"], entry["id"]))
+    (BUILD_ROOT / "search-index.json").write_text(
+        json.dumps(search_entries, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     authors = load_yaml(CONTENT_ROOT / "taxonomy" / "authors.yaml").get("authors", [])
     topics = load_yaml(CONTENT_ROOT / "taxonomy" / "topics.yaml").get("topics", [])
     content_index = {

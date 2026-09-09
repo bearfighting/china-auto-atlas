@@ -1,4 +1,4 @@
-import { loadContentIndex, loadDataIndex } from "./load-index";
+import { loadContentIndex, loadDataIndex, loadSearchIndex } from "./load-index";
 import {
   entitiesByType,
   entitiesByIds,
@@ -6,7 +6,6 @@ import {
   eventsRelatedTo,
   mediaByIds,
   approvedMedia,
-  slugFor,
   sourcesByIds,
   vehiclesFromIndex,
   vehiclesRelatedTo,
@@ -22,6 +21,8 @@ import type {
   Organization,
   Platform,
   SearchResult,
+  SearchOptions,
+  SearchType,
   Source,
   Topic,
   Technology,
@@ -262,60 +263,68 @@ export const eventRepository = {
   },
 };
 
-function normalize(value: string) {
-  return value.trim().toLowerCase();
+const searchableTypes: SearchType[] = ["vehicle", "brand", "manufacturer", "technology", "news"];
+const typeOrder = new Map<SearchType, number>(searchableTypes.map((type, index) => [type, index]));
+
+export function normalizeSearchValue(value: string) {
+  return value.normalize("NFKC").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function searchType(value: string | undefined): SearchType {
+  return value && ["all", ...searchableTypes].includes(value) ? (value as SearchType) : "all";
+}
+
+function resultHref(type: SearchType, slug: string) {
+  const route = {
+    vehicle: "vehicles",
+    brand: "brands",
+    manufacturer: "manufacturers",
+    technology: "technologies",
+    news: "news",
+  }[type as Exclude<SearchType, "all">];
+  return `/${route}/${slug}`;
 }
 
 export const searchRepository = {
-  search(query: string): SearchResult[] {
-    const normalizedQuery = normalize(query);
+  search(query: string, options: SearchOptions = {}): SearchResult[] {
+    const normalizedQuery = normalizeSearchValue(query);
     if (!normalizedQuery) return [];
+    const wantedType = searchType(options.type);
+    const limit = positiveInteger(options.limit, 20);
 
-    const index = loadDataIndex();
-    const entityResults = index.entities.map((entity, position) => {
-      const values = [entity.id, slugFor(entity), entity.names?.en, entity.names?.["zh-CN"], ...(entity.aliases ?? [])]
-        .filter((value): value is string => Boolean(value))
-        .map(normalize);
-      const exact = values.some((value) => value === normalizedQuery);
-      const match = exact || values.some((value) => value.includes(normalizedQuery));
-      return match
-        ? {
-            result: {
-              id: entity.id,
-              type: entity.type,
-              slug: slugFor(entity),
-              display_name: entity.names?.en ?? entity.names?.["zh-CN"] ?? entity.id,
-              kind: "entity" as const,
-            },
-            exact,
-            position,
-          }
-        : null;
-    });
-    const newsResults = newsRepository.list().map((document, position) => {
-      const values = [document.id, document.slug, document.title, document.title_zh]
-        .filter((value): value is string => Boolean(value))
-        .map(normalize);
-      const exact = values.some((value) => value === normalizedQuery);
-      const match = exact || values.some((value) => value.includes(normalizedQuery));
-      return match
-        ? {
-            result: {
-              id: document.id,
-              type: document.type,
-              slug: document.slug,
-              display_name: document.title,
-              kind: "news" as const,
-            },
-            exact,
-            position: index.entities.length + position,
-          }
-        : null;
-    });
-
-    return [...entityResults, ...newsResults]
+    return loadSearchIndex()
+      .filter((entry) => wantedType === "all" || entry.type === wantedType)
+      .map((entry) => {
+        const values = [entry.id, entry.slug, entry.display_name, entry.display_name_zh, ...(entry.aliases ?? [])]
+          .filter((value): value is string => Boolean(value))
+          .map(normalizeSearchValue);
+        const exact = values.some((value) => value === normalizedQuery);
+        const prefix = !exact && values.some((value) => value.startsWith(normalizedQuery));
+        const match = exact || prefix || values.some((value) => value.includes(normalizedQuery));
+        if (!match) return null;
+        const matchRank = exact ? (entry.kind === "entity" ? 0 : 1) : prefix ? (entry.kind === "entity" ? 2 : 3) : entry.kind === "entity" ? 4 : 5;
+        return {
+          result: {
+            id: entry.id,
+            type: entry.type,
+            slug: entry.slug,
+            display_name: entry.display_name,
+            display_name_zh: entry.display_name_zh,
+            kind: entry.kind,
+            href: resultHref(entry.type, entry.slug),
+          },
+          matchRank,
+          typeRank: typeOrder.get(entry.type) ?? searchableTypes.length,
+        };
+      })
       .filter((item): item is NonNullable<typeof item> => Boolean(item))
-      .sort((a, b) => Number(b.exact) - Number(a.exact) || a.position - b.position)
+      .sort(
+        (a, b) =>
+          a.matchRank - b.matchRank ||
+          a.typeRank - b.typeRank ||
+          a.result.id.localeCompare(b.result.id),
+      )
+      .slice(0, limit)
       .map((item) => item.result);
   },
 };

@@ -160,12 +160,31 @@ export type NewsPage = {
   totalPages: number;
 };
 
+export type SearchType = "all" | "vehicle" | "brand" | "manufacturer" | "technology" | "news";
+
+export type SearchOptions = {
+  type?: SearchType;
+  limit?: number;
+};
+
+export type SearchIndexEntry = {
+  kind: "entity" | "news";
+  id: string;
+  type: SearchType;
+  slug: string;
+  display_name: string;
+  display_name_zh?: string;
+  aliases?: string[];
+};
+
 export type SearchResult = {
   id: string;
   type: string;
   slug: string;
   display_name: string;
+  display_name_zh?: string;
   kind: "entity" | "news";
+  href: string;
 };
 
 export type Author = {

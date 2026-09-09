@@ -13,7 +13,7 @@ python3 scripts/extract_media_assets.py
 ```
 
 `validate` checks YAML/frontmatter syntax, duplicate IDs, required news metadata and cross-file references.
-`build` runs validation first and generates `build/data-index.json` and `build/content-index.json` for the MVP adapter.
+`build` runs validation first and generates `build/data-index.json`, `build/content-index.json`, and `build/search-index.json` for the MVP adapter.
 `extract_media_assets.py` reads registered official pages, downloads candidate image resources, converts raster images to
 WebP, preserves SVG when available, and writes a review report to `build/media-extraction-results.yaml`.
 

@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Search } from "lucide-react";
 import { MobileNavigation } from "@/components/mobile-navigation";
-import { Button } from "@/components/ui/button";
+import { SearchCommand } from "@/components/search-command";
 import { Separator } from "@/components/ui/separator";
 
 const navigationItems = [
@@ -14,6 +14,8 @@ const navigationItems = [
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchReturnFocusRef = useRef<HTMLElement | null>(null);
   return (
     <header className="border-b bg-background/95">
       <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -45,19 +47,16 @@ export function SiteHeader() {
               );
             })}
           </nav>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="hidden md:inline-flex"
-            disabled
-            aria-label="Search coming soon"
-            title="Search coming soon"
-          >
-            <Search className="mr-2 h-4 w-4" aria-hidden="true" />
-            Search
-          </Button>
-          <MobileNavigation />
+          <SearchCommand
+            open={searchOpen}
+            onOpenChange={setSearchOpen}
+            returnFocusRef={searchReturnFocusRef}
+          />
+          <MobileNavigation
+            searchOpen={searchOpen}
+            searchReturnFocusRef={searchReturnFocusRef}
+            onSearch={() => setSearchOpen(true)}
+          />
         </div>
       </div>
       <Separator />
