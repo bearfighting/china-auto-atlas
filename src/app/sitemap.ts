@@ -39,7 +39,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...eventRepository.list().map((event) => ({
       url: absoluteUrl(`/events/${event.id}`),
-      lastModified: validDate(event.date),
     })),
   ];
 }

@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ErrorState, EmptyState, UnknownState } from "./states";
+import GlobalError from "@/app/global-error";
 
 describe("state components", () => {
   it("renders an actionable error state without internal details", () => {
@@ -18,5 +19,12 @@ describe("state components", () => {
         EmptyState({ title: "No results found", description: "No records matched the query." }),
       ),
     ).toContain("No results found");
+  });
+
+  it("renders the root error boundary without implementation details", () => {
+    const markup = renderToStaticMarkup(GlobalError({ reset: () => undefined }));
+    expect(markup).toContain("Something went wrong");
+    expect(markup).toContain("Try again");
+    expect(markup).not.toMatch(/stack|build\/|data\//i);
   });
 });

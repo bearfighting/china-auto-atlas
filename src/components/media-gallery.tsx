@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { UnknownState } from "@/components/states";
-import { publicMediaPath } from "@/lib/media";
+import { publicMediaAlt, publicMediaPath } from "@/lib/media";
 import type { Media } from "@/lib/data/types";
 
 export function MediaGallery({ media }: { media: Media[] }) {
@@ -20,17 +20,17 @@ export function MediaGallery({ media }: { media: Media[] }) {
       {media.map((item) => (
         <Card key={item.id} data-testid="approved-media">
           <CardContent className="p-2">
-            {item.asset_path && publicMediaPath(item.asset_path) ? (
+            {item.asset_path && publicMediaPath(item.asset_path) && publicMediaAlt(item) ? (
               <Image
                 src={publicMediaPath(item.asset_path)!}
-                alt={item.alt?.en ?? item.alt?.["zh-CN"] ?? "Vehicle media"}
+                alt={publicMediaAlt(item)!}
                 width={1200}
                 height={675}
                 className="aspect-video rounded-md object-cover"
               />
             ) : (
               <div className="flex min-h-40 items-center justify-center">
-                <UnknownState label="Media file not available" />
+                <UnknownState label="Media description or file not available" />
               </div>
             )}
           </CardContent>

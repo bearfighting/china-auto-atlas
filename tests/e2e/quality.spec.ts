@@ -83,3 +83,20 @@ test("search API failures have an accessible error state", async ({ page }) => {
   await page.locator('input[aria-label="Search atlas"]').fill("ZEEKR");
   await expect(page.getByText("Search is temporarily unavailable.")).toBeVisible();
 });
+
+test("reduced motion disables smooth transitions", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const motionStyles = await page
+    .locator("a")
+    .first()
+    .evaluate((element) => {
+      const styles = getComputedStyle(element);
+      return {
+        scrollBehavior: styles.scrollBehavior,
+        transitionDuration: styles.transitionDuration,
+      };
+    });
+  expect(motionStyles.scrollBehavior).toBe("auto");
+  expect(Number.parseFloat(motionStyles.transitionDuration)).toBeLessThanOrEqual(0.01);
+});

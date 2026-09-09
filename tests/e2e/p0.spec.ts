@@ -223,6 +223,9 @@ test("searches from the global Command and navigates to an exact result", async 
 
 test("opens Search with the keyboard and restores focus on close", async ({ page }) => {
   await page.goto("/");
+  if (test.info().project.name !== "mobile") {
+    await expect(page.getByTestId("search-trigger")).toBeVisible();
+  }
   await page.keyboard.press("Control+k");
 
   await expect(page.getByRole("dialog")).toBeVisible();
