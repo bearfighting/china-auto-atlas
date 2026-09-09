@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { UnknownState } from "@/components/states";
 import { newsRepository } from "@/lib/data/repositories";
 import { displayName } from "@/lib/data/resolvers";
+import { StructuredData } from "@/components/structured-data";
+import { absoluteUrl } from "@/lib/site";
 
 export function generateStaticParams() {
   return newsRepository.list().map((item) => ({ slug: item.slug }));
@@ -53,6 +55,21 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   return (
     <PageContainer>
       <article className="space-y-10">
+        <StructuredData
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.title,
+            description: article.body.slice(0, 160),
+            datePublished: article.published_at,
+            dateModified: article.updated_at ?? article.published_at,
+            author: authors.map((author) => ({
+              "@type": "Person",
+              name: author.short_name ?? displayName(author.names),
+            })),
+            mainEntityOfPage: absoluteUrl(`/news/${article.slug}`),
+          }}
+        />
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },

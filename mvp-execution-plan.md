@@ -14,7 +14,7 @@
 | News → vehicle → source slice | Complete | Five news documents build; the ZEEKR 7X path is covered by unit and E2E tests. |
 | Full entity expansion | Complete | Vehicle, brand, manufacturer, technology, and event detail pages are statically generated with repository-backed relationships. |
 | Search | Complete | Generated search index, deterministic ranking, local search API, `/search` results page, and Command interface are in place. |
-| Local release quality gate | Partial | Build and automated checks pass; manual accessibility/content/media review remains. |
+| Local release quality gate | Complete | SEO, structured metadata, accessibility scans, responsive checks, media safety checks, and reproducible local quality checks are complete. |
 | Vercel deployment | Not started | Deliberately reserved for the final MVP phase. |
 
 This document translates `roadmap.md` into an implementation sequence. It is an execution checklist, not a replacement
@@ -342,17 +342,17 @@ Checklist:
 - [x] Add sitemap.
 - [x] Add robots configuration.
 - [x] Add canonical URLs.
-- [ ] Add structured metadata where useful.
-- [ ] Verify heading hierarchy.
-- [ ] Verify keyboard navigation.
-- [ ] Verify focus states.
-- [ ] Verify color contrast.
-- [ ] Verify image alt text.
+- [x] Add structured metadata where useful.
+- [x] Verify heading hierarchy.
+- [x] Verify keyboard navigation.
+- [x] Verify focus states.
+- [x] Verify color contrast.
+- [x] Verify image alt text.
 - [x] Verify reduced motion implementation.
 - [x] Verify mobile layout.
 - [x] Verify not-found page through E2E.
-- [ ] Verify error page behavior.
-- [ ] Verify no unapproved media is presented as approved.
+- [x] Verify error page behavior.
+- [x] Verify no unapproved media is presented as approved.
 
 ### Phase 7 — Final MVP deployment and release
 

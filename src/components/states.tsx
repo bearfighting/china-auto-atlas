@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AlertTriangle, FileQuestion } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export function UnknownState({ label = "Unknown" }: { label?: string }) {
   return <span className="text-sm text-muted-foreground">{label}</span>;
@@ -18,13 +19,18 @@ export function EmptyState({ title, description }: { title: string; description:
   );
 }
 
-export function ErrorState() {
+export function ErrorState({ onRetry }: { onRetry?: () => void } = {}) {
   return (
-    <Card>
+    <Card role="alert" data-testid="error-state">
       <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
         <AlertTriangle className="h-8 w-8 text-destructive" aria-hidden="true" />
-        <h2 className="font-semibold">Something went wrong</h2>
+        <h1 className="text-2xl font-semibold">Something went wrong</h1>
         <p className="text-sm text-muted-foreground">This page could not be loaded.</p>
+        {onRetry ? (
+          <Button type="button" onClick={onRetry}>
+            Try again
+          </Button>
+        ) : null}
       </CardContent>
     </Card>
   );
