@@ -15,6 +15,7 @@
 | Full entity expansion | Complete | Vehicle, brand, manufacturer, technology, and event detail pages are statically generated with repository-backed relationships. |
 | Search | Complete | Generated search index, deterministic ranking, local search API, `/search` results page, and Command interface are in place. |
 | Local release quality gate | Complete | SEO, structured metadata, accessibility scans, responsive checks, media safety checks, and reproducible local quality checks are complete. |
+| Information architecture and discoverability | Complete | Entity collection pages, Atlas navigation, homepage discovery, sitemap, responsive checks, and E2E coverage are complete. |
 | Vercel deployment | Not started | Deliberately reserved for the final MVP phase. |
 
 This document translates `roadmap.md` into an implementation sequence. It is an execution checklist, not a replacement
@@ -354,12 +355,63 @@ Checklist:
 - [x] Verify error page behavior.
 - [x] Verify no unapproved media is presented as approved.
 
+### Phase 6.5 — Information architecture, discoverability, and homepage polish
+
+Goal: close the navigation and discovery gap before deployment. The application must expose its entity model through
+consistent collection entry points instead of requiring users to reach entity detail pages through news relationships or
+search results.
+
+This phase does not introduce new entity types, a database, external search, or deployment configuration. It keeps the
+existing detail routes and repositories, and adds collection-level discovery around them.
+
+Checklist:
+
+- [x] Add `/brands` collection page backed by `brandRepository.list()`.
+- [x] Add `/manufacturers` collection page backed by `manufacturerRepository.list()`.
+- [x] Add `/technologies` collection page backed by `technologyRepository.list()`.
+- [x] Add `/events` collection page backed by `eventRepository.list()`.
+- [x] Display meaningful cards or lists with stable links to every current detail route.
+- [x] Add empty, unknown, and loading states to collection pages where applicable.
+- [x] Add collection-page metadata, canonical URLs, breadcrumbs, and Open Graph metadata.
+- [x] Add all public collection and detail routes to the sitemap; keep `/search` excluded.
+- [x] Add a flat desktop primary navigation for News, Vehicles, Brands, Manufacturers, Technologies, Events, and Search.
+- [x] Add the same flat navigation list to the mobile Sheet menu below the desktop breakpoint.
+- [x] Preserve active navigation states, keyboard access, Escape behavior, and visible focus states.
+- [x] Add a homepage Atlas/discovery entry that explains Vehicles, Brands, Manufacturers, Technologies, Events, and Sources.
+- [x] Ensure the homepage has a bottom-aligned Footer with no avoidable trailing whitespace.
+- [x] Improve homepage information hierarchy for the Hero and latest-news cards without adding unsupported content.
+- [x] Verify desktop, tablet, and 390px mobile layouts have no horizontal overflow.
+- [x] Add unit and E2E coverage for collection navigation, collection-to-detail links, metadata, and empty states.
+- [x] Run the complete local quality gate after the information architecture changes.
+
+Phase 6.5 acceptance commands:
+
+```bash
+python3 scripts/data_pipeline.py validate
+python3 scripts/data_pipeline.py build
+pnpm typecheck
+pnpm lint
+pnpm format:check
+pnpm test
+pnpm build
+pnpm test:e2e
+```
+
+Phase 6.5 is complete when:
+
+- all four entity collection pages are accessible from the global primary navigation;
+- every current Brand, Manufacturer, Technology, and Event detail record has a discoverable route;
+- desktop and mobile navigation expose the same flat entity links without dead links;
+- the homepage communicates both the news entry point and the broader atlas structure;
+- collection pages, detail pages, sitemap, metadata, and tests remain repository-backed;
+- the local release quality gate passes with no regression.
+
 ### Phase 7 — Final MVP deployment and release
 
 Goal: deploy and verify the reproducible public MVP after all local quality gates have passed.
 
 Vercel is the selected deployment provider. The deployment must run data validation and the production build from a clean
-checkout. This phase starts only after Phase 0–6 are complete.
+checkout. This phase starts only after Phase 0–6.5 are complete.
 
 Checklist:
 

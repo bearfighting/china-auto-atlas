@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="flex min-h-screen flex-col">
         <SiteHeader />
         {children}
         <SiteFooter />

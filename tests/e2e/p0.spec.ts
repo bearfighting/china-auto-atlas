@@ -26,6 +26,20 @@ test("opens the news to vehicle to source vertical slice", async ({ page }) => {
   );
 });
 
+test("homepage exposes the Atlas and keeps the footer in the page shell", async ({ page }) => {
+  await page.goto("/");
+  const atlas = page.getByTestId("homepage-atlas");
+  await expect(atlas).toBeVisible();
+  for (const item of ["Vehicles", "Brands", "Manufacturers", "Technologies", "Events"]) {
+    await expect(atlas.getByRole("link", { name: new RegExp(`^${item}`) })).toBeVisible();
+  }
+  await expect(page.getByTestId("homepage-featured-news")).toBeVisible();
+  await expect(page.getByRole("contentinfo")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+    await page.evaluate(() => document.documentElement.clientWidth),
+  );
+});
+
 test("browses the vehicle collection from the primary navigation", async ({ page }) => {
   test.skip(test.info().project.name !== "chromium", "desktop-only primary navigation coverage");
 
@@ -45,13 +59,30 @@ test("browses the vehicle collection from the primary navigation", async ({ page
   await expect(page.getByRole("contentinfo")).toBeVisible();
 });
 
+test("discovers entity collections from the desktop primary navigation", async ({ page }) => {
+  test.skip(test.info().project.name !== "chromium", "desktop-only primary navigation coverage");
+
+  await page.goto("/");
+  const primaryNavigation = page.getByRole("navigation", { name: "Primary navigation" });
+  for (const item of ["News", "Vehicles", "Brands", "Manufacturers", "Technologies", "Events"]) {
+    await expect(primaryNavigation.getByRole("link", { name: item, exact: true })).toBeVisible();
+  }
+  await primaryNavigation.getByRole("link", { name: "Brands", exact: true }).click();
+  await expect(page).toHaveURL(/\/brands$/);
+  await expect(page.getByRole("heading", { name: "Brands", exact: true })).toBeVisible();
+  await expect(page.getByTestId("atlas-entity-card").first()).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/brands$/);
+});
+
 test("opens and closes the mobile navigation", async ({ page }) => {
-  test.skip(test.info().project.name !== "mobile", "mobile-only navigation coverage");
+  test.skip(test.info().project.name === "chromium", "mobile navigation coverage");
 
   await page.goto("/");
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
-  await expect(page.getByRole("link", { name: "Vehicles" })).toBeVisible();
+  await expect(
+    page.getByRole("dialog").getByRole("link", { name: "Vehicles", exact: true }),
+  ).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog")).toBeHidden();
   await expect(page.getByRole("button", { name: "Open menu" })).toBeFocused();
@@ -68,6 +99,19 @@ test("opens and closes the mobile navigation", async ({ page }) => {
   );
   await page.getByTestId("sheet-overlay").click({ position: { x: 5, y: 400 } });
   await expect(page.getByRole("dialog")).toBeHidden();
+});
+
+test("discovers entity collections from the flat mobile navigation", async ({ page }) => {
+  test.skip(test.info().project.name === "chromium", "mobile navigation coverage");
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open menu" }).click();
+  const mobileNavigation = page.getByRole("navigation", { name: "Mobile navigation" });
+  await mobileNavigation.getByRole("link", { name: "Technologies" }).click();
+  await expect(page).toHaveURL(/\/technologies$/);
+  await expect(page.getByRole("heading", { name: "Technologies", exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(page.getByRole("button", { name: "Open menu" })).toBeFocused();
 });
 
 test("renders the complete news collection and shared shell", async ({ page }) => {
@@ -198,7 +242,7 @@ test("returns a not-found page for unknown Phase 4 entities", async ({ page }) =
 });
 
 test("searches from the global Command and navigates to an exact result", async ({ page }) => {
-  if (test.info().project.name === "mobile") {
+  if (test.info().project.name !== "chromium") {
     await page.goto("/");
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByTestId("mobile-search-trigger").click();
@@ -223,9 +267,6 @@ test("searches from the global Command and navigates to an exact result", async 
 
 test("opens Search with the keyboard and restores focus on close", async ({ page }) => {
   await page.goto("/");
-  if (test.info().project.name !== "mobile") {
-    await expect(page.getByTestId("search-trigger")).toBeVisible();
-  }
   await page.keyboard.press("Control+k");
 
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -233,13 +274,13 @@ test("opens Search with the keyboard and restores focus on close", async ({ page
   await expect(page.getByRole("dialog")).toBeHidden();
   await expect(
     page.getByRole("button", {
-      name: test.info().project.name === "mobile" ? "Open menu" : "Search",
+      name: test.info().project.name === "chromium" ? "Search" : "Open menu",
     }),
   ).toBeFocused();
 });
 
 test("opens mobile Search from the menu with the keyboard", async ({ page }) => {
-  test.skip(test.info().project.name !== "mobile", "Mobile-only interaction");
+  test.skip(test.info().project.name === "chromium", "Mobile navigation interaction");
   await page.goto("/");
   await page.getByRole("button", { name: "Open menu" }).click();
   const mobileSearch = page.getByTestId("mobile-search-trigger");

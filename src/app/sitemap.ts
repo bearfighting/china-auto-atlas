@@ -21,6 +21,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/") },
     { url: absoluteUrl("/news") },
     { url: absoluteUrl("/vehicles") },
+    { url: absoluteUrl("/brands") },
+    { url: absoluteUrl("/manufacturers") },
+    { url: absoluteUrl("/technologies") },
+    { url: absoluteUrl("/events") },
     ...news.map((document) => ({
       url: absoluteUrl(`/news/${document.slug}`),
       lastModified: validDate(document.updated_at ?? document.published_at),

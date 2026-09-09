@@ -7,9 +7,13 @@ const qualityRoutes = [
   "/news/zeekr-7x-launch",
   "/vehicles",
   "/vehicles/zeekr-7x",
+  "/brands",
   "/brands/zeekr",
+  "/manufacturers",
   "/manufacturers/zeekr-group",
+  "/technologies",
   "/technologies/zeekr-800v-system",
+  "/events",
   "/events/event-zeekr-7x-china-launch-2024",
   "/search",
 ];
@@ -65,16 +69,20 @@ test("article JSON-LD and crawl configuration are correct", async ({ page }) => 
   const sitemap = await page.request.get("/sitemap.xml");
   const sitemapText = await sitemap.text();
   expect(sitemapText).toContain("/brands/zeekr");
+  expect(sitemapText).toContain("/brands");
   expect(sitemapText).toContain("/manufacturers/zeekr-group");
+  expect(sitemapText).toContain("/manufacturers");
   expect(sitemapText).toContain("/technologies/zeekr-800v-system");
+  expect(sitemapText).toContain("/technologies");
   expect(sitemapText).toContain("/events/event-zeekr-7x-china-launch-2024");
+  expect(sitemapText).toContain("/events");
   expect(sitemapText).not.toContain("/search");
 });
 
 test("search API failures have an accessible error state", async ({ page }) => {
   await page.route("**/api/search**", (route) => route.abort());
   await page.goto("/");
-  if (test.info().project.name === "mobile") {
+  if (test.info().project.name !== "chromium") {
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByTestId("mobile-search-trigger").click();
   } else {

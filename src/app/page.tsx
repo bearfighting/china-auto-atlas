@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { atlasNavigationItems } from "@/components/atlas-navigation";
 import { PageContainer } from "@/components/page-container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -37,6 +38,40 @@ export default function HomePage() {
             Explore the latest news <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </section>
+        <section aria-labelledby="atlas-explore" className="space-y-5" data-testid="homepage-atlas">
+          <div>
+            <p className="text-sm font-medium text-muted-foreground">Explore the database</p>
+            <h2 id="atlas-explore" className="text-2xl font-semibold tracking-tight">
+              Explore the atlas
+            </h2>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <Link
+              href="/vehicles"
+              className="rounded-lg border p-4 transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <p className="font-semibold">Vehicles</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Profiles, specifications, and history.
+              </p>
+            </Link>
+            {atlasNavigationItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-lg border p-4 transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <p className="font-semibold">{item.label}</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Connected records, relationships, and sources.
+                </p>
+              </Link>
+            ))}
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Sources provide the traceable evidence behind the atlas records.
+          </p>
+        </section>
         <section aria-labelledby="latest-news">
           <div className="mb-5 flex items-end justify-between gap-4">
             <div>
@@ -53,8 +88,12 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
-            {news.slice(0, 4).map((item) => (
-              <Card key={item.id}>
+            {news.slice(0, 4).map((item, index) => (
+              <Card
+                key={item.id}
+                className={index === 0 ? "md:col-span-2" : undefined}
+                data-testid={index === 0 ? "homepage-featured-news" : "homepage-news-card"}
+              >
                 <CardHeader>
                   <div className="flex items-center justify-between gap-3">
                     <Badge variant="muted">{item.evidence_status ?? "unknown"}</Badge>

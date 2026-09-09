@@ -8,12 +8,24 @@ export function SiteFooter() {
           <p className="font-medium text-foreground">China Auto Atlas</p>
           <p>Structured automotive knowledge with traceable sources.</p>
         </div>
-        <nav aria-label="Footer navigation" className="flex gap-4">
+        <nav aria-label="Footer navigation" className="flex min-w-0 flex-wrap gap-x-4 gap-y-2">
           <Link className="hover:text-foreground hover:underline" href="/news">
             News
           </Link>
           <Link className="hover:text-foreground hover:underline" href="/vehicles">
             Vehicles
+          </Link>
+          <Link className="hover:text-foreground hover:underline" href="/brands">
+            Brands
+          </Link>
+          <Link className="hover:text-foreground hover:underline" href="/manufacturers">
+            Manufacturers
+          </Link>
+          <Link className="hover:text-foreground hover:underline" href="/technologies">
+            Technologies
+          </Link>
+          <Link className="hover:text-foreground hover:underline" href="/events">
+            Events
           </Link>
         </nav>
       </div>

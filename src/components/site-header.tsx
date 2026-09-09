@@ -3,15 +3,10 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { primaryNavigationItems } from "@/components/atlas-navigation";
 import { MobileNavigation } from "@/components/mobile-navigation";
 import { SearchCommand } from "@/components/search-command";
 import { Separator } from "@/components/ui/separator";
-
-const navigationItems = [
-  { href: "/news", label: "News" },
-  { href: "/vehicles", label: "Vehicles" },
-];
-
 export function SiteHeader() {
   const pathname = usePathname() ?? "";
   const [searchOpen, setSearchOpen] = useState(false);
@@ -31,9 +26,9 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <nav
             aria-label="Primary navigation"
-            className="hidden items-center gap-1 text-sm text-muted-foreground md:flex"
+            className="hidden items-center gap-1 text-sm text-muted-foreground lg:flex"
           >
-            {navigationItems.map((item) => {
+            {primaryNavigationItems.map((item) => {
               const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
                 <Link

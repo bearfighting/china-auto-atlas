@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { MutableRefObject } from "react";
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
+import { primaryNavigationItems } from "@/components/atlas-navigation";
 import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,11 +17,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-const navigationItems = [
-  { href: "/news", label: "News" },
-  { href: "/vehicles", label: "Vehicles" },
-];
-
 export function MobileNavigation({
   onSearch,
   searchOpen,
@@ -30,7 +26,7 @@ export function MobileNavigation({
   searchOpen: boolean;
   searchReturnFocusRef: MutableRefObject<HTMLElement | null>;
 }) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
   return (
     <Sheet>
@@ -39,7 +35,7 @@ export function MobileNavigation({
           ref={menuTriggerRef}
           variant="outline"
           size="sm"
-          className="md:hidden"
+          className="lg:hidden"
           aria-label="Open menu"
           data-testid="mobile-menu-trigger"
         >
@@ -53,7 +49,7 @@ export function MobileNavigation({
           <SheetDescription>Open a primary section of the atlas.</SheetDescription>
         </SheetHeader>
         <nav aria-label="Mobile navigation" className="mt-8 grid gap-2">
-          {navigationItems.map((item) => {
+          {primaryNavigationItems.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <SheetClose key={item.href} asChild>

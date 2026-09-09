@@ -118,7 +118,7 @@ export function SearchCommand({
         type="button"
         variant="ghost"
         size="sm"
-        className="hidden md:inline-flex"
+        className="hidden lg:inline-flex"
         aria-label="Search"
         aria-expanded={open}
         aria-controls="global-search-dialog"
