@@ -19,6 +19,25 @@ export type Entity = {
   [key: string]: unknown;
 };
 
+export type EntityRelations = {
+  source_ids?: string[];
+  event_ids?: string[];
+  news_ids?: string[];
+  vehicle_ids?: string[];
+  brand_ids?: string[];
+  manufacturer_ids?: string[];
+  organization_ids?: string[];
+  platform_ids?: string[];
+  technology_ids?: string[];
+  relationship_ids?: string[];
+};
+
+export type Brand = Entity & EntityRelations & { type: "brand" };
+export type Manufacturer = Entity & EntityRelations & { type: "manufacturer" };
+export type Organization = Entity & EntityRelations & { type: "organization" | "supplier" | "manufacturer" };
+export type Technology = Entity & EntityRelations & { type: "technology" };
+export type Platform = Entity & EntityRelations & { type: "platform" };
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;
@@ -125,6 +144,14 @@ export type NewsDocument = {
   source_ids?: string[];
   evidence_status?: EvidenceStatus;
   body: string;
+};
+
+export type SearchResult = {
+  id: string;
+  type: string;
+  slug: string;
+  display_name: string;
+  kind: "entity" | "news";
 };
 
 export type Author = {

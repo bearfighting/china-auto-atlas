@@ -1,4 +1,14 @@
-import type { Author, ContentIndex, DataIndex, Entity, LocalizedName, Media, Source, Topic } from "./types";
+import type {
+  Author,
+  ContentIndex,
+  DataIndex,
+  Entity,
+  LocalizedName,
+  Media,
+  Source,
+  Topic,
+  Vehicle,
+} from "./types";
 
 export function displayName(value: LocalizedName | undefined, locale = "en") {
   if (!value) return "Unknown";
@@ -11,6 +21,34 @@ export function slugFor(record: Entity) {
 
 export function entityById(index: DataIndex, id: string | undefined) {
   return id ? index.entities.find((entity) => entity.id === id) ?? null : null;
+}
+
+export function entitiesByType<T extends Entity>(index: DataIndex, type: T["type"]): T[] {
+  return index.entities.filter((entity): entity is T => entity.type === type);
+}
+
+export function entitiesByIds<T extends Entity>(index: DataIndex, ids: string[] | undefined): T[] {
+  const wanted = new Set(ids ?? []);
+  return index.entities.filter((entity): entity is T => wanted.has(entity.id));
+}
+
+export function vehiclesFromIndex(index: DataIndex): Vehicle[] {
+  return entitiesByType<Vehicle>(index, "vehicle");
+}
+
+export function vehiclesRelatedTo(index: DataIndex, entityId: string): Vehicle[] {
+  return vehiclesFromIndex(index).filter(
+    (vehicle) =>
+      vehicle.brand_id === entityId ||
+      vehicle.platform_id === entityId ||
+      vehicle.manufacturer_ids?.includes(entityId) ||
+      vehicle.technology_ids?.includes(entityId),
+  );
+}
+
+export function eventsRelatedTo(index: DataIndex, entityId: string, eventIds: string[] | undefined) {
+  const wanted = new Set(eventIds ?? []);
+  return index.events.filter((event) => wanted.has(event.id) || event.subject_ids?.includes(entityId));
 }
 
 export function sourcesByIds(index: DataIndex, ids: string[] | undefined): Source[] {

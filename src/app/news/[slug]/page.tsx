@@ -7,9 +7,8 @@ import { SourceList } from "@/components/source-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { UnknownState } from "@/components/states";
-import { loadContentIndex, loadDataIndex } from "@/lib/data/load-index";
-import { eventRepository, newsRepository, relatedEntities } from "@/lib/data/repositories";
-import { authorsByIds, displayName, sourcesByIds, topicsByIds } from "@/lib/data/resolvers";
+import { newsRepository } from "@/lib/data/repositories";
+import { displayName } from "@/lib/data/resolvers";
 
 export function generateStaticParams() {
   return newsRepository.list().map((item) => ({ slug: item.slug }));
@@ -23,8 +22,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = newsRepository.getBySlug(slug);
   if (!article) return {};
-  const content = loadContentIndex();
-  const authors = authorsByIds(content, article.author_ids);
+  const authors = newsRepository.getAuthors(article.id);
   return {
     title: article.title,
     description: article.body.slice(0, 160),
@@ -45,13 +43,11 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   const { slug } = await params;
   const article = newsRepository.getBySlug(slug);
   if (!article) notFound();
-  const index = loadDataIndex();
-  const content = loadContentIndex();
-  const entities = relatedEntities(article.entity_ids);
-  const sources = sourcesByIds(index, article.source_ids);
-  const authors = authorsByIds(content, article.author_ids);
-  const topics = topicsByIds(content, article.topic_ids);
-  const events = (article.event_ids ?? []).map((id) => eventRepository.getById(id)).filter(Boolean);
+  const entities = newsRepository.getRelatedEntities(article.id);
+  const sources = newsRepository.getRelatedSources(article.id);
+  const authors = newsRepository.getAuthors(article.id);
+  const topics = newsRepository.getTopics(article.id);
+  const events = newsRepository.getRelatedEvents(article.id);
   return (
     <PageContainer>
       <article className="space-y-10">

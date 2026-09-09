@@ -1,6 +1,83 @@
 import { loadContentIndex, loadDataIndex } from "./load-index";
-import { entityById, slugFor, sourcesByIds } from "./resolvers";
-import type { Event, NewsDocument, Source, Vehicle } from "./types";
+import {
+  entitiesByType,
+  entityById,
+  eventsRelatedTo,
+  mediaByIds,
+  slugFor,
+  sourcesByIds,
+  vehiclesFromIndex,
+  vehiclesRelatedTo,
+} from "./resolvers";
+import type {
+  Brand,
+  Entity,
+  Event,
+  Manufacturer,
+  Media,
+  NewsDocument,
+  Author,
+  Organization,
+  Platform,
+  SearchResult,
+  Source,
+  Topic,
+  Technology,
+  Vehicle,
+} from "./types";
+import { authorsByIds, topicsByIds } from "./resolvers";
+
+function entitySources(entity: { source_ids?: string[] }): Source[] {
+  return sourcesByIds(loadDataIndex(), entity.source_ids);
+}
+
+function entityEvents(entity: { id: string; event_ids?: string[] }): Event[] {
+  return eventsRelatedTo(loadDataIndex(), entity.id, entity.event_ids);
+}
+
+function entityNews(id: string): NewsDocument[] {
+  const entity = entityById(loadDataIndex(), id);
+  const relatedNewsIds = new Set(entity?.news_ids ?? []);
+  return newsRepository
+    .list()
+    .filter((document) => relatedNewsIds.has(document.id) || document.entity_ids?.includes(id));
+}
+
+function findBySlug<T extends { id: string; slug?: string }>(records: T[], slug: string): T | null {
+  return records.find((record) => record.slug === slug || record.id === slug) ?? null;
+}
+
+function entityOfType<T extends Entity>(id: string | undefined, type: T["type"]): T | null {
+  const entity = id ? entityById(loadDataIndex(), id) : null;
+  return entity?.type === type ? (entity as T) : null;
+}
+
+function relatedEntityRepository<T extends Entity>(
+  type: T["type"],
+) {
+  return {
+    list(): T[] {
+      return entitiesByType<T>(loadDataIndex(), type);
+    },
+    getById(id: string): T | null {
+      return this.list().find((entity) => entity.id === id) ?? null;
+    },
+    getBySlug(slug: string): T | null {
+      return findBySlug(this.list(), slug);
+    },
+    getRelatedNews(id: string): NewsDocument[] {
+      return entityNews(id);
+    },
+    getRelatedEvents(id: string): Event[] {
+      const entity = this.getById(id);
+      return entity ? entityEvents(entity) : [];
+    },
+    getRelatedSources(id: string): Source[] {
+      const entity = this.getById(id);
+      return entity ? entitySources(entity) : [];
+    },
+  };
+}
 
 export const newsRepository = {
   list(): NewsDocument[] {
@@ -12,35 +89,109 @@ export const newsRepository = {
   getBySlug(slug: string): NewsDocument | null {
     return loadContentIndex().documents.find((document) => document.slug === slug) ?? null;
   },
+  getRelatedEntities(id: string): Entity[] {
+    const document = this.getById(id);
+    return document ? relatedEntities(document.entity_ids) : [];
+  },
+  getRelatedEvents(id: string): Event[] {
+    const document = this.getById(id);
+    const wanted = new Set(document?.event_ids ?? []);
+    return loadDataIndex().events.filter((event) => wanted.has(event.id));
+  },
+  getRelatedSources(id: string): Source[] {
+    const document = this.getById(id);
+    return document ? sourcesByIds(loadDataIndex(), document.source_ids) : [];
+  },
+  getAuthors(id: string): Author[] {
+    const document = this.getById(id);
+    return document ? authorsByIds(loadContentIndex(), document.author_ids) : [];
+  },
+  getTopics(id: string): Topic[] {
+    const document = this.getById(id);
+    return document ? topicsByIds(loadContentIndex(), document.topic_ids) : [];
+  },
 };
 
 export const vehicleRepository = {
   list(): Vehicle[] {
-    return loadDataIndex().entities.filter((entity): entity is Vehicle => entity.type === "vehicle");
+    return vehiclesFromIndex(loadDataIndex());
   },
   getById(id: string): Vehicle | null {
     return this.list().find((vehicle) => vehicle.id === id) ?? null;
   },
   getBySlug(slug: string): Vehicle | null {
-    return this.list().find((vehicle) => slugFor(vehicle) === slug || vehicle.id === slug) ?? null;
+    return findBySlug(this.list(), slug);
+  },
+  getBrand(id: string): Brand | null {
+    return entityOfType(this.getById(id)?.brand_id, "brand");
+  },
+  getManufacturers(id: string): Manufacturer[] {
+    return (this.getById(id)?.manufacturer_ids ?? [])
+      .map((manufacturerId) => entityOfType<Manufacturer>(manufacturerId, "manufacturer"))
+      .filter((manufacturer): manufacturer is Manufacturer => Boolean(manufacturer));
+  },
+  getPlatform(id: string): Platform | null {
+    return entityOfType(this.getById(id)?.platform_id, "platform");
+  },
+  getTechnologies(id: string): Technology[] {
+    return (this.getById(id)?.technology_ids ?? [])
+      .map((technologyId) => entityOfType<Technology>(technologyId, "technology"))
+      .filter((technology): technology is Technology => Boolean(technology));
   },
   getRelatedSources(id: string): Source[] {
     const vehicle = this.getById(id);
-    return sourcesByIds(loadDataIndex(), vehicle?.source_ids);
+    return vehicle ? entitySources(vehicle) : [];
   },
   getRelatedEvents(id: string): Event[] {
-    const index = loadDataIndex();
     const vehicle = this.getById(id);
-    const eventIds = new Set(vehicle?.event_ids ?? []);
-    return index.events.filter((event) => eventIds.has(event.id));
+    return vehicle ? entityEvents(vehicle) : [];
   },
   getMarketSpecifications(id: string) {
     return loadDataIndex().market_specifications.filter((specification) => specification.vehicle_id === id);
   },
   getRelatedNews(id: string): NewsDocument[] {
-    return newsRepository.list().filter((document) => document.entity_ids?.includes(id));
+    return entityNews(id);
+  },
+  getMedia(id: string): Media[] {
+    const vehicle = this.getById(id);
+    return vehicle ? mediaByIds(loadDataIndex(), vehicle.media_ids) : [];
   },
 };
+
+export const brandRepository = {
+  ...relatedEntityRepository<Brand>("brand"),
+  getVehicles(id: string): Vehicle[] {
+    return vehiclesRelatedTo(loadDataIndex(), id);
+  },
+};
+
+export const manufacturerRepository = {
+  ...relatedEntityRepository<Manufacturer>("manufacturer"),
+  getVehicles(id: string): Vehicle[] {
+    return vehiclesRelatedTo(loadDataIndex(), id);
+  },
+};
+
+export const technologyRepository = {
+  ...relatedEntityRepository<Technology>("technology"),
+  getVehicles(id: string): Vehicle[] {
+    return vehiclesRelatedTo(loadDataIndex(), id);
+  },
+};
+
+export function platformById(id: string): Platform | null {
+  const platform = entityById(loadDataIndex(), id);
+  return platform?.type === "platform" ? (platform as Platform) : null;
+}
+
+export function organizationById(id: string): Organization | null {
+  const organization = entityById(loadDataIndex(), id);
+  return organization?.type === "organization" ||
+    organization?.type === "supplier" ||
+    organization?.type === "manufacturer"
+    ? (organization as Organization)
+    : null;
+}
 
 export const sourceRepository = {
   getById(id: string): Source | null {
@@ -51,6 +202,64 @@ export const sourceRepository = {
 export const eventRepository = {
   getById(id: string): Event | null {
     return loadDataIndex().events.find((event) => event.id === id) ?? null;
+  },
+};
+
+function normalize(value: string) {
+  return value.trim().toLowerCase();
+}
+
+export const searchRepository = {
+  search(query: string): SearchResult[] {
+    const normalizedQuery = normalize(query);
+    if (!normalizedQuery) return [];
+
+    const index = loadDataIndex();
+    const entityResults = index.entities.map((entity, position) => {
+      const values = [entity.id, slugFor(entity), entity.names?.en, entity.names?.["zh-CN"], ...(entity.aliases ?? [])]
+        .filter((value): value is string => Boolean(value))
+        .map(normalize);
+      const exact = values.some((value) => value === normalizedQuery);
+      const match = exact || values.some((value) => value.includes(normalizedQuery));
+      return match
+        ? {
+            result: {
+              id: entity.id,
+              type: entity.type,
+              slug: slugFor(entity),
+              display_name: entity.names?.en ?? entity.names?.["zh-CN"] ?? entity.id,
+              kind: "entity" as const,
+            },
+            exact,
+            position,
+          }
+        : null;
+    });
+    const newsResults = newsRepository.list().map((document, position) => {
+      const values = [document.id, document.slug, document.title, document.title_zh]
+        .filter((value): value is string => Boolean(value))
+        .map(normalize);
+      const exact = values.some((value) => value === normalizedQuery);
+      const match = exact || values.some((value) => value.includes(normalizedQuery));
+      return match
+        ? {
+            result: {
+              id: document.id,
+              type: document.type,
+              slug: document.slug,
+              display_name: document.title,
+              kind: "news" as const,
+            },
+            exact,
+            position: index.entities.length + position,
+          }
+        : null;
+    });
+
+    return [...entityResults, ...newsResults]
+      .filter((item): item is NonNullable<typeof item> => Boolean(item))
+      .sort((a, b) => Number(b.exact) - Number(a.exact) || a.position - b.position)
+      .map((item) => item.result);
   },
 };
 

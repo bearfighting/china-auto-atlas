@@ -9,11 +9,11 @@
 | Area | Status | Notes |
 | --- | --- | --- |
 | Project foundation | Complete | Next.js, pnpm, Tailwind, shadcn configuration, lint, format, and build pipeline are in place. |
-| JSON runtime and P0 repositories | Complete | News, vehicle, event, source, market specification, and media paths are covered. |
+| JSON runtime and repositories | Complete | Typed entity, relationship, source, media, news, event, and basic search access paths are covered. |
 | Shared application shell | Partial | Header, container, states, focus styles, and responsive checks exist; breadcrumbs and a dedicated mobile menu remain. |
 | News → vehicle → source slice | Complete | Five news documents build; the ZEEKR 7X path is covered by unit and E2E tests. |
 | Full entity expansion | Not started | Brand, manufacturer, technology, and event detail pages remain MVP expansion work. |
-| Search | Not started | Search repository and Command interface remain MVP expansion work. |
+| Search | Partial | Phase 1 basic SearchRepository is available; generated search index, ranking, and Command interface remain Phase 5 work. |
 | Local release quality gate | Partial | Build and automated checks pass; manual accessibility/content/media review remains. |
 | Vercel deployment | Not started | Deliberately reserved for the final MVP phase. |
 
@@ -151,20 +151,20 @@ Acceptance criteria:
 
 Checklist:
 
-- [ ] Define dedicated `Brand`, `Manufacturer`, `Organization`, `Technology`, and `Platform` types.
+- [x] Define dedicated `Brand`, `Manufacturer`, `Organization`, `Technology`, and `Platform` types.
 - [x] Define `Vehicle`, `Event`, `Source`, `Media`, and `News` types.
 - [x] Define `MarketSpecification` and timeline types.
 - [x] Define `VehicleRepository`.
-- [ ] Define `BrandRepository`.
-- [ ] Define `ManufacturerRepository`.
-- [ ] Define `TechnologyRepository`.
+- [x] Define `BrandRepository`.
+- [x] Define `ManufacturerRepository`.
+- [x] Define `TechnologyRepository`.
 - [x] Define `EventRepository`.
 - [x] Define `SourceRepository`.
 - [x] Define `NewsRepository`.
-- [ ] Define `SearchRepository`.
+- [x] Define `SearchRepository` with the Phase 1 basic deterministic contract.
 - [x] Implement generated-index loading.
 - [x] Implement localized-name fallback.
-- [x] Implement relationship resolution for the P0 vehicle/news slice.
+- [x] Implement relationship resolution for entities, vehicles, events, news, sources, media, and the P0 vehicle/news slice.
 - [x] Implement source and media resolution helpers.
 - [x] Add repository unit tests.
 
@@ -176,6 +176,7 @@ Deliverables:
 
 - site header;
 - desktop and mobile navigation;
+- primary collection entry points, including the vehicles index;
 - search entry point;
 - page container;
 - typography hierarchy;
@@ -186,6 +187,7 @@ Deliverables:
 Acceptance criteria:
 
 - all primary pages share the same shell;
+- primary navigation links resolve to collection or index pages, not a specific entity detail page;
 - keyboard focus is visible;
 - layout works at mobile, tablet, and desktop widths;
 - the UI does not depend on color alone to communicate state.
@@ -194,6 +196,9 @@ Checklist:
 
 - [x] Add `Header` using shadcn/ui primitives where applicable.
 - [ ] Add a dedicated mobile navigation menu.
+- [ ] Add the `/vehicles` index page using `vehicleRepository`.
+- [ ] Point the Header `Vehicles` link to `/vehicles` instead of a specific vehicle.
+- [ ] Replace Vehicle page placeholder relationship links with real Brand and Manufacturer routes when those pages exist.
 - [x] Add `PageContainer` and layout primitives.
 - [ ] Add breadcrumbs.
 - [x] Add route-level loading behavior.
@@ -311,7 +316,7 @@ Checklist:
 
 - [ ] Generate a search index during build.
 - [ ] Normalize Chinese/English names and aliases.
-- [ ] Add search repository implementation.
+- [ ] Extend the basic SearchRepository with a generated index and full Phase 5 ranking behavior.
 - [ ] Add shadcn/ui Command-based search interface.
 - [ ] Add keyboard navigation.
 - [ ] Add result type labels.

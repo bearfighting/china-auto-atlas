@@ -9,8 +9,7 @@ import { Timeline } from "@/components/timeline";
 import { UnknownState } from "@/components/states";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { entityById, displayName, sourcesByIds } from "@/lib/data/resolvers";
-import { loadDataIndex } from "@/lib/data/load-index";
+import { displayName } from "@/lib/data/resolvers";
 import { vehicleRepository } from "@/lib/data/repositories";
 
 export function generateStaticParams() {
@@ -37,17 +36,12 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const vehicle = vehicleRepository.getBySlug(slug);
   if (!vehicle) notFound();
-  const index = loadDataIndex();
-  const brand = entityById(index, vehicle.brand_id);
-  const manufacturers = (vehicle.manufacturer_ids ?? [])
-    .map((id) => entityById(index, id))
-    .filter(Boolean);
-  const platform = entityById(index, vehicle.platform_id);
-  const technologies = (vehicle.technology_ids ?? [])
-    .map((id) => entityById(index, id))
-    .filter(Boolean);
+  const brand = vehicleRepository.getBrand(vehicle.id);
+  const manufacturers = vehicleRepository.getManufacturers(vehicle.id);
+  const platform = vehicleRepository.getPlatform(vehicle.id);
+  const technologies = vehicleRepository.getTechnologies(vehicle.id);
   const events = vehicleRepository.getRelatedEvents(vehicle.id);
-  const sources = sourcesByIds(index, vehicle.source_ids);
+  const sources = vehicleRepository.getRelatedSources(vehicle.id);
   const relatedNews = vehicleRepository.getRelatedNews(vehicle.id);
   return (
     <PageContainer>

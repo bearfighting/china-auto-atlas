@@ -7,7 +7,7 @@ export function Timeline({ events }: { events: Event[] }) {
   if (!events.length) return <UnknownState label="No lifecycle events collected" />;
   return (
     <ol className="space-y-3">
-      {events
+      {[...events]
         .sort((a, b) => (a.date ?? "").localeCompare(b.date ?? ""))
         .map((event) => (
           <li key={event.id}>
