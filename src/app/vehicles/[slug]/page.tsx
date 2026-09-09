@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageContainer } from "@/components/page-container";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { EntityHeader } from "@/components/entity-header";
 import { SourceList } from "@/components/source-list";
 import { SpecificationTable } from "@/components/specification-table";
@@ -9,11 +10,11 @@ import { Timeline } from "@/components/timeline";
 import { UnknownState } from "@/components/states";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { displayName } from "@/lib/data/resolvers";
+import { displayName, slugFor } from "@/lib/data/resolvers";
 import { vehicleRepository } from "@/lib/data/repositories";
 
 export function generateStaticParams() {
-  return vehicleRepository.list().map((vehicle) => ({ slug: vehicle.id }));
+  return vehicleRepository.list().map((vehicle) => ({ slug: slugFor(vehicle) }));
 }
 export const dynamicParams = false;
 
@@ -46,6 +47,13 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
   return (
     <PageContainer>
       <div className="space-y-10">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Vehicles", href: "/vehicles" },
+            { label: displayName(vehicle.names) },
+          ]}
+        />
         <EntityHeader entity={vehicle} />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
@@ -54,9 +62,7 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             </CardHeader>
             <CardContent>
               {brand ? (
-                <Link className="font-medium text-primary hover:underline" href="/news">
-                  {displayName(brand.names)}
-                </Link>
+                <span className="font-medium">{displayName(brand.names)}</span>
               ) : (
                 <UnknownState />
               )}
@@ -69,13 +75,9 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             <CardContent>
               {manufacturers.length ? (
                 manufacturers.map((item) => (
-                  <Link
-                    key={item!.id}
-                    className="mr-2 font-medium text-primary hover:underline"
-                    href="/news"
-                  >
+                  <span key={item.id} className="mr-2 font-medium">
                     {displayName(item!.names)}
-                  </Link>
+                  </span>
                 ))
               ) : (
                 <UnknownState />

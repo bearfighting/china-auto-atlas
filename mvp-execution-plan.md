@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | Project foundation | Complete | Next.js, pnpm, Tailwind, shadcn configuration, lint, format, and build pipeline are in place. |
 | JSON runtime and repositories | Complete | Typed entity, relationship, source, media, news, event, and basic search access paths are covered. |
-| Shared application shell | Partial | Header, container, states, focus styles, and responsive checks exist; breadcrumbs and a dedicated mobile menu remain. |
+| Shared application shell | Complete | Header, desktop/mobile navigation, collection entry points, breadcrumbs, footer, states, focus styles, and responsive checks are in place. |
 | News → vehicle → source slice | Complete | Five news documents build; the ZEEKR 7X path is covered by unit and E2E tests. |
 | Full entity expansion | Not started | Brand, manufacturer, technology, and event detail pages remain MVP expansion work. |
 | Search | Partial | Phase 1 basic SearchRepository is available; generated search index, ranking, and Command interface remain Phase 5 work. |
@@ -195,12 +195,14 @@ Acceptance criteria:
 Checklist:
 
 - [x] Add `Header` using shadcn/ui primitives where applicable.
-- [ ] Add a dedicated mobile navigation menu.
-- [ ] Add the `/vehicles` index page using `vehicleRepository`.
-- [ ] Point the Header `Vehicles` link to `/vehicles` instead of a specific vehicle.
-- [ ] Replace Vehicle page placeholder relationship links with real Brand and Manufacturer routes when those pages exist.
+- [x] Add a dedicated mobile navigation menu.
+- [x] Add the `/vehicles` index page using `vehicleRepository`.
+- [x] Point the Header `Vehicles` link to `/vehicles` instead of a specific vehicle.
+- [x] Remove misleading Vehicle relationship links until Brand and Manufacturer routes exist.
+- [x] Add the visual Search entry point with behavior deferred to Phase 5.
 - [x] Add `PageContainer` and layout primitives.
-- [ ] Add breadcrumbs.
+- [x] Add breadcrumbs.
+- [x] Add the global Footer.
 - [x] Add route-level loading behavior.
 - [x] Add `EmptyState`.
 - [x] Add `ErrorState`.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageContainer } from "@/components/page-container";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ArticleHeader } from "@/components/article-header";
 import { SourceList } from "@/components/source-list";
 import { Card, CardContent } from "@/components/ui/card";
@@ -51,6 +52,13 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   return (
     <PageContainer>
       <article className="space-y-10">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "News", href: "/news" },
+            { label: article.title },
+          ]}
+        />
         <ArticleHeader
           title={article.title}
           titleZh={article.title_zh}

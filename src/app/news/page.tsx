@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageContainer } from "@/components/page-container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +12,7 @@ export default function NewsIndexPage() {
   return (
     <PageContainer>
       <div className="space-y-8">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "News" }]} />
         <header className="space-y-3">
           <p className="text-sm font-medium text-muted-foreground">Editorial reporting</p>
           <h1 className="text-4xl font-bold tracking-tight">News</h1>

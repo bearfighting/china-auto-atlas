@@ -19,6 +19,52 @@ test("opens the news to vehicle to source vertical slice", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Market specifications" })).toBeVisible();
   await expect(page.getByText(/605 km CLTC/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
+  await expect(page.getByText("ZEEKR", { exact: true }).first()).not.toHaveAttribute("href");
+});
+
+test("browses the vehicle collection from the primary navigation", async ({ page }) => {
+  test.skip(test.info().project.name !== "chromium", "desktop-only primary navigation coverage");
+
+  await page.goto("/");
+  await page
+    .getByRole("navigation", { name: "Primary navigation" })
+    .getByRole("link", { name: "Vehicles" })
+    .click();
+  await expect(page).toHaveURL(/\/vehicles$/);
+  await expect(page.getByRole("heading", { name: "Vehicles", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "ZEEKR 7X", exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Breadcrumb" }).getByText("Vehicles"),
+  ).toHaveAttribute("aria-current", "page");
+  await expect(page.getByRole("button", { name: "Search coming soon" })).toBeDisabled();
+  await expect(page.getByRole("contentinfo")).toBeVisible();
+});
+
+test("opens and closes the mobile navigation", async ({ page }) => {
+  test.skip(test.info().project.name !== "mobile", "mobile-only navigation coverage");
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Vehicles" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(page.getByRole("button", { name: "Open menu" })).toBeFocused();
+
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("dialog").getByRole("link", { name: "Vehicles" }).click();
+  await expect(page).toHaveURL(/\/vehicles$/);
+  await expect(page.getByRole("dialog")).toBeHidden();
+
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("dialog").getByRole("link", { name: "Vehicles" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await page.getByTestId("sheet-overlay").click({ position: { x: 5, y: 400 } });
+  await expect(page.getByRole("dialog")).toBeHidden();
 });
 
 test("returns a not-found page for an unknown vehicle", async ({ page }) => {

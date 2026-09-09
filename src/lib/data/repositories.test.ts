@@ -28,6 +28,13 @@ describe("generated data repositories", () => {
     expect(vehicleRepository.getRelatedNews("zeekr-7x").map((item) => item.slug)).toContain("zeekr-7x-launch");
   });
 
+  it("lists vehicles with stable detail identifiers", () => {
+    const vehicles = vehicleRepository.list();
+    expect(vehicles).toHaveLength(10);
+    expect(vehicles.map((vehicle) => vehicle.id)).toContain("zeekr-7x");
+    expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");
+  });
+
   it("resolves typed entities and reverse vehicle relationships", () => {
     expect(brandRepository.getById("zeekr")?.type).toBe("brand");
     expect(brandRepository.getBySlug("zeekr")?.id).toBe("zeekr");
