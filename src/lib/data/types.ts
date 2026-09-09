@@ -66,6 +66,7 @@ export type Event = {
   date?: string;
   date_precision?: string;
   subject_ids?: string[];
+  related_document_ids?: string[];
   summary?: string;
   source_ids?: string[];
   evidence_status?: EvidenceStatus;

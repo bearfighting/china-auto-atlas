@@ -1,9 +1,11 @@
 import { loadContentIndex, loadDataIndex } from "./load-index";
 import {
   entitiesByType,
+  entitiesByIds,
   entityById,
   eventsRelatedTo,
   mediaByIds,
+  approvedMedia,
   slugFor,
   sourcesByIds,
   vehiclesFromIndex,
@@ -186,6 +188,9 @@ export const vehicleRepository = {
     const vehicle = this.getById(id);
     return vehicle ? mediaByIds(loadDataIndex(), vehicle.media_ids) : [];
   },
+  getApprovedMedia(id: string): Media[] {
+    return approvedMedia(this.getMedia(id));
+  },
 };
 
 export const brandRepository = {
@@ -199,6 +204,10 @@ export const manufacturerRepository = {
   ...relatedEntityRepository<Manufacturer>("manufacturer"),
   getVehicles(id: string): Vehicle[] {
     return vehiclesRelatedTo(loadDataIndex(), id);
+  },
+  getBrands(id: string): Brand[] {
+    const brandIds = new Set(this.getVehicles(id).map((vehicle) => vehicle.brand_id).filter(Boolean));
+    return entitiesByType<Brand>(loadDataIndex(), "brand").filter((brand) => brandIds.has(brand.id));
   },
 };
 
@@ -230,8 +239,26 @@ export const sourceRepository = {
 };
 
 export const eventRepository = {
+  list(): Event[] {
+    return [...loadDataIndex().events];
+  },
   getById(id: string): Event | null {
     return loadDataIndex().events.find((event) => event.id === id) ?? null;
+  },
+  getRelatedEntities(id: string): Entity[] {
+    const event = this.getById(id);
+    return event ? entitiesByIds(loadDataIndex(), event.subject_ids) : [];
+  },
+  getRelatedNews(id: string): NewsDocument[] {
+    const event = this.getById(id);
+    const relatedDocumentIds = new Set(event?.related_document_ids ?? []);
+    return newsRepository
+      .list()
+      .filter((document) => relatedDocumentIds.has(document.id) || document.event_ids?.includes(id));
+  },
+  getRelatedSources(id: string): Source[] {
+    const event = this.getById(id);
+    return event ? sourcesByIds(loadDataIndex(), event.source_ids) : [];
   },
 };
 

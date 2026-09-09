@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
@@ -15,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "data"
 CONTENT_ROOT = ROOT / "content"
 BUILD_ROOT = ROOT / "build"
+PUBLIC_MEDIA_ROOT = ROOT / "public" / "assets"
 REFERENCE_KEYS = {
     "author_ids", "topic_ids", "entity_ids", "event_ids", "source_ids",
     "relationship_ids", "document_ids", "subject_ids", "brand_ids",
@@ -116,8 +118,11 @@ def validate() -> int:
             if not asset_path:
                 continue
             registered_assets.add(asset_path)
-            if media.get("collection_status") == "downloaded" and not (ROOT / asset_path).is_file():
-                errors.append(f"{media_path}: downloaded asset is missing {asset_path}")
+            requires_local_asset = media.get("collection_status") == "downloaded" or (
+                media.get("collection_status") == "approved" and media.get("rights_status") == "approved"
+            )
+            if requires_local_asset and not (ROOT / asset_path).is_file():
+                errors.append(f"{media_path}: required local asset is missing {asset_path}")
         for asset in sorted((ROOT / "assets").rglob("*")) if (ROOT / "assets").exists() else []:
             if asset.is_file() and str(asset.relative_to(ROOT)) not in registered_assets:
                 errors.append(f"unregistered media asset {asset.relative_to(ROOT)}")
@@ -145,6 +150,20 @@ def build() -> int:
         "sources": sorted((r for r in flat if r.get("type") == "source"), key=lambda r: r["id"]),
         "media": sorted((r for r in flat if r.get("type") == "media"), key=lambda r: r["id"]),
     }
+    if PUBLIC_MEDIA_ROOT.exists():
+        shutil.rmtree(PUBLIC_MEDIA_ROOT)
+    for media in index["media"]:
+        if media.get("collection_status") != "approved" or media.get("rights_status") != "approved":
+            continue
+        asset_path = Path(str(media.get("asset_path", "")))
+        if len(asset_path.parts) < 2 or asset_path.parts[0] != "assets":
+            continue
+        source = ROOT / asset_path
+        if not source.is_file():
+            continue
+        target = PUBLIC_MEDIA_ROOT.joinpath(*asset_path.parts[1:])
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
     for key in ("entities", "market_specifications", "relationships", "events", "sources", "media"):
         for record in index[key]:
             record.pop("_file", None)

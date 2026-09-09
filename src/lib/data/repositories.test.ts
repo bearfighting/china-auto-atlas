@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadContentIndex, loadDataIndex } from "./load-index";
-import { displayName } from "./resolvers";
+import { approvedMedia, displayName } from "./resolvers";
 import { sortNewsDocuments } from "./repositories";
 import {
   brandRepository,
@@ -94,6 +94,28 @@ describe("generated data repositories", () => {
     expect(brandRepository.getRelatedSources("zeekr").length).toBeGreaterThan(0);
     expect(brandRepository.getRelatedNews("zeekr").map((article) => article.slug)).toContain("zeekr-7x-launch");
     expect(vehicleRepository.getMedia("zeekr-7x").map((media) => media.id)).toContain("media-vehicle-zeekr-7x-hero");
+    expect(vehicleRepository.getApprovedMedia("zeekr-7x")).toEqual([]);
+    expect(manufacturerRepository.getBrands("zeekr-group").map((brand) => brand.id)).toContain("zeekr");
+  });
+
+  it("lists events and resolves event relationships", () => {
+    expect(eventRepository.list().length).toBe(51);
+    const event = eventRepository.getById("event-zeekr-7x-china-launch-2024");
+    expect(eventRepository.getRelatedEntities(event!.id).map((entity) => entity.id)).toContain("zeekr-7x");
+    expect(eventRepository.getRelatedNews(event!.id).map((article) => article.slug)).toContain("zeekr-7x-launch");
+    expect(eventRepository.getRelatedSources(event!.id).length).toBeGreaterThan(0);
+    expect(eventRepository.getRelatedEntities("does-not-exist")).toEqual([]);
+    expect(eventRepository.getRelatedNews("does-not-exist")).toEqual([]);
+    expect(eventRepository.getRelatedSources("does-not-exist")).toEqual([]);
+  });
+
+  it("returns only media approved for public use", () => {
+    expect(
+      approvedMedia([
+        { id: "approved", type: "media", collection_status: "approved", rights_status: "approved" },
+        { id: "needs-review", type: "media", collection_status: "downloaded", rights_status: "needs_review" },
+      ]),
+    ).toMatchObject([{ id: "approved" }]);
   });
 
   it("returns null for missing records and empty results for missing relations", () => {

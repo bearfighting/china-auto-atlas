@@ -12,7 +12,7 @@
 | JSON runtime and repositories | Complete | Typed entity, relationship, source, media, news, event, and basic search access paths are covered. |
 | Shared application shell | Complete | Header, desktop/mobile navigation, collection entry points, breadcrumbs, footer, states, focus styles, and responsive checks are in place. |
 | News → vehicle → source slice | Complete | Five news documents build; the ZEEKR 7X path is covered by unit and E2E tests. |
-| Full entity expansion | Not started | Brand, manufacturer, technology, and event detail pages remain MVP expansion work. |
+| Full entity expansion | Complete | Vehicle, brand, manufacturer, technology, and event detail pages are statically generated with repository-backed relationships. |
 | Search | Partial | Phase 1 basic SearchRepository is available; generated search index, ranking, and Command interface remain Phase 5 work. |
 | Local release quality gate | Partial | Build and automated checks pass; manual accessibility/content/media review remains. |
 | Vercel deployment | Not started | Deliberately reserved for the final MVP phase. |
@@ -280,19 +280,20 @@ Acceptance criteria:
 Checklist:
 
 - [x] Add shared `EntityHeader`.
-- [ ] Add `VehicleCard` using shadcn/ui Card primitives.
+- [x] Add `VehicleCard` using shadcn/ui Card primitives.
 - [x] Add specification table using shadcn/ui Table primitives.
 - [x] Add grouped market specification sections.
 - [x] Add timeline component using existing primitives.
 - [x] Add `EvidenceBadge`.
 - [x] Add source list and source details.
 - [x] Add vehicle page.
-- [ ] Add brand page.
-- [ ] Add manufacturer page.
-- [ ] Add technology page.
+- [x] Add brand page.
+- [x] Add manufacturer page.
+- [x] Add technology page.
+- [x] Add event detail page.
 - [x] Add event presentation.
 - [x] Add related-news sections.
-- [ ] Add media placeholders for non-approved assets.
+- [x] Add media placeholders for non-approved assets.
 
 ### Phase 5 — Search and discovery
 

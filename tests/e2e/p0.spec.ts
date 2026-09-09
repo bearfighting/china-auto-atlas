@@ -20,7 +20,10 @@ test("opens the news to vehicle to source vertical slice", async ({ page }) => {
   await expect(page.getByText(/605 km CLTC/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources" })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
-  await expect(page.getByText("ZEEKR", { exact: true }).first()).not.toHaveAttribute("href");
+  await expect(page.getByText("ZEEKR", { exact: true }).first()).toHaveAttribute(
+    "href",
+    "/brands/zeekr",
+  );
 });
 
 test("browses the vehicle collection from the primary navigation", async ({ page }) => {
@@ -144,4 +147,52 @@ test("returns a not-found page for an unknown news article", async ({ page }) =>
   const response = await page.goto("/news/not-a-real-article");
   expect(response?.status()).toBe(404);
   await expect(page.getByText(/not found/i).first()).toBeVisible();
+});
+
+test("renders Phase 4 entity detail pages and stable relationships", async ({ page }) => {
+  await page.goto("/vehicles/zeekr-7x");
+  await expect(page.getByRole("link", { name: "ZEEKR", exact: true })).toHaveAttribute(
+    "href",
+    "/brands/zeekr",
+  );
+  await expect(page.getByRole("link", { name: "Zeekr Group", exact: true })).toHaveAttribute(
+    "href",
+    "/manufacturers/zeekr-group",
+  );
+  await expect(
+    page.getByRole("link", { name: /ZEEKR 800V \/ 3×800V Ecosystem/ }).first(),
+  ).toHaveAttribute("href", "/technologies/zeekr-800v-system");
+  await expect(page.getByTestId("media-placeholder")).toContainText("Media not available");
+
+  for (const route of [
+    { path: "/brands/zeekr", heading: "ZEEKR" },
+    { path: "/manufacturers/zeekr-group", heading: "Zeekr Group" },
+    { path: "/technologies/zeekr-800v-system", heading: /ZEEKR 800V/ },
+    { path: "/events/event-zeekr-7x-china-launch-2024", heading: /ZEEKR 7X officially/ },
+  ]) {
+    await page.goto(route.path);
+    await expect(page.getByRole("heading", { name: route.heading }).first()).toBeVisible();
+    await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      new RegExp(route.path),
+    );
+    await expect(page.getByRole("contentinfo")).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+      await page.evaluate(() => document.documentElement.clientWidth),
+    );
+  }
+});
+
+test("returns a not-found page for unknown Phase 4 entities", async ({ page }) => {
+  for (const path of [
+    "/brands/not-a-brand",
+    "/manufacturers/not-a-manufacturer",
+    "/technologies/not-a-technology",
+    "/events/not-an-event",
+  ]) {
+    const response = await page.goto(path);
+    expect(response?.status()).toBe(404);
+    await expect(page.getByText(/not found/i).first()).toBeVisible();
+  }
 });

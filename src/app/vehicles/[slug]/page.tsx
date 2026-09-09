@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PageContainer } from "@/components/page-container";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { EntityHeader } from "@/components/entity-header";
+import { MediaGallery } from "@/components/media-gallery";
 import { SourceList } from "@/components/source-list";
 import { SpecificationTable } from "@/components/specification-table";
 import { Timeline } from "@/components/timeline";
@@ -62,7 +63,12 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             </CardHeader>
             <CardContent>
               {brand ? (
-                <span className="font-medium">{displayName(brand.names)}</span>
+                <Link
+                  className="font-medium text-primary hover:underline"
+                  href={`/brands/${slugFor(brand)}`}
+                >
+                  {displayName(brand.names)}
+                </Link>
               ) : (
                 <UnknownState />
               )}
@@ -75,9 +81,13 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             <CardContent>
               {manufacturers.length ? (
                 manufacturers.map((item) => (
-                  <span key={item.id} className="mr-2 font-medium">
-                    {displayName(item!.names)}
-                  </span>
+                  <Link
+                    key={item.id}
+                    className="mr-2 font-medium text-primary hover:underline"
+                    href={`/manufacturers/${slugFor(item)}`}
+                  >
+                    {displayName(item.names)}
+                  </Link>
                 ))
               ) : (
                 <UnknownState />
@@ -109,6 +119,12 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             </CardContent>
           </Card>
         </div>
+        <section className="space-y-4" aria-labelledby="vehicle-media">
+          <h2 id="vehicle-media" className="text-2xl font-semibold">
+            Media
+          </h2>
+          <MediaGallery media={vehicleRepository.getApprovedMedia(vehicle.id)} />
+        </section>
         <section className="space-y-4" aria-labelledby="vehicle-specifications">
           <div>
             <h2 id="vehicle-specifications" className="text-2xl font-semibold">
@@ -136,9 +152,9 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             {technologies.length ? (
               <div className="flex flex-wrap gap-2">
                 {technologies.map((technology) => (
-                  <Badge key={technology!.id} variant="outline">
-                    {displayName(technology!.names)}
-                  </Badge>
+                  <Link key={technology.id} href={`/technologies/${slugFor(technology)}`}>
+                    <Badge variant="outline">{displayName(technology.names)}</Badge>
+                  </Link>
                 ))}
               </div>
             ) : (

@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { UnknownState } from "@/components/states";
 import type { Event } from "@/lib/data/types";
@@ -19,7 +20,9 @@ export function Timeline({ events }: { events: Event[] }) {
                 />
                 <div>
                   <p className="text-sm font-medium">
-                    {event.summary ?? event.event_type ?? "Event"}
+                    <Link className="hover:underline" href={`/events/${event.id}`}>
+                      {event.summary ?? event.event_type ?? "Event"}
+                    </Link>
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     {event.date ?? "Date unknown"} · {event.event_type ?? "event"}
