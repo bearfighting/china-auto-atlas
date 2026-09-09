@@ -418,7 +418,7 @@ Checklist:
 - [ ] Choose hosting provider.
 - [ ] Confirm Vercel project and repository connection.
 - [ ] Configure production build command.
-- [ ] Configure pnpm and Python/PyYAML installation.
+- [ ] Configure pnpm and install Python/PyYAML into a build-local virtualenv.
 - [ ] Configure preview deployments.
 - [ ] Configure `NEXT_PUBLIC_SITE_URL` for the production domain; Vercel URL variables and localhost are safe fallbacks.
 - [ ] Configure domain and HTTPS.

@@ -2,6 +2,7 @@ build/
 __pycache__/
 .VSCodeCounter/
 node_modules/
+.venv/
 .next/
 *.tsbuildinfo
 test-results/
