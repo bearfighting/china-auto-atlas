@@ -6,7 +6,7 @@ China Auto Atlas is an evidence-led automotive knowledge platform focused on Chi
 
 Requirements:
 
-- Node.js 22.13+ (Node.js 24 recommended)
+- Node.js 24.x
 - pnpm 11.5.2+
 - Python 3.10+
 - PyYAML from `requirements-dev.txt`
