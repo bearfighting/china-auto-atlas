@@ -420,7 +420,7 @@ Checklist:
 - [ ] Configure production build command.
 - [ ] Configure pnpm and Python/PyYAML installation.
 - [ ] Configure preview deployments.
-- [ ] Configure environment variables if required.
+- [ ] Configure `NEXT_PUBLIC_SITE_URL` for the production domain; Vercel URL variables and localhost are safe fallbacks.
 - [ ] Configure domain and HTTPS.
 - [ ] Configure sitemap and robots URLs.
 - [ ] Add build failure visibility.
