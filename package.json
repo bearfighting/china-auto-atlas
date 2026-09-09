@@ -51,8 +51,8 @@
     "vitest": "^3.0.5"
   },
   "engines": {
-    "node": ">=20.9.0",
-    "pnpm": ">=9"
+    "node": ">=22.13.0",
+    "pnpm": ">=11.5.2"
   },
   "packageManager": "pnpm@11.5.2"
 }
