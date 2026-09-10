@@ -1,7 +1,7 @@
 # China Auto Atlas — Product Line / Vehicle Series 扩展实施设计
 
 **Status:** Proposed  
-**Scope:** 小范围数据模型、索引和应用层扩展  
+**Scope:** 小范围数据模型、索引和 Brand / Manufacturer 上下文展示扩展
 **Date:** 2026-09-10
 
 ## 1. 目标与范围
@@ -184,15 +184,16 @@ Vehicle repository 增加 `getProductLine(vehicleId)` 和 `getSeries(vehicleId)`
 
 页面只消费生成的 index 和 repository，不直接读取 YAML。
 
-建议使用稳定的 entity URL：
+数据层使用稳定的 entity ID，但本扩展不建立 Product Line 或 Vehicle Series 的独立页面、列表入口或 sitemap 条目。它们只作为
+Brand、Manufacturer 和 Vehicle 页面中的上下文层级展示。
+
+建议保留稳定的关联标识：
 
 ```text
-/product-lines/byd-dynasty
-/series/byd-qin-series
 /vehicles/byd-qin-l
 ```
 
-第一阶段先不做 UI；Search、Brand 分组、detail page、breadcrumb 和 sitemap 放在数据模型稳定后实施。
+不新增 `/product-lines/[slug]` 或 `/series/[slug]` 路由。
 
 ## 7. 第一批数据试点
 
@@ -262,14 +263,17 @@ Sea Lion → Sealion 7
 - 生成 search index 不产生重复 ID。
 - 新实体的 Event、News、Source 关系没有孤立记录。
 
-### Batch 4 — UI 与搜索
+### Batch 4 — Brand / Manufacturer 上下文展示
 
 只有 Batch 1–3 稳定后才实施：
 
-- Product Line 和 Series detail page；
-- Brand 分组展示和 All Vehicles；
-- Vehicle breadcrumb；
-- Search labels、filters、routes 和 sitemap。
+- Manufacturer 页面按 Brand、Product Line、Series 分组展示关联 Vehicles；
+- Brand 页面增加 Product Lines / Series 模块，同时保留 All Vehicles；
+- Vehicle breadcrumb 按实际存在的层级显示，例如 `BYD / Dynasty / Qin / Qin L`；
+- 缺少可选层级时自动跳过，不渲染空白或否定性事实。
+
+本批次不新增 Product Line / Series 独立页面、列表页、路由或 sitemap 条目。Search 如果后续支持这些类型，应将结果导向关联
+Brand 页面或 Brand 页面中的定位锚点，而不是独立实体详情页。
 
 ## 9. 验收命令
 
@@ -310,6 +314,7 @@ ZEEKR → Vehicle
 - 所有新增层级关系都有来源；
 - unknown/pending 状态得到保留；
 - Production Line、Platform、Generation、Trim 不混入本模型；
+- Product Line 和 Vehicle Series 只作为 Brand / Manufacturer / Vehicle 上下文展示，不建立独立页面；
 - pipeline、生成索引、repository 和测试通过；
 - 第一批稳定后，再决定是否正式修改 `data-schema.md` 的 canonical schema。
 
