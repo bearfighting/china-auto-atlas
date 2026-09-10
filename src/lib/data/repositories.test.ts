@@ -19,20 +19,21 @@ import type { NewsDocument } from "./types";
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
     expect(loadDataIndex().entities.length).toBeGreaterThan(0);
-    expect(loadContentIndex().documents.length).toBe(13);
+    expect(loadContentIndex().documents.length).toBe(14);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
   });
 
   it("lists news in stable chronological order", () => {
     const news = newsRepository.list();
-    expect(news).toHaveLength(13);
+    expect(news).toHaveLength(14);
     expect(news.map((item) => item.slug)).toEqual([
       "denza-n9-shanghai-presentation",
       "byd-super-e-platform-launch",
       "byd-sealion-7-europe-launch",
       "zeekr-7x-launch",
       "geely-ex5-global-unveil",
+      "xiaomi-su7-launch",
       "yangwang-u9-launch",
       "deepal-s07-debut",
       "byd-song-l-concept-debut",
@@ -56,7 +57,7 @@ describe("generated data repositories", () => {
     expect(newsRepository.listPage()).toMatchObject({
       page: 1,
       pageSize: 10,
-      total: 13,
+      total: 14,
       totalPages: 2,
     });
     expect(newsRepository.listPage({ page: 1, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
@@ -65,21 +66,22 @@ describe("generated data repositories", () => {
     ]);
     expect(newsRepository.listPage({ page: 3, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
       "geely-ex5-global-unveil",
-      "yangwang-u9-launch",
+      "xiaomi-su7-launch",
     ]);
     expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "yangwang-u9-launch",
       "deepal-s07-debut",
-      "byd-song-l-concept-debut",
     ]);
     expect(newsRepository.listPage({ page: 5, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-song-l-concept-debut",
       "avatr-11-global-launch",
-      "chn-platform-launch",
     ]);
     expect(newsRepository.listPage({ page: 6, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "chn-platform-launch",
       "byd-tang-norway-launch",
-      "byd-han-launch",
     ]);
     expect(newsRepository.listPage({ page: 7, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-han-launch",
       "byd-blade-battery-launch",
     ]);
     expect(newsRepository.listPage({ page: 8, pageSize: 2 }).items).toEqual([]);
@@ -145,6 +147,21 @@ describe("generated data repositories", () => {
     expect(sealionSpecification?.variants?.every((variant) => variant.powertrain_type === "bev")).toBe(true);
     expect(sealionSpecification?.variants?.every((variant) => variant.range?.standard === "WLTP")).toBe(true);
     expect(newsRepository.getRelatedEvents("news-2025-05-08-denza-n9-shanghai-presentation")).not.toEqual([]);
+  });
+
+  it("keeps the Xiaomi SU7 seed slice connected across entity, event, news, source and market data", () => {
+    expect(brandRepository.getVehicles("xiaomi-auto").map((vehicle) => vehicle.id)).toContain("xiaomi-su7");
+    expect(vehicleRepository.getBrand("xiaomi-su7")?.id).toBe("xiaomi-auto");
+    expect(vehicleRepository.getRelatedEvents("xiaomi-su7").map((event) => event.id)).toEqual(
+      expect.arrayContaining(["event-xiaomi-su7-prelaunch-2023", "event-xiaomi-su7-launch-2024"]),
+    );
+    expect(vehicleRepository.getRelatedNews("xiaomi-su7").map((article) => article.slug)).toContain("xiaomi-su7-launch");
+    expect(newsRepository.getRelatedSources("news-2024-04-17-xiaomi-su7-launch").map((source) => source.id)).toContain(
+      "src-xiaomi-su7-launch-2024",
+    );
+    expect(vehicleRepository.getMarketSpecifications("xiaomi-su7")[0]?.variants?.every((variant) =>
+      variant.powertrain_type === "bev",
+    )).toBe(true);
   });
 
   it("keeps the cross-slice BYD reverse indexes and D9 timeline navigable", () => {
@@ -248,7 +265,7 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(61);
+    expect(loadSearchIndex()).toHaveLength(62);
     expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({
@@ -261,6 +278,12 @@ describe("generated data repositories", () => {
       id: "geely-ex5",
       kind: "entity",
       href: "/vehicles/geely-ex5",
+    });
+    expect(searchRepository.search("小米 SU7")[0]).toMatchObject({
+      id: "xiaomi-su7",
+      type: "vehicle",
+      kind: "entity",
+      href: "/vehicles/xiaomi-su7",
     });
     expect(searchRepository.search("zeekr-7x-launch")[0]).toMatchObject({
       id: "news-2024-09-20-zeekr-7x-launch",

@@ -7,7 +7,7 @@
 
 ```text
 Validation: passed before and after audit documentation
-Current build: 53 entities, 61 events, 98 sources, 32 relationships, 16 market specifications, 13 News documents
+Current build: 53 entities, 61 events, 98 sources, 32 relationships, 16 market specifications, 14 News documents
 Technology records reviewed: 12
 Platform records reviewed: 4
 ```
@@ -121,7 +121,7 @@ was added for Song L or DENZA N9 without direct source support.
 ## Cross-slice convergence audit
 
 The convergence pass reviewed the current combined dataset: 53 entities, 61 events, 98 sources, 32 relationships, 16 market
-specifications and 13 News documents. The audit used stable-ID references and reverse-index checks; it did not treat every
+specifications and 14 News documents. The audit used stable-ID references and reverse-index checks; it did not treat every
 entity-level event association as a requirement to copy brand or organization milestones onto child vehicles.
 
 Three maintenance-blocking inconsistencies were corrected:
@@ -134,3 +134,20 @@ Three maintenance-blocking inconsistencies were corrected:
 The audit retained unknown technology history where no source establishes a first event date. The DMO and e⁴ records remain
 platform-technologies under the existing model; they were not duplicated as separate Platform records. Market specifications
 remain market- and variant-specific, including the normalized DEEPAL S07 records. No schema change was needed.
+
+## Market specification audit
+
+All 16 existing Market Specification records were reviewed. They use market-specific records with `vehicle_id`, `market`, source
+IDs and variant arrays; no top-level legacy `spec` structure was found. The Xiaomi SU7 China record has three variants, each with
+BEV powertrain type and CNY MSRP values, and is supported by the official Xiaomi launch source.
+
+Several older records still contain variants without an explicit `powertrain_type` (`BYD SEAL EU/JP`, BAO 5, EX5 reference, MG4
+and ZEEKR 7X). These remain audit findings rather than guessed corrections. Their values require a source-specific review before
+being promoted to canonical facts. No market records were merged or overwritten.
+
+## Xiaomi SU7 seed slice
+
+The existing Xiaomi Corporation, Xiaomi Auto and SU7 records were completed as a browsable seed slice by adding one News document
+for the China launch. The News links `xiaomi-su7` and `xiaomi-auto` to the existing launch event and official launch source. The
+existing 2023 reveal event remains separate from the 2024 China launch; no global-market claim or unsupported platform/technology
+relation was added.
