@@ -1,0 +1,22 @@
+schema_version: 1
+id: changan-epa1
+type: platform
+names:
+  en: Changan EPA1
+  zh-CN: 长安 EPA1 平台
+aliases:
+- EPA1
+status: active
+developer_ids:
+- chongqing-changan-automobile
+powertrain_types:
+- bev
+- erev
+technical_scope:
+- electric and extended-range vehicle platform
+vehicle_ids:
+- deepal-l07
+source_ids:
+- src-deepal-l07-reveal-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

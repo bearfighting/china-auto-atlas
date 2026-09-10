@@ -214,7 +214,8 @@ describe("generated data repositories", () => {
       expect.arrayContaining(["event-avatr-12-global-debut-2023", "event-avatr-12-production-2023"]),
     );
     expect(vehicleRepository.getMarketSpecifications("avatr-07")[0]?.variants).toEqual([{ name: "AVATR 07" }]);
-    expect(vehicleRepository.getPlatform("deepal-l07")).toBeNull();
+    expect(vehicleRepository.getPlatform("deepal-l07")?.id).toBe("changan-epa1");
+    expect(technologyRepository.getById("byd-dm-p")?.type).toBe("technology");
   });
 
   it("lists vehicles with stable detail identifiers", () => {
@@ -309,7 +310,7 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(80);
+    expect(loadSearchIndex()).toHaveLength(81);
     expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({

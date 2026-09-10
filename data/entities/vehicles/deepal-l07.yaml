@@ -12,7 +12,9 @@ manufacturer_ids:
 - chongqing-changan-automobile
 segment: mid-size-sedan
 body_style: sedan
-powertrain_types: []
+powertrain_types:
+- bev
+- erev
 status: active
 first_announced_at:
   value: '2024-09-06'
@@ -24,7 +26,7 @@ first_launched_at:
   value: null
   evidence_status: unknown
   note: China launch date remains unconfirmed by the captured primary source.
-platform_id: null
+platform_id: changan-epa1
 technology_ids: []
 market_spec_ids: []
 media_ids: []
@@ -44,4 +46,4 @@ source_ids:
 evidence_status: confirmed
 last_verified_at: '2026-09-10'
 notes:
-- Platform relationship remains unresolved until a primary technical source is captured.
+- EPA1 is recorded as the platform named by the captured Changan product material.

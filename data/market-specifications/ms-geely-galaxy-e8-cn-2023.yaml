@@ -3,7 +3,7 @@ type: market_specification
 id: ms-geely-galaxy-e8-cn-2023
 vehicle_id: geely-galaxy-e8
 market: CN
-valid_from: '2023-12-27'
+valid_from: '2024-01'
 status: available
 currency: CNY
 variants:

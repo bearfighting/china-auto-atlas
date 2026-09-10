@@ -164,7 +164,18 @@ Four market-specific records were added for Qin L, Galaxy E8, AVATR 07 and AVATR
 only source-supported market, availability, powertrain and dimensions are promoted to canonical facts. No unsupported range,
 trim-level price, or test-cycle value was added.
 
-The following remain explicitly deferred: platform identification for DEEPAL L07/S05, historical first-announcement dates for
+The following remain explicitly deferred: platform identification for DEEPAL S05, historical first-announcement dates for
 the existing Geely/Zeekr/AVATR technologies with unknown dates, and exhaustive corporate-role resolution for pending references.
-The current dataset is now at 62 entities, 72 events, 23 News documents, 20 market specifications and 110 sources. Schema
+The current dataset is now at 64 entities, 71 events, 23 News documents, 20 market specifications and 110 sources. Schema
 stabilization is still deferred until these patterns have been reviewed across all three slices.
+
+## Market specification review — 2026-09-10
+
+The focused review covered Qin L, Galaxy E8, AVATR 07, AVATR 12 and the existing DEEPAL S07 market records. Qin L pricing is
+now backed by BYD's official launch page. Galaxy E8's effective date is normalized to January 2024, matching the official sale
+and delivery announcement. AVATR 07 and AVATR 12 remain `reference_only` because the captured product pages do not establish
+the historical China-market effective date or a stable launch trim table. DEEPAL S07 retains separate market records and explicit
+BEV/EREV variants; no markets were merged.
+
+The review also confirms that range values retain their test standard where captured, while missing prices, dates and detailed
+variants remain unknown rather than being copied from current undated pages.
