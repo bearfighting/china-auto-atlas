@@ -22,7 +22,8 @@ technical_scope:
   - 400V and 800V electrical systems
   - multiple motor configurations
 vehicle_ids:
-  - byd-seal
+- byd-seal
+- byd-sealion-7
 source_ids:
   - src-byd-eplatform-3
 evidence_status: confirmed

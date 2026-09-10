@@ -1,0 +1,37 @@
+schema_version: 1
+id: byd-song-l
+type: vehicle
+names:
+  en: BYD SONG L
+  zh-CN: 比亚迪宋L
+aliases:
+- Song L
+- 宋L
+brand_id: byd
+manufacturer_ids:
+- byd-company
+segment: executive-suv
+body_style: suv
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: '2023-04-18'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-song-l-debut-2023
+first_launched_at:
+  value: null
+  evidence_status: unknown
+platform_id: null
+technology_ids: []
+event_ids:
+- event-byd-song-l-concept-debut-2023
+news_ids: []
+source_ids:
+- src-byd-song-l-debut-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- This record currently captures the officially documented concept/model debut; production launch details require a separate primary-source pass.

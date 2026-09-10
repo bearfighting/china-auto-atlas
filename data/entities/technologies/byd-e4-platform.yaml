@@ -34,6 +34,7 @@ brand_ids:
 - yangwang
 vehicle_ids:
 - yangwang-u8
+- yangwang-u9
 first_announced_at:
   value: '2023-01-08'
   precision: day

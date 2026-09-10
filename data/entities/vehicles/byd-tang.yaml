@@ -1,0 +1,35 @@
+schema_version: 1
+id: byd-tang
+type: vehicle
+names:
+  en: BYD TANG
+  zh-CN: 比亚迪唐
+aliases:
+- TANG EV
+- TANG DM-i
+- 唐
+brand_id: byd
+manufacturer_ids:
+- byd-company
+segment: large-suv
+body_style: suv
+powertrain_types:
+- bev
+- phev
+status: active
+first_launched_at:
+  value: '2021'
+  precision: year
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-tang-norway-2021
+platform_id: null
+technology_ids:
+- byd-blade-battery
+event_ids:
+- event-byd-tang-norway-launch-2021
+news_ids: []
+source_ids:
+- src-byd-tang-norway-2021
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

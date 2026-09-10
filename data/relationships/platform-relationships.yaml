@@ -109,3 +109,12 @@ relationships:
   evidence_status: confirmed
   source_ids:
     - src-avatr-chn-launch
+- schema_version: 1
+  type: relationship
+  id: rel-byd-sealion-7-based-on-e-platform-3
+  from_id: byd-sealion-7
+  to_id: byd-e-platform-3
+  relationship: based_on
+  evidence_status: confirmed
+  source_ids:
+    - src-byd-sealion-7-europe-2024

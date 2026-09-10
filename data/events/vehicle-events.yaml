@@ -318,3 +318,99 @@ events:
   source_ids:
   - src-avatr11-production-2022
   evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-sealion-7-unveil-2023
+  type: event
+  date: '2023-11-18'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - byd-sealion-7
+  summary: BYD presented the Sea Lion 07 EV as a new mid-sized pure-electric SUV at Auto Guangzhou 2023.
+  source_ids:
+  - src-byd-sealion-07-guangzhou-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-sealion-7-europe-launch-2024
+  type: event
+  date: '2024-11-15'
+  date_precision: day
+  event_type: market_launch
+  subject_ids:
+  - byd-sealion-7
+  summary: BYD introduced SEALION 7 to the European market.
+  source_ids:
+  - src-byd-sealion-7-europe-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-han-launch-2020
+  type: event
+  date: '2020'
+  date_precision: year
+  event_type: vehicle_launch
+  subject_ids:
+  - byd-han
+  summary: BYD launched the Han series in 2020.
+  source_ids:
+  - src-byd-han-launch-2020
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-tang-norway-launch-2021
+  type: event
+  date: '2021'
+  date_precision: year
+  event_type: market_launch
+  subject_ids:
+  - byd-tang
+  summary: BYD launched the Tang SUV in Norway.
+  source_ids:
+  - src-byd-tang-norway-2021
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-song-l-concept-debut-2023
+  type: event
+  date: '2023-04-18'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - byd-song-l
+  summary: BYD presented the Song L concept car at Auto Shanghai 2023.
+  source_ids:
+  - src-byd-song-l-debut-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-denza-n9-shanghai-2025
+  type: event
+  date: '2025-04'
+  date_precision: month
+  event_type: vehicle_reveal
+  subject_ids:
+  - denza-n9
+  summary: DENZA presented the N9 as a luxury SUV at Auto Shanghai 2025.
+  source_ids:
+  - src-denza-n9-shanghai-2025
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-yangwang-u9-debut-2023
+  type: event
+  date: '2023-01-08'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - yangwang-u9
+  summary: YANGWANG debuted the U9 together with the brand and U8.
+  source_ids:
+  - src-yangwang-u8-brand-unveil-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-yangwang-u9-launch-2024
+  type: event
+  date: '2024-02-25'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - yangwang-u9
+  summary: YANGWANG launched the U9 and announced summer deliveries.
+  source_ids:
+  - src-yangwang-u9-launch-2024
+  evidence_status: confirmed

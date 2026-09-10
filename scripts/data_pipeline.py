@@ -18,7 +18,7 @@ CONTENT_ROOT = ROOT / "content"
 BUILD_ROOT = ROOT / "build"
 PUBLIC_MEDIA_ROOT = ROOT / "public" / "assets"
 REFERENCE_KEYS = {
-    "author_ids", "topic_ids", "entity_ids", "event_ids", "source_ids",
+    "author_ids", "topic_ids", "entity_ids", "event_ids", "source_ids", "news_ids",
     "relationship_ids", "document_ids", "subject_ids", "brand_ids",
     "manufacturer_ids", "organization_ids", "platform_ids", "technology_ids",
     "vehicle_ids", "developer_ids", "supplier_ids", "parent_ids",
@@ -79,6 +79,18 @@ def collect() -> tuple[dict[str, list[dict[str, Any]]], list[tuple[str, str, str
                     walk(child)
 
         walk(document)
+    for path in sorted((CONTENT_ROOT / "news").glob("*.md")):
+        parts = path.read_text(encoding="utf-8").split("---", 2)
+        if len(parts) < 3:
+            continue
+        try:
+            frontmatter = yaml.safe_load(parts[1]) or {}
+        except yaml.YAMLError:
+            continue
+        if isinstance(frontmatter.get("id"), str):
+            record = dict(frontmatter)
+            record["_file"] = str(path.relative_to(ROOT))
+            records[frontmatter["id"]].append(record)
     return records, refs, errors
 
 

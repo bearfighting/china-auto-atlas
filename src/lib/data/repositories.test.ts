@@ -19,17 +19,19 @@ import type { NewsDocument } from "./types";
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
     expect(loadDataIndex().entities.length).toBeGreaterThan(0);
-    expect(loadContentIndex().documents.length).toBe(5);
+    expect(loadContentIndex().documents.length).toBe(7);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
   });
 
   it("lists news in stable chronological order", () => {
     const news = newsRepository.list();
-    expect(news).toHaveLength(5);
+    expect(news).toHaveLength(7);
     expect(news.map((item) => item.slug)).toEqual([
+      "byd-super-e-platform-launch",
       "zeekr-7x-launch",
       "geely-ex5-global-unveil",
+      "yangwang-u9-launch",
       "avatr-11-global-launch",
       "chn-platform-launch",
       "byd-blade-battery-launch",
@@ -48,17 +50,21 @@ describe("generated data repositories", () => {
     expect(newsRepository.listPage()).toMatchObject({
       page: 1,
       pageSize: 10,
-      total: 5,
+      total: 7,
       totalPages: 1,
     });
     expect(newsRepository.listPage({ page: 1, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-super-e-platform-launch",
       "zeekr-7x-launch",
-      "geely-ex5-global-unveil",
     ]);
     expect(newsRepository.listPage({ page: 3, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "avatr-11-global-launch",
+      "chn-platform-launch",
+    ]);
+    expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
       "byd-blade-battery-launch",
     ]);
-    expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items).toEqual([]);
+    expect(newsRepository.listPage({ page: 5, pageSize: 2 }).items).toEqual([]);
     expect(newsRepository.listPage({ page: 0, pageSize: 0 })).toMatchObject({ page: 1, pageSize: 10 });
   });
 
@@ -70,7 +76,7 @@ describe("generated data repositories", () => {
 
   it("lists vehicles with stable detail identifiers", () => {
     const vehicles = vehicleRepository.list();
-    expect(vehicles).toHaveLength(10);
+    expect(vehicles).toHaveLength(16);
     expect(vehicles.map((vehicle) => vehicle.id)).toContain("zeekr-7x");
     expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");
   });
@@ -99,7 +105,7 @@ describe("generated data repositories", () => {
   });
 
   it("lists events and resolves event relationships", () => {
-    expect(eventRepository.list().length).toBe(51);
+    expect(eventRepository.list().length).toBe(61);
     const event = eventRepository.getById("event-zeekr-7x-china-launch-2024");
     expect(eventRepository.getRelatedEntities(event!.id).map((entity) => entity.id)).toContain("zeekr-7x");
     expect(eventRepository.getRelatedNews(event!.id).map((article) => article.slug)).toContain("zeekr-7x-launch");
@@ -160,7 +166,7 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(45);
+    expect(loadSearchIndex()).toHaveLength(55);
     expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({

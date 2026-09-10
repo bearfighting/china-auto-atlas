@@ -27,7 +27,12 @@ market_status: unknown
 seed_market_notes:
 - Global brand; market-by-market operating status should be added as structured market records rather than inferred
   from a global website.
-vehicle_ids: []
+vehicle_ids:
+- byd-seal
+- byd-sealion-7
+- byd-han
+- byd-tang
+- byd-song-l
 seed_vehicle_names:
 - SEAL
 - DOLPHIN

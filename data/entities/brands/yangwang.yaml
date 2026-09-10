@@ -25,7 +25,9 @@ relationship_ids:
 - rel-byd-company-yangwang-operates
 market_codes:
 - CN
-vehicle_ids: []
+vehicle_ids:
+- yangwang-u8
+- yangwang-u9
 seed_vehicle_names:
 - U8
 - U9

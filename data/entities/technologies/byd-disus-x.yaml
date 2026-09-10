@@ -1,0 +1,47 @@
+schema_version: 1
+id: byd-disus-x
+type: technology
+entity_role: platform-technology
+names:
+  en: DiSus-X Intelligent Body Control System
+  zh-CN: 云辇-X智能车身控制系统
+category: chassis
+description:
+  en: High-performance branch of BYD's DiSus body-control system, first deployed on the YANGWANG U9 with independently controlled active body motion.
+  zh-CN: 比亚迪云辇智能车身控制系统的高性能分支，首次应用于仰望U9，通过主动控制车身运动服务于高性能驾驶。
+problem_solved:
+- Control body motion during high-performance driving
+- Provide adjustable suspension movement and rapid body response
+technical_features:
+- Active body-control system
+- First deployment on YANGWANG U9
+advantages:
+- Can provide rapid body-motion control in demanding driving conditions
+limitations:
+- The published performance figures are manufacturer claims and depend on vehicle calibration and operating conditions
+- Adds system complexity compared with passive suspension
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- yangwang
+vehicle_ids:
+- yangwang-u9
+first_announced_at:
+  value: '2023-04-10'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-disus-launch-2023
+event_ids:
+- event-disus-x-launch-2023
+source_ids:
+- src-byd-disus-x-u9-2024
+- src-byd-disus-launch-2023
+claim_assessment:
+  manufacturer_claims:
+  - U9 suspension travel and lifting-speed figures
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

@@ -32,6 +32,7 @@ brand_ids:
 - byd
 vehicle_ids:
 - byd-seal
+- byd-sealion-7
 first_announced_at:
   value: null
   evidence_status: unknown

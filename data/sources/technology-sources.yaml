@@ -144,3 +144,28 @@ sources:
   source_level: primary
   accessed_at: '2026-09-08'
   evidence_status: confirmed
+- id: src-byd-disus-x-u9-2024
+  type: source
+  publisher: BYD
+  title: YANGWANG Launched the U9, Priced at 1.68 Million RMB
+  url: https://www.byd.com/us/news-list/YANGWANG-Launched-the-U9-Priced-at-1-68-Million-RMB
+  published_at: '2024-02-25'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - YANGWANG U9 is the first deployment of BYD DiSus-X.
+  evidence_status: confirmed
+- id: src-byd-super-e-platform-2025
+  type: source
+  publisher: BYD
+  title: BYD Unveils Super e-Platform with Megawatt Flash Charging for Electric Vehicles
+  url: https://www.byd.com/us/news-list/BYD-Unveils-Super-e-Platform-Megawatt-Flash-Charging-Electric-Vehicles-Matching-Refueling-Speeds
+  published_at: '2025-03-17'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD launched the Super e-Platform in March 2025.
+  - Han L and Tang L were announced as its first applications.
+  evidence_status: confirmed

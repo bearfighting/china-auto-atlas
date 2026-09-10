@@ -27,7 +27,9 @@ market_codes:
 seed_market_notes:
 - Official global launch occurred in Paris in April 2026; BYD said DENZA would be available in more than 30 European
   countries by end-2026. Individual country availability should be verified separately.
-vehicle_ids: []
+vehicle_ids:
+- denza-d9
+- denza-n9
 seed_vehicle_names:
 - D9
 - N7

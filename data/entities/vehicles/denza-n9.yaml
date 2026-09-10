@@ -1,0 +1,37 @@
+schema_version: 1
+id: denza-n9
+type: vehicle
+names:
+  en: DENZA N9
+  zh-CN: 腾势N9
+aliases:
+- N9
+- 腾势 N9
+brand_id: denza
+manufacturer_ids:
+- byd-company
+segment: large-suv
+body_style: suv
+powertrain_types:
+- phev
+status: active
+first_announced_at:
+  value: '2025-04'
+  precision: month
+  evidence_status: confirmed
+  source_ids:
+  - src-denza-n9-shanghai-2025
+first_launched_at:
+  value: null
+  evidence_status: unknown
+platform_id: null
+technology_ids: []
+event_ids:
+- event-denza-n9-shanghai-2025
+news_ids: []
+source_ids:
+- src-denza-n9-shanghai-2025
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- The current source establishes the model presentation and technology context, but not a canonical launch date or complete market specification.

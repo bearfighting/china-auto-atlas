@@ -39,6 +39,11 @@ brand_ids:
 vehicle_ids:
 - byd-seal
 - yangwang-u8
+- byd-sealion-7
+- byd-han
+- byd-tang
+- byd-song-l
+- yangwang-u9
 first_announced_at:
   value: '2020-03-29'
   precision: day

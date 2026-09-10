@@ -282,3 +282,89 @@ sources:
   source_level: primary
   accessed_at: '2026-09-08'
   evidence_status: confirmed
+- id: src-byd-sealion-7-europe-2024
+  type: source
+  publisher: BYD
+  title: BYD introduces sporty BYD SEALION 7 to European market
+  url: https://www.byd.com/eu/news-list/byd-introduces-sporty-byd-sealion-7-to-european-market
+  published_at: '2024-11-15'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD SEALION 7 was introduced to the European market in November 2024.
+  - The model uses BYD Blade Battery and e-Platform 3.0.
+  evidence_status: confirmed
+- id: src-byd-han-launch-2020
+  type: source
+  publisher: BYD
+  title: BYD's Flagship Han EV Series Officially Goes on Sale
+  url: https://en.byd.com/news/byds-flagship-han-ev-series-officially-goes-on-sale/
+  published_at: '2020-07-14'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD Han was launched in 2020.
+  - The Han EV was presented with Blade Battery technology.
+  evidence_status: confirmed
+- id: src-byd-tang-norway-2021
+  type: source
+  publisher: BYD
+  title: BYD launches Tang SUV in Norway
+  url: https://en.byd.com/news/byd-launches-tang-suv-in-norway/
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD Tang launched in Norway in 2021.
+  evidence_status: confirmed
+- id: src-byd-song-l-debut-2023
+  type: source
+  publisher: BYD
+  title: BYD Presents Several New Models at Auto Shanghai 2023
+  url: https://www.byd.com/sc/news-list/BYD-Presents-Several-New-Models-at-Auto-Shanghai-2023
+  published_at: '2023-04-18'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD Song L concept car made its global debut at Auto Shanghai 2023.
+  evidence_status: confirmed
+- id: src-byd-sealion-07-guangzhou-2023
+  type: source
+  publisher: BYD
+  title: BYD Showcases Its Full Lineup of New Energy Vehicles at the 21st Guangzhou International Automobile Exhibition
+  url: https://prod.byd.com/us/news-list/BYD-Showcases-Full-Lineup-New-Energy-Vehicles-21st-Guangzhou-International-Automobile-Exhibition.html
+  published_at: '2023-11-18'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD unveiled the Sea Lion 07 EV at the 21st Guangzhou International Automobile Exhibition.
+  evidence_status: confirmed
+- id: src-denza-n9-shanghai-2025
+  type: source
+  publisher: BYD / DENZA
+  title: BYD luxury brands at Auto Shanghai 2025
+  url: https://www.byd.com/br/noticias-byd-brasil/marcas-de-luxo-da-byd-marcam-presenca-no-salao-do-automovel-de-x
+  published_at: '2025-05-08'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - DENZA N9 was presented as a DENZA luxury SUV at Auto Shanghai 2025.
+  evidence_status: confirmed
+- id: src-yangwang-u9-launch-2024
+  type: source
+  publisher: BYD
+  title: YANGWANG Launched the U9, Priced at 1.68 Million RMB
+  url: https://www.byd.com/us/news-list/YANGWANG-Launched-the-U9-Priced-at-1-68-Million-RMB
+  published_at: '2024-02-25'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - YANGWANG launched the U9 in February 2024.
+  - The U9 uses the e4 platform and DiSus-X body-control system.
+  evidence_status: confirmed

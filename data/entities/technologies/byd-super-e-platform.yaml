@@ -1,0 +1,56 @@
+schema_version: 1
+id: byd-super-e-platform
+type: technology
+entity_role: platform-technology
+names:
+  en: BYD Super e-Platform
+  zh-CN: 比亚迪超级e平台
+aliases:
+- Super e-Platform
+- 超级e平台
+category: electrical-architecture
+secondary_categories:
+- charging
+- powertrain
+description:
+  en: BYD passenger-vehicle architecture introduced with a full-domain 1000V electrical system, flash-charging battery and high-speed electric drive.
+  zh-CN: 比亚迪面向乘用车推出的全域1000V高压架构，结合闪充电池和高转速电驱。
+problem_solved:
+- Reduce charging time for compatible vehicles and infrastructure
+- Integrate high-voltage battery, drive, power electronics and thermal systems
+technical_features:
+- Full-domain 1000V architecture
+- 1000 kW peak charging-power claim
+- 30000 rpm motor claim
+- First applications announced as Han L and Tang L
+advantages:
+- Enables higher charging-power headroom when battery, charger and thermal conditions support it
+limitations:
+- Peak charging power is not the same as a complete charging curve
+- Real-world results depend on vehicle state, temperature and charger compatibility
+- Manufacturer performance claims are not independently established in this seed
+developer_ids:
+- byd-company
+supplier_ids: []
+brand_ids:
+- byd
+vehicle_ids: []
+news_ids:
+- news-2025-03-17-byd-super-e-platform-launch
+first_announced_at:
+  value: '2025-03-17'
+  precision: day
+  evidence_status: confirmed
+event_ids:
+- event-byd-super-e-platform-launch-2025
+source_ids:
+- src-byd-super-e-platform-2025
+claim_assessment:
+  manufacturer_claims:
+  - 1000 kW charging power and 400 km added in five minutes
+  independent_verification:
+    status: not_established
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- Han L and Tang L are named as first applications in the launch source, but they are not yet represented as Vehicle entities in this seed.

@@ -1,0 +1,44 @@
+schema_version: 1
+id: yangwang-u9
+type: vehicle
+names:
+  en: YANGWANG U9
+  zh-CN: 仰望U9
+aliases:
+- U9
+- 仰望 U9
+brand_id: yangwang
+manufacturer_ids:
+- byd-company
+segment: supercar
+body_style: coupe
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: '2023-01-08'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-yangwang-u8-brand-unveil-2023
+first_launched_at:
+  value: '2024-02-25'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-yangwang-u9-launch-2024
+platform_id: byd-e4-platform
+technology_ids:
+- byd-e4-platform
+- byd-disus-x
+- byd-blade-battery
+event_ids:
+- event-yangwang-u9-debut-2023
+- event-yangwang-u9-launch-2024
+news_ids:
+- news-2024-02-25-yangwang-u9-launch
+source_ids:
+- src-yangwang-u8-brand-unveil-2023
+- src-yangwang-u9-launch-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

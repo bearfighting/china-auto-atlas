@@ -68,7 +68,7 @@ events:
   type: event
   evidence_status: confirmed
   id: event-e4-yangwang-unveil-2023
-  date: '2023-01-08'
+  date: '2023-04-10'
   event_type: technology_launch
   subject_ids:
   - byd-e4-platform
@@ -110,3 +110,28 @@ events:
   summary: Global EX5 unveiling highlighted Short Blade Battery and 11-in-1 electric drive.
   source_ids:
   - src-geely-ex5-tech
+- schema_version: 1
+  id: event-disus-x-launch-2023
+  type: event
+  evidence_status: confirmed
+  date: '2023-04-10'
+  date_precision: day
+  event_type: technology_launch
+  subject_ids:
+  - byd-disus-x
+  - yangwang-u9
+  summary: BYD launched the DiSus Intelligent Body Control System and demonstrated DiSus-X on the YANGWANG U9.
+  source_ids:
+  - src-byd-disus-launch-2023
+- schema_version: 1
+  id: event-byd-super-e-platform-launch-2025
+  type: event
+  evidence_status: confirmed
+  date: '2025-03-17'
+  date_precision: day
+  event_type: technology_launch
+  subject_ids:
+  - byd-super-e-platform
+  summary: BYD launched the Super e-Platform and announced Han L and Tang L as its first applications.
+  source_ids:
+  - src-byd-super-e-platform-2025

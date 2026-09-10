@@ -1,0 +1,36 @@
+schema_version: 1
+id: byd-han
+type: vehicle
+names:
+  en: BYD HAN
+  zh-CN: 比亚迪汉
+aliases:
+- HAN EV
+- HAN DM
+- 汉EV
+- 汉DM
+brand_id: byd
+manufacturer_ids:
+- byd-company
+segment: executive-sedan
+body_style: sedan
+powertrain_types:
+- bev
+- phev
+status: active
+first_launched_at:
+  value: '2020'
+  precision: year
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-han-launch-2020
+platform_id: null
+technology_ids:
+- byd-blade-battery
+event_ids:
+- event-byd-han-launch-2020
+news_ids: []
+source_ids:
+- src-byd-han-launch-2020
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

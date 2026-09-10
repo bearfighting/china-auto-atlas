@@ -1,0 +1,44 @@
+schema_version: 1
+id: byd-sealion-7
+type: vehicle
+names:
+  en: BYD SEALION 7
+  zh-CN: 比亚迪海狮07
+aliases:
+- SEALION 7
+- 海狮07
+brand_id: byd
+manufacturer_ids:
+- byd-company
+segment: executive-suv
+body_style: suv
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: '2023-11-18'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-sealion-07-guangzhou-2023
+first_launched_at:
+  value: '2024-11-15'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-sealion-7-europe-2024
+platform_id: byd-e-platform-3
+technology_ids:
+- byd-blade-battery
+- byd-ctb
+event_ids:
+- event-byd-sealion-7-unveil-2023
+- event-byd-sealion-7-europe-launch-2024
+news_ids: []
+source_ids:
+- src-byd-sealion-7-europe-2024
+- src-byd-sealion-07-guangzhou-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- The November 2023 source describes the China model as Sea Lion 07 EV; the November 2024 source uses the European name SEALION 7.
