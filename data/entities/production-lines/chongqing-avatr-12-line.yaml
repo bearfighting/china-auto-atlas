@@ -1,0 +1,14 @@
+schema_version: 1
+id: chongqing-avatr-12-line
+type: production_line
+names:
+  en: AVATR 12 production line
+  zh-CN: 阿维塔12生产线
+factory_id: chongqing-plant
+status: active
+vehicle_ids:
+- avatr-12
+source_ids:
+- src-avatr-12-production-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

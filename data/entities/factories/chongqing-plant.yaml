@@ -1,0 +1,17 @@
+schema_version: 1
+id: chongqing-plant
+type: factory
+names:
+  en: Chongqing plant
+  zh-CN: 重庆工厂
+aliases:
+- Chongqing production plant
+location:
+  country: CN
+  region: Chongqing
+  city: Chongqing
+status: active
+source_ids:
+- src-avatr-12-production-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

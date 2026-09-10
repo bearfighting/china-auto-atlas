@@ -10,8 +10,10 @@ import { Timeline } from "@/components/timeline";
 import { UnknownState } from "@/components/states";
 import { VehicleCard } from "@/components/vehicle-card";
 import { PageContainer } from "@/components/page-container";
+import { ProductHierarchy } from "@/components/product-hierarchy";
+import { ProductionContext } from "@/components/production-context";
 import { displayName, slugFor } from "@/lib/data/resolvers";
-import { manufacturerRepository } from "@/lib/data/repositories";
+import { brandRepository, manufacturerRepository } from "@/lib/data/repositories";
 
 export const dynamicParams = false;
 
@@ -45,6 +47,10 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
   if (!manufacturer) notFound();
   const vehicles = manufacturerRepository.getVehicles(manufacturer.id);
   const brands = manufacturerRepository.getBrands(manufacturer.id);
+  const factories = manufacturerRepository.getFactories(manufacturer.id);
+  const productionLines = manufacturerRepository.getProductionLines(manufacturer.id);
+  const productLines = brands.flatMap((brand) => brandRepository.getProductLines(brand.id));
+  const series = brands.flatMap((brand) => brandRepository.getSeries(brand.id));
   return (
     <PageContainer>
       <div className="space-y-10">
@@ -86,20 +92,35 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
             <UnknownState label="No brands connected to this manufacturer" />
           )}
         </section>
-        <section className="space-y-4" aria-labelledby="manufacturer-vehicles">
-          <h2 id="manufacturer-vehicles" className="text-2xl font-semibold">
-            Vehicles
-          </h2>
-          {vehicles.length ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {vehicles.map((vehicle) => (
-                <VehicleCard key={vehicle.id} vehicle={vehicle} />
-              ))}
-            </div>
-          ) : (
-            <UnknownState label="No vehicles connected to this manufacturer" />
-          )}
-        </section>
+        {!productLines.length && !series.length ? (
+          <section className="space-y-4" aria-labelledby="manufacturer-vehicles">
+            <h2 id="manufacturer-vehicles" className="text-2xl font-semibold">
+              Vehicles
+            </h2>
+            {vehicles.length ? (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {vehicles.map((vehicle) => (
+                  <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                ))}
+              </div>
+            ) : (
+              <UnknownState label="No vehicles connected to this manufacturer" />
+            )}
+          </section>
+        ) : null}
+        {productLines.length || series.length ? (
+          <section className="space-y-4" aria-labelledby="manufacturer-product-hierarchy">
+            <h2 id="manufacturer-product-hierarchy" className="text-2xl font-semibold">
+              Product lines and vehicle series
+            </h2>
+            <ProductHierarchy productLines={productLines} series={series} vehicles={vehicles} />
+          </section>
+        ) : null}
+        <ProductionContext
+          factories={factories}
+          productionLines={productionLines}
+          vehicles={vehicles}
+        />
         <section className="space-y-4" aria-labelledby="manufacturer-events">
           <h2 id="manufacturer-events" className="text-2xl font-semibold">
             Related events

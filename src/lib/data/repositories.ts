@@ -14,6 +14,7 @@ import type {
   Brand,
   Entity,
   Event,
+  Factory,
   Manufacturer,
   Media,
   NewsDocument,
@@ -21,6 +22,7 @@ import type {
   Organization,
   ProductLine,
   Platform,
+  ProductionLine,
   SearchResult,
   SearchOptions,
   SearchType,
@@ -166,6 +168,12 @@ export const vehicleRepository = {
   getSeries(id: string): VehicleSeries | null {
     return entityOfType<VehicleSeries>(this.getById(id)?.series_id, "vehicle_series");
   },
+  getFactories(id: string): Factory[] {
+    return factoryRepository.list().filter((factory) => productionLineRepository.getVehiclesByFactory(factory.id).some((vehicle) => vehicle.id === id));
+  },
+  getProductionLines(id: string): ProductionLine[] {
+    return productionLineRepository.list().filter((line) => line.vehicle_ids?.includes(id));
+  },
   getManufacturers(id: string): Manufacturer[] {
     return (this.getById(id)?.manufacturer_ids ?? [])
       .map((manufacturerId) => entityOfType<Manufacturer>(manufacturerId, "manufacturer"))
@@ -213,6 +221,12 @@ export const brandRepository = {
   getSeries(id: string): VehicleSeries[] {
     return entitiesByType<VehicleSeries>(loadDataIndex(), "vehicle_series").filter((vehicleSeries) => vehicleSeries.brand_id === id);
   },
+  getFactories(id: string): Factory[] {
+    const vehicleIds = new Set(this.getVehicles(id).map((vehicle) => vehicle.id));
+    return factoryRepository.list().filter((factory) =>
+      productionLineRepository.getVehiclesByFactory(factory.id).some((vehicle) => vehicleIds.has(vehicle.id)),
+    );
+  },
 };
 
 export const productLineRepository = {
@@ -254,6 +268,49 @@ export const vehicleSeriesRepository = {
   },
 };
 
+export const factoryRepository = {
+  list(): Factory[] {
+    return entitiesByType<Factory>(loadDataIndex(), "factory");
+  },
+  getById(id: string): Factory | null {
+    return this.list().find((factory) => factory.id === id) ?? null;
+  },
+  getBySlug(slug: string): Factory | null {
+    return findBySlug(this.list(), slug);
+  },
+  getProductionLines(factoryId: string): ProductionLine[] {
+    return productionLineRepository.list().filter((line) => line.factory_id === factoryId);
+  },
+  getVehicles(factoryId: string): Vehicle[] {
+    return this.getProductionLines(factoryId).flatMap((line) => line.vehicle_ids ?? [])
+      .map((vehicleId) => vehicleRepository.getById(vehicleId))
+      .filter((vehicle): vehicle is Vehicle => Boolean(vehicle));
+  },
+};
+
+export const productionLineRepository = {
+  list(): ProductionLine[] {
+    return entitiesByType<ProductionLine>(loadDataIndex(), "production_line");
+  },
+  getById(id: string): ProductionLine | null {
+    return this.list().find((line) => line.id === id) ?? null;
+  },
+  getBySlug(slug: string): ProductionLine | null {
+    return findBySlug(this.list(), slug);
+  },
+  getByFactory(factoryId: string): ProductionLine[] {
+    return this.list().filter((line) => line.factory_id === factoryId);
+  },
+  getVehicles(lineId: string): Vehicle[] {
+    return (this.getById(lineId)?.vehicle_ids ?? [])
+      .map((vehicleId) => vehicleRepository.getById(vehicleId))
+      .filter((vehicle): vehicle is Vehicle => Boolean(vehicle));
+  },
+  getVehiclesByFactory(factoryId: string): Vehicle[] {
+    return this.getByFactory(factoryId).flatMap((line) => this.getVehicles(line.id));
+  },
+};
+
 export const manufacturerRepository = {
   ...relatedEntityRepository<Manufacturer>("manufacturer"),
   getVehicles(id: string): Vehicle[] {
@@ -262,6 +319,16 @@ export const manufacturerRepository = {
   getBrands(id: string): Brand[] {
     const brandIds = new Set(this.getVehicles(id).map((vehicle) => vehicle.brand_id).filter(Boolean));
     return entitiesByType<Brand>(loadDataIndex(), "brand").filter((brand) => brandIds.has(brand.id));
+  },
+  getFactories(id: string): Factory[] {
+    const vehicleIds = new Set(this.getVehicles(id).map((vehicle) => vehicle.id));
+    return factoryRepository.list().filter((factory) =>
+      productionLineRepository.getVehiclesByFactory(factory.id).some((vehicle) => vehicleIds.has(vehicle.id)),
+    );
+  },
+  getProductionLines(id: string): ProductionLine[] {
+    const vehicleIds = new Set(this.getVehicles(id).map((vehicle) => vehicle.id));
+    return productionLineRepository.list().filter((line) => (line.vehicle_ids ?? []).some((vehicleId) => vehicleIds.has(vehicleId)));
   },
 };
 

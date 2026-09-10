@@ -9,8 +9,10 @@ import { Timeline } from "@/components/timeline";
 import { UnknownState } from "@/components/states";
 import { VehicleCard } from "@/components/vehicle-card";
 import { PageContainer } from "@/components/page-container";
+import { ProductHierarchy } from "@/components/product-hierarchy";
+import { ProductionContext } from "@/components/production-context";
 import { displayName, slugFor } from "@/lib/data/resolvers";
-import { brandRepository } from "@/lib/data/repositories";
+import { brandRepository, productionLineRepository } from "@/lib/data/repositories";
 
 export const dynamicParams = false;
 
@@ -43,13 +45,19 @@ export default async function BrandPage({ params }: { params: Promise<{ slug: st
   const brand = brandRepository.getBySlug(slug);
   if (!brand) notFound();
   const vehicles = brandRepository.getVehicles(brand.id);
+  const productLines = brandRepository.getProductLines(brand.id);
+  const series = brandRepository.getSeries(brand.id);
+  const factories = brandRepository.getFactories(brand.id);
+  const productionLines = factories.flatMap((factory) =>
+    productionLineRepository.getByFactory(factory.id),
+  );
   return (
     <PageContainer>
       <div className="space-y-10">
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
-            { label: "Brand" },
+            { label: "Brand", href: "/brands" },
             { label: displayName(brand.names) },
           ]}
         />
@@ -63,20 +71,39 @@ export default async function BrandPage({ params }: { params: Promise<{ slug: st
           />
           <EntityFact label="Market codes" value={brand.market_codes} />
         </EntityFacts>
-        <section className="space-y-4" aria-labelledby="brand-vehicles">
-          <h2 id="brand-vehicles" className="text-2xl font-semibold">
-            Vehicles
-          </h2>
-          {vehicles.length ? (
+        {productLines.length || series.length ? (
+          <section className="space-y-4" aria-labelledby="brand-product-hierarchy">
+            <div>
+              <h2 id="brand-product-hierarchy" className="text-2xl font-semibold">
+                Product lines and vehicle series
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Optional product organization is shown when supported by sources.
+              </p>
+            </div>
+            <ProductHierarchy productLines={productLines} series={series} vehicles={vehicles} />
+          </section>
+        ) : vehicles.length ? (
+          <section className="space-y-4" aria-labelledby="brand-vehicles">
+            <h2 id="brand-vehicles" className="text-2xl font-semibold">
+              Vehicles
+            </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {vehicles.map((vehicle) => (
                 <VehicleCard key={vehicle.id} vehicle={vehicle} />
               ))}
             </div>
-          ) : (
-            <UnknownState label="No vehicles connected to this brand" />
-          )}
-        </section>
+          </section>
+        ) : (
+          <UnknownState label="No vehicles connected to this brand" />
+        )}
+        {factories.length ? (
+          <ProductionContext
+            factories={factories}
+            productionLines={productionLines}
+            vehicles={vehicles}
+          />
+        ) : null}
         <section className="space-y-4" aria-labelledby="brand-events">
           <h2 id="brand-events" className="text-2xl font-semibold">
             Related events

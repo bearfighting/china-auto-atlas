@@ -20,10 +20,10 @@ PUBLIC_MEDIA_ROOT = ROOT / "public" / "assets"
 REFERENCE_KEYS = {
     "author_ids", "topic_ids", "entity_ids", "event_ids", "source_ids", "news_ids",
     "relationship_ids", "document_ids", "subject_ids", "brand_ids",
-    "manufacturer_ids", "organization_ids", "platform_ids", "technology_ids",
+    "manufacturer_ids", "organization_ids", "operator_ids", "owner_ids", "platform_ids", "technology_ids",
     "vehicle_ids", "developer_ids", "supplier_ids", "parent_ids",
     "media_ids",
-    "from_id", "to_id", "entity_id", "brand_id", "manufacturer_id", "organization_id",
+    "from_id", "to_id", "entity_id", "brand_id", "manufacturer_id", "organization_id", "factory_id",
     "platform_id", "market_spec_ids", "technology_id", "vehicle_id",
     "announcement_event_id", "preorder_event_id", "launch_event_id",
     "production_start_event_id", "delivery_start_event_id", "market_entry_event_ids",
@@ -255,6 +255,45 @@ def validate_product_hierarchy(records: dict[str, list[dict[str, Any]]]) -> list
     return errors
 
 
+def validate_factory_hierarchy(records: dict[str, list[dict[str, Any]]]) -> list[str]:
+    """Validate optional Factory / Production Line references and applications."""
+    errors: list[str] = []
+    entities = {record["id"]: record for values in records.values() for record in values}
+    factories = {record["id"]: record for record in entities.values() if record.get("type") == "factory"}
+    lines = {record["id"]: record for record in entities.values() if record.get("type") == "production_line"}
+    vehicles = {record["id"]: record for record in entities.values() if record.get("type") == "vehicle"}
+    technologies = {record["id"]: record for record in entities.values() if record.get("type") == "technology"}
+    organizations = {record["id"]: record for record in entities.values() if record.get("type") in {"organization", "manufacturer", "supplier"}}
+
+    for factory_id, factory in factories.items():
+        for field in ("operator_ids", "owner_ids"):
+            for organization_id in factory.get(field) or []:
+                if organization_id not in organizations:
+                    errors.append(f"{factory['_file']}: {factory_id} {field} must reference an organization")
+
+    for line_id, line in lines.items():
+        factory_id = line.get("factory_id")
+        if not isinstance(factory_id, str) or factory_id not in factories:
+            errors.append(f"{line['_file']}: {line_id} factory_id must reference a factory")
+        for vehicle_id in line.get("vehicle_ids") or []:
+            if vehicle_id not in vehicles:
+                errors.append(f"{line['_file']}: {line_id} vehicle_ids must reference a vehicle")
+        for technology_id in line.get("technology_ids") or []:
+            if technology_id not in technologies:
+                errors.append(f"{line['_file']}: {line_id} technology_ids must reference a technology")
+        capacity = line.get("reported_capacity")
+        if capacity is not None and not isinstance(capacity, dict):
+            errors.append(f"{line['_file']}: {line_id} reported_capacity must be an object")
+        elif isinstance(capacity, dict):
+            if "value" not in capacity or "unit" not in capacity:
+                errors.append(f"{line['_file']}: {line_id} reported_capacity requires value and unit")
+            for source_id in capacity.get("source_ids") or []:
+                if source_id not in entities or entities[source_id].get("type") != "source":
+                    errors.append(f"{line['_file']}: {line_id} reported_capacity source_ids must reference a source")
+
+    return errors
+
+
 def validate() -> int:
     records, refs, errors = collect()
     duplicate_ids = {key: values for key, values in records.items() if len(values) > 1}
@@ -283,6 +322,7 @@ def validate() -> int:
     errors.extend(f"{path}: missing {key} reference {target}" for path, key, target in missing)
     errors.extend(validate_relationship_indexes(records))
     errors.extend(validate_product_hierarchy(records))
+    errors.extend(validate_factory_hierarchy(records))
 
     media_path = DATA_ROOT / "media" / "media-items.yaml"
     if media_path.exists():
@@ -318,7 +358,7 @@ def build() -> int:
     flat = [record for values in records.values() for record in values]
     index = {
         "schema_version": 1,
-        "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "platform", "technology", "vehicle", "product_line", "vehicle_series"}), key=lambda r: r["id"]),
+        "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "platform", "technology", "vehicle", "product_line", "vehicle_series", "factory", "production_line"}), key=lambda r: r["id"]),
         "market_specifications": sorted((r for r in flat if r.get("type") == "market_specification"), key=lambda r: r["id"]),
         "relationships": sorted((r for r in flat if r.get("type") == "relationship"), key=lambda r: r["id"]),
         "events": sorted((r for r in flat if r.get("type") == "event"), key=lambda r: r["id"]),

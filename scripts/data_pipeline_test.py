@@ -1,6 +1,6 @@
 import unittest
 
-from data_pipeline import validate_product_hierarchy, validate_relationship_indexes
+from data_pipeline import validate_factory_hierarchy, validate_product_hierarchy, validate_relationship_indexes
 
 
 def record(record_id, record_type, **fields):
@@ -87,6 +87,25 @@ class ProductHierarchyValidationTests(unittest.TestCase):
         }
         errors = validate_product_hierarchy(records)
         self.assertTrue(any("does not match series_id" in error for error in errors))
+
+    def test_accepts_sourced_factory_and_production_line_hierarchy(self):
+        records = {
+            "factory": [record("factory", "factory")],
+            "line": [record("line", "production_line", factory_id="factory", vehicle_ids=["vehicle"], technology_ids=["technology"])],
+            "vehicle": [record("vehicle", "vehicle")],
+            "technology": [record("technology", "technology")],
+        }
+        self.assertEqual(validate_factory_hierarchy(records), [])
+
+    def test_reports_invalid_factory_and_production_line_references(self):
+        records = {
+            "factory": [record("factory", "factory", operator_ids=["missing-org"])],
+            "line": [record("line", "production_line", factory_id="missing-factory", vehicle_ids=["missing-vehicle"])],
+        }
+        errors = validate_factory_hierarchy(records)
+        self.assertTrue(any("operator_ids" in error for error in errors))
+        self.assertTrue(any("factory_id" in error for error in errors))
+        self.assertTrue(any("vehicle_ids" in error for error in errors))
 
     def test_reports_missing_hierarchy_references(self):
         records = {

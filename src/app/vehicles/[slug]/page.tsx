@@ -5,6 +5,7 @@ import { PageContainer } from "@/components/page-container";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { EntityHeader } from "@/components/entity-header";
 import { MediaGallery } from "@/components/media-gallery";
+import { ProductionContext } from "@/components/production-context";
 import { SourceList } from "@/components/source-list";
 import { SpecificationTable } from "@/components/specification-table";
 import { Timeline } from "@/components/timeline";
@@ -46,12 +47,16 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
   const vehicle = vehicleRepository.getBySlug(slug);
   if (!vehicle) notFound();
   const brand = vehicleRepository.getBrand(vehicle.id);
+  const productLine = vehicleRepository.getProductLine(vehicle.id);
+  const series = vehicleRepository.getSeries(vehicle.id);
   const manufacturers = vehicleRepository.getManufacturers(vehicle.id);
   const platform = vehicleRepository.getPlatform(vehicle.id);
   const technologies = vehicleRepository.getTechnologies(vehicle.id);
   const events = vehicleRepository.getRelatedEvents(vehicle.id);
   const sources = vehicleRepository.getRelatedSources(vehicle.id);
   const relatedNews = vehicleRepository.getRelatedNews(vehicle.id);
+  const factories = vehicleRepository.getFactories(vehicle.id);
+  const productionLines = vehicleRepository.getProductionLines(vehicle.id);
   return (
     <PageContainer>
       <div className="space-y-10">
@@ -59,6 +64,11 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
           items={[
             { label: "Home", href: "/" },
             { label: "Vehicles", href: "/vehicles" },
+            ...(brand
+              ? [{ label: displayName(brand.names), href: `/brands/${slugFor(brand)}` }]
+              : []),
+            ...(productLine ? [{ label: displayName(productLine.names) }] : []),
+            ...(series ? [{ label: displayName(series.names) }] : []),
             { label: displayName(vehicle.names) },
           ]}
         />
@@ -76,6 +86,20 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
                 >
                   {displayName(brand.names)}
                 </Link>
+              ) : (
+                <UnknownState />
+              )}
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm text-muted-foreground">Product hierarchy</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {productLine || series ? (
+                [productLine, series]
+                  .filter(Boolean)
+                  .map((item) => <div key={item!.id}>{displayName(item!.names)}</div>)
               ) : (
                 <UnknownState />
               )}
@@ -126,6 +150,11 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
             </CardContent>
           </Card>
         </div>
+        <ProductionContext
+          factories={factories}
+          productionLines={productionLines}
+          vehicles={[vehicle]}
+        />
         <section className="space-y-4" aria-labelledby="vehicle-media">
           <h2 id="vehicle-media" className="text-2xl font-semibold">
             Media

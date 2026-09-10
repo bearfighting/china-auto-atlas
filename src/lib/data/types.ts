@@ -35,6 +35,31 @@ export type EntityRelations = {
 export type Brand = Entity & EntityRelations & { type: "brand" };
 export type Manufacturer = Entity & EntityRelations & { type: "manufacturer" };
 export type Organization = Entity & EntityRelations & { type: "organization" | "supplier" | "manufacturer" };
+export type Factory = Entity & {
+  type: "factory";
+  operator_ids?: string[];
+  owner_ids?: string[];
+  location?: Record<string, unknown>;
+  opened_at?: Record<string, unknown> | string | null;
+};
+export type ReportedCapacity = {
+  value?: number;
+  unit?: string;
+  valid_from?: string | null;
+  valid_to?: string | null;
+  date_precision?: string;
+  evidence_status?: EvidenceStatus;
+  source_ids?: string[];
+};
+export type ProductionLine = Entity & {
+  type: "production_line";
+  factory_id: string;
+  opened_at?: Record<string, unknown> | string | null;
+  closed_at?: Record<string, unknown> | string | null;
+  vehicle_ids?: string[];
+  technology_ids?: string[];
+  reported_capacity?: ReportedCapacity;
+};
 export type ProductLine = Entity & {
   type: "product_line";
   brand_id: string;

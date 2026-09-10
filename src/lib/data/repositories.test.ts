@@ -5,11 +5,13 @@ import { sortNewsDocuments } from "./repositories";
 import {
   brandRepository,
   eventRepository,
+  factoryRepository,
   manufacturerRepository,
   newsRepository,
   organizationById,
   platformById,
   productLineRepository,
+  productionLineRepository,
   searchRepository,
   sourceRepository,
   technologyRepository,
@@ -195,6 +197,21 @@ describe("generated data repositories", () => {
     expect(brandRepository.getProductLines("zeekr")).toEqual([]);
   });
 
+  it("resolves the sourced Factory and Production Line pilot", () => {
+    expect(factoryRepository.getById("chongqing-plant")?.location).toMatchObject({ city: "Chongqing" });
+    expect(factoryRepository.getProductionLines("chongqing-plant").map((line) => line.id)).toEqual([
+      "chongqing-avatr-12-line",
+    ]);
+    expect(productionLineRepository.getVehicles("chongqing-avatr-12-line").map((vehicle) => vehicle.id)).toEqual([
+      "avatr-12",
+    ]);
+    expect(vehicleRepository.getFactories("avatr-12").map((factory) => factory.id)).toEqual(["chongqing-plant"]);
+    expect(manufacturerRepository.getProductionLines("chongqing-changan-automobile").map((line) => line.id)).toEqual([
+      "chongqing-avatr-12-line",
+    ]);
+    expect(manufacturerRepository.getFactories("byd-company")).toEqual([]);
+  });
+
   it("exposes the BYD vertical-slice news and market specification", () => {
     expect(vehicleRepository.getRelatedNews("byd-sealion-7").map((item) => item.slug)).toContain(
       "byd-sealion-7-europe-launch",
@@ -246,7 +263,7 @@ describe("generated data repositories", () => {
 
   it("preserves evidence boundaries during stabilization", () => {
     const dataIndex = loadDataIndex();
-    expect(dataIndex.entities).toHaveLength(72);
+    expect(dataIndex.entities).toHaveLength(74);
     expect(dataIndex.events).toHaveLength(71);
     expect(dataIndex.sources).toHaveLength(111);
     expect(dataIndex.market_specifications).toHaveLength(20);

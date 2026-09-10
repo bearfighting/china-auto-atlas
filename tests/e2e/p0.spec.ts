@@ -20,10 +20,11 @@ test("opens the news to vehicle to source vertical slice", async ({ page }) => {
   await expect(page.getByText(/605 km CLTC/)).toBeVisible();
   await expect(page.getByRole("heading", { name: "Sources" })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
-  await expect(page.getByText("ZEEKR", { exact: true }).first()).toHaveAttribute(
-    "href",
-    "/brands/zeekr",
-  );
+  await expect(
+    page
+      .getByRole("navigation", { name: "Breadcrumb" })
+      .getByRole("link", { name: "ZEEKR", exact: true }),
+  ).toHaveAttribute("href", "/brands/zeekr");
 });
 
 test("homepage exposes the Atlas and keeps the footer in the page shell", async ({ page }) => {
@@ -195,10 +196,11 @@ test("returns a not-found page for an unknown news article", async ({ page }) =>
 
 test("renders Phase 4 entity detail pages and stable relationships", async ({ page }) => {
   await page.goto("/vehicles/zeekr-7x");
-  await expect(page.getByRole("link", { name: "ZEEKR", exact: true })).toHaveAttribute(
-    "href",
-    "/brands/zeekr",
-  );
+  await expect(
+    page
+      .getByRole("navigation", { name: "Breadcrumb" })
+      .getByRole("link", { name: "ZEEKR", exact: true }),
+  ).toHaveAttribute("href", "/brands/zeekr");
   await expect(page.getByRole("link", { name: "Zeekr Group", exact: true })).toHaveAttribute(
     "href",
     "/manufacturers/zeekr-group",
@@ -226,6 +228,33 @@ test("renders Phase 4 entity detail pages and stable relationships", async ({ pa
       await page.evaluate(() => document.documentElement.clientWidth),
     );
   }
+});
+
+test("browses the brand product hierarchy with filters and without duplicate vehicles", async ({
+  page,
+}) => {
+  await page.goto("/brands/byd");
+  await expect(
+    page.getByRole("navigation", { name: "Breadcrumb" }).getByRole("link", { name: "Brand" }),
+  ).toHaveAttribute("href", "/brands");
+  const dynasty = page.getByRole("button", { name: /Dynasty.*series.*vehicles/i });
+  const ocean = page.getByRole("button", { name: /Ocean.*series.*vehicles/i });
+  await expect(dynasty).toHaveAttribute("aria-expanded", "true");
+  await expect(ocean).toHaveAttribute("aria-expanded", "false");
+  await ocean.click();
+  await expect(dynasty).toHaveAttribute("aria-expanded", "false");
+  await expect(ocean).toHaveAttribute("aria-expanded", "true");
+
+  await page.getByPlaceholder("Search vehicles...").fill("Seal");
+  await expect(page.getByText(/Showing 2 of 6 vehicles/)).toBeVisible();
+  await expect(page.locator('a[href="/vehicles/byd-seal"]')).toHaveCount(1);
+  await expect(page.locator('a[href="/vehicles/byd-sealion-7"]')).toHaveCount(1);
+
+  await page.getByLabel("Powertrain").selectOption("phev");
+  await expect(page.getByText(/Showing 0 of 6 vehicles/)).toBeVisible();
+  await expect(page.getByText("No vehicles match these filters.")).toBeVisible();
+  await page.getByRole("button", { name: /Clear filters/ }).click();
+  await expect(page.getByText(/Showing 6 of 6 vehicles/)).toBeVisible();
 });
 
 test("returns a not-found page for unknown Phase 4 entities", async ({ page }) => {
@@ -296,7 +325,11 @@ test("supports search page filters, empty results, and API responses", async ({ 
   expect(apiResponse.ok()).toBeTruthy();
   const apiPayload = await apiResponse.json();
   expect(apiPayload.type).toBe("vehicle");
-  expect(apiPayload.results[0]).toMatchObject({ id: "zeekr-7x", href: "/vehicles/zeekr-7x" });
+  expect(apiPayload.results).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ id: "zeekr-7x", href: "/vehicles/zeekr-7x" }),
+    ]),
+  );
 
   const invalidTypeResponse = await page.request.get("/api/search?q=ZEEKR&type=unknown");
   expect(invalidTypeResponse.ok()).toBeTruthy();
