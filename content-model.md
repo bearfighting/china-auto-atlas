@@ -183,7 +183,8 @@ The content system consists of five primary conceptual layers:
 ┌─────────────────────────────────┐
 │          ENTITY LAYER           │
 │                                 │
-│ Manufacturer / Brand / Vehicle  │
+│ Manufacturer / Brand / Product  │
+│ Line / Vehicle Series / Vehicle │
 │ Platform / Technology / Factory │
 │ Supplier                        │
 └─────────────────────────────────┘
@@ -357,6 +358,23 @@ A brand may:
 
 These changes should be historical relationships rather than overwritten fields.
 
+Brands may optionally organize vehicles through Product Lines and Vehicle Series:
+
+```text
+Brand
+  └── Product Line
+        └── Vehicle Series
+              └── Vehicle
+```
+
+`Product Line` is a brand-level commercial or product organization such as BYD Dynasty or Ocean. `Vehicle Series` is a durable
+vehicle family such as Qin, Han, Seal, or Sea Lion. Neither represents a factory production line, generation, trim, variant, or
+market specification.
+
+Product Line and Vehicle Series are optional. A Vehicle may reference a Product Line and/or Vehicle Series when supported by
+sources; missing relationships remain unknown. Child records are canonical, and reverse lists are derived by repositories rather
+than duplicated on parent records.
+
 ---
 
 # 8. Manufacturer–Brand Relationships
@@ -413,6 +431,16 @@ Vehicle Model
 Not every vehicle will require every level.
 
 The model should support complexity without forcing unnecessary complexity.
+
+A Vehicle may optionally reference a Product Line and Vehicle Series:
+
+```text
+Vehicle → Vehicle Series? → Product Line? → Brand
+```
+
+When both `series_id` and `product_line_id` are present, the Product Line must be the parent of the referenced Series and all
+three records must belong to the same Brand. These references describe product context only; they do not imply a manufacturing
+facility or production line.
 
 ---
 
@@ -745,6 +773,10 @@ Sources
 ```
 
 Capacity should preserve attribution when it comes from manufacturer claims.
+
+Factory may contain multiple Production Lines. Production Line is a physical manufacturing or assembly facility inside a Factory,
+not a Product Line. Its canonical parent reference is `factory_id`; vehicle and technology references are optional and must be
+source-supported. Reverse Factory → Production Line lists are derived from child records.
 
 For example:
 

@@ -257,6 +257,36 @@ test("browses the brand product hierarchy with filters and without duplicate veh
   await expect(page.getByText(/Showing 6 of 6 vehicles/)).toBeVisible();
 });
 
+test("parent breadcrumbs return to their collection pages", async ({ page }) => {
+  const cases = [
+    { detail: "/brands/byd", parent: "Brand", collection: "/brands" },
+    {
+      detail: "/manufacturers/zeekr-group",
+      parent: "Manufacturer",
+      collection: "/manufacturers",
+    },
+    {
+      detail: "/technologies/zeekr-800v-system",
+      parent: "Technology",
+      collection: "/technologies",
+    },
+    {
+      detail: "/events/event-zeekr-7x-china-launch-2024",
+      parent: "Event",
+      collection: "/events",
+    },
+  ];
+
+  for (const item of cases) {
+    await page.goto(item.detail);
+    await page
+      .getByRole("navigation", { name: "Breadcrumb" })
+      .getByRole("link", { name: item.parent, exact: true })
+      .click();
+    await expect(page).toHaveURL(new RegExp(`${item.collection}$`));
+  }
+});
+
 test("returns a not-found page for unknown Phase 4 entities", async ({ page }) => {
   for (const path of [
     "/brands/not-a-brand",

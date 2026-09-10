@@ -56,7 +56,13 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
   return (
     <PageContainer>
       <div className="space-y-10">
-        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Event" }, { label: title }]} />
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Event", href: "/events" },
+            { label: title },
+          ]}
+        />
         <header className="space-y-4">
           <div className="flex flex-wrap items-center gap-2">
             <span className="rounded-full border px-2.5 py-0.5 text-xs font-medium">Event</span>

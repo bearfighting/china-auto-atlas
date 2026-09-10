@@ -57,7 +57,7 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
-            { label: "Manufacturer" },
+            { label: "Manufacturer", href: "/manufacturers" },
             { label: displayName(manufacturer.names) },
           ]}
         />

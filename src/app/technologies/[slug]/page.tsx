@@ -49,7 +49,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
-            { label: "Technology" },
+            { label: "Technology", href: "/technologies" },
             { label: displayName(technology.names) },
           ]}
         />

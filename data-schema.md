@@ -59,6 +59,8 @@ For the MVP, a file-based structure is recommended.
     /manufacturers
     /organizations
     /brands
+    /product-lines
+    /vehicle-series
     /vehicles
     /platforms
     /technologies
@@ -363,6 +365,82 @@ sources
 ```
 
 Ownership relationships should generally include historical validity periods.
+
+## Product Line and Vehicle Series Schema
+
+Product Line and Vehicle Series are optional context entities between a Brand and Vehicle. They are not independent public page
+types in the MVP.
+
+```yaml
+id: byd-dynasty
+type: product_line
+brand_id: byd
+names:
+  en: Dynasty
+  zh-CN: 王朝
+aliases:
+  - Dynasty Network
+status: active
+source_ids:
+  - src-example
+evidence_status: confirmed
+```
+
+```yaml
+id: byd-qin-series
+type: vehicle_series
+brand_id: byd
+product_line_id: byd-dynasty
+names:
+  en: Qin
+  zh-CN: 秦
+aliases:
+  - Qin series
+status: active
+source_ids:
+  - src-example
+evidence_status: confirmed
+```
+
+Vehicle records may contain:
+
+```yaml
+brand_id: byd
+product_line_id: byd-dynasty
+series_id: byd-qin-series
+```
+
+`product_line_id` and `series_id` are optional. Each referenced ID must exist, and Brand consistency is validated by the data
+pipeline. When a Series has a Product Line, a Vehicle referencing both must use the same Product Line. Parent records do not
+maintain reverse `series_ids` or `vehicle_ids` arrays.
+
+Dates use the existing value/precision/evidence/source structure when collected. Product Line and Series descriptions and
+relationships require their own sources; Vehicle sources are not automatically inherited.
+
+# Factory and Production Line Schema
+
+Factory and Production Line belong to the manufacturing context and must not be confused with Product Line. Production Line uses
+`factory_id` as its canonical parent reference.
+
+```yaml
+id: chongqing-avatr-12-line
+type: production_line
+factory_id: chongqing-plant
+vehicle_ids:
+  - avatr-12
+technology_ids: []
+reported_capacity:
+  value: 100000
+  unit: vehicles_per_year
+  valid_from: 2025
+  date_precision: year
+  evidence_status: reported
+  source_ids:
+    - src-example
+```
+
+Capacity preserves value, unit, validity, date precision, evidence status, and sources. Factory does not maintain reverse production
+line IDs; reverse lists are derived by repositories. These entities do not create independent public pages in the MVP.
 
 ---
 

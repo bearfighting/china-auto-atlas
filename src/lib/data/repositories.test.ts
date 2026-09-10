@@ -397,8 +397,10 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(81);
-    expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
+    const searchIndex = loadSearchIndex();
+    expect(searchIndex).toHaveLength(81);
+    expect(new Set(searchIndex.map((entry) => entry.id)).size).toBe(searchIndex.length);
+    expect(searchIndex.some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({
       id: "zeekr-7x",

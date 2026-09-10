@@ -1,8 +1,9 @@
 # China Auto Atlas — Product Line / Vehicle Series 扩展实施设计
 
-**Status:** Proposed  
+**Status:** Implemented
 **Scope:** 小范围数据模型、索引和 Brand / Manufacturer 上下文展示扩展
 **Date:** 2026-09-10
+**Completed:** 2026-09-10
 
 ## 1. 目标与范围
 
@@ -268,7 +269,7 @@ Sea Lion → Sealion 7
 只有 Batch 1–3 稳定后才实施：
 
 - Manufacturer 页面按 Brand、Product Line、Series 分组展示关联 Vehicles；
-- Brand 页面增加 Product Lines / Series 模块，同时保留 All Vehicles；
+- Brand 页面增加 Product Lines / Series 模块；已分类车型只在对应 Series 中展示，未分类车型进入 `Unclassified vehicles`，避免重复展示；
 - Vehicle breadcrumb 按实际存在的层级显示，例如 `BYD / Dynasty / Qin / Qin L`；
 - 缺少可选层级时自动跳过，不渲染空白或否定性事实。
 
@@ -316,11 +317,16 @@ ZEEKR → Vehicle
 - Production Line、Platform、Generation、Trim 不混入本模型；
 - Product Line 和 Vehicle Series 只作为 Brand / Manufacturer / Vehicle 上下文展示，不建立独立页面；
 - pipeline、生成索引、repository 和测试通过；
-- 第一批稳定后，再决定是否正式修改 `data-schema.md` 的 canonical schema。
+- `data-schema.md` 已正式记录 Product Line、Vehicle Series 以及 Factory / Production Line 的当前 canonical 边界。
 
-## 11. 暂不纳入
+## 11. 已实现的 Factory / Production Line 边界
 
-- Factory Production Line 实体扩展；
+当前仓库已包含 Factory 和 Production Line 的最小数据模型、pipeline 校验、repository 查询和上下文展示。它们仍属于 Factory 语境，不参与 Product Line → Vehicle Series 层级。
+
+当前实现不包含独立 Factory / Production Line 页面、实时产能、复杂 GIS、详细工艺流程或无来源的车型归属。
+
+## 12. 暂不纳入
+
 - generation、facelift、model year、trim、variant hierarchy；
 - 市场特定层级版本和 Series 迁移历史；
 - 数据库、CMS、API、批量抓取和大范围 UI 重构。

@@ -76,6 +76,9 @@ test("article JSON-LD and crawl configuration are correct", async ({ page }) => 
   expect(sitemapText).toContain("/technologies");
   expect(sitemapText).toContain("/events/event-zeekr-7x-china-launch-2024");
   expect(sitemapText).toContain("/events");
+  expect(sitemapText).not.toContain("/product-lines/");
+  expect(sitemapText).not.toContain("/vehicle-series/");
+  expect(sitemapText).not.toContain("/production-lines/");
   expect(sitemapText).not.toContain("/search");
 });
 
