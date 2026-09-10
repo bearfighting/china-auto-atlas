@@ -10,6 +10,8 @@ aliases:
 - 汉EV
 - 汉DM
 brand_id: byd
+product_line_id: byd-dynasty
+series_id: byd-han-series
 manufacturer_ids:
 - byd-company
 segment: executive-sedan

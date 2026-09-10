@@ -9,6 +9,8 @@ aliases:
 - TANG DM-i
 - 唐
 brand_id: byd
+product_line_id: byd-dynasty
+series_id: byd-tang-series
 manufacturer_ids:
 - byd-company
 segment: large-suv

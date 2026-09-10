@@ -1,0 +1,19 @@
+schema_version: 1
+id: byd-song-series
+type: vehicle_series
+brand_id: byd
+product_line_id: byd-dynasty
+names:
+  en: Song
+  zh-CN: 宋
+aliases:
+- Song series
+description:
+  en: BYD Song vehicle series.
+  zh-CN: 比亚迪宋车型系列。
+status: active
+source_ids:
+- src-byd-brand-center
+- src-byd-song-l-debut-2023
+evidence_status: claimed
+last_verified_at: '2026-09-10'

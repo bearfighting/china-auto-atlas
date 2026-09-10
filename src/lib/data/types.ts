@@ -35,6 +35,15 @@ export type EntityRelations = {
 export type Brand = Entity & EntityRelations & { type: "brand" };
 export type Manufacturer = Entity & EntityRelations & { type: "manufacturer" };
 export type Organization = Entity & EntityRelations & { type: "organization" | "supplier" | "manufacturer" };
+export type ProductLine = Entity & {
+  type: "product_line";
+  brand_id: string;
+};
+export type VehicleSeries = Entity & {
+  type: "vehicle_series";
+  brand_id: string;
+  product_line_id?: string;
+};
 export type Technology = Entity & EntityRelations & { type: "technology" };
 export type Platform = Entity & EntityRelations & { type: "platform" };
 
@@ -50,6 +59,8 @@ export type Timeline = {
 export type Vehicle = Entity & {
   type: "vehicle";
   brand_id?: string;
+  product_line_id?: string;
+  series_id?: string;
   manufacturer_ids?: string[];
   platform_id?: string;
   technology_ids?: string[];

@@ -1,0 +1,20 @@
+schema_version: 1
+id: byd-seal-series
+type: vehicle_series
+brand_id: byd
+product_line_id: byd-ocean
+names:
+  en: Seal
+  zh-CN: 海豹
+aliases:
+- SEAL series
+- 海豹系列
+description:
+  en: BYD Seal vehicle series.
+  zh-CN: 比亚迪海豹车型系列。
+status: active
+source_ids:
+- src-byd-brand-center
+- src-byd-seal-europe-2023
+evidence_status: claimed
+last_verified_at: '2026-09-10'

@@ -1,0 +1,19 @@
+schema_version: 1
+id: byd-tang-series
+type: vehicle_series
+brand_id: byd
+product_line_id: byd-dynasty
+names:
+  en: Tang
+  zh-CN: 唐
+aliases:
+- Tang series
+description:
+  en: BYD Tang vehicle series.
+  zh-CN: 比亚迪唐车型系列。
+status: active
+source_ids:
+- src-byd-brand-center
+- src-byd-tang-norway-2021
+evidence_status: claimed
+last_verified_at: '2026-09-10'

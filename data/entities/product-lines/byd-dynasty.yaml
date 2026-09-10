@@ -1,0 +1,18 @@
+schema_version: 1
+id: byd-dynasty
+type: product_line
+brand_id: byd
+names:
+  en: Dynasty
+  zh-CN: 王朝
+aliases:
+- Dynasty Network
+- 王朝网
+description:
+  en: BYD's Dynasty product line.
+  zh-CN: 比亚迪王朝产品线。
+status: active
+source_ids:
+- src-byd-brand-center
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

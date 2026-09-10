@@ -8,6 +8,8 @@ aliases:
 - SEAL
 - 海豹
 brand_id: byd
+product_line_id: byd-ocean
+series_id: byd-seal-series
 manufacturer_ids:
 - byd-company
 segment: executive-sedan

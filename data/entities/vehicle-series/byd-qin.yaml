@@ -1,0 +1,19 @@
+schema_version: 1
+id: byd-qin-series
+type: vehicle_series
+brand_id: byd
+product_line_id: byd-dynasty
+names:
+  en: Qin
+  zh-CN: 秦
+aliases:
+- Qin series
+description:
+  en: BYD Qin vehicle series.
+  zh-CN: 比亚迪秦车型系列。
+status: active
+source_ids:
+- src-byd-brand-center
+- src-byd-qin-l-launch-2024
+evidence_status: claimed
+last_verified_at: '2026-09-10'

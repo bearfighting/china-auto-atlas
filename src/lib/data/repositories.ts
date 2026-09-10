@@ -19,6 +19,7 @@ import type {
   NewsDocument,
   Author,
   Organization,
+  ProductLine,
   Platform,
   SearchResult,
   SearchOptions,
@@ -26,6 +27,7 @@ import type {
   Source,
   Topic,
   Technology,
+  VehicleSeries,
   Vehicle,
   NewsPage,
   NewsPageOptions,
@@ -158,6 +160,12 @@ export const vehicleRepository = {
   getBrand(id: string): Brand | null {
     return entityOfType(this.getById(id)?.brand_id, "brand");
   },
+  getProductLine(id: string): ProductLine | null {
+    return entityOfType<ProductLine>(this.getById(id)?.product_line_id, "product_line");
+  },
+  getSeries(id: string): VehicleSeries | null {
+    return entityOfType<VehicleSeries>(this.getById(id)?.series_id, "vehicle_series");
+  },
   getManufacturers(id: string): Manufacturer[] {
     return (this.getById(id)?.manufacturer_ids ?? [])
       .map((manufacturerId) => entityOfType<Manufacturer>(manufacturerId, "manufacturer"))
@@ -198,6 +206,51 @@ export const brandRepository = {
   ...relatedEntityRepository<Brand>("brand"),
   getVehicles(id: string): Vehicle[] {
     return vehiclesRelatedTo(loadDataIndex(), id);
+  },
+  getProductLines(id: string): ProductLine[] {
+    return entitiesByType<ProductLine>(loadDataIndex(), "product_line").filter((productLine) => productLine.brand_id === id);
+  },
+  getSeries(id: string): VehicleSeries[] {
+    return entitiesByType<VehicleSeries>(loadDataIndex(), "vehicle_series").filter((vehicleSeries) => vehicleSeries.brand_id === id);
+  },
+};
+
+export const productLineRepository = {
+  list(): ProductLine[] {
+    return entitiesByType<ProductLine>(loadDataIndex(), "product_line");
+  },
+  getById(id: string): ProductLine | null {
+    return this.list().find((productLine) => productLine.id === id) ?? null;
+  },
+  getBySlug(slug: string): ProductLine | null {
+    return findBySlug(this.list(), slug);
+  },
+  getByBrand(brandId: string): ProductLine[] {
+    return this.list().filter((productLine) => productLine.brand_id === brandId);
+  },
+  getSeries(productLineId: string): VehicleSeries[] {
+    return vehicleSeriesRepository.list().filter((vehicleSeries) => vehicleSeries.product_line_id === productLineId);
+  },
+};
+
+export const vehicleSeriesRepository = {
+  list(): VehicleSeries[] {
+    return entitiesByType<VehicleSeries>(loadDataIndex(), "vehicle_series");
+  },
+  getById(id: string): VehicleSeries | null {
+    return this.list().find((vehicleSeries) => vehicleSeries.id === id) ?? null;
+  },
+  getBySlug(slug: string): VehicleSeries | null {
+    return findBySlug(this.list(), slug);
+  },
+  getByBrand(brandId: string): VehicleSeries[] {
+    return this.list().filter((vehicleSeries) => vehicleSeries.brand_id === brandId);
+  },
+  getByProductLine(productLineId: string): VehicleSeries[] {
+    return this.list().filter((vehicleSeries) => vehicleSeries.product_line_id === productLineId);
+  },
+  getVehicles(seriesId: string): Vehicle[] {
+    return vehiclesFromIndex(loadDataIndex()).filter((vehicle) => vehicle.series_id === seriesId);
   },
 };
 

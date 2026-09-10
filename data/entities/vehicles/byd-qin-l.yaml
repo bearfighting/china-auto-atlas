@@ -8,6 +8,8 @@ aliases:
 - Qin L
 - 秦L
 brand_id: byd
+product_line_id: byd-dynasty
+series_id: byd-qin-series
 manufacturer_ids:
 - byd-company
 segment: mid-size-sedan

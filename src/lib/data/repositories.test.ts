@@ -9,9 +9,11 @@ import {
   newsRepository,
   organizationById,
   platformById,
+  productLineRepository,
   searchRepository,
   sourceRepository,
   technologyRepository,
+  vehicleSeriesRepository,
   vehicleRepository,
 } from "./repositories";
 import type { NewsDocument } from "./types";
@@ -169,6 +171,30 @@ describe("generated data repositories", () => {
     );
   });
 
+  it("resolves the optional BYD product hierarchy without changing direct brand access", () => {
+    expect(brandRepository.getVehicles("byd").map((vehicle) => vehicle.id)).toEqual([
+      "byd-han",
+      "byd-qin-l",
+      "byd-seal",
+      "byd-sealion-7",
+      "byd-song-l",
+      "byd-tang",
+    ]);
+    expect(productLineRepository.getByBrand("byd").map((line) => line.id)).toEqual(["byd-dynasty", "byd-ocean"]);
+    expect(productLineRepository.getSeries("byd-dynasty").map((series) => series.id)).toEqual([
+      "byd-han-series",
+      "byd-qin-series",
+      "byd-song-series",
+      "byd-tang-series",
+    ]);
+    expect(vehicleSeriesRepository.getVehicles("byd-qin-series").map((vehicle) => vehicle.id)).toEqual(["byd-qin-l"]);
+    expect(vehicleSeriesRepository.getVehicles("byd-sea-lion-series").map((vehicle) => vehicle.id)).toEqual(["byd-sealion-7"]);
+    expect(vehicleRepository.getProductLine("byd-qin-l")?.id).toBe("byd-dynasty");
+    expect(vehicleRepository.getSeries("byd-qin-l")?.id).toBe("byd-qin-series");
+    expect(vehicleRepository.getSeries("zeekr-007")).toBeNull();
+    expect(brandRepository.getProductLines("zeekr")).toEqual([]);
+  });
+
   it("exposes the BYD vertical-slice news and market specification", () => {
     expect(vehicleRepository.getRelatedNews("byd-sealion-7").map((item) => item.slug)).toContain(
       "byd-sealion-7-europe-launch",
@@ -220,7 +246,7 @@ describe("generated data repositories", () => {
 
   it("preserves evidence boundaries during stabilization", () => {
     const dataIndex = loadDataIndex();
-    expect(dataIndex.entities).toHaveLength(64);
+    expect(dataIndex.entities).toHaveLength(72);
     expect(dataIndex.events).toHaveLength(71);
     expect(dataIndex.sources).toHaveLength(111);
     expect(dataIndex.market_specifications).toHaveLength(20);

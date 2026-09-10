@@ -1,0 +1,18 @@
+schema_version: 1
+id: byd-ocean
+type: product_line
+brand_id: byd
+names:
+  en: Ocean
+  zh-CN: 海洋
+aliases:
+- Ocean Network
+- 海洋网
+description:
+  en: BYD's Ocean product line.
+  zh-CN: 比亚迪海洋产品线。
+status: active
+source_ids:
+- src-byd-brand-center
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

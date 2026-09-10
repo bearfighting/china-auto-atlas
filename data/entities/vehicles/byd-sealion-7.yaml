@@ -8,6 +8,8 @@ aliases:
 - SEALION 7
 - 海狮07
 brand_id: byd
+product_line_id: byd-ocean
+series_id: byd-sea-lion-series
 manufacturer_ids:
 - byd-company
 segment: executive-suv

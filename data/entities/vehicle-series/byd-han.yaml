@@ -1,0 +1,19 @@
+schema_version: 1
+id: byd-han-series
+type: vehicle_series
+brand_id: byd
+product_line_id: byd-dynasty
+names:
+  en: Han
+  zh-CN: 汉
+aliases:
+- Han series
+description:
+  en: BYD Han vehicle series.
+  zh-CN: 比亚迪汉车型系列。
+status: active
+source_ids:
+- src-byd-brand-center
+- src-byd-han-launch-2020
+evidence_status: claimed
+last_verified_at: '2026-09-10'

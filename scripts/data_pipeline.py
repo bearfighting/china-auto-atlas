@@ -175,6 +175,86 @@ def validate_relationship_indexes(records: dict[str, list[dict[str, Any]]]) -> l
     return errors
 
 
+def validate_product_hierarchy(records: dict[str, list[dict[str, Any]]]) -> list[str]:
+    """Validate optional Product Line / Vehicle Series parent consistency."""
+    errors: list[str] = []
+    brands = {
+        record["id"]
+        for values in records.values()
+        for record in values
+        if record.get("type") == "brand"
+    }
+    product_lines = {
+        record["id"]: record
+        for values in records.values()
+        for record in values
+        if record.get("type") == "product_line"
+    }
+    series = {
+        record["id"]: record
+        for values in records.values()
+        for record in values
+        if record.get("type") == "vehicle_series"
+    }
+
+    for product_line_id, product_line in product_lines.items():
+        brand_id = product_line.get("brand_id")
+        if not isinstance(brand_id, str) or brand_id not in brands:
+            errors.append(
+                f"{product_line['_file']}: {product_line_id} brand_id must reference a brand"
+            )
+
+    for series_id, vehicle_series in series.items():
+        brand_id = vehicle_series.get("brand_id")
+        if not isinstance(brand_id, str) or brand_id not in brands:
+            errors.append(f"{vehicle_series['_file']}: {series_id} brand_id must reference a brand")
+        product_line_id = vehicle_series.get("product_line_id")
+        if product_line_id is None:
+            continue
+        if not isinstance(product_line_id, str):
+            errors.append(f"{vehicle_series['_file']}: {series_id} product_line_id must reference a product_line")
+            continue
+        product_line = product_lines.get(product_line_id)
+        if not product_line:
+            errors.append(
+                f"{vehicle_series['_file']}: {series_id} product_line_id must reference a product_line"
+            )
+        elif product_line.get("brand_id") != brand_id:
+            errors.append(
+                f"{vehicle_series['_file']}: {series_id} brand_id does not match product_line_id {product_line_id}"
+            )
+
+    vehicles = [
+        record
+        for values in records.values()
+        for record in values
+        if record.get("type") == "vehicle"
+    ]
+    for vehicle in vehicles:
+        vehicle_id = vehicle["id"]
+        brand_id = vehicle.get("brand_id")
+        product_line_id = vehicle.get("product_line_id")
+        series_id = vehicle.get("series_id")
+        product_line = product_lines.get(product_line_id) if isinstance(product_line_id, str) else None
+        vehicle_series = series.get(series_id) if isinstance(series_id, str) else None
+        if product_line_id is not None and not isinstance(product_line_id, str):
+            errors.append(f"{vehicle['_file']}: {vehicle_id} product_line_id must reference a product_line")
+        elif product_line_id is not None and not product_line:
+            errors.append(f"{vehicle['_file']}: {vehicle_id} product_line_id must reference a product_line")
+        if series_id is not None and not isinstance(series_id, str):
+            errors.append(f"{vehicle['_file']}: {vehicle_id} series_id must reference a vehicle_series")
+        elif series_id is not None and not vehicle_series:
+            errors.append(f"{vehicle['_file']}: {vehicle_id} series_id must reference a vehicle_series")
+        if product_line and product_line.get("brand_id") != brand_id:
+            errors.append(f"{vehicle['_file']}: {vehicle_id} brand_id does not match product_line_id {product_line_id}")
+        if vehicle_series and vehicle_series.get("brand_id") != brand_id:
+            errors.append(f"{vehicle['_file']}: {vehicle_id} brand_id does not match series_id {series_id}")
+        if vehicle_series and product_line_id and vehicle_series.get("product_line_id") != product_line_id:
+            errors.append(f"{vehicle['_file']}: {vehicle_id} product_line_id does not match series_id {series_id}")
+
+    return errors
+
+
 def validate() -> int:
     records, refs, errors = collect()
     duplicate_ids = {key: values for key, values in records.items() if len(values) > 1}
@@ -202,6 +282,7 @@ def validate() -> int:
             errors.append(f"duplicate id {key}: {locations}")
     errors.extend(f"{path}: missing {key} reference {target}" for path, key, target in missing)
     errors.extend(validate_relationship_indexes(records))
+    errors.extend(validate_product_hierarchy(records))
 
     media_path = DATA_ROOT / "media" / "media-items.yaml"
     if media_path.exists():
@@ -237,7 +318,7 @@ def build() -> int:
     flat = [record for values in records.values() for record in values]
     index = {
         "schema_version": 1,
-        "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "platform", "technology", "vehicle"}), key=lambda r: r["id"]),
+        "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "platform", "technology", "vehicle", "product_line", "vehicle_series"}), key=lambda r: r["id"]),
         "market_specifications": sorted((r for r in flat if r.get("type") == "market_specification"), key=lambda r: r["id"]),
         "relationships": sorted((r for r in flat if r.get("type") == "relationship"), key=lambda r: r["id"]),
         "events": sorted((r for r in flat if r.get("type") == "event"), key=lambda r: r["id"]),

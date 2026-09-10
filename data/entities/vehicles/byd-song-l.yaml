@@ -8,6 +8,8 @@ aliases:
 - Song L
 - 宋L
 brand_id: byd
+product_line_id: byd-dynasty
+series_id: byd-song-series
 manufacturer_ids:
 - byd-company
 segment: executive-suv

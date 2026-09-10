@@ -7,8 +7,8 @@
 
 ```text
 Validation: passed before and after audit documentation
-Current build (2026-09-10): 64 entities, 71 events, 111 sources, 32 relationships, 20 market specifications, 23 News documents
-Current entity coverage: 25 vehicles, 15 technologies, 5 platforms
+Current build (2026-09-10): 72 entities, 71 events, 111 sources, 32 relationships, 20 market specifications, 23 News documents
+Current entity coverage: 25 vehicles, 15 technologies, 5 platforms, 2 product lines, 6 vehicle series
 Technology records reviewed: 15
 Platform records reviewed: 5
 ```
@@ -176,7 +176,7 @@ trim-level price, or test-cycle value was added.
 
 The following remain explicitly deferred: platform identification for DEEPAL S05, historical first-announcement dates for
 the existing Geely/Zeekr/AVATR technologies with unknown dates, and exhaustive corporate-role resolution for pending references.
-The current dataset is now at 64 entities, 71 events, 23 News documents, 20 market specifications and 111 sources. Schema
+The current dataset is now at 72 entities, 71 events, 23 News documents, 20 market specifications and 111 sources. Schema
 stabilization has now been reviewed across all three slices; the conclusion and remaining data work are recorded below.
 
 ## Market specification review — 2026-09-10
@@ -214,3 +214,15 @@ No pending item was upgraded solely because the referenced entity exists. No con
 - The three vertical slices retain navigable Entity → Event → News → Source paths where historical evidence exists.
 - Reference-only market records and product-reference News remain explicitly non-historical.
 - Schema stabilization review is recorded in `data-model-issues.md`; no canonical schema change is required in this phase.
+
+## Product Line / Vehicle Series pilot — 2026-09-10
+
+The experimental hierarchy adds two Product Lines (`byd-dynasty`, `byd-ocean`) and six Vehicle Series for the existing BYD vehicle
+records. Product Line membership is confirmed by the official brand-center material; individual Series-to-Product Line assignments
+remain `claimed` until a source explicitly enumerates each model family under its product line. The hierarchy uses child-to-parent
+references and repository-derived reverse lists; no `vehicle_ids` or `series_ids` arrays
+were added to the new parent records. Qin PLUS, Seal 06, Sea Lion 05/07 and Dolphin remain unmodeled because they are not current
+Vehicle records in this repository.
+
+The pilot does not add Factory Production Line entities, UI routes, Search types or formal canonical schema changes. Cross-Brand
+references and inconsistent Vehicle/Product Line/Series combinations are rejected by the pipeline validation tests.
