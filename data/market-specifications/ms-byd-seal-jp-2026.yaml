@@ -8,6 +8,7 @@ status: available
 currency: JPY
 variants:
 - name: SEAL
+  powertrain_type: bev
   prices:
   - amount: 4950000
     currency: JPY
@@ -25,6 +26,7 @@ variants:
   acceleration_0_100_s: 5.9
   curb_weight_kg: 2100
 - name: SEAL AWD
+  powertrain_type: bev
   prices:
   - amount: 5720000
     currency: JPY

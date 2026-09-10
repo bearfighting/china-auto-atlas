@@ -8,6 +8,7 @@ status: available
 currency: null
 variants:
 - name: RWD 82 kWh
+  powertrain_type: bev
   battery_kwh: 82.56
   battery_type: LFP Blade Battery
   range:
@@ -21,6 +22,7 @@ variants:
   dc_charge_kw: 150
   acceleration_0_100_s: 5.9
 - name: AWD 82 kWh
+  powertrain_type: bev
   battery_kwh: 82.56
   battery_type: LFP Blade Battery
   range:

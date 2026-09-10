@@ -30,6 +30,7 @@ variants:
     powertrain_type: bev
     battery_type: semi-solid
   - name: Lineup common specification
+    powertrain_type: bev
     system_power_kw: 120
     max_torque_nm: 250
     drive: RWD

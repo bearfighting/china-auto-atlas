@@ -7,6 +7,7 @@ status: available
 currency: CNY
 variants:
 - name: 75 kWh Golden Battery family
+  powertrain_type: bev
   battery_kwh: 75
   battery_type: LFP
   range:
@@ -15,6 +16,7 @@ variants:
     evidence_status: claimed
   charge_10_80_min: 10.5
 - name: 100 kWh Qilin Battery family
+  powertrain_type: bev
   battery_kwh: 100
   battery_type: NMC
   range:

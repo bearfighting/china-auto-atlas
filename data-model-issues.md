@@ -96,3 +96,21 @@ These questions remain deferred until the BYD, Geely/Zeekr and Changan/Avatr/Dee
   they must not be interpreted as historical launch coverage.
 - The first additional platform in this pass is `changan-epa1`, supported by the DEEPAL L07 product material. BYD DM-p is
   modeled as a technology with unknown first-announcement date and no application vehicle until a vehicle-specific source is captured.
+
+## 2026-09-10 evidence closeout and schema stabilization
+
+The evidence closeout found no P0 modeling problem. The default decision is to retain the canonical schema unchanged.
+
+- Technology and Platform remain separate editorial types. A named vehicle architecture such as EPA1 is a platform; a component,
+  subsystem, control system or powertrain family such as DM-p is a technology. Platform-technologies such as DMO and e⁴ remain
+  documented exceptions rather than a reason to duplicate records.
+- `developer`, `supplier`, `jointly_developed_by`, `strategic_partner_of`, `operator` and `owner` remain non-interchangeable.
+  Entity arrays continue to support page-oriented indexes, while typed relationship records carry authoritative role semantics.
+- Claim-level evidence is not promoted to a new schema requirement yet. Existing source IDs, evidence states and claim assessments
+  safely express the current records; revisit only if the lack of claim-level granularity blocks publication repeatedly.
+- Event `date_precision`, existing event types and market-specification validity dates are sufficient for the current evidence set.
+  Do not add change/validity fields until product revisions or ownership changes repeatedly cannot be represented without ambiguity.
+- Market specifications can currently express market, variant, local/global naming, powertrain, test standard, price and validity
+  differences. Keep unsupported historical dates and trim details unknown or reference-only; no version/name-evolution field is needed yet.
+- Entity arrays and typed relationships continue to coexist. A schema change becomes justified only when the same issue recurs across
+  multiple slices and materially blocks maintenance or publication.

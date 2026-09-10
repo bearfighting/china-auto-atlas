@@ -218,6 +218,50 @@ describe("generated data repositories", () => {
     expect(technologyRepository.getById("byd-dm-p")?.type).toBe("technology");
   });
 
+  it("preserves evidence boundaries during stabilization", () => {
+    const dataIndex = loadDataIndex();
+    expect(dataIndex.entities).toHaveLength(64);
+    expect(dataIndex.events).toHaveLength(71);
+    expect(dataIndex.sources).toHaveLength(111);
+    expect(dataIndex.market_specifications).toHaveLength(20);
+
+    expect(platformById("changan-epa1")?.vehicle_ids).toContain("deepal-l07");
+    expect(technologyRepository.getById("byd-dm-p")?.first_announced_at).toMatchObject({ value: null });
+    expect(vehicleRepository.getById("deepal-s05")?.platform_id).toBeNull();
+    expect(vehicleRepository.getById("deepal-s05")?.event_ids).toEqual([]);
+    expect(vehicleRepository.getMarketSpecifications("avatr-07")[0]?.status).toBe("reference_only");
+    expect(vehicleRepository.getMarketSpecifications("avatr-12")[0]?.status).toBe("reference_only");
+    for (const [vehicleId, expectedPowertrain] of [
+      ["byd-seal", "bev"],
+      ["fangchengbao-bao-5", "phev"],
+      ["geely-ex5", "bev"],
+      ["mg4", "bev"],
+      ["zeekr-7x", "bev"],
+    ]) {
+      const specifications = vehicleRepository.getMarketSpecifications(vehicleId);
+      const variants = specifications.flatMap((specification) => specification.variants ?? []);
+      expect(specifications).not.toHaveLength(0);
+      expect(variants).not.toHaveLength(0);
+      expect(variants.every((variant) => variant.powertrain_type === expectedPowertrain)).toBe(true);
+    }
+
+    const gea = platformById("geely-gea");
+    expect(gea?.pending_reference_ids).toContain("geely-auto-group");
+    const avatrChn = platformById("avatr-chn");
+    expect(avatrChn?.pending_reference_ids).toEqual(
+      expect.arrayContaining(["chongqing-changan-automobile", "huawei", "catl"]),
+    );
+    for (const [technologyId, referenceId] of [
+      ["geely-short-blade-battery", "geely-auto-group"],
+      ["geely-11-in-1-electric-drive", "geely-auto-group"],
+      ["zeekr-800v-system", "zeekr-group"],
+      ["zeekr-golden-battery", "zeekr-group"],
+      ["avatr-800v-sic", "huawei"],
+    ]) {
+      expect(technologyRepository.getById(technologyId)?.pending_reference_ids).toContain(referenceId);
+    }
+  });
+
   it("lists vehicles with stable detail identifiers", () => {
     const vehicles = vehicleRepository.list();
     expect(vehicles).toHaveLength(25);

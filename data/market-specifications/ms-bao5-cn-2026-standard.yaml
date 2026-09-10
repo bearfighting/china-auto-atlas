@@ -9,21 +9,25 @@ status: available
 currency: CNY
 variants:
 - name: 天神智驾Max版
+  powertrain_type: phev
   prices:
   - amount: 239800
     currency: CNY
     price_type: msrp
 - name: 天神智驾Ultra版
+  powertrain_type: phev
   prices:
   - amount: 259800
     currency: CNY
     price_type: msrp
 - name: 激光乾崑智驾版
+  powertrain_type: phev
   prices:
   - amount: 284800
     currency: CNY
     price_type: msrp
 - name: 云辇激光乾崑智驾版
+  powertrain_type: phev
   prices:
   - amount: 329800
     currency: CNY

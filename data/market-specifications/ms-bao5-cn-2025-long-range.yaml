@@ -8,21 +8,25 @@ status: available
 currency: CNY
 variants:
 - name: 210KM 天神Ultra版
+  powertrain_type: phev
   prices:
   - amount: 269800
     currency: CNY
     price_type: msrp
 - name: 210KM 云辇天神Ultra版
+  powertrain_type: phev
   prices:
   - amount: 279800
     currency: CNY
     price_type: msrp
 - name: 210KM 乾崑Ultra版
+  powertrain_type: phev
   prices:
   - amount: 294800
     currency: CNY
     price_type: msrp
 - name: 210KM 云辇乾崑Ultra+版
+  powertrain_type: phev
   prices:
   - amount: 329800
     currency: CNY

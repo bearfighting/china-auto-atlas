@@ -6,6 +6,7 @@ market: GLOBAL_REFERENCE
 status: reference_only
 variants:
 - name: Global EX5 reference
+  powertrain_type: bev
   battery_type: LFP Short Blade Battery
   max_power_kw: 160
 platform: GEA
