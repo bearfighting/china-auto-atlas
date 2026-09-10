@@ -422,6 +422,37 @@ relationships require their own sources; Vehicle sources are not automatically i
 Factory and Production Line belong to the manufacturing context and must not be confused with Product Line. Production Line uses
 `factory_id` as its canonical parent reference.
 
+Factory records may contain:
+
+```text
+id
+names
+aliases
+location
+operator_ids
+owner_ids
+status
+opened_at
+source_ids
+evidence_status
+```
+
+Production Line records may contain:
+
+```text
+id
+names
+factory_id
+status
+opened_at
+closed_at
+vehicle_ids
+technology_ids
+reported_capacity
+source_ids
+evidence_status
+```
+
 ```yaml
 id: chongqing-avatr-12-line
 type: production_line

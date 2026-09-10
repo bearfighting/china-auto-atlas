@@ -287,6 +287,16 @@ test("parent breadcrumbs return to their collection pages", async ({ page }) => 
   }
 });
 
+test("manufacturer hierarchy does not duplicate vehicle links", async ({ page }) => {
+  await page.goto("/manufacturers/byd-company");
+  const vehicleLinks = page.locator('a[href^="/vehicles/"]');
+  const hrefs = await vehicleLinks.evaluateAll((links) =>
+    links.map((link) => link.getAttribute("href")),
+  );
+  expect(hrefs.length).toBeGreaterThan(0);
+  expect(new Set(hrefs).size).toBe(hrefs.length);
+});
+
 test("returns a not-found page for unknown Phase 4 entities", async ({ page }) => {
   for (const path of [
     "/brands/not-a-brand",
