@@ -47,10 +47,13 @@ timeline:
 event_ids:
 - event-denza-d9-reveal-2022
 - event-denza-d9-china-launch-2022
+- event-denza-d9-production-2022
+- event-denza-d9-delivery-2022
 - event-denza-d9-france-orders-2026
 news_ids: []
 source_ids:
 - src-denza-brand-history
+- src-denza-d9-production-2022
 - src-denza-d9-europe-2026
 - src-denza-d9-france-2026
 evidence_status: confirmed

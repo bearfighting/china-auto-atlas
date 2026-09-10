@@ -147,6 +147,15 @@ describe("generated data repositories", () => {
     expect(newsRepository.getRelatedEvents("news-2025-05-08-denza-n9-shanghai-presentation")).not.toEqual([]);
   });
 
+  it("keeps the cross-slice BYD reverse indexes and D9 timeline navigable", () => {
+    expect(brandRepository.getVehicles("fangchengbao").map((vehicle) => vehicle.id)).toContain("fangchengbao-bao-5");
+    expect(technologyRepository.getVehicles("byd-blade-battery").map((vehicle) => vehicle.id)).toContain("denza-d9");
+    expect(vehicleRepository.getRelatedEvents("denza-d9").map((event) => event.id)).toEqual(
+      expect.arrayContaining(["event-denza-d9-production-2022", "event-denza-d9-delivery-2022"]),
+    );
+    expect(sourceRepository.getById("src-denza-d9-production-2022")?.id).toBe("src-denza-d9-production-2022");
+  });
+
   it("lists vehicles with stable detail identifiers", () => {
     const vehicles = vehicleRepository.list();
     expect(vehicles).toHaveLength(16);

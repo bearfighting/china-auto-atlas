@@ -44,6 +44,7 @@ vehicle_ids:
 - byd-tang
 - byd-song-l
 - yangwang-u9
+- denza-d9
 first_announced_at:
   value: '2020-03-29'
   precision: day

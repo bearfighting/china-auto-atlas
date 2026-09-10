@@ -117,3 +117,20 @@ not establish one EU-wide price.
 The remaining priority vehicles have News or explicit existing coverage as follows: SEAL, DENZA D9, YANGWANG U8 and FANGCHENGBAO
 BAO 5 retain their existing event/source paths, while YANGWANG U9 retains its launch News. No new platform or technology relation
 was added for Song L or DENZA N9 without direct source support.
+
+## Cross-slice convergence audit
+
+The convergence pass reviewed the current combined dataset: 53 entities, 61 events, 98 sources, 32 relationships, 16 market
+specifications and 13 News documents. The audit used stable-ID references and reverse-index checks; it did not treat every
+entity-level event association as a requirement to copy brand or organization milestones onto child vehicles.
+
+Three maintenance-blocking inconsistencies were corrected:
+
+- `byd-blade-battery` now includes `denza-d9` in `vehicle_ids`, matching the D9 vehicle's technology index.
+- `fangchengbao` now includes `fangchengbao-bao-5` in `vehicle_ids`, matching the vehicle's `brand_id`.
+- DENZA D9 now indexes its existing production-start and delivery-start events, and the vehicle indexes the existing production
+  source used by both events.
+
+The audit retained unknown technology history where no source establishes a first event date. The DMO and e⁴ records remain
+platform-technologies under the existing model; they were not duplicated as separate Platform records. Market specifications
+remain market- and variant-specific, including the normalized DEEPAL S07 records. No schema change was needed.

@@ -26,7 +26,8 @@ relationship_ids:
 - rel-byd-company-fangchengbao-operates
 market_codes:
 - CN
-vehicle_ids: []
+vehicle_ids:
+- fangchengbao-bao-5
 seed_vehicle_names:
 - BAO 5
 - BAO 8
