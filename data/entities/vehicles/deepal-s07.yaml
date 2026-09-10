@@ -18,8 +18,11 @@ powertrain_types:
   - erev
 status: active
 first_announced_at:
-  value: null
-  evidence_status: unknown
+  value: '2023-04-18'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-deepal-s07-debut-2023
 first_launched_at:
   value: null
   evidence_status: unknown
@@ -43,12 +46,18 @@ timeline:
   - event-deepal-s07-thailand-launch-2023
   - event-deepal-s07-indonesia-market
 event_ids:
+- event-deepal-s07-debut-2023
+- event-deepal-s07-thailand-preorder-2023
+- event-deepal-s07-thailand-launch-2023
 - event-deepal-s07-indonesia-market
-news_ids: []
+news_ids:
+- news-2023-05-18-deepal-s07-debut
 source_ids:
 - src-deepal-s07-mauritius
 - src-deepal-s07-indonesia
 - src-deepal-s07-chile
+- src-deepal-s07-debut-2023
+- src-deepal-s07-thailand-launch-2023
 evidence_status: confirmed
 last_verified_at: '2026-09-08'
 notes:

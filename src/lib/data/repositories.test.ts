@@ -19,14 +19,14 @@ import type { NewsDocument } from "./types";
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
     expect(loadDataIndex().entities.length).toBeGreaterThan(0);
-    expect(loadContentIndex().documents.length).toBe(12);
+    expect(loadContentIndex().documents.length).toBe(13);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
   });
 
   it("lists news in stable chronological order", () => {
     const news = newsRepository.list();
-    expect(news).toHaveLength(12);
+    expect(news).toHaveLength(13);
     expect(news.map((item) => item.slug)).toEqual([
       "denza-n9-shanghai-presentation",
       "byd-super-e-platform-launch",
@@ -34,6 +34,7 @@ describe("generated data repositories", () => {
       "zeekr-7x-launch",
       "geely-ex5-global-unveil",
       "yangwang-u9-launch",
+      "deepal-s07-debut",
       "byd-song-l-concept-debut",
       "avatr-11-global-launch",
       "chn-platform-launch",
@@ -55,7 +56,7 @@ describe("generated data repositories", () => {
     expect(newsRepository.listPage()).toMatchObject({
       page: 1,
       pageSize: 10,
-      total: 12,
+      total: 13,
       totalPages: 2,
     });
     expect(newsRepository.listPage({ page: 1, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
@@ -67,18 +68,21 @@ describe("generated data repositories", () => {
       "yangwang-u9-launch",
     ]);
     expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "deepal-s07-debut",
       "byd-song-l-concept-debut",
-      "avatr-11-global-launch",
     ]);
     expect(newsRepository.listPage({ page: 5, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "avatr-11-global-launch",
       "chn-platform-launch",
-      "byd-tang-norway-launch",
     ]);
     expect(newsRepository.listPage({ page: 6, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-tang-norway-launch",
       "byd-han-launch",
+    ]);
+    expect(newsRepository.listPage({ page: 7, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
       "byd-blade-battery-launch",
     ]);
-    expect(newsRepository.listPage({ page: 7, pageSize: 2 }).items).toEqual([]);
+    expect(newsRepository.listPage({ page: 8, pageSize: 2 }).items).toEqual([]);
     expect(newsRepository.listPage({ page: 0, pageSize: 0 })).toMatchObject({ page: 1, pageSize: 10 });
   });
 
@@ -102,6 +106,33 @@ describe("generated data repositories", () => {
       "zeekr-800v-system",
       "zeekr-golden-battery",
     ]);
+  });
+
+  it("keeps the Changan, AVATR and DEEPAL slice navigable", () => {
+    expect(loadDataIndex().entities.find((entity) => entity.id === "avatr")?.vehicle_ids).toEqual(["avatr-11"]);
+    expect(loadDataIndex().entities.find((entity) => entity.id === "deepal")?.vehicle_ids).toEqual(["deepal-s07"]);
+    expect(vehicleRepository.getRelatedNews("avatr-11").map((item) => item.slug)).toContain("avatr-11-global-launch");
+    expect(vehicleRepository.getRelatedNews("deepal-s07").map((item) => item.slug)).toContain("deepal-s07-debut");
+    expect(vehicleRepository.getRelatedEvents("deepal-s07").map((event) => event.id)).toEqual(
+      expect.arrayContaining([
+      "event-deepal-s07-debut-2023",
+      "event-deepal-s07-thailand-preorder-2023",
+      "event-deepal-s07-thailand-launch-2023",
+      "event-deepal-s07-indonesia-market",
+      ]),
+    );
+    expect(vehicleRepository.getRelatedEvents("deepal-s07")).toHaveLength(4);
+    expect(vehicleRepository.getMarketSpecifications("deepal-s07").find((item) => item.id === "ms-deepal-s07-id-bev")?.variants?.[0]).toMatchObject({
+      name: "S07 BEV",
+      powertrain_type: "bev",
+    });
+    expect(vehicleRepository.getMarketSpecifications("deepal-s07").find((item) => item.id === "ms-deepal-s07-mu-bev")?.variants?.[0]).toMatchObject({
+      name: "S07 BEV",
+      powertrain_type: "bev",
+    });
+    expect(newsRepository.getRelatedEvents("news-2023-05-18-deepal-s07-debut").map((event) => event.id)).toContain(
+      "event-deepal-s07-debut-2023",
+    );
   });
 
   it("exposes the BYD vertical-slice news and market specification", () => {
@@ -208,7 +239,7 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(60);
+    expect(loadSearchIndex()).toHaveLength(61);
     expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({

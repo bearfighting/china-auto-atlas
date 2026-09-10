@@ -49,7 +49,8 @@ event_ids:
 - event-avatr11-launch-2022
 - event-avatr11-production-2022
 - event-avatr11-delivery-2022
-news_ids: []
+news_ids:
+- news-2022-08-08-avatr-11-global-launch
 source_ids:
 - src-avatr11-miit-2022
 - src-avatr11-preorder-2022

@@ -5,11 +5,13 @@ vehicle_id: deepal-s07
 market: ID
 status: available
 currency: IDR
-prices:
-- amount: 619000000
-  price_type: otr
-  currency: IDR
-spec:
+variants:
+- name: S07 BEV
+  powertrain_type: bev
+  prices:
+  - amount: 619000000
+    price_type: otr
+    currency: IDR
   range:
     value_km: 560
     standard: NEDC

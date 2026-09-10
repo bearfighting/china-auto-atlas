@@ -4,8 +4,9 @@ id: ms-deepal-s07-mu-bev
 vehicle_id: deepal-s07
 market: MU
 status: available
-powertrain_type: bev
-spec:
+variants:
+- name: S07 BEV
+  powertrain_type: bev
   battery_kwh: 79.97
   battery_type: ternary_lithium
   range:

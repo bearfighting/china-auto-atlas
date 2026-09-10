@@ -7,7 +7,7 @@
 
 ```text
 Validation: passed before and after audit documentation
-Current build: 53 entities, 61 events, 98 sources, 32 relationships, 16 market specifications, 12 News documents
+Current build: 53 entities, 61 events, 98 sources, 32 relationships, 16 market specifications, 13 News documents
 Technology records reviewed: 12
 Platform records reviewed: 4
 ```
@@ -94,6 +94,18 @@ These should not be added merely from secondary descriptions or because a target
 The three existing Geely / Zeekr market specifications remain separate records. `GLOBAL_REFERENCE` for EX5 is not treated as a
 sale-market record; the two 7X records remain separated by China and EU markets. Existing unknown, claimed and confirmed evidence
 states are preserved.
+
+## Changan / Avatr / Deepal slice audit
+
+| Area | Result | Decision |
+|---|---|---|
+| Brand reverse indexes | `avatr` → `avatr-11`; `deepal` → `deepal-s07` | corrected and aligned with vehicle `brand_id` |
+| AVATR 11 corporate roles | AVATR Technology operates the brand; Changan and CATL roles remain separately modeled | retain operating, investment and strategic-partner distinctions |
+| CHN platform | AVATR 11 is linked to CHN; Changan, Huawei and CATL remain jointly-developed roles | do not convert platform cooperation into ownership or supplier claims |
+| DEEPAL S07 events | reveal, Thailand preorder, Thailand launch and Indonesia market event are now all indexed on the vehicle | retain event types and dates as sourced |
+| DEEPAL S07 market variants | Mauritius, Indonesia and Chile records remain separate; Indonesia is explicitly BEV | do not merge market-specific specifications |
+| Technology history | AVATR 800V SiC retains unknown first date | do not infer a historical technology-launch event |
+| News links | AVATR 11 reuses its existing launch News; S07 has a new debut News | complete Vehicle → News → Event → Source paths |
 
 ## BYD vertical-slice closeout
 

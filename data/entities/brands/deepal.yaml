@@ -29,7 +29,8 @@ relationship_ids:
 - rel-ccag-deepal-group-brand
 market_codes:
 - CN
-vehicle_ids: []
+vehicle_ids:
+- deepal-s07
 seed_vehicle_names:
 - SL03
 - S07

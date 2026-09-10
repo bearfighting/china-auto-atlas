@@ -31,7 +31,8 @@ market_codes:
 seed_market_notes:
 - The company maintains an overseas-business function and describes a global ambition, but brand-level country availability
   is not inferred from that alone.
-vehicle_ids: []
+vehicle_ids:
+- avatr-11
 seed_vehicle_names:
 - AVATR 11
 - AVATR 12
