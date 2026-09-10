@@ -1,0 +1,51 @@
+schema_version: 1
+id: geely-galaxy-e8
+type: vehicle
+names:
+  en: GEELY GALAXY E8
+  zh-CN: 吉利银河E8
+aliases:
+- Galaxy E8
+- 银河E8
+brand_id: geely-auto
+manufacturer_ids:
+- geely-auto-group
+segment: executive-sedan
+body_style: sedan
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: '2023'
+  precision: year
+  evidence_status: confirmed
+  source_ids:
+  - src-geely-galaxy-e8-debut-2023
+first_launched_at:
+  value: '2024-01'
+  precision: month
+  evidence_status: confirmed
+  source_ids:
+  - src-geely-galaxy-e8-launch-2023
+platform_id: geely-gea
+technology_ids: []
+market_spec_ids:
+- ms-geely-galaxy-e8-cn-2023
+media_ids: []
+timeline:
+  announcement_event_id: event-geely-galaxy-e8-debut-2023
+  preorder_event_id: null
+  launch_event_id: event-geely-galaxy-e8-launch-2023
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-geely-galaxy-e8-debut-2023
+- event-geely-galaxy-e8-launch-2023
+news_ids:
+- news-2023-12-27-geely-galaxy-e8-launch
+source_ids:
+- src-geely-galaxy-e8-debut-2023
+- src-geely-galaxy-e8-launch-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

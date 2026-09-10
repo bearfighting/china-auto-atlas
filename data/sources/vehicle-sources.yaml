@@ -373,3 +373,158 @@ sources:
   - YANGWANG launched the U9 in February 2024.
   - The U9 uses the e4 platform and DiSus-X body-control system.
   evidence_status: confirmed
+- id: src-byd-qin-l-launch-2024
+  type: source
+  publisher: BYD
+  title: BYD Qin L DM-i launched in China
+  url: https://www.byd.com/cn/live-list/liveDetail86
+  published_at: '2024-05-28'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - BYD Qin L DM-i launched in China on 2024-05-28.
+  - The official launch page lists the Qin L DM-i price range as CNY 99,800–139,800.
+  evidence_status: confirmed
+- id: src-zeekr-001-launch-2021
+  type: source
+  publisher: ZEEKR
+  title: ZEEKR 001 official launch
+  url: https://www.zeekrlife.com/global/posts/goodbye-dull-evs-the-zeekr-001-has-arrived
+  published_at: '2021-04-15'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - ZEEKR 001 was launched as the brand's first production model.
+  evidence_status: confirmed
+- id: src-zeekr-001-delivery-2021
+  type: source
+  publisher: ZEEKR
+  title: ZEEKR 001 deliveries begin
+  url: https://www.zeekrlife.com/global/posts/zeekr-001-goes-into-production
+  published_at: '2021-10-19'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - ZEEKR began deliveries of the 001 in October 2021.
+  evidence_status: confirmed
+- id: src-zeekr-007-launch-2023
+  type: source
+  publisher: ZEEKR
+  title: ZEEKR 007 launched in China
+  url: https://www.zeekrlife.com/global/posts/the-zeekr-007-a-smart-electric-sedan-is-officially-launched/
+  published_at: '2023-12-27'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - ZEEKR 007 launched in China on 2023-12-27.
+  evidence_status: confirmed
+- id: src-zeekr-009-launch-2022
+  type: source
+  publisher: ZEEKR
+  title: ZEEKR 009 launched
+  url: https://www.zeekrlife.com/global/posts/no-more-dull-mpvs-redefining-a-segment-with-the-zeekr-009
+  published_at: '2022-11-01'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - ZEEKR 009 was launched in China in November 2022.
+  evidence_status: confirmed
+- id: src-geely-galaxy-e8-debut-2023
+  type: source
+  publisher: Geely Auto
+  title: Geely Automobile Holdings 2023 interim report — Galaxy E8
+  url: https://www1.hkexnews.hk/listedco/listconews/sehk/2023/0822/2023082200213.pdf
+  published_at: '2023-08-22'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - Geely Galaxy E8 was identified as a battery-electric sedan planned for launch in 2023.
+  evidence_status: confirmed
+- id: src-geely-galaxy-e8-launch-2023
+  type: source
+  publisher: Geely Auto
+  title: Geely Galaxy E8 launched
+  url: https://global.geely.com/en/news/2023/geely-auto-starts-delivery-yinhe-e8-sedan
+  published_at: '2024-01-05'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - Geely Auto began official sale and deliveries of the Galaxy E8 in January 2024.
+  evidence_status: confirmed
+- id: src-deepal-l07-reveal-2024
+  type: source
+  publisher: DEEPAL
+  title: Changan presents DEEPAL L07 at Chengdu Auto Show
+  url: https://changanauto.ru/about-us/news/sportivnyi-tehnologicnyi-umnyi-na-mezdunarodnom-avtosalone-v-cendu-changan-predstavil-novyi-deepal-l07
+  published_at: '2024-09-06'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - Changan presented the DEEPAL L07 at the Chengdu Auto Show.
+  - The L07 was described as offering two powertrain options.
+  evidence_status: confirmed
+- id: src-deepal-s05-launch-2024
+  type: source
+  publisher: DEEPAL
+  title: DEEPAL S05 official product page
+  url: https://deepal.sa/vehicle/S05?language_content_entity=en
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - The official DEEPAL product page identifies the S05 model and its current product information.
+  evidence_status: confirmed
+- id: src-avatr-07-config-2024
+  type: source
+  publisher: AVATR
+  title: AVATR 07 official product page
+  url: https://www.avatr.com/en/07
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - AVATR 07 official dimensions and current product information.
+  evidence_status: confirmed
+- id: src-avatr-12-global-debut-2023
+  type: source
+  publisher: AVATR
+  title: AVATR 12 World Premiere
+  url: https://www.avatr.com/en/news?newsChId=avatr-12-world-premiere-2023
+  published_at: '2023-09-05'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - AVATR 12 made its global debut in Munich on 2023-09-05.
+  evidence_status: confirmed
+- id: src-avatr-12-config-2026
+  type: source
+  publisher: AVATR
+  title: AVATR 12 official product page
+  url: https://www.avatr.com/12
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - AVATR 12 official dimensions and current product information.
+  evidence_status: confirmed
+- id: src-avatr-12-production-2023
+  type: source
+  publisher: AVATR
+  title: AVATR 12 mass production completed
+  url: https://www.avatr.com/en/news?newsChId=8fd0a71ffb87422714c4551d6766728f
+  published_at: '2023-10-11'
+  accessed_at: '2026-09-10'
+  source_type: manufacturer
+  source_level: primary
+  supports:
+  - AVATR 12 mass production was completed on 2023-10-11.
+  evidence_status: confirmed

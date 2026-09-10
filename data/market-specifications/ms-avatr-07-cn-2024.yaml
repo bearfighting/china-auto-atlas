@@ -1,0 +1,19 @@
+schema_version: 1
+type: market_specification
+id: ms-avatr-07-cn-2024
+vehicle_id: avatr-07
+market: CN
+valid_from: null
+status: reference_only
+currency: CNY
+variants:
+- name: AVATR 07
+dimensions_mm:
+  length: 4825
+  width: 1980
+  height: 1620
+  wheelbase: 2940
+source_ids:
+- src-avatr-07-config-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

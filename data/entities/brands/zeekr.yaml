@@ -29,6 +29,9 @@ seed_market_notes:
   should be collected separately.
 vehicle_ids:
 - zeekr-7x
+- zeekr-001
+- zeekr-007
+- zeekr-009
 seed_vehicle_names:
 - ZEEKR 001
 - ZEEKR 007

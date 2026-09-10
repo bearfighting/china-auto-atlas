@@ -1,0 +1,15 @@
+schema_version: 1
+type: market_specification
+id: ms-geely-galaxy-e8-cn-2023
+vehicle_id: geely-galaxy-e8
+market: CN
+valid_from: '2023-12-27'
+status: available
+currency: CNY
+variants:
+- name: Galaxy E8
+  powertrain_type: bev
+source_ids:
+- src-geely-galaxy-e8-launch-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

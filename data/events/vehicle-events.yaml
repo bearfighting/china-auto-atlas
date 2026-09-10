@@ -414,3 +414,123 @@ events:
   source_ids:
   - src-yangwang-u9-launch-2024
   evidence_status: confirmed
+- schema_version: 1
+  id: event-byd-qin-l-launch-2024
+  type: event
+  date: '2024-05-28'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - byd-qin-l
+  summary: BYD launched the Qin L DM-i in China.
+  source_ids:
+  - src-byd-qin-l-launch-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-zeekr-001-launch-2021
+  type: event
+  date: '2021-04-15'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - zeekr-001
+  summary: ZEEKR launched the 001 as its first production model.
+  source_ids:
+  - src-zeekr-001-launch-2021
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-zeekr-001-delivery-2021
+  type: event
+  date: '2021-10-19'
+  date_precision: day
+  event_type: delivery_start
+  subject_ids:
+  - zeekr-001
+  summary: ZEEKR began deliveries of the 001.
+  source_ids:
+  - src-zeekr-001-delivery-2021
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-zeekr-007-launch-2023
+  type: event
+  date: '2023-12-27'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - zeekr-007
+  summary: ZEEKR launched the 007 in China.
+  source_ids:
+  - src-zeekr-007-launch-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-zeekr-009-launch-2022
+  type: event
+  date: '2022-11-01'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - zeekr-009
+  summary: ZEEKR launched the 009 in China.
+  source_ids:
+  - src-zeekr-009-launch-2022
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-geely-galaxy-e8-debut-2023
+  type: event
+  date: '2023-11-17'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - geely-galaxy-e8
+  summary: Geely unveiled the Galaxy E8.
+  source_ids:
+  - src-geely-galaxy-e8-debut-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-geely-galaxy-e8-launch-2023
+  type: event
+  date: '2023-12-27'
+  date_precision: day
+  event_type: vehicle_launch
+  subject_ids:
+  - geely-galaxy-e8
+  summary: Geely launched the Galaxy E8 in China.
+  source_ids:
+  - src-geely-galaxy-e8-launch-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-deepal-l07-reveal-2024
+  type: event
+  date: '2024-09-06'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - deepal-l07
+  summary: Changan presented the DEEPAL L07 at the Chengdu Auto Show.
+  source_ids:
+  - src-deepal-l07-reveal-2024
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr-12-global-debut-2023
+  type: event
+  date: '2023-09-05'
+  date_precision: day
+  event_type: vehicle_reveal
+  subject_ids:
+  - avatr-12
+  summary: AVATR 12 made its global debut in Munich.
+  source_ids:
+  - src-avatr-12-global-debut-2023
+  evidence_status: confirmed
+- schema_version: 1
+  id: event-avatr-12-production-2023
+  type: event
+  date: '2023-10-11'
+  date_precision: day
+  event_type: production_start
+  subject_ids:
+  - avatr-12
+  summary: Mass production of AVATR 12 was completed at the Chongqing plant.
+  source_ids:
+  - src-avatr-12-production-2023
+  evidence_status: confirmed

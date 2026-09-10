@@ -38,6 +38,8 @@ brand_ids:
 - avatr
 vehicle_ids:
 - avatr-11
+- avatr-07
+- avatr-12
 first_announced_at:
   value: null
   evidence_status: unknown

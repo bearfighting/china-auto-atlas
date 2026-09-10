@@ -151,3 +151,20 @@ The existing Xiaomi Corporation, Xiaomi Auto and SU7 records were completed as a
 for the China launch. The News links `xiaomi-su7` and `xiaomi-auto` to the existing launch event and official launch source. The
 existing 2023 reveal event remains separate from the 2024 China launch; no global-market claim or unsupported platform/technology
 relation was added.
+
+## Content Foundation expansion pass — 2026-09-10
+
+This pass added nine vehicles across the three existing slices: BYD Qin L; ZEEKR 001, 007 and 009; Geely Galaxy E8; DEEPAL L07
+and S05; and AVATR 07 and 12. Vehicles with confirmed milestone sources have matching events and News entries; product-reference
+News entries for AVATR 07 and DEEPAL S05 intentionally have no historical event until a dated primary source is captured. The new platform
+indexes connect the ZEEKR vehicles to SEA, Galaxy E8 to GEA, and AVATR 07/12 to CHN. AVATR 07/12 also reuse the existing 800V
+SiC technology index; no new developer or supplier claim was inferred.
+
+Four market-specific records were added for Qin L, Galaxy E8, AVATR 07 and AVATR 12. They intentionally keep the records small:
+only source-supported market, availability, powertrain and dimensions are promoted to canonical facts. No unsupported range,
+trim-level price, or test-cycle value was added.
+
+The following remain explicitly deferred: platform identification for DEEPAL L07/S05, historical first-announcement dates for
+the existing Geely/Zeekr/AVATR technologies with unknown dates, and exhaustive corporate-role resolution for pending references.
+The current dataset is now at 62 entities, 72 events, 23 News documents, 20 market specifications and 110 sources. Schema
+stabilization is still deferred until these patterns have been reviewed across all three slices.

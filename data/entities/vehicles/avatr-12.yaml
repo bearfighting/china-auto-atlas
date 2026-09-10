@@ -1,0 +1,51 @@
+schema_version: 1
+id: avatr-12
+type: vehicle
+names:
+  en: AVATR 12
+  zh-CN: 阿维塔12
+aliases:
+- Avatr 12
+- 阿维塔 12
+brand_id: avatr
+manufacturer_ids:
+- chongqing-changan-automobile
+segment: executive-hatchback
+body_style: liftback
+powertrain_types:
+- bev
+- erev
+status: active
+first_announced_at:
+  value: '2023-09-05'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-avatr-12-global-debut-2023
+first_launched_at:
+  value: null
+  evidence_status: unknown
+  note: China launch date is not established by the captured global debut and production sources.
+platform_id: avatr-chn
+technology_ids:
+- avatr-800v-sic
+market_spec_ids:
+- ms-avatr-12-cn-2023
+media_ids: []
+timeline:
+  announcement_event_id: event-avatr-12-global-debut-2023
+  preorder_event_id: null
+  launch_event_id: null
+  production_start_event_id: event-avatr-12-production-2023
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-avatr-12-global-debut-2023
+- event-avatr-12-production-2023
+news_ids:
+- news-2023-09-05-avatr-12-global-debut
+source_ids:
+- src-avatr-12-global-debut-2023
+- src-avatr-12-production-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

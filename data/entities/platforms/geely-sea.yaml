@@ -19,7 +19,10 @@ technical_scope:
   - hardware, system, and ecosystem layers
   - vehicle sizes from segment A to segment E
 vehicle_ids:
-  - zeekr-7x
+- zeekr-7x
+- zeekr-001
+- zeekr-007
+- zeekr-009
 source_ids:
   - src-geely-sea-platform
 evidence_status: confirmed

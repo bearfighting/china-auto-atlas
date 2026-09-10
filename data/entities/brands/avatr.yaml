@@ -33,6 +33,8 @@ seed_market_notes:
   is not inferred from that alone.
 vehicle_ids:
 - avatr-11
+- avatr-07
+- avatr-12
 seed_vehicle_names:
 - AVATR 11
 - AVATR 12

@@ -1,0 +1,43 @@
+schema_version: 1
+id: avatr-07
+type: vehicle
+names:
+  en: AVATR 07
+  zh-CN: 阿维塔07
+aliases:
+- Avatr 07
+- 阿维塔 07
+brand_id: avatr
+manufacturer_ids:
+- chongqing-changan-automobile
+segment: mid-size-suv
+body_style: suv
+powertrain_types: []
+status: active
+first_announced_at:
+  value: null
+  evidence_status: unknown
+  note: The current product page does not establish the original announcement date.
+first_launched_at:
+  value: null
+  evidence_status: unknown
+platform_id: avatr-chn
+technology_ids:
+- avatr-800v-sic
+market_spec_ids:
+- ms-avatr-07-cn-2024
+media_ids: []
+timeline:
+  announcement_event_id: null
+  preorder_event_id: null
+  launch_event_id: null
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids: []
+news_ids:
+- news-2024-09-26-avatr-07-launch
+source_ids:
+- src-avatr-07-config-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

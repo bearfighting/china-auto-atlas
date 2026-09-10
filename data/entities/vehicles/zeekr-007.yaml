@@ -1,0 +1,45 @@
+schema_version: 1
+id: zeekr-007
+type: vehicle
+names:
+  en: ZEEKR 007
+  zh-CN: 极氪007
+aliases:
+- Zeekr 007
+brand_id: zeekr
+manufacturer_ids:
+- zeekr-group
+segment: mid-size-sedan
+body_style: sedan
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: null
+  evidence_status: unknown
+  note: The official launch source mentions an earlier Guangzhou debut without establishing its exact date.
+first_launched_at:
+  value: '2023-12-27'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-007-launch-2023
+platform_id: geely-sea
+technology_ids: []
+market_spec_ids: []
+media_ids: []
+timeline:
+  announcement_event_id: null
+  preorder_event_id: null
+  launch_event_id: event-zeekr-007-launch-2023
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-zeekr-007-launch-2023
+news_ids:
+- news-2023-12-27-zeekr-007-launch
+source_ids:
+- src-zeekr-007-launch-2023
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

@@ -20,7 +20,8 @@ technical_scope:
   - hardware, system, ecosystem, and AI integration
   - intelligent electric vehicle architecture
 vehicle_ids:
-  - geely-ex5
+- geely-ex5
+- geely-galaxy-e8
 pending_reference_ids:
   - geely-auto-group
 source_ids:

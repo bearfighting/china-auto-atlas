@@ -1,0 +1,49 @@
+schema_version: 1
+id: byd-qin-l
+type: vehicle
+names:
+  en: BYD QIN L
+  zh-CN: 比亚迪秦L
+aliases:
+- Qin L
+- 秦L
+brand_id: byd
+manufacturer_ids:
+- byd-company
+segment: mid-size-sedan
+body_style: sedan
+powertrain_types:
+- phev
+status: active
+first_announced_at:
+  value: null
+  evidence_status: unknown
+  note: A separate announcement date is not retained until a source-specific debut record is captured.
+first_launched_at:
+  value: '2024-05-28'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-byd-qin-l-launch-2024
+platform_id: null
+technology_ids: []
+market_spec_ids:
+- ms-byd-qin-l-cn-2024
+media_ids: []
+timeline:
+  announcement_event_id: null
+  preorder_event_id: null
+  launch_event_id: event-byd-qin-l-launch-2024
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-byd-qin-l-launch-2024
+news_ids:
+- news-2024-05-28-byd-qin-l-launch
+source_ids:
+- src-byd-qin-l-launch-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- Platform and narrower technology relationships remain unresolved in this pass.

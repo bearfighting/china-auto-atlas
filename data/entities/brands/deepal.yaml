@@ -31,6 +31,8 @@ market_codes:
 - CN
 vehicle_ids:
 - deepal-s07
+- deepal-l07
+- deepal-s05
 seed_vehicle_names:
 - SL03
 - S07

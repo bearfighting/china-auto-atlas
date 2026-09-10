@@ -1,0 +1,20 @@
+schema_version: 1
+type: market_specification
+id: ms-avatr-12-cn-2023
+vehicle_id: avatr-12
+market: CN
+valid_from: null
+status: reference_only
+currency: CNY
+variants:
+- name: AVATR 12
+dimensions_mm:
+  length: 5020
+  width: 1999
+  height: 1460
+  wheelbase: 3020
+source_ids:
+- src-avatr-12-global-debut-2023
+- src-avatr-12-config-2026
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

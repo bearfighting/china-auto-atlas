@@ -1,0 +1,47 @@
+schema_version: 1
+id: zeekr-009
+type: vehicle
+names:
+  en: ZEEKR 009
+  zh-CN: 极氪009
+aliases:
+- Zeekr 009
+brand_id: zeekr
+manufacturer_ids:
+- zeekr-group
+segment: luxury-mpv
+body_style: mpv
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: '2022-11-01'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-009-launch-2022
+first_launched_at:
+  value: '2022-11-01'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-009-launch-2022
+platform_id: geely-sea
+technology_ids: []
+market_spec_ids: []
+media_ids: []
+timeline:
+  announcement_event_id: event-zeekr-009-launch-2022
+  preorder_event_id: null
+  launch_event_id: event-zeekr-009-launch-2022
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-zeekr-009-launch-2022
+news_ids:
+- news-2022-11-01-zeekr-009-launch
+source_ids:
+- src-zeekr-009-launch-2022
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

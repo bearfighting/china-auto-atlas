@@ -38,6 +38,7 @@ seed_market_notes:
   are only directly named examples, not an exhaustive footprint.
 vehicle_ids:
 - geely-ex5
+- geely-galaxy-e8
 seed_vehicle_names:
 - EX5
 - EX5 EM-i

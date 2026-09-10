@@ -1,0 +1,47 @@
+schema_version: 1
+id: deepal-l07
+type: vehicle
+names:
+  en: DEEPAL L07
+  zh-CN: 深蓝L07
+aliases:
+- Deepal L07
+- L07
+brand_id: deepal
+manufacturer_ids:
+- chongqing-changan-automobile
+segment: mid-size-sedan
+body_style: sedan
+powertrain_types: []
+status: active
+first_announced_at:
+  value: '2024-09-06'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-deepal-l07-reveal-2024
+first_launched_at:
+  value: null
+  evidence_status: unknown
+  note: China launch date remains unconfirmed by the captured primary source.
+platform_id: null
+technology_ids: []
+market_spec_ids: []
+media_ids: []
+timeline:
+  announcement_event_id: event-deepal-l07-reveal-2024
+  preorder_event_id: null
+  launch_event_id: null
+  production_start_event_id: null
+  delivery_start_event_id: null
+  market_entry_event_ids: []
+event_ids:
+- event-deepal-l07-reveal-2024
+news_ids:
+- news-2024-09-20-deepal-l07-launch
+source_ids:
+- src-deepal-l07-reveal-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- Platform relationship remains unresolved until a primary technical source is captured.

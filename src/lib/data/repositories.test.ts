@@ -19,26 +19,35 @@ import type { NewsDocument } from "./types";
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
     expect(loadDataIndex().entities.length).toBeGreaterThan(0);
-    expect(loadContentIndex().documents.length).toBe(14);
+    expect(loadContentIndex().documents.length).toBe(23);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
   });
 
   it("lists news in stable chronological order", () => {
     const news = newsRepository.list();
-    expect(news).toHaveLength(14);
+    expect(news).toHaveLength(23);
     expect(news.map((item) => item.slug)).toEqual([
+      "deepal-l07-launch",
+      "avatr-07-launch",
+      "deepal-s05-launch",
       "denza-n9-shanghai-presentation",
       "byd-super-e-platform-launch",
       "byd-sealion-7-europe-launch",
       "zeekr-7x-launch",
       "geely-ex5-global-unveil",
+      "byd-qin-l-launch",
       "xiaomi-su7-launch",
       "yangwang-u9-launch",
+      "geely-galaxy-e8-launch",
+      "zeekr-007-launch",
+      "avatr-12-global-debut",
       "deepal-s07-debut",
       "byd-song-l-concept-debut",
+      "zeekr-009-launch",
       "avatr-11-global-launch",
       "chn-platform-launch",
+      "zeekr-001-launch",
       "byd-tang-norway-launch",
       "byd-han-launch",
       "byd-blade-battery-launch",
@@ -57,34 +66,41 @@ describe("generated data repositories", () => {
     expect(newsRepository.listPage()).toMatchObject({
       page: 1,
       pageSize: 10,
-      total: 14,
-      totalPages: 2,
+      total: 23,
+      totalPages: 3,
     });
     expect(newsRepository.listPage({ page: 1, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "denza-n9-shanghai-presentation",
-      "byd-super-e-platform-launch",
+      "deepal-l07-launch",
+      "avatr-07-launch",
     ]);
     expect(newsRepository.listPage({ page: 3, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "geely-ex5-global-unveil",
-      "xiaomi-su7-launch",
+      "byd-super-e-platform-launch",
+      "byd-sealion-7-europe-launch",
     ]);
     expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "yangwang-u9-launch",
-      "deepal-s07-debut",
+      "zeekr-7x-launch",
+      "geely-ex5-global-unveil",
     ]);
     expect(newsRepository.listPage({ page: 5, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "byd-song-l-concept-debut",
-      "avatr-11-global-launch",
+      "byd-qin-l-launch",
+      "xiaomi-su7-launch",
     ]);
     expect(newsRepository.listPage({ page: 6, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "chn-platform-launch",
-      "byd-tang-norway-launch",
+      "yangwang-u9-launch",
+      "geely-galaxy-e8-launch",
     ]);
     expect(newsRepository.listPage({ page: 7, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "byd-han-launch",
+      "zeekr-007-launch",
+      "avatr-12-global-debut",
+    ]);
+    expect(newsRepository.listPage({ page: 8, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "deepal-s07-debut",
+      "byd-song-l-concept-debut",
+    ]);
+    expect(newsRepository.listPage({ page: 12, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
       "byd-blade-battery-launch",
     ]);
-    expect(newsRepository.listPage({ page: 8, pageSize: 2 }).items).toEqual([]);
+    expect(newsRepository.listPage({ page: 13, pageSize: 2 }).items).toEqual([]);
     expect(newsRepository.listPage({ page: 0, pageSize: 0 })).toMatchObject({ page: 1, pageSize: 10 });
   });
 
@@ -95,8 +111,16 @@ describe("generated data repositories", () => {
   });
 
   it("keeps Geely and Zeekr brand indexes and vehicle relations aligned", () => {
-    expect(loadDataIndex().entities.find((entity) => entity.id === "geely-auto")?.vehicle_ids).toEqual(["geely-ex5"]);
-    expect(loadDataIndex().entities.find((entity) => entity.id === "zeekr")?.vehicle_ids).toEqual(["zeekr-7x"]);
+    expect(loadDataIndex().entities.find((entity) => entity.id === "geely-auto")?.vehicle_ids).toEqual([
+      "geely-ex5",
+      "geely-galaxy-e8",
+    ]);
+    expect(loadDataIndex().entities.find((entity) => entity.id === "zeekr")?.vehicle_ids).toEqual([
+      "zeekr-7x",
+      "zeekr-001",
+      "zeekr-007",
+      "zeekr-009",
+    ]);
     expect(vehicleRepository.getRelatedNews("geely-ex5").map((item) => item.slug)).toContain("geely-ex5-global-unveil");
     expect(vehicleRepository.getPlatform("geely-ex5")?.id).toBe("geely-gea");
     expect(vehicleRepository.getTechnologies("geely-ex5").map((technology) => technology.id)).toEqual([
@@ -111,8 +135,16 @@ describe("generated data repositories", () => {
   });
 
   it("keeps the Changan, AVATR and DEEPAL slice navigable", () => {
-    expect(loadDataIndex().entities.find((entity) => entity.id === "avatr")?.vehicle_ids).toEqual(["avatr-11"]);
-    expect(loadDataIndex().entities.find((entity) => entity.id === "deepal")?.vehicle_ids).toEqual(["deepal-s07"]);
+    expect(loadDataIndex().entities.find((entity) => entity.id === "avatr")?.vehicle_ids).toEqual([
+      "avatr-11",
+      "avatr-07",
+      "avatr-12",
+    ]);
+    expect(loadDataIndex().entities.find((entity) => entity.id === "deepal")?.vehicle_ids).toEqual([
+      "deepal-s07",
+      "deepal-l07",
+      "deepal-s05",
+    ]);
     expect(vehicleRepository.getRelatedNews("avatr-11").map((item) => item.slug)).toContain("avatr-11-global-launch");
     expect(vehicleRepository.getRelatedNews("deepal-s07").map((item) => item.slug)).toContain("deepal-s07-debut");
     expect(vehicleRepository.getRelatedEvents("deepal-s07").map((event) => event.id)).toEqual(
@@ -173,9 +205,21 @@ describe("generated data repositories", () => {
     expect(sourceRepository.getById("src-denza-d9-production-2022")?.id).toBe("src-denza-d9-production-2022");
   });
 
+  it("connects the expanded vehicle batch to events, news and market data", () => {
+    expect(vehicleRepository.getPlatform("zeekr-001")?.id).toBe("geely-sea");
+    expect(vehicleRepository.getPlatform("geely-galaxy-e8")?.id).toBe("geely-gea");
+    expect(vehicleRepository.getPlatform("avatr-12")?.id).toBe("avatr-chn");
+    expect(vehicleRepository.getRelatedNews("byd-qin-l").map((item) => item.slug)).toContain("byd-qin-l-launch");
+    expect(vehicleRepository.getRelatedEvents("avatr-12").map((event) => event.id)).toEqual(
+      expect.arrayContaining(["event-avatr-12-global-debut-2023", "event-avatr-12-production-2023"]),
+    );
+    expect(vehicleRepository.getMarketSpecifications("avatr-07")[0]?.variants).toEqual([{ name: "AVATR 07" }]);
+    expect(vehicleRepository.getPlatform("deepal-l07")).toBeNull();
+  });
+
   it("lists vehicles with stable detail identifiers", () => {
     const vehicles = vehicleRepository.list();
-    expect(vehicles).toHaveLength(16);
+    expect(vehicles).toHaveLength(25);
     expect(vehicles.map((vehicle) => vehicle.id)).toContain("zeekr-7x");
     expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");
   });
@@ -204,7 +248,7 @@ describe("generated data repositories", () => {
   });
 
   it("lists events and resolves event relationships", () => {
-    expect(eventRepository.list().length).toBe(61);
+    expect(eventRepository.list().length).toBe(71);
     const event = eventRepository.getById("event-zeekr-7x-china-launch-2024");
     expect(eventRepository.getRelatedEntities(event!.id).map((entity) => entity.id)).toContain("zeekr-7x");
     expect(eventRepository.getRelatedNews(event!.id).map((article) => article.slug)).toContain("zeekr-7x-launch");
@@ -265,7 +309,7 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(62);
+    expect(loadSearchIndex()).toHaveLength(80);
     expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({

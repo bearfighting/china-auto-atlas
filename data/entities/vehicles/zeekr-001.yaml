@@ -1,0 +1,49 @@
+schema_version: 1
+id: zeekr-001
+type: vehicle
+names:
+  en: ZEEKR 001
+  zh-CN: 极氪001
+aliases:
+- Zeekr 001
+brand_id: zeekr
+manufacturer_ids:
+- zeekr-group
+segment: executive-hatchback
+body_style: shooting-brake
+powertrain_types:
+- bev
+status: active
+first_announced_at:
+  value: '2021-04-15'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-001-launch-2021
+first_launched_at:
+  value: '2021-04-15'
+  precision: day
+  evidence_status: confirmed
+  source_ids:
+  - src-zeekr-001-launch-2021
+platform_id: geely-sea
+technology_ids: []
+market_spec_ids: []
+media_ids: []
+timeline:
+  announcement_event_id: event-zeekr-001-launch-2021
+  preorder_event_id: null
+  launch_event_id: event-zeekr-001-launch-2021
+  production_start_event_id: null
+  delivery_start_event_id: event-zeekr-001-delivery-2021
+  market_entry_event_ids: []
+event_ids:
+- event-zeekr-001-launch-2021
+- event-zeekr-001-delivery-2021
+news_ids:
+- news-2021-04-15-zeekr-001-launch
+source_ids:
+- src-zeekr-001-launch-2021
+- src-zeekr-001-delivery-2021
+evidence_status: confirmed
+last_verified_at: '2026-09-10'

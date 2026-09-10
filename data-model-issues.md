@@ -82,3 +82,14 @@ exhaustive.
 4. Should technology generations such as Golden Short Blade Battery be separate entities or dated technology versions?
 
 These questions remain deferred until the BYD, Geely/Zeekr and Changan/Avatr/Deepal slices expose repeated cases.
+
+## 2026-09-10 expansion decisions
+
+- New vehicles with no safely sourced platform attribution retain `platform_id: null`; DEEPAL L07 and S05 are deliberate
+  examples. The absence is not rendered as evidence that they use no platform.
+- AVATR 07 and 12 reuse the existing CHN platform and AVATR 800V SiC indexes because the current primary product material
+  supports those relationships; no Huawei developer/supplier relationship was added to the vehicles.
+- Market specifications for the new vehicles use family-level variants where the captured source does not provide a stable
+  trim table. Detailed prices and range remain deferred rather than copied from an undated current product page.
+- Product-reference News for AVATR 07 and DEEPAL S05 are dated with the editorial capture date and carry empty `event_ids`;
+  they must not be interpreted as historical launch coverage.
