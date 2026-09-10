@@ -39,4 +39,5 @@ pnpm build
 The application reads generated indexes from `build/`. YAML and Markdown under `data/` and `content/` remain the source
 files and must not be imported directly by pages or components.
 
-See `AGENTS.md` and `mvp-execution-plan.md` for contribution rules and the P0 execution sequence.
+See `AGENTS.md` for contribution rules. The canonical product, content, schema, UI, data-access, and editorial documents are
+listed there.

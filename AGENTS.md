@@ -15,7 +15,6 @@ News is an input; traceable entities, relationships, events, market facts, sourc
 - Implementable schema: `data-schema.md`
 - Data access boundary: `data-access-architecture.md`
 - Editorial rules: `editorial-guidelines.md`
-- Delivery sequence: `roadmap.md`
 
 When documents disagree, preserve the current canonical data layout and update the documentation rather than introducing a second convention.
 
