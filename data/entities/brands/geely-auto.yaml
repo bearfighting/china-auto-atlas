@@ -36,7 +36,8 @@ market_codes:
 seed_market_notes:
 - Official Geely material says the brand covered nearly 20 mainstream European markets by March 2026; listed codes
   are only directly named examples, not an exhaustive footprint.
-vehicle_ids: []
+vehicle_ids:
+- geely-ex5
 seed_vehicle_names:
 - EX5
 - EX5 EM-i

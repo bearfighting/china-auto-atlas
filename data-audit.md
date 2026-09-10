@@ -78,6 +78,23 @@ DiSus-C and DiSus-A as separate records
 
 These should not be added merely from secondary descriptions or because a target count requires them.
 
+## Geely / Zeekr slice audit
+
+| Area | Result | Decision |
+|---|---|---|
+| Brand reverse indexes | `geely-auto` → `geely-ex5`; `zeekr` → `zeekr-7x` | corrected and kept aligned with vehicle `brand_id` |
+| Manufacturer relationships | EX5 uses `geely-auto-group`; 7X uses `zeekr-group` | retain existing operating-company distinctions |
+| Platform relationships | EX5 → `geely-gea`; 7X → `geely-sea` | typed `based_on` records and platform reverse indexes agree |
+| Technology applications | two technologies on each vehicle | vehicle and technology application indexes agree |
+| Pending corporate references | Geely Auto Group / Zeekr Group references remain pending where role scope is not exhaustive | do not upgrade from entity existence alone |
+| EX5 / E5 naming | E5 and Galaxy E5 remain aliases/market-name context on the EX5 record | no duplicate Vehicle created |
+| Technology history | ZEEKR 800V and Golden Battery retain unknown first dates and no guessed events | historical event pass remains deferred |
+| News links | Existing EX5 global-unveil and 7X launch News are now indexed from their Vehicles | reuse existing IDs; no duplicate News created |
+
+The three existing Geely / Zeekr market specifications remain separate records. `GLOBAL_REFERENCE` for EX5 is not treated as a
+sale-market record; the two 7X records remain separated by China and EU markets. Existing unknown, claimed and confirmed evidence
+states are preserved.
+
 ## BYD vertical-slice closeout
 
 The closeout pass completed the relationship and evidence review for the ten priority vehicles. Five News documents now connect

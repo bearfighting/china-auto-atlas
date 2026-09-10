@@ -15,7 +15,6 @@ topic_ids:
 entity_ids:
   - zeekr
   - zeekr-7x
-  - geely-sea
 event_ids:
   - event-zeekr-7x-china-launch-2024
 source_ids:

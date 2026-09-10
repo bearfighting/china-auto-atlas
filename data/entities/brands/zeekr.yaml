@@ -27,7 +27,8 @@ market_codes:
 seed_market_notes:
 - Official sources document expansion into Europe, Latin America, the Middle East and Asia; country-level availability
   should be collected separately.
-vehicle_ids: []
+vehicle_ids:
+- zeekr-7x
 seed_vehicle_names:
 - ZEEKR 001
 - ZEEKR 007

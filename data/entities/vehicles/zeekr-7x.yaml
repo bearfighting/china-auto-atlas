@@ -43,7 +43,8 @@ timeline:
 event_ids:
 - event-zeekr-7x-china-launch-2024
 - event-zeekr-7x-china-delivery-2024
-news_ids: []
+news_ids:
+- news-2024-09-20-zeekr-7x-launch
 source_ids:
 - src-zeekr-7x-cn
 - src-zeekr-7x-eu

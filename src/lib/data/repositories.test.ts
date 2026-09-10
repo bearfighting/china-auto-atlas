@@ -88,6 +88,22 @@ describe("generated data repositories", () => {
     expect(vehicleRepository.getRelatedNews("zeekr-7x").map((item) => item.slug)).toContain("zeekr-7x-launch");
   });
 
+  it("keeps Geely and Zeekr brand indexes and vehicle relations aligned", () => {
+    expect(loadDataIndex().entities.find((entity) => entity.id === "geely-auto")?.vehicle_ids).toEqual(["geely-ex5"]);
+    expect(loadDataIndex().entities.find((entity) => entity.id === "zeekr")?.vehicle_ids).toEqual(["zeekr-7x"]);
+    expect(vehicleRepository.getRelatedNews("geely-ex5").map((item) => item.slug)).toContain("geely-ex5-global-unveil");
+    expect(vehicleRepository.getPlatform("geely-ex5")?.id).toBe("geely-gea");
+    expect(vehicleRepository.getTechnologies("geely-ex5").map((technology) => technology.id)).toEqual([
+      "geely-short-blade-battery",
+      "geely-11-in-1-electric-drive",
+    ]);
+    expect(vehicleRepository.getPlatform("zeekr-7x")?.id).toBe("geely-sea");
+    expect(vehicleRepository.getTechnologies("zeekr-7x").map((technology) => technology.id)).toEqual([
+      "zeekr-800v-system",
+      "zeekr-golden-battery",
+    ]);
+  });
+
   it("exposes the BYD vertical-slice news and market specification", () => {
     expect(vehicleRepository.getRelatedNews("byd-sealion-7").map((item) => item.slug)).toContain(
       "byd-sealion-7-europe-launch",
