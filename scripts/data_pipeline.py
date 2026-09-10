@@ -311,7 +311,12 @@ def build() -> int:
     return 0
 
 
-parser = argparse.ArgumentParser()
-parser.add_argument("command", choices=("validate", "build"))
-args = parser.parse_args()
-raise SystemExit(validate() if args.command == "validate" else build())
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("command", choices=("validate", "build"))
+    args = parser.parse_args()
+    return validate() if args.command == "validate" else build()
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
