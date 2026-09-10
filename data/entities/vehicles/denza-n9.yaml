@@ -28,7 +28,8 @@ platform_id: null
 technology_ids: []
 event_ids:
 - event-denza-n9-shanghai-2025
-news_ids: []
+news_ids:
+- news-2025-05-08-denza-n9-shanghai-presentation
 source_ids:
 - src-denza-n9-shanghai-2025
 evidence_status: confirmed

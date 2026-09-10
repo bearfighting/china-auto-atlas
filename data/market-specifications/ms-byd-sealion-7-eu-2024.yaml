@@ -1,0 +1,51 @@
+schema_version: 1
+type: market_specification
+id: ms-byd-sealion-7-eu-2024
+vehicle_id: byd-sealion-7
+market: EU
+valid_from: '2024-11-15'
+status: available
+currency: null
+variants:
+- name: Comfort
+  powertrain_type: bev
+  battery_kwh: 82.5
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 482
+    standard: WLTP
+    evidence_status: claimed
+  motors: 1
+  drive: RWD
+  max_power_kw: 230
+  dc_charge_kw: 150
+- name: Design AWD
+  powertrain_type: bev
+  battery_kwh: 82.5
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 456
+    standard: WLTP
+    evidence_status: claimed
+  motors: 2
+  drive: AWD
+  max_power_kw: 390
+  dc_charge_kw: 150
+- name: Excellence AWD
+  powertrain_type: bev
+  battery_kwh: 91.3
+  battery_type: LFP Blade Battery
+  range:
+    value_km: 502
+    standard: WLTP
+    evidence_status: claimed
+  motors: 2
+  drive: AWD
+  max_power_kw: 390
+  dc_charge_kw: 230
+source_ids:
+- src-byd-sealion-7-europe-2024
+evidence_status: confirmed
+last_verified_at: '2026-09-10'
+notes:
+- Prices are omitted because the cited launch source does not establish one EU-wide price; market-specific pricing should remain separate.

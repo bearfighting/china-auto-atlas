@@ -29,7 +29,8 @@ technology_ids:
 - byd-blade-battery
 event_ids:
 - event-byd-han-launch-2020
-news_ids: []
+news_ids:
+- news-2020-07-14-byd-han-launch
 source_ids:
 - src-byd-han-launch-2020
 evidence_status: confirmed

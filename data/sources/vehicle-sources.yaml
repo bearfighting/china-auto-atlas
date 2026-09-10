@@ -294,6 +294,11 @@ sources:
   supports:
   - BYD SEALION 7 was introduced to the European market in November 2024.
   - The model uses BYD Blade Battery and e-Platform 3.0.
+  - The model uses Cell-to-Body construction and is offered as a pure-electric vehicle.
+  - Comfort, Design AWD and Excellence AWD versions have 82.5, 82.5 and 91.3 kWh batteries respectively.
+  - The three versions have 482, 456 and 502 km of WLTP combined range respectively.
+  - Comfort uses rear-wheel drive and 230 kW; Design AWD and Excellence AWD use all-wheel drive and 390 kW.
+  - Comfort and Design AWD support up to 150 kW DC charging; Excellence AWD supports up to 230 kW.
   evidence_status: confirmed
 - id: src-byd-han-launch-2020
   type: source

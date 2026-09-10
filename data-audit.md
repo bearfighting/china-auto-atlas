@@ -7,7 +7,7 @@
 
 ```text
 Validation: passed before and after audit documentation
-Current build: 53 entities, 61 events, 98 sources, 32 relationships
+Current build: 53 entities, 61 events, 98 sources, 32 relationships, 16 market specifications, 12 News documents
 Technology records reviewed: 12
 Platform records reviewed: 4
 ```
@@ -77,3 +77,14 @@ DiSus-C and DiSus-A as separate records
 ```
 
 These should not be added merely from secondary descriptions or because a target count requires them.
+
+## BYD vertical-slice closeout
+
+The closeout pass completed the relationship and evidence review for the ten priority vehicles. Five News documents now connect
+SEALION 7, Han, Tang, Song L and DENZA N9 to their existing events and primary sources. SEALION 7 also has a separate EU market
+specification with variant-level WLTP range, battery, drive and charging values; prices remain unknown because the cited source does
+not establish one EU-wide price.
+
+The remaining priority vehicles have News or explicit existing coverage as follows: SEAL, DENZA D9, YANGWANG U8 and FANGCHENGBAO
+BAO 5 retain their existing event/source paths, while YANGWANG U9 retains its launch News. No new platform or technology relation
+was added for Song L or DENZA N9 without direct source support.

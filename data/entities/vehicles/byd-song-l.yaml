@@ -28,7 +28,8 @@ platform_id: null
 technology_ids: []
 event_ids:
 - event-byd-song-l-concept-debut-2023
-news_ids: []
+news_ids:
+- news-2023-04-18-byd-song-l-concept-debut
 source_ids:
 - src-byd-song-l-debut-2023
 evidence_status: confirmed

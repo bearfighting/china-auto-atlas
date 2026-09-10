@@ -19,21 +19,26 @@ import type { NewsDocument } from "./types";
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
     expect(loadDataIndex().entities.length).toBeGreaterThan(0);
-    expect(loadContentIndex().documents.length).toBe(7);
+    expect(loadContentIndex().documents.length).toBe(12);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
   });
 
   it("lists news in stable chronological order", () => {
     const news = newsRepository.list();
-    expect(news).toHaveLength(7);
+    expect(news).toHaveLength(12);
     expect(news.map((item) => item.slug)).toEqual([
+      "denza-n9-shanghai-presentation",
       "byd-super-e-platform-launch",
+      "byd-sealion-7-europe-launch",
       "zeekr-7x-launch",
       "geely-ex5-global-unveil",
       "yangwang-u9-launch",
+      "byd-song-l-concept-debut",
       "avatr-11-global-launch",
       "chn-platform-launch",
+      "byd-tang-norway-launch",
+      "byd-han-launch",
       "byd-blade-battery-launch",
     ]);
   });
@@ -50,21 +55,30 @@ describe("generated data repositories", () => {
     expect(newsRepository.listPage()).toMatchObject({
       page: 1,
       pageSize: 10,
-      total: 7,
-      totalPages: 1,
+      total: 12,
+      totalPages: 2,
     });
     expect(newsRepository.listPage({ page: 1, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "denza-n9-shanghai-presentation",
       "byd-super-e-platform-launch",
-      "zeekr-7x-launch",
     ]);
     expect(newsRepository.listPage({ page: 3, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
-      "avatr-11-global-launch",
-      "chn-platform-launch",
+      "geely-ex5-global-unveil",
+      "yangwang-u9-launch",
     ]);
     expect(newsRepository.listPage({ page: 4, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-song-l-concept-debut",
+      "avatr-11-global-launch",
+    ]);
+    expect(newsRepository.listPage({ page: 5, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "chn-platform-launch",
+      "byd-tang-norway-launch",
+    ]);
+    expect(newsRepository.listPage({ page: 6, pageSize: 2 }).items.map((item) => item.slug)).toEqual([
+      "byd-han-launch",
       "byd-blade-battery-launch",
     ]);
-    expect(newsRepository.listPage({ page: 5, pageSize: 2 }).items).toEqual([]);
+    expect(newsRepository.listPage({ page: 7, pageSize: 2 }).items).toEqual([]);
     expect(newsRepository.listPage({ page: 0, pageSize: 0 })).toMatchObject({ page: 1, pageSize: 10 });
   });
 
@@ -72,6 +86,18 @@ describe("generated data repositories", () => {
     expect(vehicleRepository.getById("zeekr-7x")?.id).toBe("zeekr-7x");
     expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");
     expect(vehicleRepository.getRelatedNews("zeekr-7x").map((item) => item.slug)).toContain("zeekr-7x-launch");
+  });
+
+  it("exposes the BYD vertical-slice news and market specification", () => {
+    expect(vehicleRepository.getRelatedNews("byd-sealion-7").map((item) => item.slug)).toContain(
+      "byd-sealion-7-europe-launch",
+    );
+    expect(vehicleRepository.getRelatedNews("byd-han").map((item) => item.slug)).toContain("byd-han-launch");
+    const sealionSpecification = vehicleRepository.getMarketSpecifications("byd-sealion-7")[0];
+    expect(sealionSpecification?.id).toBe("ms-byd-sealion-7-eu-2024");
+    expect(sealionSpecification?.variants?.every((variant) => variant.powertrain_type === "bev")).toBe(true);
+    expect(sealionSpecification?.variants?.every((variant) => variant.range?.standard === "WLTP")).toBe(true);
+    expect(newsRepository.getRelatedEvents("news-2025-05-08-denza-n9-shanghai-presentation")).not.toEqual([]);
   });
 
   it("lists vehicles with stable detail identifiers", () => {
@@ -166,7 +192,7 @@ describe("generated data repositories", () => {
   });
 
   it("provides deterministic basic search across entities and news", () => {
-    expect(loadSearchIndex()).toHaveLength(55);
+    expect(loadSearchIndex()).toHaveLength(60);
     expect(loadSearchIndex().some((entry) => (entry.type as string) === "platform")).toBe(false);
     expect(searchRepository.search("")).toEqual([]);
     expect(searchRepository.search("极氪 7X")[0]).toMatchObject({

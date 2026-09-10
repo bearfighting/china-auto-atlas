@@ -28,7 +28,8 @@ technology_ids:
 - byd-blade-battery
 event_ids:
 - event-byd-tang-norway-launch-2021
-news_ids: []
+news_ids:
+- news-2021-byd-tang-norway-launch
 source_ids:
 - src-byd-tang-norway-2021
 evidence_status: confirmed

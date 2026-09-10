@@ -31,10 +31,13 @@ platform_id: byd-e-platform-3
 technology_ids:
 - byd-blade-battery
 - byd-ctb
+market_spec_ids:
+- ms-byd-sealion-7-eu-2024
 event_ids:
 - event-byd-sealion-7-unveil-2023
 - event-byd-sealion-7-europe-launch-2024
-news_ids: []
+news_ids:
+- news-2024-11-15-byd-sealion-7-europe-launch
 source_ids:
 - src-byd-sealion-7-europe-2024
 - src-byd-sealion-07-guangzhou-2023
