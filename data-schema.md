@@ -482,16 +482,18 @@ Relationships should use a reusable structure.
 Example:
 
 ```yaml
+id: rel-geely-owns-zeekr
+type: relationship
 from_id: geely-holding
 to_id: zeekr
-type: owns
+relationship: owns
 
 valid_from: 2021-01-01
 valid_to: null
 
-status: confirmed
+evidence_status: confirmed
 
-sources:
+source_ids:
   - source-geely-annual-report
 ```
 
@@ -1035,31 +1037,44 @@ The MVP should only model trims when they materially affect major specifications
 Example:
 
 ```yaml
-id: 800v-architecture
+id: zeekr-800v-system
 type: technology
+kind: branded
 
 names:
-  en: 800V Electrical Architecture
-  zh-CN: 800V 高压电气架构
+  en: ZEEKR 800V / 3×800V Ecosystem
+  zh-CN: 极氪800V / 3×800V生态
 
+domain_ids:
+  - electrical-architecture
+category_ids:
+  - high-voltage-architecture
+family_ids: []
+
+# Legacy classification fields remain during migration.
 category: electrical-architecture
+secondary_categories: []
 
 description:
   en: ...
 
 status: active
 
-related_vehicles:
+vehicle_ids:
   - zeekr-7x
 
-related_platforms:
-  - sea-platform
-
-sources:
-  - source-800v-explainer
+source_ids:
+  - src-zeekr-group-tech
+  - src-zeekr-7x
+evidence_status: confirmed
 ```
 
-Technology categories may include:
+The current Technology records use `domain_ids`, `category_ids`, and `family_ids` for controlled taxonomy references. The legacy
+`category` and `secondary_categories` fields remain during migration and must not be silently reinterpreted. Technology-to-Vehicle
+references use `vehicle_ids`; related entities are resolved through repositories rather than copied into fields such as
+`related_vehicles` or `related_platforms`.
+
+Legacy category values may include:
 
 ```text
 battery
@@ -2478,3 +2493,78 @@ The test for every schema decision should be:
 > **Will this make the information easier to verify, preserve, connect, or understand five years from now?**
 
 If not, the complexity may not be justified.
+
+---
+
+# Current Technology Model Implementation Contract
+
+The implemented Technology model extends the original seed schema while preserving existing IDs, slugs, URLs, and legacy
+classification fields.
+
+## Technology
+
+Technology records may contain:
+
+```yaml
+kind: branded
+domain_ids:
+  - energy-storage
+category_ids:
+  - battery-pack
+family_ids:
+  - lfp
+```
+
+`kind` is one of `generic`, `branded`, `system`, `component`, or `process`. `domain_ids`, `category_ids`, and `family_ids`
+reference the corresponding taxonomy record types. Existing `category` and `secondary_categories` remain available during the
+migration window and are not reinterpreted as the new taxonomy.
+
+## Taxonomy and index boundary
+
+The four controlled registries are:
+
+```text
+technology_domains
+technology_categories
+technology_families
+powertrain_architectures
+```
+
+Their records use the corresponding `technology_domain`, `technology_category`, `technology_family`, and
+`powertrain_architecture` types. Categories require `domain_id` and may use `parent_id: null` or a Category ID.
+
+Taxonomy records are emitted into their own arrays in `data-index.json`. They are not members of `entities`, `search-index.json`,
+or sitemap output, and they do not have standalone public routes.
+
+## Relationships
+
+The current relationship record shape is:
+
+```yaml
+id: rel-example
+type: relationship
+from_id: technology-a
+to_id: technology-family-a
+relationship: based_on
+source_ids:
+  - source-example
+evidence_status: confirmed
+```
+
+Technology relationship types and endpoint combinations are validated by the data pipeline. Relationship endpoints use stable IDs;
+reverse lookups are derived by repositories and are not copied into Technology records.
+
+## Vehicle architecture
+
+Vehicle classification remains in `powertrain_types`. Architecture is optional and explicit:
+
+```yaml
+powertrain_types:
+  - bev
+powertrain_architecture_id: battery-electric
+motor_positions:
+  - e-axle
+```
+
+`motor_positions` accepts `p0`, `p1`, `p2`, `p3`, `p4`, `e-axle`, and `unknown`. Missing optional facts are unknown and must not be
+inferred from another field.

@@ -1,10 +1,33 @@
 # China Auto Atlas — Vehicle Seed v0.1
 
-Verified: **2026-09-08**
+Seed verification date: **2026-09-08**
 
-This prototype creates **one Vehicle entity for each of the first ten Brand entities**:
+Historical seed scope: this prototype originally created **one Vehicle entity for each of the first ten Brand entities**. The
+current generated index contains 25 Vehicle entities; the original count is retained here as seed history, not as a current
+dataset count:
 
 Canonical records: `data/entities/vehicles/`; market snapshots are stored in `data/market-specifications/`.
+
+## Current classification and architecture fields
+
+Vehicle records use lower-case controlled `powertrain_types` values such as `bev`, `phev`, and `erev`. The page layer may render
+these as `BEV`, `PHEV`, and `EREV`, but the stored values remain unchanged.
+
+When a source explicitly supports a powertrain architecture, the Vehicle may include:
+
+```yaml
+powertrain_architecture_id: battery-electric
+motor_positions:
+  - e-axle
+```
+
+`powertrain_architecture_id` references a Powertrain Architecture taxonomy record. `motor_positions` is optional and uses the
+controlled values `p0`, `p1`, `p2`, `p3`, `p4`, `e-axle`, and `unknown`. Missing architecture or motor-position facts are `null`
+or absent and are rendered as Unknown.
+
+`powertrain_types` describes vehicle classification; it does not imply a specific architecture. The pipeline and page layer must
+not infer `series-parallel-hybrid` or another architecture from `bev`, `phev`, or `erev` alone. `technology_ids` continues to
+reference concrete Technology records such as BYD DM-i and remains separate from both classification and architecture.
 
 | Brand | Vehicle | Main model test |
 |---|---|---|
@@ -131,7 +154,8 @@ Before adding 50+ vehicles, stabilize these concepts:
 9. source-level evidence attached to individual facts;
 10. technology IDs only after Technology entities exist.
 
-The eight prototypes are enough to begin rendering real Vehicle pages and expose where the schema/UI breaks.
+The original eight prototypes were enough to begin rendering real Vehicle pages and expose where the schema/UI breaks. They are
+historical seed scope; the current generated index contains 25 Vehicle entities.
 
 ## MVP normalization conventions
 

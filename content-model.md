@@ -2215,3 +2215,32 @@ The migration from JSON to a database should preserve:
 * market and date semantics.
 
 The purpose of this boundary is to keep the MVP easy to edit while preserving a realistic path toward database-backed editorial workflows.
+
+---
+
+# Current Technology Model Semantics
+
+The implemented model keeps these concepts separate:
+
+```text
+Classification    the vehicle's controlled powertrain type
+Architecture      how the vehicle powertrain is organized
+Technology        a concrete technical concept or manufacturer implementation
+Family            a reusable general technical route
+Category          a controlled technology organization area
+Specification     a market, variant, date, and evidence-scoped value
+```
+
+`Vehicle.powertrain_types` stores values such as `bev`, `phev`, and `erev`. It does not determine
+`Vehicle.powertrain_architecture_id`; architecture is recorded only when a source explicitly supports it. `Vehicle.technology_ids`
+continues to point to concrete Technology records such as BYD DM-i and is separate from both classification and architecture.
+
+Technology records may reference multiple Domains, Categories, and Families. These are controlled taxonomy records rather than
+public entities. They provide context on Technology pages but do not create standalone routes, search records, or sitemap entries.
+
+Relationships use stable `from_id` and `to_id` values, a controlled relationship type, `source_ids`, and `evidence_status`.
+Reverse relationships are derived by resolvers/repositories instead of being duplicated in entity YAML. Category and Family are not
+copied into a Vehicle's concrete Technology list.
+
+Unknown optional facts remain unknown. In particular, the absence of an Architecture or motor position does not assert that the
+vehicle does not have one.

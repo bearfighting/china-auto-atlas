@@ -1,6 +1,6 @@
 # China Auto Atlas — Technology Model 执行清单
 
-**Status:** PR 4 implemented; PR 5 pending
+**Status:** PR 5 implemented; Technology Model complete
 **Related design:** `technology-model-implementation-plan.md`  
 **Scope:** Technology taxonomy、Powertrain Architecture、Technology relations、repository、页面和测试  
 **Last updated:** 2026-09-11
@@ -257,36 +257,58 @@
 
 ### 文档
 
-- [ ] 更新 `data-schema.md` 的 Technology、taxonomy、Vehicle Architecture 和 relationship 章节。
-- [ ] 更新 `content-model.md`，明确 Classification、Architecture、Technology、Family、Category、Specification 的边界。
-- [ ] 更新 `data-access-architecture.md`，记录 taxonomy repository 和关系 resolver。
-- [ ] 更新 `data/docs/technology.md` 的迁移字段和编辑规则。
-- [ ] 将本清单中已完成的事项标记为完成，或记录未完成原因。
-- [ ] 当所有 Technology 完成迁移后，将 `technology-model-implementation-plan.md` 状态从 `Draft` 改为 `Implemented`。
+- [x] 更新 `data-schema.md` 的 Technology、taxonomy、Vehicle Architecture 和 relationship 章节。
+- [x] 更新 `content-model.md`，明确 Classification、Architecture、Technology、Family、Category、Specification 的边界。
+- [x] 更新 `data-access-architecture.md`，记录 taxonomy repository 和关系 resolver。
+- [x] 更新 `data/docs/technology.md` 的迁移字段和编辑规则。
+- [x] 更新 `data/docs/vehicle.md` 的 Classification、Architecture 和 Technology 约定。
+- [x] 将本清单中已完成的事项标记为完成，或记录未完成原因。
+- [x] 当所有 Technology 完成迁移后，将 `technology-model-implementation-plan.md` 状态从 `Draft` 改为 `Implemented`。
 
 ### 全量验收命令
 
-- [ ] `python3 scripts/data_pipeline.py validate`
-- [ ] `python3 scripts/data_pipeline.py build`
-- [ ] `pnpm test`
-- [ ] `pnpm typecheck`
-- [ ] `pnpm lint`
-- [ ] `pnpm format:check`
-- [ ] `pnpm build`
-- [ ] `pnpm test:e2e`
-- [ ] `pnpm quality:check`
+- [x] `python3 scripts/data_pipeline.py validate`
+- [x] `python3 scripts/data_pipeline.py build`
+- [x] `pnpm test`
+- [x] `pnpm typecheck`
+- [x] `pnpm lint`
+- [x] `pnpm format:check`
+- [x] `pnpm build`
+- [x] `pnpm test:e2e`
+- [x] `pnpm quality:check`
+
+### PR 5 baseline
+
+```text
+entities: 74
+technologies: 15
+vehicles: 25
+relationships: 37
+events: 71
+sources: 111
+market_specifications: 20
+search-index: 81
+technology_domains: 6
+technology_categories: 9
+technology_families: 5
+powertrain_architectures: 8
+data validation: pass (413 IDs, 953 references)
+unit tests: pass (42 Vitest tests, 30 data tests)
+E2E: pass (71 passed, 7 skipped)
+production build: pass (166 static pages)
+```
 
 ### Definition of Done
 
-- [ ] Blade Battery、DM-i、DiSus-P、ZEEKR 800V System、Geely 11-in-1 Electric Drive 均能用统一模型表达。
-- [ ] Technology 可以关联多个 Domain、Category 和 Family。
-- [ ] CTB 和 CTC 保持独立，同时可以表达结构集成语义。
-- [ ] Vehicle 的 Classification、Architecture 和 Technology 在数据与页面上分离。
-- [ ] Technology relation 有类型约束、来源和证据状态。
-- [ ] taxonomy 不进入公开 entity、search index、sitemap 或独立路由。
-- [ ] 现有 ID、URL、Vehicle technology references、搜索行为和反向 Vehicle 查询不回归。
-- [ ] 缺失事实继续显示为 unknown，不被推断为否定事实。
-- [ ] 完成迁移前旧 `category` 和 `secondary_categories` 未删除。
+- [x] Blade Battery、DM-i、DiSus-P、ZEEKR 800V System、Geely 11-in-1 Electric Drive 均能用统一模型表达。
+- [x] Technology 可以关联多个 Domain、Category 和 Family。
+- [x] CTB 和 CTC 保持独立，同时可以表达结构集成语义。
+- [x] Vehicle 的 Classification、Architecture 和 Technology 在数据与页面上分离。
+- [x] Technology relation 有类型约束、来源和证据状态。
+- [x] taxonomy 不进入公开 entity、search index、sitemap 或独立路由。
+- [x] 现有 ID、URL、Vehicle technology references、搜索行为和反向 Vehicle 查询不回归。
+- [x] 缺失事实继续显示为 unknown，不被推断为否定事实。
+- [x] 完成迁移前旧 `category` 和 `secondary_categories` 未删除。
 
 ## 暂不纳入本次执行
 

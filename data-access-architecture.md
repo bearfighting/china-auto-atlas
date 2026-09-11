@@ -69,6 +69,10 @@ The pipeline reads YAML, validates syntax and references, and writes global JSON
 pages and components never import files from `data/` or depend on source paths. Physical directories are authoring details.
 The indexes resolve references across entities, relationships, events, market specifications, sources, media, and content.
 
+The current `data-index.json` also contains separate arrays for `technology_domains`, `technology_categories`,
+`technology_families`, and `powertrain_architectures`. These taxonomy records are read through repositories and are not included
+in `entities`. They do not create search entries, sitemap entries, or public routes.
+
 The build pipeline should read files, validate schemas, validate references, generate a search index, and generate pages.
 
 ## Stability Rules
@@ -100,6 +104,22 @@ search(query)
 Missing records return `null` for single-record operations and an empty list for collection operations. Missing optional
 facts remain `null` and must be rendered as unknown, not as a negative assertion. Localized names fall back from the
 requested locale to `en`, then to the first available name.
+
+Current taxonomy and relationship operations are:
+
+```text
+TechnologyDomainRepository.list/getById
+TechnologyCategoryRepository.list/getById/getChildren
+TechnologyFamilyRepository.list/getById
+PowertrainArchitectureRepository.list/getById
+
+TechnologyRepository.getDomains/getCategories/getFamilies
+TechnologyRepository.getRelatedTechnologies/getRelatedRelationships
+VehicleRepository.getPowertrainArchitecture
+```
+
+Relationship resolution filters generated `Relationship` records by `from_id` or `to_id`; reverse relationships are derived at
+read time rather than copied into entity records. Pages and components continue to consume repository results only.
 
 ## Database Migration
 

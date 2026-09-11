@@ -1,8 +1,8 @@
 # China Auto Atlas — Technology Seed v0.1
 
-Verified: **2026-09-08**
+Seed verification date: **2026-09-08**
 
-This pack formalizes **12 Technology entities** already needed by the first Vehicle prototypes.
+This pack formalizes **15 Technology entities** currently used by the first Vehicle prototypes.
 
 Canonical records: `data/entities/technologies/`.
 
@@ -12,18 +12,33 @@ Canonical records: `data/entities/technologies/`.
 |---|---|---|
 | `byd-blade-battery` | battery | BYD / DENZA / YANGWANG / FANGCHENGBAO |
 | `byd-ctb` | manufacturing / battery | BYD SEAL |
+| `byd-ctc` | manufacturing / battery | structural integration context |
 | `byd-dm-i` | powertrain | BYD / DENZA |
+| `byd-dm-p` | powertrain | BYD all-wheel-drive hybrid context |
 | `byd-dmo` | powertrain / platform | BAO 5 |
 | `byd-disus-p` | chassis | U8 / BAO 5 |
-| `byd-ctc` | manufacturing / battery | DMO-related structural integration |
+| `byd-disus-x` | chassis | BYD body-control context |
 | `byd-e4-platform` | platform / powertrain | YANGWANG U8 |
 | `avatr-800v-sic` | electrical architecture | AVATR 11 |
+| `byd-super-e-platform` | electrical architecture | BYD high-voltage charging context |
 | `zeekr-800v-system` | electrical architecture | ZEEKR 7X |
 | `zeekr-golden-battery` | battery | ZEEKR 7X |
 | `geely-short-blade-battery` | battery | GEELY EX5 |
 | `geely-11-in-1-electric-drive` | powertrain | GEELY EX5 |
 
 ## Editorial rule: technology pages are not marketing pages
+
+## Current model and editing rules
+
+Technology records use `kind`, `domain_ids`, `category_ids`, and optional `family_ids` in addition to the legacy `category` and
+`secondary_categories` fields. The legacy fields remain during the migration window and must not be silently reinterpreted as the
+new taxonomy.
+
+Domains, Categories, Families, and Powertrain Architectures are controlled taxonomy records under `data/taxonomy/`. They are
+available through the generated data index, but are not public entities, search records, sitemap entries, or standalone routes.
+
+Technology relationships use stable `from_id` and `to_id` values. Every relationship requires `source_ids` and an
+`evidence_status`; unsupported or inferred relationships must not be added. CTB and CTC remain separate Technology IDs.
 
 Each Technology record separates:
 
@@ -128,7 +143,8 @@ A Vehicle can use several technologies, and a Technology can span several brands
 
 Do **not** immediately add dozens of marketing technology names.
 
-First render these 12 pages and test:
+All 15 Technology records are included in the production build, with representative Technology list/detail pages covered by E2E
+tests. Future work should focus on evidence quality rather than adding unverified marketing names.
 
 ```text
 Technology

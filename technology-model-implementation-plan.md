@@ -1,6 +1,6 @@
 # China Auto Atlas — Technology Model 实施方案
 
-**Status:** Draft
+**Status:** Implemented
 **Scope:** Technology taxonomy、Technology schema、Powertrain Architecture、技术关系和页面上下文
 **Date:** 2026-09-10
 
