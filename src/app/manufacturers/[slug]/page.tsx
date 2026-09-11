@@ -49,6 +49,7 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
   const brands = manufacturerRepository.getBrands(manufacturer.id);
   const factories = manufacturerRepository.getFactories(manufacturer.id);
   const productionLines = manufacturerRepository.getProductionLines(manufacturer.id);
+  const summary = manufacturerRepository.getSummary(manufacturer.id);
   const productLines = brands.flatMap((brand) => brandRepository.getProductLines(brand.id));
   const series = brands.flatMap((brand) => brandRepository.getSeries(brand.id));
   return (
@@ -62,20 +63,65 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
           ]}
         />
         <EntityHeader entity={manufacturer} eyebrow="Manufacturer" />
-        <EntityFacts>
-          <EntityFact label="Description" value={manufacturer.description} />
-          <EntityFact
-            label="Founded"
-            value={(manufacturer.founded as { value?: string } | undefined)?.value}
-          />
-          <EntityFact label="Origin" value={manufacturer.origin} />
-          <EntityFact label="Headquarters" value={manufacturer.headquarters} />
-          <EntityFact label="Company type" value={manufacturer.company_type} />
-        </EntityFacts>
-        <section className="space-y-4" aria-labelledby="manufacturer-brands">
-          <h2 id="manufacturer-brands" className="text-2xl font-semibold">
+        <section
+          id="manufacturer-overview"
+          className="scroll-mt-6 space-y-4"
+          aria-labelledby="manufacturer-overview-heading"
+        >
+          <h2 id="manufacturer-overview-heading" className="sr-only">
+            Overview
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            {summary.brandCount} associated brands · {summary.vehicleCount} vehicles ·{" "}
+            {factories.length} factories · {productionLines.length} production lines
+          </p>
+          <EntityFacts>
+            <EntityFact label="Brands" value={summary.brandCount} />
+            <EntityFact label="Vehicles" value={summary.vehicleCount} />
+            <EntityFact label="Factories" value={factories.length} />
+            <EntityFact label="Production lines" value={productionLines.length} />
+          </EntityFacts>
+          <EntityFacts>
+            <EntityFact label="Description" value={manufacturer.description} />
+            <EntityFact
+              label="Founded"
+              value={(manufacturer.founded as { value?: string } | undefined)?.value}
+            />
+            <EntityFact label="Origin" value={manufacturer.origin} />
+            <EntityFact label="Headquarters" value={manufacturer.headquarters} />
+            <EntityFact label="Company type" value={manufacturer.company_type} />
+          </EntityFacts>
+        </section>
+        <nav aria-label="Manufacturer sections" className="flex flex-wrap gap-2 border-y py-3">
+          {[
+            ["Overview", "manufacturer-overview"],
+            ["Brands", "manufacturer-brands"],
+            ["Vehicles", "manufacturer-vehicles"],
+            ["Production", "production-context"],
+            ["Events", "manufacturer-events"],
+            ["News", "manufacturer-news"],
+            ["Sources", "manufacturer-sources"],
+          ].map(([label, id]) => (
+            <a
+              key={id}
+              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              href={`#${id}`}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+        <section
+          id="manufacturer-brands"
+          className="scroll-mt-6 space-y-4"
+          aria-labelledby="manufacturer-brands-heading"
+        >
+          <h2 id="manufacturer-brands-heading" className="text-2xl font-semibold">
             Associated brands
           </h2>
+          <p className="text-sm text-muted-foreground">
+            Brands currently connected to this manufacturer in the atlas.
+          </p>
           {brands.length ? (
             <div className="flex flex-wrap gap-2">
               {brands.map((brand) => (
@@ -93,10 +139,17 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
           )}
         </section>
         {!productLines.length && !series.length ? (
-          <section className="space-y-4" aria-labelledby="manufacturer-vehicles">
-            <h2 id="manufacturer-vehicles" className="text-2xl font-semibold">
+          <section
+            id="manufacturer-vehicles"
+            className="scroll-mt-6 space-y-4"
+            aria-labelledby="manufacturer-vehicles-heading"
+          >
+            <h2 id="manufacturer-vehicles-heading" className="text-2xl font-semibold">
               Vehicles
             </h2>
+            <p className="text-sm text-muted-foreground">
+              Vehicle records currently connected to this manufacturer.
+            </p>
             {vehicles.length ? (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {vehicles.map((vehicle) => (
@@ -109,10 +162,17 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
           </section>
         ) : null}
         {productLines.length || series.length ? (
-          <section className="space-y-4" aria-labelledby="manufacturer-product-hierarchy">
-            <h2 id="manufacturer-product-hierarchy" className="text-2xl font-semibold">
+          <section
+            id="manufacturer-vehicles"
+            className="scroll-mt-6 space-y-4"
+            aria-labelledby="manufacturer-product-hierarchy-heading"
+          >
+            <h2 id="manufacturer-product-hierarchy-heading" className="text-2xl font-semibold">
               Product lines and vehicle series
             </h2>
+            <p className="text-sm text-muted-foreground">
+              Vehicle hierarchy currently connected to this manufacturer through its brands.
+            </p>
             <ProductHierarchy productLines={productLines} series={series} vehicles={vehicles} />
           </section>
         ) : null}
@@ -120,21 +180,40 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
           factories={factories}
           productionLines={productionLines}
           vehicles={vehicles}
+          showEmpty
         />
-        <section className="space-y-4" aria-labelledby="manufacturer-events">
-          <h2 id="manufacturer-events" className="text-2xl font-semibold">
+        <section
+          id="manufacturer-events"
+          className="scroll-mt-6 space-y-4"
+          aria-labelledby="manufacturer-events-heading"
+        >
+          <h2 id="manufacturer-events-heading" className="text-2xl font-semibold">
             Related events
           </h2>
+          <p className="text-sm text-muted-foreground">
+            Events currently connected to this manufacturer.
+          </p>
           <Timeline events={manufacturerRepository.getRelatedEvents(manufacturer.id)} />
         </section>
-        <section className="space-y-4" aria-labelledby="manufacturer-news">
-          <h2 id="manufacturer-news" className="text-2xl font-semibold">
+        <section
+          id="manufacturer-news"
+          className="scroll-mt-6 space-y-4"
+          aria-labelledby="manufacturer-news-heading"
+        >
+          <h2 id="manufacturer-news-heading" className="text-2xl font-semibold">
             Related news
           </h2>
+          <p className="text-sm text-muted-foreground">
+            News currently connected to this manufacturer.
+          </p>
           <RelatedNewsList documents={manufacturerRepository.getRelatedNews(manufacturer.id)} />
         </section>
-        <section className="space-y-4" aria-labelledby="manufacturer-sources">
-          <h2 id="manufacturer-sources" className="text-2xl font-semibold">
+        <section
+          id="manufacturer-sources"
+          className="scroll-mt-6 space-y-4"
+          aria-labelledby="manufacturer-sources-heading"
+        >
+          <h2 id="manufacturer-sources-heading" className="text-2xl font-semibold">
             Sources
           </h2>
           <SourceList sources={manufacturerRepository.getRelatedSources(manufacturer.id)} />

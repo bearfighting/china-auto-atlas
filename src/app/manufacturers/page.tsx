@@ -17,6 +17,11 @@ export const metadata: Metadata = {
   },
 };
 
+function manufacturerSummaryMeta(id: string): string {
+  const summary = manufacturerRepository.getSummary(id);
+  return `${summary.brandCount} brands · ${summary.vehicleCount} vehicles · ${summary.newsCount} news · ${summary.sourceCount} sources`;
+}
+
 export default function ManufacturersPage() {
   const manufacturers = manufacturerRepository.list();
   return (
@@ -40,6 +45,7 @@ export default function ManufacturersPage() {
                 titleZh={manufacturer.names?.["zh-CN"]}
                 eyebrow="Manufacturer"
                 status={manufacturer.status}
+                meta={manufacturerSummaryMeta(manufacturer.id)}
               />
             ))}
           </div>

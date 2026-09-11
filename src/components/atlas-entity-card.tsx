@@ -29,7 +29,7 @@ export function AtlasEntityCard({
           <Badge variant="outline">{eyebrow}</Badge>
           {status ? <Badge variant="muted">{status}</Badge> : null}
         </div>
-        <CardTitle>
+        <CardTitle className="leading-tight">
           <Link
             className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             href={href}

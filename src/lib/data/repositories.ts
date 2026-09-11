@@ -42,6 +42,7 @@ import type {
   VehiclePageOptions,
   BrandPage,
   BrandPageOptions,
+  ManufacturerSummary,
   NewsFilterOptions,
   NewsPage,
   NewsPageOptions,
@@ -420,6 +421,14 @@ export const productionLineRepository = {
 
 export const manufacturerRepository = {
   ...relatedEntityRepository<Manufacturer>("manufacturer"),
+  getSummary(id: string): ManufacturerSummary {
+    return {
+      brandCount: this.getBrands(id).length,
+      vehicleCount: this.getVehicles(id).length,
+      newsCount: this.getRelatedNews(id).length,
+      sourceCount: this.getRelatedSources(id).length,
+    };
+  },
   getVehicles(id: string): Vehicle[] {
     return vehiclesRelatedTo(loadDataIndex(), id);
   },

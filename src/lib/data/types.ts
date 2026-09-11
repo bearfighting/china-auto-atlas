@@ -165,6 +165,13 @@ export type BrandPage = {
   totalPages: number;
 };
 
+export type ManufacturerSummary = {
+  brandCount: number;
+  vehicleCount: number;
+  newsCount: number;
+  sourceCount: number;
+};
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;

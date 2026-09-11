@@ -566,6 +566,21 @@ describe("generated data repositories", () => {
     expect(platformById("geely-sea")?.type).toBe("platform");
   });
 
+  it("provides manufacturer relationship summaries without changing relations", () => {
+    expect(manufacturerRepository.getSummary("byd-company")).toEqual({
+      brandCount: 4,
+      vehicleCount: 11,
+      newsCount: 8,
+      sourceCount: 2,
+    });
+    expect(manufacturerRepository.getSummary("does-not-exist")).toEqual({
+      brandCount: 0,
+      vehicleCount: 0,
+      newsCount: 0,
+      sourceCount: 0,
+    });
+  });
+
   it("resolves typed entity relations and media", () => {
     expect(brandRepository.getRelatedEvents("zeekr").length).toBeGreaterThan(0);
     expect(brandRepository.getRelatedSources("zeekr").length).toBeGreaterThan(0);

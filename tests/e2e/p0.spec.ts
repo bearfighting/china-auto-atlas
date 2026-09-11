@@ -127,6 +127,15 @@ test("discovers entity collections from the desktop primary navigation", async (
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/brands$/);
 });
 
+test("renders manufacturer relationship summaries", async ({ page }) => {
+  await page.goto("/manufacturers");
+  await expect(page.getByRole("heading", { name: "Manufacturers", exact: true })).toBeVisible();
+  await expect(page.getByTestId("atlas-entity-card")).toHaveCount(8);
+  await expect(page.getByTestId("atlas-entity-card").first()).toContainText(
+    /\d+ brands · \d+ vehicles · \d+ news · \d+ sources/,
+  );
+});
+
 test("searches brands and handles an out-of-range page", async ({ page }) => {
   await page.goto("/brands");
   await expect(page.getByText("Showing 1–10 of 10 brands")).toBeVisible();
@@ -339,6 +348,20 @@ test("renders Phase 4 entity detail pages and stable relationships", async ({ pa
       new RegExp(route.path),
     );
     await expect(page.getByRole("contentinfo")).toBeVisible();
+    if (route.path === "/manufacturers/zeekr-group") {
+      const sectionNav = page.getByRole("navigation", { name: "Manufacturer sections" });
+      await expect(sectionNav).toBeVisible();
+      const productionLink = sectionNav.getByRole("link", { name: "Production" });
+      await expect(productionLink).toHaveAttribute("href", "#production-context");
+      await productionLink.click();
+      await expect(page).toHaveURL(/#production-context$/);
+      await expect(page.getByRole("heading", { name: "Production context" })).toBeVisible();
+      await expect(
+        page.getByText(
+          /\d+ associated brands · \d+ vehicles · \d+ factories · \d+ production lines/,
+        ),
+      ).toBeVisible();
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
       await page.evaluate(() => document.documentElement.clientWidth),
     );
