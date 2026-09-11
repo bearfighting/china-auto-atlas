@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { AtlasEntityCard } from "@/components/atlas-entity-card";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { TechnologyFilters } from "@/components/technology-filters";
+import { TechnologyPagination } from "@/components/technology-pagination";
 import { EmptyState } from "@/components/states";
 import { PageContainer } from "@/components/page-container";
 import { technologyRepository } from "@/lib/data/repositories";
@@ -17,8 +20,42 @@ export const metadata: Metadata = {
   },
 };
 
-export default function TechnologiesPage() {
-  const technologies = technologyRepository.list();
+function queryValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function TechnologiesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    page?: string | string[];
+    q?: string | string[];
+    domain?: string | string[];
+    category?: string | string[];
+    family?: string | string[];
+  }>;
+}) {
+  const params = await searchParams;
+  const page = Number(queryValue(params.page) ?? 1);
+  const query = queryValue(params.q)?.trim() || undefined;
+  const domainId = queryValue(params.domain)?.trim() || undefined;
+  const categoryId = queryValue(params.category)?.trim() || undefined;
+  const familyId = queryValue(params.family)?.trim() || undefined;
+  const technologyPage = technologyRepository.listPage({
+    page,
+    query,
+    domainId,
+    categoryId,
+    familyId,
+  });
+  const filterOptions = technologyRepository.getFilterOptions();
+  const hasFilters = Boolean(query || domainId || categoryId || familyId);
+  const firstResult = technologyPage.items.length
+    ? (technologyPage.page - 1) * technologyPage.pageSize + 1
+    : 0;
+  const lastResult = technologyPage.items.length
+    ? firstResult + technologyPage.items.length - 1
+    : 0;
   return (
     <PageContainer>
       <div className="space-y-8">
@@ -30,9 +67,21 @@ export default function TechnologiesPage() {
             Explore technology records connected to vehicles, events, news, and sources.
           </p>
         </header>
-        {technologies.length ? (
+        <TechnologyFilters
+          options={filterOptions}
+          query={query}
+          domainId={domainId}
+          categoryId={categoryId}
+          familyId={familyId}
+        />
+        {technologyPage.total > 0 && technologyPage.items.length > 0 ? (
+          <p className="text-sm text-muted-foreground" aria-live="polite">
+            Showing {firstResult}–{lastResult} of {technologyPage.total} technologies
+          </p>
+        ) : null}
+        {technologyPage.items.length ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {technologies.map((technology) => (
+            {technologyPage.items.map((technology) => (
               <AtlasEntityCard
                 key={technology.id}
                 href={`/technologies/${slugFor(technology)}`}
@@ -48,11 +97,35 @@ export default function TechnologiesPage() {
             ))}
           </div>
         ) : (
-          <EmptyState
-            title="No technologies collected"
-            description="Technology records will appear here when they are added to the atlas."
-          />
+          <div className="space-y-4">
+            <EmptyState
+              title={
+                hasFilters ? "No technologies match these filters" : "No technologies on this page"
+              }
+              description={
+                hasFilters
+                  ? "Try another name or taxonomy filter, or clear the filters."
+                  : "Try another page or return to the first page."
+              }
+            />
+            <div className="flex justify-center">
+              <Link
+                className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                href="/technologies"
+              >
+                {hasFilters ? "Clear filters" : "Return to all Technologies"}
+              </Link>
+            </div>
+          </div>
         )}
+        <TechnologyPagination
+          page={technologyPage.page}
+          totalPages={technologyPage.totalPages}
+          query={query}
+          domainId={domainId}
+          categoryId={categoryId}
+          familyId={familyId}
+        />
       </div>
     </PageContainer>
   );

@@ -383,6 +383,47 @@ test("renders Technology taxonomy context and relationship empty state", async (
   await expect(page.locator('a[href^="/technologies/"]')).toHaveCount(0);
 });
 
+test("renders paginated technologies and applies taxonomy filters", async ({ page }) => {
+  await page.goto("/technologies");
+  await expect(page.getByText("Showing 1–12 of 15 technologies")).toBeVisible();
+  await expect(page.getByTestId("atlas-entity-card")).toHaveCount(12);
+  await expect(page.getByRole("navigation", { name: "Technology pagination" })).toBeVisible();
+  await expect(page.getByText("Previous", { exact: true })).toHaveAttribute(
+    "aria-disabled",
+    "true",
+  );
+
+  await page.goto("/technologies?page=2");
+  await expect(page).toHaveURL(/\/technologies\?page=2$/);
+  await expect(page.getByText("Showing 13–15 of 15 technologies")).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Technology pagination" }).getByText("2", { exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+
+  await page.goto("/technologies?domain=vehicle-structure");
+  await expect(page.getByText("Showing 1–2 of 2 technologies")).toBeVisible();
+  await expect(page.getByRole("link", { name: /CTB/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: /CTC/ })).toBeVisible();
+  await expect(page.getByTestId("atlas-entity-card")).toHaveCount(2);
+
+  const filters = page.locator('form[action="/technologies"]');
+  await filters.getByRole("searchbox", { name: "Search technologies" }).fill("battery");
+  await filters.getByRole("combobox", { name: "Family" }).selectOption("lfp");
+  await filters.getByRole("button", { name: "Apply filters" }).click();
+  await expect(page).toHaveURL(/\/technologies\?q=battery&family=lfp$/);
+  await expect(page.getByText("Showing 1–2 of 2 technologies")).toBeVisible();
+  await expect(page.getByRole("link", { name: /Blade Battery/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Short Blade Battery/ })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear filters" })).toHaveAttribute(
+    "href",
+    "/technologies",
+  );
+
+  await page.goto("/technologies?q=not-a-technology");
+  await expect(page.getByText("No technologies match these filters")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Technology pagination" })).toHaveCount(0);
+});
+
 test("renders vehicle classification and sourced architecture context", async ({ page }) => {
   await page.goto("/vehicles/byd-sealion-7");
   await expect(page.getByText("Classification")).toBeVisible();

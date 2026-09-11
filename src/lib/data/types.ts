@@ -172,6 +172,29 @@ export type ManufacturerSummary = {
   sourceCount: number;
 };
 
+export type TechnologyPageOptions = {
+  page?: number;
+  pageSize?: number;
+  query?: string;
+  domainId?: string;
+  categoryId?: string;
+  familyId?: string;
+};
+
+export type TechnologyFilterOptions = {
+  domains: TechnologyDomain[];
+  categories: TechnologyCategory[];
+  families: TechnologyFamily[];
+};
+
+export type TechnologyPage = {
+  items: Technology[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;

@@ -33,6 +33,9 @@ import type {
   TechnologyCategory,
   TechnologyDomain,
   TechnologyFamily,
+  TechnologyFilterOptions,
+  TechnologyPage,
+  TechnologyPageOptions,
   PowertrainArchitecture,
   Relationship,
   VehicleSeries,
@@ -450,6 +453,53 @@ export const manufacturerRepository = {
 
 export const technologyRepository = {
   ...relatedEntityRepository<Technology>("technology"),
+  listPage(options: TechnologyPageOptions = {}): TechnologyPage {
+    const page = positiveInteger(options.page, 1);
+    const pageSize = positiveInteger(options.pageSize, 12);
+    const query = options.query?.trim().toLocaleLowerCase();
+    const technologies = this.list().filter((technology) => {
+      const textMatches = !query || [
+        technology.names?.en,
+        technology.names?.["zh-CN"],
+        ...(technology.aliases ?? []),
+      ]
+        .filter(Boolean)
+        .some((value) => value?.toLocaleLowerCase().includes(query));
+      const domainMatches = !options.domainId || technology.domain_ids.includes(options.domainId);
+      const categoryMatches =
+        !options.categoryId || technology.category_ids.includes(options.categoryId);
+      const familyMatches = !options.familyId || technology.family_ids?.includes(options.familyId);
+      return textMatches && domainMatches && categoryMatches && familyMatches;
+    });
+    const total = technologies.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+    return {
+      items: technologies.slice(start, start + pageSize),
+      page,
+      pageSize,
+      total,
+      totalPages,
+    };
+  },
+  getFilterOptions(): TechnologyFilterOptions {
+    const technologies = this.list();
+    const usedDomains = new Set(technologies.flatMap((technology) => technology.domain_ids));
+    const usedCategories = new Set(technologies.flatMap((technology) => technology.category_ids));
+    const usedFamilies = new Set(
+      technologies.flatMap((technology) => technology.family_ids ?? []),
+    );
+    const sortByName = <T extends { id: string; names?: Technology["names"] }>(a: T, b: T) =>
+      displayName(a.names).localeCompare(displayName(b.names)) || a.id.localeCompare(b.id);
+    const index = loadDataIndex();
+    return {
+      domains: index.technology_domains.filter((domain) => usedDomains.has(domain.id)).sort(sortByName),
+      categories: index.technology_categories
+        .filter((category) => usedCategories.has(category.id))
+        .sort(sortByName),
+      families: index.technology_families.filter((family) => usedFamilies.has(family.id)).sort(sortByName),
+    };
+  },
   getDomains(id: string): TechnologyDomain[] {
     const technology = this.getById(id);
     const wanted = new Set(technology?.domain_ids ?? []);

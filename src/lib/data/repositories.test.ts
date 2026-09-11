@@ -53,6 +53,52 @@ describe("generated data repositories", () => {
     expect(powertrainArchitectureRepository.getById("missing-architecture")).toBeNull();
   });
 
+  it("provides stable technology pagination, search, and taxonomy filters", () => {
+    expect(technologyRepository.listPage()).toMatchObject({
+      page: 1,
+      pageSize: 12,
+      total: 15,
+      totalPages: 2,
+    });
+    expect(technologyRepository.listPage({ page: 2 }).items).toHaveLength(3);
+    expect(technologyRepository.listPage({ page: 1, pageSize: 2 }).items).toHaveLength(2);
+    expect(technologyRepository.listPage({ page: 0 })).toMatchObject({ page: 1, pageSize: 12 });
+    expect(technologyRepository.listPage({ page: 3 }).items).toEqual([]);
+    expect(
+      technologyRepository.listPage({ query: "SUPER E-PLATFORM" }).items.map((item) => item.id),
+    ).toEqual(["byd-super-e-platform"]);
+    expect(
+      technologyRepository.listPage({ query: "超级e平台" }).items.map((item) => item.id),
+    ).toEqual(["byd-super-e-platform"]);
+    expect(
+      technologyRepository.listPage({ domainId: "vehicle-structure" }).items.map((item) => item.id),
+    ).toEqual(["byd-ctb", "byd-ctc"]);
+    expect(
+      technologyRepository.listPage({ categoryId: "battery-pack", familyId: "lfp" }).items.map((item) => item.id),
+    ).toEqual(["byd-blade-battery", "geely-short-blade-battery"]);
+    expect(technologyRepository.listPage({ domainId: "missing-domain" }).items).toEqual([]);
+    expect(technologyRepository.listPage({ familyId: "missing-family" }).items).toEqual([]);
+    expect(
+      technologyRepository.listPage({ query: "battery", domainId: "energy-storage" }).total,
+    ).toBe(4);
+
+    const options = technologyRepository.getFilterOptions();
+    expect(options.domains.map((domain) => domain.id)).toEqual([
+      "chassis-dynamics",
+      "electric-drive",
+      "electrical-architecture",
+      "energy-storage",
+      "powertrain",
+      "vehicle-structure",
+    ]);
+    expect(options.categories.map((category) => category.id)).not.toContain("integrated-casting");
+    expect(options.families.map((family) => family.id)).toEqual([
+      "highly-integrated-e-drive",
+      "lfp",
+      "structural-battery-family",
+    ]);
+  });
+
   it("returns children for a taxonomy category with a parent", () => {
     const dataIndex = loadDataIndex();
     const child = {
