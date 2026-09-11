@@ -52,6 +52,7 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
   const manufacturers = vehicleRepository.getManufacturers(vehicle.id);
   const platform = vehicleRepository.getPlatform(vehicle.id);
   const technologies = vehicleRepository.getTechnologies(vehicle.id);
+  const architecture = vehicleRepository.getPowertrainArchitecture(vehicle.id);
   const events = vehicleRepository.getRelatedEvents(vehicle.id);
   const sources = vehicleRepository.getRelatedSources(vehicle.id);
   const relatedNews = vehicleRepository.getRelatedNews(vehicle.id);
@@ -133,20 +134,34 @@ export default async function VehiclePage({ params }: { params: Promise<{ slug: 
           </Card>
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm text-muted-foreground">Powertrain</CardTitle>
+              <CardTitle className="text-sm text-muted-foreground">Classification</CardTitle>
             </CardHeader>
             <CardContent>
               {vehicle.powertrain_types?.length ? (
                 <div className="flex flex-wrap gap-2">
                   {vehicle.powertrain_types.map((type) => (
                     <Badge key={type} variant="muted">
-                      {type}
+                      {{ bev: "BEV", phev: "PHEV", erev: "EREV" }[type] ?? type}
                     </Badge>
                   ))}
                 </div>
               ) : (
                 <UnknownState />
               )}
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm text-muted-foreground">Architecture</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <p className="font-medium">
+                {architecture ? displayName(architecture.names) : <UnknownState />}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Motor positions:{" "}
+                {vehicle.motor_positions?.length ? vehicle.motor_positions.join(", ") : "Unknown"}
+              </p>
             </CardContent>
           </Card>
         </div>

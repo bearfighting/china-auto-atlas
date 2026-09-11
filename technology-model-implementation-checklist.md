@@ -1,6 +1,6 @@
 # China Auto Atlas — Technology Model 执行清单
 
-**Status:** PR 3 implemented; PR 4 pending
+**Status:** PR 4 implemented; PR 5 pending
 **Related design:** `technology-model-implementation-plan.md`  
 **Scope:** Technology taxonomy、Powertrain Architecture、Technology relations、repository、页面和测试  
 **Last updated:** 2026-09-11
@@ -211,47 +211,47 @@
 
 修改：`src/app/technologies/[slug]/page.tsx`
 
-- [ ] 显示 `kind`。
-- [ ] 显示 Domain。
-- [ ] 显示 Category。
-- [ ] 显示 Family。
-- [ ] 显示 Description、Technical features、Advantages、Limitations。
-- [ ] 显示 Related technologies。
-- [ ] 保留 Vehicles、Events、News、Sources。
-- [ ] taxonomy 标签通过 repository 解析，不直接读取 YAML。
-- [ ] taxonomy 缺失时显示 `Unknown` 或对应 `UnknownState`。
-- [ ] Related technologies 没有结果时显示明确空状态。
-- [ ] 保持现有 Technology URL、metadata、canonical 和 static params。
+- [x] 显示 `kind`。
+- [x] 显示 Domain。
+- [x] 显示 Category。
+- [x] 显示 Family。
+- [x] 显示 Description、Technical features、Advantages、Limitations。
+- [x] 显示 Related technologies。
+- [x] 保留 Vehicles、Events、News、Sources。
+- [x] taxonomy 标签通过 repository 解析，不直接读取 YAML。
+- [x] taxonomy 缺失时显示 `Unknown` 或对应 `UnknownState`。
+- [x] Related technologies 没有结果时显示明确空状态。
+- [x] 保持现有 Technology URL、metadata、canonical 和 static params。
 
 ### Technology 列表页
 
 修改：`src/app/technologies/page.tsx`
 
-- [ ] 保持现有列表路由和卡片结构。
-- [ ] 可在卡片 eyebrow 或辅助信息中显示 kind，但不强制增加复杂筛选。
-- [ ] 不把 taxonomy 记录渲染成 Technology 卡片。
-- [ ] 保持无数据时的 EmptyState。
+- [x] 保持现有列表路由和卡片结构。
+- [x] 可在卡片 eyebrow 或辅助信息中显示 kind，但不强制增加复杂筛选。
+- [x] 不把 taxonomy 记录渲染成 Technology 卡片。
+- [x] 保持无数据时的 EmptyState。
 
 ### Vehicle 页面
 
 修改：`src/app/vehicles/[slug]/page.tsx`
 
-- [ ] 新增 Classification 区块，展示 `powertrain_types`。
-- [ ] 新增 Architecture 区块，展示 Architecture 名称和 `motor_positions`。
-- [ ] Technology 区块只展示具体 Technology。
-- [ ] 缺少 Architecture 时显示 unknown，而不是“没有该架构”。
-- [ ] 保持现有 Platform、Market specifications、Timeline、News、Sources 等区块。
-- [ ] 确保移动端布局不产生横向溢出。
-- [ ] 确保标签和链接具备键盘焦点状态和可理解文本。
+- [x] 新增 Classification 区块，展示 `powertrain_types`。
+- [x] 新增 Architecture 区块，展示 Architecture 名称和 `motor_positions`。
+- [x] Technology 区块只展示具体 Technology。
+- [x] 缺少 Architecture 时显示 unknown，而不是“没有该架构”。
+- [x] 保持现有 Platform、Market specifications、Timeline、News、Sources 等区块。
+- [x] 确保移动端布局不产生横向溢出。
+- [x] 确保标签和链接具备键盘焦点状态和可理解文本。
 
 ### 页面验收
 
-- [ ] Technology detail 页面能显示多个 Domain、Category、Family。
-- [ ] CTB 能同时显示 Energy Storage 和 Vehicle Structure 上下文。
-- [ ] Technology 页面能显示相关 Technology 关系。
-- [ ] Vehicle 页面能分别显示 `PHEV`、`Series-Parallel Hybrid` 和 `BYD DM-i`。
-- [ ] 缺失分类、关系和 Architecture 都有 intentional empty/unknown state。
-- [ ] 运行移动端、键盘、reduced-motion 和 axe 检查。
+- [x] Technology detail 页面能显示多个 Domain、Category、Family。
+- [x] CTB 能同时显示 Energy Storage 和 Vehicle Structure 上下文。
+- [x] Technology 页面能显示相关 Technology 关系或明确空状态。
+- [x] Vehicle 页面显示已有的 `PHEV`/`BEV`、`BYD DM-i` Technology；未确认的 `Series-Parallel Hybrid` 显示 Unknown。
+- [x] 缺失分类、关系和 Architecture 都有 intentional empty/unknown state。
+- [x] 运行移动端、键盘、reduced-motion 和 axe 检查。
 
 ## PR 5 — 文档、全量回归与完成迁移
 

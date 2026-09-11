@@ -40,6 +40,7 @@ export default function TechnologiesPage() {
                 titleZh={technology.names?.["zh-CN"]}
                 eyebrow="Technology"
                 status={technology.status}
+                meta={technology.kind ? `Kind: ${technology.kind}` : undefined}
                 description={
                   typeof technology.description === "string" ? technology.description : undefined
                 }

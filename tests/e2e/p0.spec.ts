@@ -230,6 +230,39 @@ test("renders Phase 4 entity detail pages and stable relationships", async ({ pa
   }
 });
 
+test("renders Technology taxonomy context and relationship empty state", async ({ page }) => {
+  await page.goto("/technologies/byd-ctb");
+  await expect(page.getByRole("heading", { name: /CTB/ })).toBeVisible();
+  await expect(page.getByText("Kind")).toBeVisible();
+  await expect(page.getByText("Energy Storage")).toBeVisible();
+  await expect(page.getByText("Vehicle Structure")).toBeVisible();
+  await expect(page.getByText("Battery Pack")).toBeVisible();
+  await expect(page.getByText("Family", { exact: true })).toBeVisible();
+  await expect(page.getByText("Structural Battery", { exact: true })).toHaveCount(2);
+  await expect(page.getByText("Legacy category")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Related technologies" })).toBeVisible();
+  await expect(page.getByText("No related technologies collected")).toBeVisible();
+  await expect(page.locator('a[href^="/technologies/"]')).toHaveCount(0);
+});
+
+test("renders vehicle classification and sourced architecture context", async ({ page }) => {
+  await page.goto("/vehicles/byd-sealion-7");
+  await expect(page.getByText("Classification")).toBeVisible();
+  await expect(page.getByText("BEV", { exact: true })).toBeVisible();
+  await expect(page.getByText("Architecture")).toBeVisible();
+  await expect(page.getByText("Battery Electric")).toBeVisible();
+  await expect(page.getByText("Motor positions: Unknown")).toBeVisible();
+
+  await page.goto("/vehicles/denza-d9");
+  await expect(page.getByText("PHEV", { exact: true })).toBeVisible();
+  await expect(page.getByText("BEV", { exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: /DM-i Super Hybrid/ })).toBeVisible();
+
+  await page.goto("/vehicles/deepal-s05");
+  await expect(page.getByText("Architecture")).toBeVisible();
+  await expect(page.getByText("Unknown", { exact: true }).first()).toBeVisible();
+});
+
 test("browses the brand product hierarchy with filters and without duplicate vehicles", async ({
   page,
 }) => {
