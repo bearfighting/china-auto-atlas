@@ -17,6 +17,17 @@ DATA_ROOT = ROOT / "data"
 CONTENT_ROOT = ROOT / "content"
 BUILD_ROOT = ROOT / "build"
 PUBLIC_MEDIA_ROOT = ROOT / "public" / "assets"
+TAXONOMY_REGISTRIES = {
+    "technology_domains": ("technology-domains.yaml", "technology_domain_registry", "technology_domain"),
+    "technology_categories": ("technology-categories.yaml", "technology_category_registry", "technology_category"),
+    "technology_families": ("technology-families.yaml", "technology_family_registry", "technology_family"),
+    "powertrain_architectures": (
+        "powertrain-architectures.yaml",
+        "powertrain_architecture_registry",
+        "powertrain_architecture",
+    ),
+}
+TAXONOMY_RECORD_TYPES = {spec[2] for spec in TAXONOMY_REGISTRIES.values()}
 REFERENCE_KEYS = {
     "author_ids", "topic_ids", "entity_ids", "event_ids", "source_ids", "news_ids",
     "relationship_ids", "document_ids", "subject_ids", "brand_ids",
@@ -25,6 +36,7 @@ REFERENCE_KEYS = {
     "media_ids",
     "from_id", "to_id", "entity_id", "brand_id", "manufacturer_id", "organization_id", "factory_id",
     "platform_id", "market_spec_ids", "technology_id", "vehicle_id",
+    "domain_id", "parent_id",
     "announcement_event_id", "preorder_event_id", "launch_event_id",
     "production_start_event_id", "delivery_start_event_id", "market_entry_event_ids",
 }
@@ -37,6 +49,140 @@ def yaml_files() -> list[Path]:
 def load_yaml(path: Path) -> Any:
     with path.open(encoding="utf-8") as handle:
         return yaml.safe_load(handle) or {}
+
+
+def load_taxonomy(taxonomy_root: Path | None = None) -> tuple[dict[str, list[dict[str, Any]]], list[str]]:
+    """Load the four non-entity taxonomy registries with their source paths."""
+    taxonomy: dict[str, list[dict[str, Any]]] = {}
+    errors: list[str] = []
+    taxonomy_root = taxonomy_root or DATA_ROOT / "taxonomy"
+    for root_key, (filename, registry_type, record_type) in TAXONOMY_REGISTRIES.items():
+        path = taxonomy_root / filename
+        if not path.is_file():
+            errors.append(f"{path}: missing taxonomy registry")
+            taxonomy[root_key] = []
+            continue
+        try:
+            document = load_yaml(path)
+        except yaml.YAMLError as exc:
+            errors.append(f"{path}: YAML parse error: {exc}")
+            taxonomy[root_key] = []
+            continue
+
+        if not isinstance(document, dict):
+            errors.append(f"{path}: taxonomy registry must be an object")
+            taxonomy[root_key] = []
+            continue
+        if document.get("schema_version") != 1:
+            errors.append(f"{path}: schema_version must be 1")
+        if document.get("type") != registry_type:
+            errors.append(f"{path}: type must be {registry_type}")
+        allowed_document_keys = {"schema_version", "type", root_key}
+        unexpected_keys = sorted(set(document) - allowed_document_keys)
+        if unexpected_keys:
+            errors.append(f"{path}: unexpected registry fields: {', '.join(unexpected_keys)}")
+
+        records = document.get(root_key)
+        if not isinstance(records, list):
+            errors.append(f"{path}: {root_key} must be a list")
+            taxonomy[root_key] = []
+            continue
+
+        normalized: list[dict[str, Any]] = []
+        try:
+            source_file = str(path.relative_to(ROOT))
+        except ValueError:
+            source_file = str(path)
+        for index, record in enumerate(records):
+            if not isinstance(record, dict):
+                errors.append(f"{path}: {root_key}[{index}] must be an object")
+                continue
+            normalized_record = dict(record)
+            normalized_record["_file"] = source_file
+            if normalized_record.get("type") != record_type:
+                errors.append(f"{path}: {root_key}[{index}] type must be {record_type}")
+            normalized.append(normalized_record)
+        taxonomy[root_key] = normalized
+
+    return taxonomy, errors
+
+
+def validate_taxonomy(
+    taxonomy: dict[str, list[dict[str, Any]]],
+    entity_ids: set[str] | None = None,
+) -> list[str]:
+    """Validate taxonomy records, references, and Category parent acyclicity."""
+    errors: list[str] = []
+    entity_ids = entity_ids or set()
+    all_records = [record for records in taxonomy.values() for record in records]
+    by_id: dict[str, dict[str, Any]] = {}
+
+    for record in all_records:
+        path = record.get("_file", "taxonomy")
+        record_id = record.get("id")
+        if not isinstance(record_id, str) or not record_id:
+            errors.append(f"{path}: taxonomy record id must be a non-empty string")
+            continue
+        if record_id in by_id:
+            errors.append(f"duplicate taxonomy id {record_id}: {path} and {by_id[record_id]['_file']}")
+        else:
+            by_id[record_id] = record
+        if not isinstance(record.get("type"), str):
+            errors.append(f"{path}: {record_id} taxonomy record type is required")
+        if record.get("type") not in TAXONOMY_RECORD_TYPES:
+            errors.append(f"{path}: {record_id} has unknown taxonomy record type {record.get('type')!r}")
+        if not isinstance(record.get("names"), dict) or not record.get("names"):
+            errors.append(f"{path}: {record_id} names must be a non-empty object")
+
+    for record_id in sorted(set(by_id) & entity_ids):
+        errors.append(f"taxonomy id {record_id} conflicts with an entity id")
+
+    domains = {
+        record["id"]: record
+        for record in taxonomy.get("technology_domains", [])
+        if isinstance(record.get("id"), str) and record.get("type") == "technology_domain"
+    }
+    categories = {
+        record["id"]: record
+        for record in taxonomy.get("technology_categories", [])
+        if isinstance(record.get("id"), str) and record.get("type") == "technology_category"
+    }
+
+    for category_id, category in categories.items():
+        path = category.get("_file", "taxonomy")
+        domain_id = category.get("domain_id")
+        if not isinstance(domain_id, str):
+            errors.append(f"{path}: {category_id} domain_id must reference a technology_domain")
+        elif domain_id not in domains:
+            errors.append(f"{path}: {category_id} domain_id references missing technology_domain {domain_id}")
+        parent_id = category.get("parent_id")
+        if parent_id is not None:
+            if not isinstance(parent_id, str):
+                errors.append(f"{path}: {category_id} parent_id must reference a technology_category or null")
+            elif parent_id not in categories:
+                errors.append(f"{path}: {category_id} parent_id references missing technology_category {parent_id}")
+
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(category_id: str) -> None:
+        if category_id in visited:
+            return
+        if category_id in visiting:
+            category = categories[category_id]
+            errors.append(f"{category.get('_file', 'taxonomy')}: Category parent cycle includes {category_id}")
+            return
+        visiting.add(category_id)
+        parent_id = categories[category_id].get("parent_id")
+        if isinstance(parent_id, str) and parent_id in categories:
+            visit(parent_id)
+        visiting.remove(category_id)
+        visited.add(category_id)
+
+    for category_id in categories:
+        visit(category_id)
+
+    return errors
 
 
 def iter_id_objects(value: Any, path: Path):
@@ -296,6 +442,15 @@ def validate_factory_hierarchy(records: dict[str, list[dict[str, Any]]]) -> list
 
 def validate() -> int:
     records, refs, errors = collect()
+    taxonomy, taxonomy_errors = load_taxonomy()
+    errors.extend(taxonomy_errors)
+    entity_ids = {
+        record["id"]
+        for values in records.values()
+        for record in values
+        if record.get("type") not in TAXONOMY_RECORD_TYPES
+    }
+    errors.extend(validate_taxonomy(taxonomy, entity_ids))
     duplicate_ids = {key: values for key, values in records.items() if len(values) > 1}
     known_ids = set(records)
     missing = [item for item in refs if item[2] not in known_ids]
@@ -354,11 +509,16 @@ def build() -> int:
     if validate() != 0:
         return 1
     records, _, _ = collect()
+    taxonomy, _ = load_taxonomy()
     BUILD_ROOT.mkdir(exist_ok=True)
     flat = [record for values in records.values() for record in values]
     index = {
         "schema_version": 1,
         "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "platform", "technology", "vehicle", "product_line", "vehicle_series", "factory", "production_line"}), key=lambda r: r["id"]),
+        "technology_domains": sorted(taxonomy["technology_domains"], key=lambda r: r["id"]),
+        "technology_categories": sorted(taxonomy["technology_categories"], key=lambda r: r["id"]),
+        "technology_families": sorted(taxonomy["technology_families"], key=lambda r: r["id"]),
+        "powertrain_architectures": sorted(taxonomy["powertrain_architectures"], key=lambda r: r["id"]),
         "market_specifications": sorted((r for r in flat if r.get("type") == "market_specification"), key=lambda r: r["id"]),
         "relationships": sorted((r for r in flat if r.get("type") == "relationship"), key=lambda r: r["id"]),
         "events": sorted((r for r in flat if r.get("type") == "event"), key=lambda r: r["id"]),
@@ -379,7 +539,10 @@ def build() -> int:
         target = PUBLIC_MEDIA_ROOT.joinpath(*asset_path.parts[1:])
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-    for key in ("entities", "market_specifications", "relationships", "events", "sources", "media"):
+    for key in (
+        "entities", "technology_domains", "technology_categories", "technology_families",
+        "powertrain_architectures", "market_specifications", "relationships", "events", "sources", "media",
+    ):
         for record in index[key]:
             record.pop("_file", None)
     (BUILD_ROOT / "data-index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -80,6 +80,42 @@ test("article JSON-LD and crawl configuration are correct", async ({ page }) => 
   expect(sitemapText).not.toContain("/vehicle-series/");
   expect(sitemapText).not.toContain("/production-lines/");
   expect(sitemapText).not.toContain("/search");
+
+  const taxonomyIds = [
+    "energy-storage",
+    "electric-drive",
+    "powertrain",
+    "electrical-architecture",
+    "chassis-dynamics",
+    "vehicle-structure",
+    "battery-cell",
+    "battery-pack",
+    "battery-safety",
+    "integrated-electric-drive",
+    "plug-in-hybrid-system",
+    "high-voltage-architecture",
+    "active-suspension",
+    "structural-battery",
+    "integrated-casting",
+    "lfp",
+    "structural-battery-family",
+    "module-free-pack",
+    "highly-integrated-e-drive",
+    "series-parallel-hybrid-family",
+    "ice",
+    "battery-electric",
+    "series-hybrid",
+    "parallel-hybrid",
+    "series-parallel-hybrid-architecture",
+    "power-split-hybrid",
+    "range-extended-electric",
+    "fuel-cell-electric",
+  ];
+
+  expect(sitemapText).not.toContain("/taxonomy/");
+  for (const taxonomyId of taxonomyIds) {
+    expect(sitemapText).not.toContain(`/technologies/${taxonomyId}`);
+  }
 });
 
 test("search API failures have an accessible error state", async ({ page }) => {

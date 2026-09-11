@@ -1,0 +1,27 @@
+schema_version: 1
+type: powertrain_architecture_registry
+powertrain_architectures:
+  - id: ice
+    type: powertrain_architecture
+    names: {en: Internal Combustion Engine, zh-CN: 内燃机}
+  - id: battery-electric
+    type: powertrain_architecture
+    names: {en: Battery Electric, zh-CN: 纯电动}
+  - id: series-hybrid
+    type: powertrain_architecture
+    names: {en: Series Hybrid, zh-CN: 串联混合动力}
+  - id: parallel-hybrid
+    type: powertrain_architecture
+    names: {en: Parallel Hybrid, zh-CN: 并联混合动力}
+  - id: series-parallel-hybrid-architecture
+    type: powertrain_architecture
+    names: {en: Series-parallel Hybrid, zh-CN: 串并联混合动力}
+  - id: power-split-hybrid
+    type: powertrain_architecture
+    names: {en: Power-split Hybrid, zh-CN: 功率分流混合动力}
+  - id: range-extended-electric
+    type: powertrain_architecture
+    names: {en: Range-extended Electric, zh-CN: 增程式电动}
+  - id: fuel-cell-electric
+    type: powertrain_architecture
+    names: {en: Fuel-cell Electric, zh-CN: 燃料电池电动}

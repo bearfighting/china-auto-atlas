@@ -22,7 +22,13 @@ import type { NewsDocument } from "./types";
 
 describe("generated data repositories", () => {
   it("loads the generated indexes", () => {
-    expect(loadDataIndex().entities.length).toBeGreaterThan(0);
+    const dataIndex = loadDataIndex();
+    expect(dataIndex.entities.length).toBeGreaterThan(0);
+    expect(dataIndex.entities.filter((entity) => entity.type.endsWith("_domain") || entity.type.endsWith("_category") || entity.type.endsWith("_family") || entity.type === "powertrain_architecture")).toEqual([]);
+    expect(dataIndex.technology_domains).toHaveLength(6);
+    expect(dataIndex.technology_categories).toHaveLength(9);
+    expect(dataIndex.technology_families).toHaveLength(5);
+    expect(dataIndex.powertrain_architectures).toHaveLength(8);
     expect(loadContentIndex().documents.length).toBe(23);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);

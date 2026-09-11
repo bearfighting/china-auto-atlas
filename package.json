@@ -12,6 +12,7 @@
     "format:check": "prettier --check .",
     "data:validate": "python3 scripts/data_pipeline.py validate",
     "data:build": "python3 scripts/data_pipeline.py build",
+    "data:test": "python3 -m unittest discover -s scripts -p '*_test.py'",
     "predev": "pnpm data:build",
     "prebuild": "pnpm data:build",
     "pretest": "pnpm data:build",
@@ -19,7 +20,7 @@
     "test:watch": "vitest",
     "pretest:e2e": "pnpm build",
     "test:e2e": "playwright test",
-    "quality:check": "pnpm data:validate && pnpm data:build && pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build && pnpm test:e2e"
+    "quality:check": "pnpm data:validate && pnpm data:build && pnpm data:test && pnpm typecheck && pnpm lint && pnpm format:check && pnpm test && pnpm build && pnpm test:e2e"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",

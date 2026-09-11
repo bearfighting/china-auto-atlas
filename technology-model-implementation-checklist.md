@@ -47,49 +47,50 @@
 
 ### 新增文件
 
-- [ ] `data/taxonomy/technology-domains.yaml`
-- [ ] `data/taxonomy/technology-categories.yaml`
-- [ ] `data/taxonomy/technology-families.yaml`
-- [ ] `data/taxonomy/powertrain-architectures.yaml`
+- [x] `data/taxonomy/technology-domains.yaml`
+- [x] `data/taxonomy/technology-categories.yaml`
+- [x] `data/taxonomy/technology-families.yaml`
+- [x] `data/taxonomy/powertrain-architectures.yaml`
 
 ### 数据内容
 
-- [ ] 建立第一版 Domain：`energy-storage`、`electric-drive`、`powertrain`、`electrical-architecture`、`chassis-dynamics`、`vehicle-structure`。
-- [ ] 建立首批 Category：`battery-cell`、`battery-pack`、`battery-safety`、`integrated-electric-drive`、`plug-in-hybrid-system`、`high-voltage-architecture`、`active-suspension`、`structural-battery`、`integrated-casting`。
-- [ ] 建立首批 Family：`lfp`、`structural-battery`、`module-free-pack`、`highly-integrated-e-drive`、`series-parallel-hybrid`。
-- [ ] 建立首批 Architecture：`ice`、`battery-electric`、`series-hybrid`、`parallel-hybrid`、`series-parallel-hybrid`、`power-split-hybrid`、`range-extended-electric`、`fuel-cell-electric`。
-- [ ] 所有 taxonomy 记录包含稳定 `id`、`type`、`names`。
-- [ ] Category 包含 `domain_id`，可选 `parent_id`。
-- [ ] 每个新增分类的定义和关系均有对应来源，或明确标记为模型定义而非事实断言。
+- [x] 建立第一版 Domain：`energy-storage`、`electric-drive`、`powertrain`、`electrical-architecture`、`chassis-dynamics`、`vehicle-structure`。
+- [x] 建立首批 Category：`battery-cell`、`battery-pack`、`battery-safety`、`integrated-electric-drive`、`plug-in-hybrid-system`、`high-voltage-architecture`、`active-suspension`、`structural-battery`、`integrated-casting`。
+- [x] 建立首批 Family：`lfp`、`structural-battery-family`、`module-free-pack`、`highly-integrated-e-drive`、`series-parallel-hybrid-family`。
+- [x] 建立首批 Architecture：`ice`、`battery-electric`、`series-hybrid`、`parallel-hybrid`、`series-parallel-hybrid-architecture`、`power-split-hybrid`、`range-extended-electric`、`fuel-cell-electric`。
+- [x] 所有 taxonomy 记录包含稳定 `id`、`type`、`names`。
+- [x] Category 包含 `domain_id`，可选 `parent_id`。
+- [x] 每个新增分类的定义和关系均有对应来源，或明确标记为模型定义而非事实断言。
 
 ### 代码修改
 
-- [ ] 在 `scripts/data_pipeline.py` 中单独加载 taxonomy 文件。
-- [ ] 将 taxonomy 写入 `data-index.json` 的独立数组：`technology_domains`、`technology_categories`、`technology_families`、`powertrain_architectures`。
-- [ ] 确保 taxonomy 不写入 `entities`。
-- [ ] 确保 taxonomy 不写入 `search-index.json`。
-- [ ] 保持 `entities`、`relationships`、`events`、`sources` 等已有索引结构兼容。
-- [ ] 在 `src/lib/data/types.ts` 增加 taxonomy 类型和 `DataIndex` 字段。
-- [ ] 暂不让 taxonomy 参与 sitemap 或 Next.js static params。
+- [x] 在 `scripts/data_pipeline.py` 中单独加载 taxonomy 文件。
+- [x] 将 taxonomy 写入 `data-index.json` 的独立数组：`technology_domains`、`technology_categories`、`technology_families`、`powertrain_architectures`。
+- [x] 确保 taxonomy 不写入 `entities`。
+- [x] 确保 taxonomy 不写入 `search-index.json`。
+- [x] 保持 `entities`、`relationships`、`events`、`sources` 等已有索引结构兼容。
+- [x] 在 `src/lib/data/types.ts` 增加 taxonomy 类型和 `DataIndex` 字段。
+- [x] 暂不让 taxonomy 参与 sitemap 或 Next.js static params。
 
 ### Pipeline 校验
 
-- [ ] taxonomy ID 不重复。
-- [ ] taxonomy `type` 必须是允许值。
-- [ ] `domain_id` 必须引用 Domain。
-- [ ] `parent_id` 必须引用 Category。
-- [ ] Category parent 关系不能形成循环。
-- [ ] taxonomy ID 不得与现有 entity、event、source、relationship ID 冲突。
+- [x] taxonomy ID 不重复。
+- [x] taxonomy `type` 必须是允许值。
+- [x] `domain_id` 必须引用 Domain。
+- [x] `parent_id` 必须引用 Category。
+- [x] Category parent 关系不能形成循环。
+- [x] taxonomy ID 不得与现有 entity、event、source、relationship ID 冲突。
 
 ### 测试与验收
 
-- [ ] 增加 taxonomy 加载和 build index 测试。
-- [ ] 增加无效 Domain、Category parent 和循环引用的失败测试。
-- [ ] 验证 taxonomy 不出现在 `loadDataIndex().entities`。
-- [ ] 验证 taxonomy 不出现在 `loadSearchIndex()`。
-- [ ] 执行 `python3 scripts/data_pipeline.py validate`。
-- [ ] 执行 `python3 scripts/data_pipeline.py build`。
-- [ ] 执行 `pnpm test`、`pnpm typecheck`、`pnpm lint`、`pnpm build`。
+- [x] 增加 taxonomy 加载和 build index 测试。
+- [x] 增加无效 Domain、Category parent 和循环引用的失败测试。
+- [x] 验证 taxonomy 不出现在 `loadDataIndex().entities`。
+- [x] 验证 taxonomy 不出现在 `loadSearchIndex()`。
+- [x] 执行 `pnpm data:test`。
+- [x] 执行 `python3 scripts/data_pipeline.py validate`。
+- [x] 执行 `python3 scripts/data_pipeline.py build`。
+- [x] 执行 `pnpm test`、`pnpm typecheck`、`pnpm lint`、`pnpm build`。
 
 ## PR 2 — Taxonomy Repository 与 Technology 类型
 

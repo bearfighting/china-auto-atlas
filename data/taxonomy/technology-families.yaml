@@ -1,0 +1,18 @@
+schema_version: 1
+type: technology_family_registry
+technology_families:
+  - id: lfp
+    type: technology_family
+    names: {en: Lithium Iron Phosphate, zh-CN: 磷酸铁锂}
+  - id: structural-battery-family
+    type: technology_family
+    names: {en: Structural Battery, zh-CN: 结构电池}
+  - id: module-free-pack
+    type: technology_family
+    names: {en: Module-free Battery Pack, zh-CN: 无模组电池包}
+  - id: highly-integrated-e-drive
+    type: technology_family
+    names: {en: Highly Integrated Electric Drive, zh-CN: 高度集成电驱}
+  - id: series-parallel-hybrid-family
+    type: technology_family
+    names: {en: Series-parallel Hybrid, zh-CN: 串并联混合动力}

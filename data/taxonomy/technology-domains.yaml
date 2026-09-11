@@ -1,0 +1,39 @@
+schema_version: 1
+type: technology_domain_registry
+technology_domains:
+  - id: energy-storage
+    type: technology_domain
+    names: {en: Energy Storage, zh-CN: 能量存储}
+    description:
+      en: Technologies related to storing and delivering onboard energy.
+      zh-CN: 与车载能量存储和释放相关的技术。
+  - id: electric-drive
+    type: technology_domain
+    names: {en: Electric Drive, zh-CN: 电驱动}
+    description:
+      en: Technologies that convert electrical energy into vehicle motion.
+      zh-CN: 将电能转换为车辆运动的技术。
+  - id: powertrain
+    type: technology_domain
+    names: {en: Powertrain, zh-CN: 动力系统}
+    description:
+      en: Technologies that determine how propulsion energy is generated, combined, and delivered.
+      zh-CN: 决定推进能量如何产生、组合和传递的技术。
+  - id: electrical-architecture
+    type: technology_domain
+    names: {en: Electrical Architecture, zh-CN: 电气架构}
+    description:
+      en: Vehicle-level high-voltage and electrical-system architecture.
+      zh-CN: 整车高压系统和电气系统架构。
+  - id: chassis-dynamics
+    type: technology_domain
+    names: {en: Chassis Dynamics, zh-CN: 底盘动态}
+    description:
+      en: Technologies that control vehicle body and chassis behavior.
+      zh-CN: 控制车身和底盘运动特性的技术。
+  - id: vehicle-structure
+    type: technology_domain
+    names: {en: Vehicle Structure, zh-CN: 车辆结构}
+    description:
+      en: Technologies concerning load-bearing vehicle structures and integration.
+      zh-CN: 与车辆承载结构和结构集成相关的技术。

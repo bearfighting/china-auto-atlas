@@ -1,0 +1,48 @@
+schema_version: 1
+type: technology_category_registry
+technology_categories:
+  - id: battery-cell
+    type: technology_category
+    domain_id: energy-storage
+    parent_id: null
+    names: {en: Battery Cell, zh-CN: 电池电芯}
+  - id: battery-pack
+    type: technology_category
+    domain_id: energy-storage
+    parent_id: null
+    names: {en: Battery Pack, zh-CN: 电池包}
+  - id: battery-safety
+    type: technology_category
+    domain_id: energy-storage
+    parent_id: null
+    names: {en: Battery Safety, zh-CN: 电池安全}
+  - id: integrated-electric-drive
+    type: technology_category
+    domain_id: electric-drive
+    parent_id: null
+    names: {en: Integrated Electric Drive, zh-CN: 高度集成电驱}
+  - id: plug-in-hybrid-system
+    type: technology_category
+    domain_id: powertrain
+    parent_id: null
+    names: {en: Plug-in Hybrid System, zh-CN: 插电式混合动力系统}
+  - id: high-voltage-architecture
+    type: technology_category
+    domain_id: electrical-architecture
+    parent_id: null
+    names: {en: High-voltage Architecture, zh-CN: 高压架构}
+  - id: active-suspension
+    type: technology_category
+    domain_id: chassis-dynamics
+    parent_id: null
+    names: {en: Active Suspension, zh-CN: 主动悬架}
+  - id: structural-battery
+    type: technology_category
+    domain_id: vehicle-structure
+    parent_id: null
+    names: {en: Structural Battery, zh-CN: 结构电池}
+  - id: integrated-casting
+    type: technology_category
+    domain_id: vehicle-structure
+    parent_id: null
+    names: {en: Integrated Casting, zh-CN: 一体化压铸}

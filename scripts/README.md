@@ -9,11 +9,13 @@ python3 -m pip install -r requirements-dev.txt
 ```bash
 python3 scripts/data_pipeline.py validate
 python3 scripts/data_pipeline.py build
+pnpm data:test
 python3 scripts/extract_media_assets.py
 ```
 
 `validate` checks YAML/frontmatter syntax, duplicate IDs, required news metadata and cross-file references.
 `build` runs validation first and generates `build/data-index.json`, `build/content-index.json`, and `build/search-index.json` for the MVP adapter.
+`data:test` runs the Python unit tests for pipeline-specific validation behavior.
 
 The reproducible local release check is available as `pnpm quality:check`. It runs data validation, the data build, static
 checks, unit tests, the production build, and Playwright E2E checks in order.

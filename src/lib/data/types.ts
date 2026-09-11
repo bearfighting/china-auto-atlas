@@ -72,6 +72,22 @@ export type VehicleSeries = Entity & {
 export type Technology = Entity & EntityRelations & { type: "technology" };
 export type Platform = Entity & EntityRelations & { type: "platform" };
 
+export type TaxonomyRecord = {
+  id: string;
+  type: string;
+  names: LocalizedName;
+  description?: LocalizedName;
+};
+
+export type TechnologyDomain = TaxonomyRecord & { type: "technology_domain" };
+export type TechnologyCategory = TaxonomyRecord & {
+  type: "technology_category";
+  domain_id: string;
+  parent_id?: string | null;
+};
+export type TechnologyFamily = TaxonomyRecord & { type: "technology_family" };
+export type PowertrainArchitecture = TaxonomyRecord & { type: "powertrain_architecture" };
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;
@@ -250,6 +266,10 @@ export type Media = {
 export type DataIndex = {
   schema_version: number;
   entities: Entity[];
+  technology_domains: TechnologyDomain[];
+  technology_categories: TechnologyCategory[];
+  technology_families: TechnologyFamily[];
+  powertrain_architectures: PowertrainArchitecture[];
   market_specifications: MarketSpecification[];
   relationships: Entity[];
   events: Event[];

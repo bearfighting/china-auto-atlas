@@ -1,6 +1,17 @@
 import unittest
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
-from data_pipeline import validate_factory_hierarchy, validate_product_hierarchy, validate_relationship_indexes
+import yaml
+
+from data_pipeline import (
+    TAXONOMY_REGISTRIES,
+    load_taxonomy,
+    validate_factory_hierarchy,
+    validate_product_hierarchy,
+    validate_relationship_indexes,
+    validate_taxonomy,
+)
 
 
 def record(record_id, record_type, **fields):
@@ -128,6 +139,109 @@ class ProductHierarchyValidationTests(unittest.TestCase):
         }
         errors = validate_product_hierarchy(records)
         self.assertGreaterEqual(len(errors), 3)
+
+
+class TaxonomyValidationTests(unittest.TestCase):
+    def test_loads_the_four_taxonomy_registries(self):
+        taxonomy, errors = load_taxonomy()
+        self.assertEqual(errors, [])
+        self.assertEqual(len(taxonomy["technology_domains"]), 6)
+        self.assertEqual(len(taxonomy["technology_categories"]), 9)
+        self.assertEqual(len(taxonomy["technology_families"]), 5)
+        self.assertEqual(len(taxonomy["powertrain_architectures"]), 8)
+        self.assertEqual(validate_taxonomy(taxonomy), [])
+
+    def write_valid_registries(self, root: Path):
+        for root_key, (filename, registry_type, record_type) in TAXONOMY_REGISTRIES.items():
+            document = {
+                "schema_version": 1,
+                "type": registry_type,
+                root_key: [],
+            }
+            if root_key == "technology_domains":
+                document[root_key] = [{"id": "domain", "type": record_type, "names": {"en": "Domain"}}]
+            root.joinpath(filename).write_text(yaml.safe_dump(document), encoding="utf-8")
+
+    def test_loader_rejects_registry_shape_errors(self):
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            self.write_valid_registries(root)
+
+            domains_path = root / "technology-domains.yaml"
+            domains = yaml.safe_load(domains_path.read_text(encoding="utf-8"))
+            domains["wrong_root"] = domains.pop("technology_domains")
+            domains["type"] = "wrong_registry_type"
+            domains_path.write_text(yaml.safe_dump(domains), encoding="utf-8")
+            (root / "powertrain-architectures.yaml").unlink()
+
+            _, errors = load_taxonomy(root)
+            self.assertTrue(any("missing taxonomy registry" in error for error in errors))
+            self.assertTrue(any("type must be technology_domain_registry" in error for error in errors))
+            self.assertTrue(any("technology_domains must be a list" in error for error in errors))
+            self.assertTrue(any("unexpected registry fields: wrong_root" in error for error in errors))
+
+    def test_loader_rejects_record_in_wrong_registry(self):
+        with TemporaryDirectory() as temporary_directory:
+            root = Path(temporary_directory)
+            self.write_valid_registries(root)
+            domains_path = root / "technology-domains.yaml"
+            domains = yaml.safe_load(domains_path.read_text(encoding="utf-8"))
+            domains["technology_domains"][0]["type"] = "technology_category"
+            domains_path.write_text(yaml.safe_dump(domains), encoding="utf-8")
+
+            _, errors = load_taxonomy(root)
+            self.assertTrue(any("technology_domains[0] type must be technology_domain" in error for error in errors))
+
+    def test_rejects_invalid_taxonomy_types_and_required_fields(self):
+        taxonomy = {
+            "technology_domains": [record("domain", "wrong_type", names={})],
+            "technology_categories": [record("category", "technology_category", names={})],
+            "technology_families": [],
+            "powertrain_architectures": [],
+        }
+        errors = validate_taxonomy(taxonomy)
+        self.assertTrue(any("unknown taxonomy record type" in error for error in errors))
+        self.assertTrue(any("names must be a non-empty object" in error for error in errors))
+        self.assertTrue(any("domain_id must reference" in error for error in errors))
+
+    def test_rejects_duplicate_and_entity_conflicting_ids(self):
+        taxonomy = {
+            "technology_domains": [
+                record("duplicate", "technology_domain", names={"en": "One"}),
+                record("duplicate", "technology_domain", names={"en": "Two"}),
+            ],
+            "technology_categories": [],
+            "technology_families": [],
+            "powertrain_architectures": [],
+        }
+        errors = validate_taxonomy(taxonomy, {"duplicate"})
+        self.assertTrue(any("duplicate taxonomy id" in error for error in errors))
+        self.assertTrue(any("conflicts with an entity id" in error for error in errors))
+
+    def test_rejects_invalid_category_domain_parent_and_cycles(self):
+        taxonomy = {
+            "technology_domains": [record("domain", "technology_domain", names={"en": "Domain"})],
+            "technology_categories": [
+                record("category-a", "technology_category", domain_id="missing", parent_id="category-b", names={"en": "A"}),
+                record("category-b", "technology_category", domain_id="domain", parent_id="category-a", names={"en": "B"}),
+                record("category-c", "technology_category", domain_id="domain", parent_id="missing", names={"en": "C"}),
+            ],
+            "technology_families": [],
+            "powertrain_architectures": [],
+        }
+        errors = validate_taxonomy(taxonomy)
+        self.assertTrue(any("missing technology_domain" in error for error in errors))
+        self.assertTrue(any("missing technology_category" in error for error in errors))
+        self.assertTrue(any("Category parent cycle" in error for error in errors))
+
+    def test_allows_root_categories_with_null_parent(self):
+        taxonomy = {
+            "technology_domains": [record("domain", "technology_domain", names={"en": "Domain"})],
+            "technology_categories": [record("category", "technology_category", domain_id="domain", parent_id=None, names={"en": "Category"})],
+            "technology_families": [],
+            "powertrain_architectures": [],
+        }
+        self.assertEqual(validate_taxonomy(taxonomy), [])
 
 
 if __name__ == "__main__":

@@ -68,6 +68,8 @@ names:
 
 Family 表示通用技术路线，Technology 可以关联多个 Family。第一批包括 lfp、sodium-ion、solid-state、structural-cell、module-free-pack、highly-integrated-e-drive 和 series-parallel-hybrid。
 
+所有 taxonomy ID 在四类 registry 之间也必须全局唯一；当 Category、Family 和 Architecture 的显示概念同名时，使用类型后缀消歧，例如 `structural-battery-family`、`series-parallel-hybrid-family` 和 `series-parallel-hybrid-architecture`。
+
 ## 3. Technology Schema
 
 在现有 Technology 记录上增加可选字段：
