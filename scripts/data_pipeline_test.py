@@ -302,6 +302,15 @@ class TechnologyClassificationValidationTests(unittest.TestCase):
             )
             self.assertTrue(any("kind must be one of" in error for error in errors))
 
+    def test_requires_current_classification_fields(self):
+        errors = validate_technology_classification(
+            {"technology": [record("technology", "technology")]},
+            self.taxonomy,
+        )
+        self.assertTrue(any("kind must be one of" in error for error in errors))
+        self.assertTrue(any("domain_ids must be a list" in error for error in errors))
+        self.assertTrue(any("category_ids must be a list" in error for error in errors))
+
     def test_rejects_category_outside_declared_domain(self):
         records = {
             "technology": [
@@ -383,6 +392,18 @@ class RelationshipValidationTests(unittest.TestCase):
 
 
 class VehicleArchitectureValidationTests(unittest.TestCase):
+    def test_rejects_unknown_powertrain_type(self):
+        errors = validate_vehicle_architecture(
+            {"vehicle": [record("vehicle", "vehicle", powertrain_types=["hybrid"])]}
+        )
+        self.assertTrue(any("powertrain_types must use" in error for error in errors))
+
+    def test_rejects_non_list_powertrain_types(self):
+        errors = validate_vehicle_architecture(
+            {"vehicle": [record("vehicle", "vehicle", powertrain_types="bev")]}
+        )
+        self.assertTrue(any("powertrain_types must use" in error for error in errors))
+
     def test_accepts_known_architecture_and_motor_positions(self):
         records = {
             "architecture": [record("architecture", "powertrain_architecture")],

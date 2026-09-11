@@ -2503,7 +2503,7 @@ classification fields.
 
 ## Technology
 
-Technology records may contain:
+Current Technology records contain:
 
 ```yaml
 kind: branded
@@ -2515,9 +2515,9 @@ family_ids:
   - lfp
 ```
 
-`kind` is one of `generic`, `branded`, `system`, `component`, or `process`. `domain_ids`, `category_ids`, and `family_ids`
-reference the corresponding taxonomy record types. Existing `category` and `secondary_categories` remain available during the
-migration window and are not reinterpreted as the new taxonomy.
+`kind` is one of `generic`, `branded`, `system`, `component`, or `process`. `domain_ids` and `category_ids` are required and
+reference the corresponding taxonomy record types. `family_ids` is optional when evidence is insufficient. Existing `category`
+and `secondary_categories` remain available during the migration window and are not reinterpreted as the new taxonomy.
 
 ## Taxonomy and index boundary
 
@@ -2568,3 +2568,6 @@ motor_positions:
 
 `motor_positions` accepts `p0`, `p1`, `p2`, `p3`, `p4`, `e-axle`, and `unknown`. Missing optional facts are unknown and must not be
 inferred from another field.
+
+The current controlled `powertrain_types` values are `bev`, `phev`, and `erev`. They are storage values, not Architecture
+identifiers; the page layer may map them to display labels such as `BEV`, `PHEV`, and `EREV`.

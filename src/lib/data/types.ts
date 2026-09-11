@@ -73,9 +73,9 @@ export type TechnologyKind = "generic" | "branded" | "system" | "component" | "p
 export type Technology = Entity &
   EntityRelations & {
     type: "technology";
-    kind?: TechnologyKind;
-    domain_ids?: string[];
-    category_ids?: string[];
+    kind: TechnologyKind;
+    domain_ids: string[];
+    category_ids: string[];
     family_ids?: string[];
   };
 export type Platform = Entity & EntityRelations & { type: "platform" };
@@ -96,18 +96,38 @@ export type TechnologyCategory = TaxonomyRecord & {
 export type TechnologyFamily = TaxonomyRecord & { type: "technology_family" };
 export type PowertrainArchitecture = TaxonomyRecord & { type: "powertrain_architecture" };
 
+export type RelationshipType =
+  | "uses"
+  | "integrates"
+  | "based_on"
+  | "evolves_from"
+  | "replaces"
+  | "enables"
+  | "complements"
+  | "related_to"
+  | "operates"
+  | "parent_of"
+  | "controls"
+  | "strategic_partner_of"
+  | "developed_by"
+  | "developed_for"
+  | "jointly_developed_by"
+  | "owns"
+  | "invested_in";
+
 export type Relationship = {
   id: string;
   type: "relationship";
   from_id: string;
   to_id: string;
-  relationship: string;
+  relationship: RelationshipType;
   source_ids: string[];
   evidence_status: EvidenceStatus;
   [key: string]: unknown;
 };
 
 export type MotorPosition = "p0" | "p1" | "p2" | "p3" | "p4" | "e-axle" | "unknown";
+export type PowertrainType = "bev" | "phev" | "erev";
 
 export type Timeline = {
   announcement_event_id?: string | null;
@@ -128,7 +148,7 @@ export type Vehicle = Entity & {
   technology_ids?: string[];
   market_spec_ids?: string[];
   media_ids?: string[];
-  powertrain_types?: string[];
+  powertrain_types?: PowertrainType[];
   powertrain_architecture_id?: string | null;
   motor_positions?: MotorPosition[];
   timeline?: Timeline;

@@ -30,9 +30,9 @@ Canonical records: `data/entities/technologies/`.
 
 ## Current model and editing rules
 
-Technology records use `kind`, `domain_ids`, `category_ids`, and optional `family_ids` in addition to the legacy `category` and
-`secondary_categories` fields. The legacy fields remain during the migration window and must not be silently reinterpreted as the
-new taxonomy.
+Technology records require `kind`, `domain_ids`, and `category_ids`, and may include `family_ids` when evidence is sufficient, in
+addition to the legacy `category` and `secondary_categories` fields. The legacy fields remain during the migration window and must
+not be silently reinterpreted as the new taxonomy.
 
 Domains, Categories, Families, and Powertrain Architectures are controlled taxonomy records under `data/taxonomy/`. They are
 available through the generated data index, but are not public entities, search records, sitemap entries, or standalone routes.

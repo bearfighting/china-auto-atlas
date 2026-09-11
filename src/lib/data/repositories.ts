@@ -195,9 +195,7 @@ export const vehicleRepository = {
   },
   getPowertrainArchitecture(id: string): PowertrainArchitecture | null {
     const architectureId = this.getById(id)?.powertrain_architecture_id;
-    return architectureId
-      ? loadDataIndex().powertrain_architectures.find((architecture) => architecture.id === architectureId) ?? null
-      : null;
+    return architectureId ? powertrainArchitectureRepository.getById(architectureId) : null;
   },
   getRelatedSources(id: string): Source[] {
     const vehicle = this.getById(id);

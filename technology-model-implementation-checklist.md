@@ -293,7 +293,7 @@ technology_categories: 9
 technology_families: 5
 powertrain_architectures: 8
 data validation: pass (413 IDs, 953 references)
-unit tests: pass (42 Vitest tests, 30 data tests)
+unit tests: pass (42 Vitest tests, 33 data tests)
 E2E: pass (71 passed, 7 skipped)
 production build: pass (166 static pages)
 ```

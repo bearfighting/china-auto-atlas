@@ -10,8 +10,8 @@ Canonical records: `data/entities/vehicles/`; market snapshots are stored in `da
 
 ## Current classification and architecture fields
 
-Vehicle records use lower-case controlled `powertrain_types` values such as `bev`, `phev`, and `erev`. The page layer may render
-these as `BEV`, `PHEV`, and `EREV`, but the stored values remain unchanged.
+Vehicle records use the lower-case controlled `powertrain_types` values `bev`, `phev`, and `erev`. The page layer may render these
+as `BEV`, `PHEV`, and `EREV`, but the stored values remain unchanged.
 
 When a source explicitly supports a powertrain architecture, the Vehicle may include:
 

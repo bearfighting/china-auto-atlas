@@ -31,6 +31,7 @@ TAXONOMY_RECORD_TYPES = {spec[2] for spec in TAXONOMY_REGISTRIES.values()}
 TECHNOLOGY_KINDS = {"generic", "branded", "system", "component", "process"}
 EVIDENCE_STATUSES = {"confirmed", "claimed", "reported", "estimated", "unknown"}
 MOTOR_POSITIONS = {"p0", "p1", "p2", "p3", "p4", "e-axle", "unknown"}
+POWERTRAIN_TYPES = {"bev", "phev", "erev"}
 TECHNOLOGY_RELATION_TYPES = {
     "uses", "integrates", "based_on", "evolves_from", "replaces", "enables", "complements", "related_to",
 }
@@ -200,7 +201,7 @@ def validate_technology_classification(
     records: dict[str, list[dict[str, Any]]],
     taxonomy: dict[str, list[dict[str, Any]]],
 ) -> list[str]:
-    """Validate optional Technology classification fields against taxonomy types."""
+    """Validate Technology classification fields against taxonomy types."""
     errors: list[str] = []
     domains = {
         record["id"]
@@ -225,45 +226,43 @@ def validate_technology_classification(
             path = technology.get("_file", "technology")
             technology_id = technology.get("id", "unknown")
             kind = technology.get("kind")
-            if kind is not None and (not isinstance(kind, str) or kind not in TECHNOLOGY_KINDS):
+            if not isinstance(kind, str) or kind not in TECHNOLOGY_KINDS:
                 errors.append(f"{path}: {technology_id} kind must be one of {sorted(TECHNOLOGY_KINDS)}")
 
             declared_domains = technology.get("domain_ids")
-            if declared_domains is not None:
-                if not isinstance(declared_domains, list) or not all(isinstance(item, str) for item in declared_domains):
-                    errors.append(f"{path}: {technology_id} domain_ids must be a list of technology_domain IDs")
-                else:
-                    missing_domains = sorted(set(declared_domains) - domains)
-                    for domain_id in missing_domains:
-                        errors.append(f"{path}: {technology_id} domain_ids references missing technology_domain {domain_id}")
+            if not isinstance(declared_domains, list) or not all(isinstance(item, str) for item in declared_domains):
+                errors.append(f"{path}: {technology_id} domain_ids must be a list of technology_domain IDs")
+            else:
+                missing_domains = sorted(set(declared_domains) - domains)
+                for domain_id in missing_domains:
+                    errors.append(f"{path}: {technology_id} domain_ids references missing technology_domain {domain_id}")
 
             declared_categories = technology.get("category_ids")
-            if declared_categories is not None:
-                if not isinstance(declared_categories, list) or not all(isinstance(item, str) for item in declared_categories):
-                    errors.append(f"{path}: {technology_id} category_ids must be a list of technology_category IDs")
-                else:
-                    missing_categories = sorted(set(declared_categories) - set(categories))
-                    for category_id in missing_categories:
-                        errors.append(f"{path}: {technology_id} category_ids references missing technology_category {category_id}")
-                    declared_domain_set = set(declared_domains or []) if isinstance(declared_domains, list) else set()
-                    for category_id in set(declared_categories) & set(categories):
-                        category_domain = categories[category_id].get("domain_id")
-                        if category_domain not in declared_domain_set:
-                            errors.append(
-                                f"{path}: {technology_id} category {category_id} belongs to domain {category_domain}, "
-                                "which is not declared in domain_ids"
-                            )
-                    legacy_categories = set()
-                    if isinstance(technology.get("category"), str):
-                        legacy_categories.add(technology["category"])
-                    if isinstance(technology.get("secondary_categories"), list):
-                        legacy_categories.update(
-                            item for item in technology["secondary_categories"] if isinstance(item, str)
-                        )
-                    for legacy_category in sorted(legacy_categories & set(categories) - set(declared_categories)):
+            if not isinstance(declared_categories, list) or not all(isinstance(item, str) for item in declared_categories):
+                errors.append(f"{path}: {technology_id} category_ids must be a list of technology_category IDs")
+            else:
+                missing_categories = sorted(set(declared_categories) - set(categories))
+                for category_id in missing_categories:
+                    errors.append(f"{path}: {technology_id} category_ids references missing technology_category {category_id}")
+                declared_domain_set = set(declared_domains) if isinstance(declared_domains, list) else set()
+                for category_id in set(declared_categories) & set(categories):
+                    category_domain = categories[category_id].get("domain_id")
+                    if category_domain not in declared_domain_set:
                         errors.append(
-                            f"{path}: {technology_id} legacy category {legacy_category} conflicts with category_ids"
+                            f"{path}: {technology_id} category {category_id} belongs to domain {category_domain}, "
+                            "which is not declared in domain_ids"
                         )
+                legacy_categories = set()
+                if isinstance(technology.get("category"), str):
+                    legacy_categories.add(technology["category"])
+                if isinstance(technology.get("secondary_categories"), list):
+                    legacy_categories.update(
+                        item for item in technology["secondary_categories"] if isinstance(item, str)
+                    )
+                for legacy_category in sorted(legacy_categories & set(categories) - set(declared_categories)):
+                    errors.append(
+                        f"{path}: {technology_id} legacy category {legacy_category} conflicts with category_ids"
+                    )
 
             declared_families = technology.get("family_ids")
             if declared_families is not None:
@@ -358,6 +357,10 @@ def validate_vehicle_architecture(records: dict[str, list[dict[str, Any]]]) -> l
                         f"{path}: {vehicle_id} powertrain_architecture_id must reference a Powertrain Architecture or null"
                     )
             powertrain_types = vehicle.get("powertrain_types", [])
+            if not isinstance(powertrain_types, list) or not all(
+                isinstance(value, str) and value in POWERTRAIN_TYPES for value in powertrain_types
+            ):
+                errors.append(f"{path}: {vehicle_id} powertrain_types must use {sorted(POWERTRAIN_TYPES)}")
             if (
                 architecture_id == "battery-electric"
                 and isinstance(powertrain_types, list)

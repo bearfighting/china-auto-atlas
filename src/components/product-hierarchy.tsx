@@ -6,9 +6,13 @@ import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { displayName, slugFor } from "@/lib/data/resolvers";
-import type { ProductLine, Vehicle, VehicleSeries } from "@/lib/data/types";
+import type { PowertrainType, ProductLine, Vehicle, VehicleSeries } from "@/lib/data/types";
 
-const powertrainOptions = ["bev", "phev", "erev"];
+const powertrainOptions: readonly PowertrainType[] = ["bev", "phev", "erev"];
+
+function isPowertrainType(value: string): value is PowertrainType {
+  return (powertrainOptions as readonly string[]).includes(value);
+}
 
 function normalized(value: string) {
   return value.normalize("NFKC").trim().toLowerCase();
@@ -32,7 +36,8 @@ export function filterVehicles(
       .map(normalized);
     const textMatches = !search || values.some((value) => value.includes(search));
     const powertrainMatches =
-      powertrain === "all" || vehicle.powertrain_types?.includes(powertrain);
+      powertrain === "all" ||
+      (isPowertrainType(powertrain) && vehicle.powertrain_types?.includes(powertrain));
     const bodyStyleMatches = bodyStyle === "all" || vehicle.body_style === bodyStyle;
     return textMatches && powertrainMatches && bodyStyleMatches;
   });
