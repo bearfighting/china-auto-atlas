@@ -684,6 +684,21 @@ test("supports search page filters, empty results, and API responses", async ({ 
   await expect(page).toHaveURL(/\/search\?q=ZEEKR&type=vehicle$/);
   await expect(page.getByText("ZEEKR 7X", { exact: true })).toBeVisible();
   await expect(page.getByText("ZEEKR", { exact: true })).not.toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear type" })).toHaveAttribute(
+    "href",
+    "/search?q=ZEEKR",
+  );
+  await expect(page.getByRole("link", { name: "Clear search" })).toHaveAttribute("href", "/search");
+
+  await page.goto("/search?q=byd");
+  await expect(page.getByText("Showing 1–20 of 25 results")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Search pagination" })).toBeVisible();
+  await expect(page.getByTestId("search-result")).toHaveCount(20);
+  await page.goto("/search?q=byd&page=2");
+  await expect(page.getByText("Showing 21–25 of 25 results")).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Search pagination" }).getByText("2", { exact: true }),
+  ).toHaveAttribute("aria-current", "page");
 
   await page.goto("/search?q=not-a-real-record");
   await expect(page.getByText("No results found")).toBeVisible();

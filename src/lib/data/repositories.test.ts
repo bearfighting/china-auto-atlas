@@ -810,4 +810,23 @@ describe("generated data repositories", () => {
     expect(searchRepository.search("zeekr", { limit: 1 })).toHaveLength(1);
     expect(searchRepository.search("zeekr")).toEqual(searchRepository.search("zeekr"));
   });
+
+  it("provides complete ranked search pagination without changing search limits", () => {
+    const firstPage = searchRepository.searchPage("byd");
+    expect(firstPage).toMatchObject({ page: 1, pageSize: 20, total: 25, totalPages: 2 });
+    expect(firstPage.items).toHaveLength(20);
+    expect(searchRepository.searchPage("byd", { page: 2 }).items).toHaveLength(5);
+    expect(searchRepository.searchPage("byd", { page: 0 }).page).toBe(1);
+    expect(searchRepository.searchPage("byd", { page: 3 })).toMatchObject({ page: 3, items: [] });
+    expect(searchRepository.searchPage("byd", { pageSize: 2 }).items).toHaveLength(2);
+    expect(searchRepository.searchPage("byd", { type: "brand" }).items.every((item) => item.type === "brand")).toBe(true);
+    expect(searchRepository.searchPage("ZEEKR", { type: "not-a-type" as never }).total).toBe(
+      searchRepository.searchPage("ZEEKR", { type: "all" }).total,
+    );
+    expect(searchRepository.searchPage("")).toMatchObject({ total: 0, totalPages: 0, items: [] });
+    expect(searchRepository.searchPage("not-a-real-record").items).toEqual([]);
+    expect(searchRepository.search("byd")).toEqual(firstPage.items);
+    expect(searchRepository.searchPage("byd").items.some((item) => item.type === "relationship")).toBe(false);
+    expect(searchRepository.searchPage("byd").items.some((item) => item.type === "technology_domain")).toBe(false);
+  });
 });

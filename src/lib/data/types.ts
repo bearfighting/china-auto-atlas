@@ -384,6 +384,20 @@ export type SearchResult = {
   href: string;
 };
 
+export type SearchPageOptions = {
+  page?: number;
+  pageSize?: number;
+  type?: SearchType;
+};
+
+export type SearchPage = {
+  items: SearchResult[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
 export type Author = {
   id: string;
   names?: LocalizedName;

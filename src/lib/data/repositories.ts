@@ -27,6 +27,8 @@ import type {
   SearchResult,
   SearchOptions,
   SearchType,
+  SearchPage,
+  SearchPageOptions,
   Source,
   Topic,
   Technology,
@@ -698,10 +700,24 @@ function resultHref(type: SearchType, slug: string) {
 
 export const searchRepository = {
   search(query: string, options: SearchOptions = {}): SearchResult[] {
+    const limit = positiveInteger(options.limit, 20);
+    return rankedSearchResults(query, options.type).slice(0, limit);
+  },
+  searchPage(query: string, options: SearchPageOptions = {}): SearchPage {
+    const page = positiveInteger(options.page, 1);
+    const pageSize = positiveInteger(options.pageSize, 20);
+    const results = rankedSearchResults(query.slice(0, 200), options.type);
+    const total = results.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+    return { items: results.slice(start, start + pageSize), page, pageSize, total, totalPages };
+  },
+};
+
+function rankedSearchResults(query: string, type?: SearchType): SearchResult[] {
     const normalizedQuery = normalizeSearchValue(query);
     if (!normalizedQuery) return [];
-    const wantedType = searchType(options.type);
-    const limit = positiveInteger(options.limit, 20);
+    const wantedType = searchType(type);
 
     return loadSearchIndex()
       .filter((entry) => wantedType === "all" || entry.type === wantedType)
@@ -735,10 +751,8 @@ export const searchRepository = {
           a.typeRank - b.typeRank ||
           a.result.id.localeCompare(b.result.id),
       )
-      .slice(0, limit)
       .map((item) => item.result);
-  },
-};
+}
 
 export function relatedEntities(ids: string[] | undefined) {
   const index = loadDataIndex();
