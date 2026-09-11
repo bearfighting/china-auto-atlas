@@ -266,6 +266,63 @@ describe("generated data repositories", () => {
     expect(options.entities.every((entity) => entity.type !== "technology_domain")).toBe(true);
   });
 
+  it("provides stable vehicle pagination and filters", () => {
+    expect(vehicleRepository.listPage()).toMatchObject({
+      page: 1,
+      pageSize: 12,
+      total: 25,
+      totalPages: 3,
+    });
+    expect(vehicleRepository.listPage().items.map((vehicle) => vehicle.id)).toEqual([
+      "avatr-07",
+      "avatr-11",
+      "avatr-12",
+      "byd-han",
+      "byd-qin-l",
+      "byd-seal",
+      "byd-sealion-7",
+      "byd-song-l",
+      "byd-tang",
+      "deepal-l07",
+      "deepal-s05",
+      "deepal-s07",
+    ]);
+    expect(vehicleRepository.listPage({ page: 2 }).items[0]?.id).toBe("denza-d9");
+    expect(vehicleRepository.listPage({ page: 3 }).items).toHaveLength(1);
+    expect(vehicleRepository.listPage({ page: 4 }).items).toEqual([]);
+    expect(vehicleRepository.listPage({ page: 0 })).toMatchObject({ page: 1, pageSize: 12 });
+
+    expect(vehicleRepository.listPage({ brandId: "byd" }).items).toHaveLength(6);
+    expect(
+      vehicleRepository.listPage({ powertrainType: "phev" }).items.every((vehicle) =>
+        vehicle.powertrain_types?.includes("phev"),
+      ),
+    ).toBe(true);
+    expect(vehicleRepository.listPage({ status: "active" }).total).toBe(25);
+    expect(vehicleRepository.listPage({ brandId: "byd", powertrainType: "bev", status: "active" }).total).toBe(5);
+    expect(vehicleRepository.listPage({ brandId: "missing-brand" }).items).toEqual([]);
+    expect(vehicleRepository.listPage({ powertrainType: "unknown" as "bev" }).items).toEqual([]);
+    expect(vehicleRepository.listPage({ status: "missing-status" }).items).toEqual([]);
+  });
+
+  it("provides only values used by vehicles as filter options", () => {
+    const options = vehicleRepository.getFilterOptions();
+    expect(options.brands.map((brand) => brand.id)).toEqual([
+      "avatr",
+      "byd",
+      "deepal",
+      "denza",
+      "fangchengbao",
+      "geely-auto",
+      "mg",
+      "xiaomi-auto",
+      "yangwang",
+      "zeekr",
+    ]);
+    expect(options.powertrainTypes).toEqual(["bev", "phev", "erev"]);
+    expect(options.statuses).toEqual(["active"]);
+  });
+
   it("resolves the ZEEKR 7X by id and slug", () => {
     expect(vehicleRepository.getById("zeekr-7x")?.id).toBe("zeekr-7x");
     expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");

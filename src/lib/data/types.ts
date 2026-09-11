@@ -129,6 +129,28 @@ export type Relationship = {
 export type MotorPosition = "p0" | "p1" | "p2" | "p3" | "p4" | "e-axle" | "unknown";
 export type PowertrainType = "bev" | "phev" | "erev";
 
+export type VehiclePageOptions = {
+  page?: number;
+  pageSize?: number;
+  brandId?: string;
+  powertrainType?: PowertrainType;
+  status?: string;
+};
+
+export type VehicleFilterOptions = {
+  brands: Brand[];
+  powertrainTypes: PowertrainType[];
+  statuses: string[];
+};
+
+export type VehiclePage = {
+  items: Vehicle[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;

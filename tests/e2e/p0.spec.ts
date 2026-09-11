@@ -51,13 +51,65 @@ test("browses the vehicle collection from the primary navigation", async ({ page
     .click();
   await expect(page).toHaveURL(/\/vehicles$/);
   await expect(page.getByRole("heading", { name: "Vehicles", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: "ZEEKR 7X", exact: true }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "AVATR 07", exact: true }).first()).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Breadcrumb" })).toBeVisible();
   await expect(
     page.getByRole("navigation", { name: "Breadcrumb" }).getByText("Vehicles"),
   ).toHaveAttribute("aria-current", "page");
   await expect(page.getByTestId("search-trigger")).toBeVisible();
   await expect(page.getByRole("contentinfo")).toBeVisible();
+});
+
+test("renders paginated vehicles and applies URL filters", async ({ page }) => {
+  await page.goto("/vehicles");
+  await expect(page.getByText("Showing 1–12 of 25 vehicles")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Vehicle pagination" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next" })).toBeVisible();
+  await expect(page.getByText("Previous", { exact: true })).toHaveAttribute(
+    "aria-disabled",
+    "true",
+  );
+
+  await page.goto("/vehicles?page=2");
+  await expect(page).toHaveURL(/\/vehicles\?page=2$/);
+  await expect(page.getByText("Showing 13–24 of 25 vehicles")).toBeVisible();
+  await expect(page.getByRole("link", { name: "DENZA N9", exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Vehicle pagination" }).getByText("2", { exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+
+  await page.getByRole("combobox", { name: "Brand" }).selectOption("byd");
+  await page.getByRole("combobox", { name: "Powertrain" }).selectOption("bev");
+  await page.getByRole("combobox", { name: "Status" }).selectOption("active");
+  await page.getByRole("button", { name: "Apply filters" }).click();
+  await expect(page).toHaveURL(/\/vehicles\?brand=byd&powertrain=bev&status=active$/);
+  await expect(page.getByText("Showing 1–5 of 5 vehicles")).toBeVisible();
+  await expect(page.getByRole("link", { name: "BYD SEAL", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear filters" })).toHaveAttribute(
+    "href",
+    "/vehicles",
+  );
+
+  await page.getByRole("link", { name: "Clear filters" }).click();
+  await expect(page).toHaveURL(/\/vehicles$/);
+
+  await page.goto("/vehicles?powertrain=bev");
+  await expect(page.getByText("Showing 1–12 of 19 vehicles")).toBeVisible();
+  await expect(
+    page
+      .getByRole("navigation", { name: "Vehicle pagination" })
+      .getByRole("link", { name: "Next" }),
+  ).toHaveAttribute("href", "/vehicles?page=2&powertrain=bev");
+});
+
+test("shows an empty state for an out-of-range vehicle page", async ({ page }) => {
+  await page.goto("/vehicles?page=99");
+  await expect(page.getByText("No vehicles on this page")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Return to all Vehicles" })).toHaveAttribute(
+    "href",
+    "/vehicles",
+  );
+  await expect(page.getByRole("navigation", { name: "Vehicle pagination" })).toHaveCount(0);
 });
 
 test("discovers entity collections from the desktop primary navigation", async ({ page }) => {

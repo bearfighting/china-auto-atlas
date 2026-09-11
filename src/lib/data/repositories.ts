@@ -37,6 +37,9 @@ import type {
   Relationship,
   VehicleSeries,
   Vehicle,
+  VehicleFilterOptions,
+  VehiclePage,
+  VehiclePageOptions,
   NewsFilterOptions,
   NewsPage,
   NewsPageOptions,
@@ -175,6 +178,55 @@ export const newsRepository = {
 export const vehicleRepository = {
   list(): Vehicle[] {
     return vehiclesFromIndex(loadDataIndex());
+  },
+  listPage(options: VehiclePageOptions = {}): VehiclePage {
+    const dataIndex = loadDataIndex();
+    const page = positiveInteger(options.page, 1);
+    const pageSize = positiveInteger(options.pageSize, 12);
+    const vehicles = this.list()
+      .filter((vehicle) => {
+        const brandMatches = options.brandId === undefined || vehicle.brand_id === options.brandId;
+        const powertrainMatches =
+          options.powertrainType === undefined || vehicle.powertrain_types?.includes(options.powertrainType);
+        const statusMatches = options.status === undefined || vehicle.status === options.status;
+        return brandMatches && powertrainMatches && statusMatches;
+      })
+      .sort((a, b) => {
+        const brandA = a.brand_id ? entityById(dataIndex, a.brand_id) : null;
+        const brandB = b.brand_id ? entityById(dataIndex, b.brand_id) : null;
+        return (
+          displayName(brandA?.type === "brand" ? brandA.names : undefined).localeCompare(
+            displayName(brandB?.type === "brand" ? brandB.names : undefined),
+          ) ||
+          displayName(a.names).localeCompare(displayName(b.names)) ||
+          a.id.localeCompare(b.id)
+        );
+      });
+    const total = vehicles.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+
+    return {
+      items: vehicles.slice(start, start + pageSize),
+      page,
+      pageSize,
+      total,
+      totalPages,
+    };
+  },
+  getFilterOptions(): VehicleFilterOptions {
+    const vehicles = this.list();
+    const brands = [...new Set(vehicles.map((vehicle) => vehicle.brand_id).filter(Boolean))]
+      .map((brandId) => entityOfType<Brand>(brandId, "brand"))
+      .filter((brand): brand is Brand => Boolean(brand))
+      .sort((a, b) => displayName(a.names).localeCompare(displayName(b.names)) || a.id.localeCompare(b.id));
+    const powertrainTypes = (["bev", "phev", "erev"] as const).filter((type) =>
+      vehicles.some((vehicle) => vehicle.powertrain_types?.includes(type)),
+    );
+    const statuses = [...new Set(vehicles.map((vehicle) => vehicle.status).filter(Boolean))]
+      .filter((status): status is string => Boolean(status))
+      .sort((a, b) => a.localeCompare(b));
+    return { brands, powertrainTypes: [...powertrainTypes], statuses };
   },
   getById(id: string): Vehicle | null {
     return this.list().find((vehicle) => vehicle.id === id) ?? null;
