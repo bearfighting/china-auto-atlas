@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { AtlasEntityCard } from "@/components/atlas-entity-card";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { EventCard } from "@/components/event-card";
+import { EventFilters } from "@/components/event-filters";
+import { EventPagination } from "@/components/event-pagination";
 import { EmptyState } from "@/components/states";
 import { PageContainer } from "@/components/page-container";
 import { eventRepository } from "@/lib/data/repositories";
@@ -16,12 +19,38 @@ export const metadata: Metadata = {
   },
 };
 
-function eventTitle(event: { summary?: string; event_type?: string; id: string }) {
-  return event.summary ?? event.event_type ?? event.id;
+function queryValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
 }
 
-export default function EventsPage() {
-  const events = eventRepository.list();
+export default async function EventsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    page?: string | string[];
+    year?: string | string[];
+    type?: string | string[];
+    entity?: string | string[];
+  }>;
+}) {
+  const params = await searchParams;
+  const page = Number(queryValue(params.page) ?? 1);
+  const yearValue = queryValue(params.year)?.trim() || undefined;
+  const year = yearValue && /^\d{4}$/.test(yearValue) ? Number(yearValue) : undefined;
+  const invalidYear = Boolean(yearValue && year === undefined);
+  const eventType = queryValue(params.type)?.trim() || undefined;
+  const entityId = queryValue(params.entity)?.trim() || undefined;
+  const eventPage = eventRepository.listPage({
+    page,
+    year: invalidYear ? Number.NaN : year,
+    eventType,
+    entityId,
+  });
+  const filterOptions = eventRepository.getFilterOptions();
+  const hasFilters = Boolean(yearValue || eventType || entityId);
+  const isOutOfRange = eventPage.total > 0 && eventPage.items.length === 0;
+  const firstResult = eventPage.items.length ? (eventPage.page - 1) * eventPage.pageSize + 1 : 0;
+  const lastResult = eventPage.items.length ? firstResult + eventPage.items.length - 1 : 0;
   return (
     <PageContainer>
       <div className="space-y-8">
@@ -33,25 +62,59 @@ export default function EventsPage() {
             Explore dated announcements, launches, milestones, and other events in the atlas.
           </p>
         </header>
-        {events.length ? (
+        <EventFilters
+          options={filterOptions}
+          year={year}
+          eventType={eventType}
+          entityId={entityId}
+          hasFilters={hasFilters}
+        />
+        {eventPage.items.length ? (
+          <p className="text-sm text-muted-foreground" aria-live="polite">
+            Showing {firstResult}–{lastResult} of {eventPage.total} events
+          </p>
+        ) : null}
+        {eventPage.items.length ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {events.map((event) => (
-              <AtlasEntityCard
+            {eventPage.items.map((event) => (
+              <EventCard
                 key={event.id}
-                href={`/events/${event.id}`}
-                title={eventTitle(event)}
-                eyebrow="Event"
-                status={event.evidence_status}
-                meta={`${event.date ?? "Date unknown"} · ${event.event_type ?? "event"}`}
+                event={event}
+                relatedEntities={eventRepository.getRelatedEntities(event.id)}
               />
             ))}
           </div>
         ) : (
-          <EmptyState
-            title="No events collected"
-            description="Event records will appear here when they are added to the atlas."
-          />
+          <div className="space-y-4">
+            <EmptyState
+              title={
+                isOutOfRange || !hasFilters
+                  ? "No events on this page"
+                  : "No events match these filters"
+              }
+              description={
+                isOutOfRange || !hasFilters
+                  ? "Try another page or return to the first page."
+                  : "Try another year, event type, or related entity, or clear the filters."
+              }
+            />
+            <div className="flex justify-center">
+              <Link
+                className="text-sm font-medium text-primary underline-offset-4 hover:underline"
+                href="/events"
+              >
+                {isOutOfRange || !hasFilters ? "Return to all Events" : "Clear filters"}
+              </Link>
+            </div>
+          </div>
         )}
+        <EventPagination
+          page={eventPage.page}
+          totalPages={eventPage.totalPages}
+          year={year}
+          eventType={eventType}
+          entityId={entityId}
+        />
       </div>
     </PageContainer>
   );

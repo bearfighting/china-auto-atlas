@@ -202,6 +202,28 @@ export type TechnologyPage = {
   totalPages: number;
 };
 
+export type EventPageOptions = {
+  page?: number;
+  pageSize?: number;
+  year?: number;
+  eventType?: string;
+  entityId?: string;
+};
+
+export type EventFilterOptions = {
+  years: number[];
+  eventTypes: string[];
+  entities: Entity[];
+};
+
+export type EventPage = {
+  items: Event[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;

@@ -37,6 +37,9 @@ import type {
   TechnologyPage,
   TechnologyPageOptions,
   TechnologySummary,
+  EventFilterOptions,
+  EventPage,
+  EventPageOptions,
   PowertrainArchitecture,
   Relationship,
   VehicleSeries,
@@ -605,6 +608,51 @@ export const sourceRepository = {
 export const eventRepository = {
   list(): Event[] {
     return [...loadDataIndex().events];
+  },
+  listPage(options: EventPageOptions = {}): EventPage {
+    const page = positiveInteger(options.page, 1);
+    const pageSize = positiveInteger(options.pageSize, 12);
+    const events = [...this.list()].sort((a, b) => {
+      if (a.date && b.date) return b.date.localeCompare(a.date) || a.id.localeCompare(b.id);
+      if (a.date) return -1;
+      if (b.date) return 1;
+      return a.id.localeCompare(b.id);
+    });
+    const filtered = events.filter((event) => {
+      const yearMatches =
+        options.year === undefined ||
+        (Number.isInteger(options.year) && event.date?.slice(0, 4) === String(options.year));
+      const typeMatches = options.eventType === undefined || event.event_type === options.eventType;
+      const entityMatches =
+        options.entityId === undefined || event.subject_ids?.includes(options.entityId);
+      return yearMatches && typeMatches && entityMatches;
+    });
+    const total = filtered.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+    return { items: filtered.slice(start, start + pageSize), page, pageSize, total, totalPages };
+  },
+  getFilterOptions(): EventFilterOptions {
+    const events = this.list();
+    const years = [...new Set(
+      events
+        .map((event) => event.date?.slice(0, 4))
+        .filter((year): year is string => typeof year === "string" && /^\d{4}$/.test(year)),
+    )]
+      .map(Number)
+      .sort((a, b) => b - a);
+    const eventTypes = [
+      ...new Set(
+        events
+          .map((event) => event.event_type)
+          .filter((eventType): eventType is string => typeof eventType === "string" && eventType.length > 0),
+      ),
+    ].sort();
+    const subjectIds = new Set(events.flatMap((event) => event.subject_ids ?? []));
+    const entities = entitiesByIds(loadDataIndex(), [...subjectIds]).sort(
+      (a, b) => displayName(a.names).localeCompare(displayName(b.names)) || a.id.localeCompare(b.id),
+    );
+    return { years, eventTypes, entities };
   },
   getById(id: string): Event | null {
     return loadDataIndex().events.find((event) => event.id === id) ?? null;

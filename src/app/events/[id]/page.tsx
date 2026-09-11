@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PageContainer } from "@/components/page-container";
 import { displayName, slugFor } from "@/lib/data/resolvers";
 import { eventRepository } from "@/lib/data/repositories";
+import { formatEntityType, formatEventType } from "@/lib/event-utils";
 import type { Entity } from "@/lib/data/types";
 
 export const dynamicParams = false;
@@ -71,9 +72,10 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
           <h1 className="max-w-4xl text-3xl font-bold tracking-tight sm:text-5xl">{title}</h1>
         </header>
         <EntityFacts>
-          <EntityFact label="Event type" value={event.event_type} />
+          <EntityFact label="Event type" value={formatEventType(event.event_type)} />
           <EntityFact label="Date" value={event.date ?? "Date unknown"} />
           <EntityFact label="Date precision" value={event.date_precision} />
+          <EntityFact label="Evidence status" value={event.evidence_status} />
           <EntityFact label="Record ID" value={event.id} />
         </EntityFacts>
         <section className="space-y-4" aria-labelledby="event-summary">
@@ -102,7 +104,9 @@ export default async function EventPage({ params }: { params: Promise<{ id: stri
                       ) : (
                         <span className="font-medium">{displayName(entity.names)}</span>
                       )}
-                      <p className="mt-1 text-xs text-muted-foreground">{entity.type}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {formatEntityType(entity.type)}
+                      </p>
                     </CardContent>
                   </Card>
                 );

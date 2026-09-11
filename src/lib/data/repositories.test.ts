@@ -662,6 +662,68 @@ describe("generated data repositories", () => {
     expect(eventRepository.getRelatedSources("does-not-exist")).toEqual([]);
   });
 
+  it("provides stable event pagination, sorting, filters, and options", () => {
+    const firstPage = eventRepository.listPage();
+    expect(firstPage).toMatchObject({ page: 1, pageSize: 12, total: 71, totalPages: 6 });
+    expect(firstPage.items).toHaveLength(12);
+    expect(eventRepository.listPage({ page: 2 }).items).toHaveLength(12);
+    expect(eventRepository.listPage({ page: 6 }).items).toHaveLength(11);
+    expect(eventRepository.listPage({ page: 1, pageSize: 5 }).items).toHaveLength(5);
+    expect(eventRepository.listPage({ page: 0 }).page).toBe(1);
+    expect(eventRepository.listPage({ page: 7 })).toMatchObject({ page: 7, items: [], total: 71 });
+    expect(eventRepository.list()).toHaveLength(71);
+
+    const sortedEvents = eventRepository.listPage({ pageSize: 100 }).items;
+    for (let index = 1; index < sortedEvents.length; index += 1) {
+      const previous = sortedEvents[index - 1];
+      const current = sortedEvents[index];
+      if (previous.date && current.date) {
+        expect(previous.date.localeCompare(current.date)).toBeGreaterThanOrEqual(0);
+        if (previous.date === current.date) {
+          expect(previous.id.localeCompare(current.id)).toBeLessThanOrEqual(0);
+        }
+      } else if (!previous.date) {
+        expect(current.date).toBeFalsy();
+      }
+    }
+
+    expect(eventRepository.listPage({ year: 2023 }).items.every((event) => event.date?.startsWith("2023"))).toBe(true);
+    expect(eventRepository.listPage({ eventType: "vehicle_reveal" }).items.every((event) => event.event_type === "vehicle_reveal")).toBe(true);
+    expect(eventRepository.listPage({ entityId: "avatr-12" }).items.every((event) => event.subject_ids?.includes("avatr-12"))).toBe(true);
+    expect(
+      eventRepository.listPage({ year: 2023, eventType: "vehicle_reveal", entityId: "avatr-12" }).items.map((event) => event.id),
+    ).toEqual(["event-avatr-12-global-debut-2023"]);
+    expect(eventRepository.listPage({ year: 1900 }).items).toEqual([]);
+    expect(eventRepository.listPage({ eventType: "not-an-event-type" }).items).toEqual([]);
+    expect(eventRepository.listPage({ entityId: "not-an-entity" }).items).toEqual([]);
+
+    const options = eventRepository.getFilterOptions();
+    expect(options.years).toEqual([2026, 2025, 2024, 2023, 2022, 2021, 2020, 2010, 2003]);
+    expect(options.eventTypes).toContain("vehicle_reveal");
+    expect(options.entities.map((entity) => entity.id)).toContain("avatr-12");
+    expect(options.entities.map((entity) => entity.id)).not.toContain("energy-storage");
+  });
+
+  it("puts undated events last and sorts equal dates by ID", () => {
+    const dataIndex = loadDataIndex();
+    const originalEvents = dataIndex.events;
+    const spy = vi.spyOn(loadIndexModule, "loadDataIndex").mockReturnValue({
+      ...dataIndex,
+      events: [
+        { ...originalEvents[0], id: "event-z", date: "2024-01-01" },
+        { ...originalEvents[0], id: "event-a", date: "2024-01-01" },
+        { ...originalEvents[0], id: "event-undated", date: undefined },
+      ],
+    });
+
+    expect(eventRepository.listPage({ pageSize: 10 }).items.map((event) => event.id)).toEqual([
+      "event-a",
+      "event-z",
+      "event-undated",
+    ]);
+    spy.mockRestore();
+  });
+
   it("returns only media approved for public use", () => {
     expect(
       approvedMedia([

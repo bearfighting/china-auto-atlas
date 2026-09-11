@@ -256,6 +256,84 @@ test("shows an empty state for an out-of-range news page", async ({ page }) => {
   await expect(page.getByRole("navigation", { name: "News pagination" })).toHaveCount(0);
 });
 
+test("renders paginated events and supports URL filters", async ({ page }) => {
+  await page.goto("/events");
+  await expect(page.getByRole("heading", { name: "Events", exact: true })).toBeVisible();
+  await expect(page.getByText("Showing 1–12 of 71 events")).toBeVisible();
+  await expect(page.getByTestId("event-card")).toHaveCount(12);
+  await expect(page.getByRole("navigation", { name: "Event pagination" })).toBeVisible();
+  await expect(page.getByText("Previous", { exact: true })).toHaveAttribute(
+    "aria-disabled",
+    "true",
+  );
+  await expect(page.getByRole("combobox", { name: "Year" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Event type" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Related entity" })).toBeVisible();
+
+  await page.goto("/events?page=2");
+  await expect(page).toHaveURL(/\/events\?page=2$/);
+  await expect(page.getByText("Showing 13–24 of 71 events")).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "Event pagination" }).getByText("2", { exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+
+  await page.goto("/events?year=2023&type=vehicle_reveal&entity=avatr-12");
+  await expect(page.getByText("Showing 1–1 of 1 events")).toBeVisible();
+  await expect(page.getByRole("link", { name: /AVATR 12 made its global debut/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear filters" })).toHaveAttribute(
+    "href",
+    "/events",
+  );
+
+  await page.goto("/events?type=not-an-event-type");
+  await expect(page.getByText("No events match these filters")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear filters" })).toHaveAttribute(
+    "href",
+    "/events",
+  );
+  await expect(page.getByRole("navigation", { name: "Event pagination" })).toHaveCount(0);
+
+  await page.goto("/events?year=2023&page=99");
+  await expect(page.getByText("No events on this page")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Return to all Events" })).toHaveAttribute(
+    "href",
+    "/events",
+  );
+
+  await page.goto("/events?page=99");
+  await expect(page.getByText("No events on this page")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Return to all Events" })).toHaveAttribute(
+    "href",
+    "/events",
+  );
+  await expect(page.getByRole("navigation", { name: "Event pagination" })).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+    await page.evaluate(() => document.documentElement.clientWidth),
+  );
+});
+
+test("renders event detail context and related entity links", async ({ page }) => {
+  await page.goto("/events/event-avatr-chn-platform-launch-2022");
+  await expect(page.getByRole("heading", { name: /CHN architecture/i })).toBeVisible();
+  await expect(page.getByText("Technology launch", { exact: true })).toBeVisible();
+  await expect(page.getByText("2022-06-25", { exact: true })).toBeVisible();
+  await expect(page.getByText("Date precision", { exact: true })).toBeVisible();
+  await expect(page.getByText("Evidence status", { exact: true })).toBeVisible();
+  await expect(page.getByText("Record ID", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Related entities" })).toBeVisible();
+  await expect(page.getByTestId("event-entity")).toHaveCount(5);
+  await expect(page.locator('a[href="/vehicles/avatr-11"]')).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Related news" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Sources" })).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "/events/event-avatr-chn-platform-launch-2022",
+  );
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+    await page.evaluate(() => document.documentElement.clientWidth),
+  );
+});
+
 test("renders metadata and relations for every news article", async ({ page }) => {
   const articles = [
     "zeekr-7x-launch",
