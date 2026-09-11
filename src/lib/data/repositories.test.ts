@@ -242,6 +242,30 @@ describe("generated data repositories", () => {
     expect(newsRepository.listPage({ page: 0, pageSize: 0 })).toMatchObject({ page: 1, pageSize: 10 });
   });
 
+  it("filters news before applying pagination", () => {
+    expect(newsRepository.listPage({ year: 2025 }).items.map((item) => item.slug)).toEqual([
+      "denza-n9-shanghai-presentation",
+      "byd-super-e-platform-launch",
+    ]);
+    expect(newsRepository.listPage({ entityId: "zeekr-7x" }).items.map((item) => item.slug)).toEqual([
+      "zeekr-7x-launch",
+    ]);
+    expect(
+      newsRepository.listPage({ year: 2022, entityId: "avatr-11" }).items.map((item) => item.slug),
+    ).toEqual(["avatr-11-global-launch", "chn-platform-launch"]);
+    expect(newsRepository.listPage({ year: 2025, page: 2 }).items).toEqual([]);
+    expect(newsRepository.listPage({ year: 2099 }).items).toEqual([]);
+    expect(newsRepository.listPage({ entityId: "missing-entity" }).items).toEqual([]);
+  });
+
+  it("provides only entities referenced by news as filter options", () => {
+    const options = newsRepository.getFilterOptions();
+    expect(options.years).toEqual([2026, 2025, 2024, 2023, 2022, 2021, 2020]);
+    expect(options.entities.map((entity) => entity.id)).toContain("zeekr-7x");
+    expect(options.entities.map((entity) => entity.id)).not.toContain("mg4");
+    expect(options.entities.every((entity) => entity.type !== "technology_domain")).toBe(true);
+  });
+
   it("resolves the ZEEKR 7X by id and slug", () => {
     expect(vehicleRepository.getById("zeekr-7x")?.id).toBe("zeekr-7x");
     expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");

@@ -37,10 +37,11 @@ import type {
   Relationship,
   VehicleSeries,
   Vehicle,
+  NewsFilterOptions,
   NewsPage,
   NewsPageOptions,
 } from "./types";
-import { authorsByIds, topicsByIds } from "./resolvers";
+import { authorsByIds, displayName, topicsByIds } from "./resolvers";
 
 function entitySources(entity: { source_ids?: string[] }): Source[] {
   return sourcesByIds(loadDataIndex(), entity.source_ids);
@@ -113,7 +114,11 @@ export const newsRepository = {
   listPage(options: NewsPageOptions = {}): NewsPage {
     const page = positiveInteger(options.page, 1);
     const pageSize = positiveInteger(options.pageSize, 10);
-    const documents = this.list();
+    const documents = this.list().filter((document) => {
+      const yearMatches = options.year === undefined || document.published_at.slice(0, 4) === String(options.year);
+      const entityMatches = options.entityId === undefined || document.entity_ids?.includes(options.entityId);
+      return yearMatches && entityMatches;
+    });
     const total = documents.length;
     const totalPages = Math.ceil(total / pageSize);
     const start = (page - 1) * pageSize;
@@ -125,6 +130,18 @@ export const newsRepository = {
       total,
       totalPages,
     };
+  },
+  getFilterOptions(): NewsFilterOptions {
+    const documents = this.list();
+    const years = [...new Set(documents.map((document) => Number(document.published_at.slice(0, 4))))]
+      .filter((year) => Number.isInteger(year))
+      .sort((a, b) => b - a);
+    const entityIds = new Set(documents.flatMap((document) => document.entity_ids ?? []));
+    const entities = [...entityIds]
+      .map((id) => entityById(loadDataIndex(), id))
+      .filter((entity): entity is Entity => Boolean(entity))
+      .sort((a, b) => displayName(a.names).localeCompare(displayName(b.names)) || a.id.localeCompare(b.id));
+    return { years, entities };
   },
   getById(id: string): NewsDocument | null {
     return loadContentIndex().documents.find((document) => document.id === id) ?? null;

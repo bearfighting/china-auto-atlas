@@ -118,11 +118,16 @@ test("discovers entity collections from the flat mobile navigation", async ({ pa
 test("renders the complete news collection and shared shell", async ({ page }) => {
   await page.goto("/news");
   await expect(page.getByRole("heading", { name: "News", exact: true })).toBeVisible();
-  await expect(page.getByRole("link", { name: /ZEEKR launches the 7X/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Geely unveils the EX5/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /AVATR launches the AVATR 11/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /BYD introduces the Blade Battery/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /jointly launch the CHN/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /DEEPAL L07 presented/i })).toBeVisible();
+  await expect(page.getByText("Showing 1–10 of 23 news articles")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "News pagination" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Next" })).toBeVisible();
+  await expect(page.getByText("Previous", { exact: true })).toHaveAttribute(
+    "aria-disabled",
+    "true",
+  );
+  await expect(page.getByRole("combobox", { name: "Year" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Related entity" })).toBeVisible();
   await expect(
     page.getByRole("navigation", { name: "Breadcrumb" }).getByText("News"),
   ).toHaveAttribute("aria-current", "page");
@@ -130,6 +135,42 @@ test("renders the complete news collection and shared shell", async ({ page }) =
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
     await page.evaluate(() => document.documentElement.clientWidth),
   );
+});
+
+test("supports news pagination and URL filters", async ({ page }) => {
+  await page.goto("/news?page=2");
+  await expect(page).toHaveURL(/\/news\?page=2$/);
+  await expect(page.getByText("Showing 11–20 of 23 news articles")).toBeVisible();
+  await expect(page.getByRole("link", { name: /YANGWANG launches the U9/i })).toBeVisible();
+  await expect(
+    page.getByRole("navigation", { name: "News pagination" }).getByText("2", { exact: true }),
+  ).toHaveAttribute("aria-current", "page");
+
+  await page.getByRole("combobox", { name: "Year" }).selectOption("2025");
+  await page.getByRole("button", { name: "Apply filters" }).click();
+  await expect(page).toHaveURL(/\/news\?year=2025&entity=$/);
+  await expect(page.getByText("Showing 1–2 of 2 news articles")).toBeVisible();
+  await expect(page.getByRole("link", { name: /DENZA N9 presented/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear filters" })).toHaveAttribute("href", "/news");
+
+  await page.getByRole("link", { name: "Clear filters" }).click();
+  await expect(page).toHaveURL(/\/news$/);
+  await page.getByRole("combobox", { name: "Related entity" }).selectOption("zeekr-7x");
+  await page.getByRole("button", { name: "Apply filters" }).click();
+  await expect(page).toHaveURL(/\/news\?year=&entity=zeekr-7x$/);
+  await expect(page.getByText("Showing 1–1 of 1 news articles")).toBeVisible();
+  await expect(page.getByRole("link", { name: /ZEEKR launches the 7X/i })).toBeVisible();
+});
+
+test("shows an empty state for an out-of-range news page", async ({ page }) => {
+  await page.goto("/news?page=99");
+  await expect(page.getByText("No news on this page")).toBeVisible();
+  await expect(page.getByText("Try another page or return to the first page.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Return to all News" })).toHaveAttribute(
+    "href",
+    "/news",
+  );
+  await expect(page.getByRole("navigation", { name: "News pagination" })).toHaveCount(0);
 });
 
 test("renders metadata and relations for every news article", async ({ page }) => {

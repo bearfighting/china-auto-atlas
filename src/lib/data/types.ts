@@ -245,6 +245,13 @@ export type NewsDocument = {
 export type NewsPageOptions = {
   page?: number;
   pageSize?: number;
+  year?: number;
+  entityId?: string;
+};
+
+export type NewsFilterOptions = {
+  years: number[];
+  entities: Entity[];
 };
 
 export type NewsPage = {
