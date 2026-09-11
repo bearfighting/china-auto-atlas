@@ -4,10 +4,12 @@ import { AtlasEntityCard } from "@/components/atlas-entity-card";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { TechnologyFilters } from "@/components/technology-filters";
 import { TechnologyPagination } from "@/components/technology-pagination";
+import { TechnologyContext } from "@/components/technology-context";
 import { EmptyState } from "@/components/states";
 import { PageContainer } from "@/components/page-container";
 import { technologyRepository } from "@/lib/data/repositories";
 import { displayName, slugFor } from "@/lib/data/resolvers";
+import type { Technology } from "@/lib/data/types";
 
 export const metadata: Metadata = {
   title: "Technologies",
@@ -22,6 +24,16 @@ export const metadata: Metadata = {
 
 function queryValue(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
+}
+
+function technologyCardContext(technology: Technology) {
+  return (
+    <TechnologyContext
+      kind={technology.kind}
+      domains={technologyRepository.getDomains(technology.id)}
+      categories={technologyRepository.getCategories(technology.id)}
+    />
+  );
 }
 
 export default async function TechnologiesPage({
@@ -89,7 +101,7 @@ export default async function TechnologiesPage({
                 titleZh={technology.names?.["zh-CN"]}
                 eyebrow="Technology"
                 status={technology.status}
-                meta={technology.kind ? `Kind: ${technology.kind}` : undefined}
+                meta={technologyCardContext(technology)}
                 description={
                   typeof technology.description === "string" ? technology.description : undefined
                 }

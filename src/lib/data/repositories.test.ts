@@ -53,6 +53,21 @@ describe("generated data repositories", () => {
     expect(powertrainArchitectureRepository.getById("missing-architecture")).toBeNull();
   });
 
+  it("provides technology relationship summaries without changing relations", () => {
+    expect(technologyRepository.getSummary("byd-ctb")).toEqual({
+      vehicleCount: 2,
+      eventCount: 0,
+      newsCount: 1,
+      sourceCount: 1,
+    });
+    expect(technologyRepository.getSummary("missing-technology")).toEqual({
+      vehicleCount: 0,
+      eventCount: 0,
+      newsCount: 0,
+      sourceCount: 0,
+    });
+  });
+
   it("provides stable technology pagination, search, and taxonomy filters", () => {
     expect(technologyRepository.listPage()).toMatchObject({
       page: 1,

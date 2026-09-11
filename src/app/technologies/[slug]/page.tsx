@@ -45,6 +45,7 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
   const technology = technologyRepository.getBySlug(slug);
   if (!technology) notFound();
   const vehicles = technologyRepository.getVehicles(technology.id);
+  const summary = technologyRepository.getSummary(technology.id);
   const domains = technologyRepository.getDomains(technology.id);
   const categories = technologyRepository.getCategories(technology.id);
   const families = technologyRepository.getFamilies(technology.id);
@@ -73,6 +74,10 @@ export default async function TechnologyPage({ params }: { params: Promise<{ slu
           ]}
         />
         <EntityHeader entity={technology} eyebrow="Technology" />
+        <p className="text-sm text-muted-foreground" aria-label="Technology relationship summary">
+          {summary.vehicleCount} vehicles · {summary.eventCount} events · {summary.newsCount} news ·{" "}
+          {summary.sourceCount} sources
+        </p>
         <EntityFacts>
           <EntityFact label="Kind" value={kindLabel} />
           <TaxonomyFact label="Domain" items={domains} />

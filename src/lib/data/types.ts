@@ -172,6 +172,13 @@ export type ManufacturerSummary = {
   sourceCount: number;
 };
 
+export type TechnologySummary = {
+  vehicleCount: number;
+  eventCount: number;
+  newsCount: number;
+  sourceCount: number;
+};
+
 export type TechnologyPageOptions = {
   page?: number;
   pageSize?: number;

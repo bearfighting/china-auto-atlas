@@ -36,6 +36,7 @@ import type {
   TechnologyFilterOptions,
   TechnologyPage,
   TechnologyPageOptions,
+  TechnologySummary,
   PowertrainArchitecture,
   Relationship,
   VehicleSeries,
@@ -453,6 +454,14 @@ export const manufacturerRepository = {
 
 export const technologyRepository = {
   ...relatedEntityRepository<Technology>("technology"),
+  getSummary(id: string): TechnologySummary {
+    return {
+      vehicleCount: this.getVehicles(id).length,
+      eventCount: this.getRelatedEvents(id).length,
+      newsCount: this.getRelatedNews(id).length,
+      sourceCount: this.getRelatedSources(id).length,
+    };
+  },
   listPage(options: TechnologyPageOptions = {}): TechnologyPage {
     const page = positiveInteger(options.page, 1);
     const pageSize = positiveInteger(options.pageSize, 12);

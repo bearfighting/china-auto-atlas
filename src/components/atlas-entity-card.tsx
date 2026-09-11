@@ -17,7 +17,7 @@ export function AtlasEntityCard({
   eyebrow: string;
   status?: string;
   description?: string;
-  meta?: string;
+  meta?: React.ReactNode;
 }) {
   return (
     <Card

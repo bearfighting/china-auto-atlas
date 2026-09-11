@@ -377,6 +377,7 @@ test("renders Technology taxonomy context and relationship empty state", async (
   await expect(page.getByText("Battery Pack")).toBeVisible();
   await expect(page.getByText("Family", { exact: true })).toBeVisible();
   await expect(page.getByText("Structural Battery", { exact: true })).toHaveCount(2);
+  await expect(page.getByText("2 vehicles · 0 events · 1 news · 1 sources")).toBeVisible();
   await expect(page.getByText("Legacy category")).toBeVisible();
   await expect(page.getByRole("heading", { name: "Related technologies" })).toBeVisible();
   await expect(page.getByText("No related technologies collected")).toBeVisible();
@@ -387,6 +388,11 @@ test("renders paginated technologies and applies taxonomy filters", async ({ pag
   await page.goto("/technologies");
   await expect(page.getByText("Showing 1–12 of 15 technologies")).toBeVisible();
   await expect(page.getByTestId("atlas-entity-card")).toHaveCount(12);
+  const ctbCard = page.getByTestId("atlas-entity-card").filter({ hasText: "CTB (Cell-to-Body)" });
+  await expect(ctbCard).toContainText("Energy Storage");
+  await expect(ctbCard).toContainText("Vehicle Structure");
+  await expect(ctbCard).toContainText("Battery Pack");
+  await expect(ctbCard).toContainText("Structural Battery");
   await expect(page.getByRole("navigation", { name: "Technology pagination" })).toBeVisible();
   await expect(page.getByText("Previous", { exact: true })).toHaveAttribute(
     "aria-disabled",
