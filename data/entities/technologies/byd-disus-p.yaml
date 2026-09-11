@@ -1,6 +1,11 @@
 schema_version: 1
 id: byd-disus-p
 type: technology
+kind: branded
+domain_ids:
+- chassis-dynamics
+category_ids:
+- active-suspension
 names:
   en: DiSus-P Intelligent Hydraulic Body Control System
   zh-CN: 云辇-P 智能液压车身控制系统

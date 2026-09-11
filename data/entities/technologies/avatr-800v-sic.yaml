@@ -1,6 +1,11 @@
 schema_version: 1
 id: avatr-800v-sic
 type: technology
+kind: branded
+domain_ids:
+- electrical-architecture
+category_ids:
+- high-voltage-architecture
 names:
   en: Full-stack 800V SiC EV Platform
   zh-CN: 全栈800V碳化硅高压平台

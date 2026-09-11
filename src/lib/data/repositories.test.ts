@@ -1,4 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import * as loadIndexModule from "./load-index";
 import { loadContentIndex, loadDataIndex, loadSearchIndex } from "./load-index";
 import { approvedMedia, displayName } from "./resolvers";
 import { sortNewsDocuments } from "./repositories";
@@ -12,8 +13,12 @@ import {
   platformById,
   productLineRepository,
   productionLineRepository,
+  powertrainArchitectureRepository,
   searchRepository,
   sourceRepository,
+  technologyCategoryRepository,
+  technologyDomainRepository,
+  technologyFamilyRepository,
   technologyRepository,
   vehicleSeriesRepository,
   vehicleRepository,
@@ -32,6 +37,73 @@ describe("generated data repositories", () => {
     expect(loadContentIndex().documents.length).toBe(23);
     expect(loadContentIndex().authors.length).toBeGreaterThan(0);
     expect(loadContentIndex().topics.length).toBeGreaterThan(0);
+  });
+
+  it("resolves taxonomy through generated-index repositories", () => {
+    expect(technologyDomainRepository.list()).toHaveLength(6);
+    expect(technologyDomainRepository.getById("energy-storage")?.names.en).toBe("Energy Storage");
+    expect(technologyDomainRepository.getById("missing-domain")).toBeNull();
+
+    expect(technologyCategoryRepository.getById("battery-pack")?.domain_id).toBe("energy-storage");
+    expect(technologyCategoryRepository.getChildren("missing-category")).toEqual([]);
+
+    expect(technologyFamilyRepository.getById("lfp")?.id).toBe("lfp");
+    expect(technologyFamilyRepository.getById("missing-family")).toBeNull();
+    expect(powertrainArchitectureRepository.getById("battery-electric")?.id).toBe("battery-electric");
+    expect(powertrainArchitectureRepository.getById("missing-architecture")).toBeNull();
+  });
+
+  it("returns children for a taxonomy category with a parent", () => {
+    const dataIndex = loadDataIndex();
+    const child = {
+      ...dataIndex.technology_categories[0],
+      id: "battery-cell-child",
+      parent_id: "battery-pack",
+    };
+    const spy = vi.spyOn(loadIndexModule, "loadDataIndex").mockReturnValue({
+      ...dataIndex,
+      technology_categories: [...dataIndex.technology_categories, child],
+    });
+
+    try {
+      expect(technologyCategoryRepository.getChildren("battery-pack").map((category) => category.id)).toEqual([
+        "battery-cell-child",
+      ]);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
+  it("requires classification fields on every migrated Technology", () => {
+    const technologies = loadDataIndex().entities.filter((entity) => entity.type === "technology");
+    expect(technologies).toHaveLength(15);
+    expect(
+      technologies.every(
+        (technology) =>
+          typeof technology.kind === "string" &&
+          Array.isArray(technology.domain_ids) &&
+          Array.isArray(technology.category_ids),
+      ),
+    ).toBe(true);
+  });
+
+  it("resolves Technology classification without changing legacy relations", () => {
+    expect(technologyRepository.getById("byd-blade-battery")).toMatchObject({
+      kind: "branded",
+      domain_ids: ["energy-storage"],
+      category_ids: ["battery-cell", "battery-pack", "battery-safety"],
+      family_ids: ["lfp"],
+      category: "battery",
+    });
+    expect(technologyRepository.getDomains("byd-blade-battery").map((domain) => domain.id)).toEqual(["energy-storage"]);
+    expect(technologyRepository.getCategories("byd-ctb").map((category) => category.id)).toEqual([
+      "battery-pack",
+      "structural-battery",
+    ]);
+    expect(technologyRepository.getFamilies("byd-ctb").map((family) => family.id)).toEqual(["structural-battery-family"]);
+    expect(technologyRepository.getDomains("missing-technology")).toEqual([]);
+    expect(technologyRepository.getCategories("missing-technology")).toEqual([]);
+    expect(technologyRepository.getFamilies("missing-technology")).toEqual([]);
   });
 
   it("lists news in stable chronological order", () => {

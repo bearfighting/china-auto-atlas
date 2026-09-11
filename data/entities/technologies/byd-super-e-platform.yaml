@@ -1,6 +1,11 @@
 schema_version: 1
 id: byd-super-e-platform
 type: technology
+kind: branded
+domain_ids:
+- electrical-architecture
+category_ids:
+- high-voltage-architecture
 entity_role: platform-technology
 names:
   en: BYD Super e-Platform

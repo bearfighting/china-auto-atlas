@@ -69,7 +69,15 @@ export type VehicleSeries = Entity & {
   brand_id: string;
   product_line_id?: string;
 };
-export type Technology = Entity & EntityRelations & { type: "technology" };
+export type TechnologyKind = "generic" | "branded" | "system" | "component" | "process";
+export type Technology = Entity &
+  EntityRelations & {
+    type: "technology";
+    kind?: TechnologyKind;
+    domain_ids?: string[];
+    category_ids?: string[];
+    family_ids?: string[];
+  };
 export type Platform = Entity & EntityRelations & { type: "platform" };
 
 export type TaxonomyRecord = {

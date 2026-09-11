@@ -1,6 +1,11 @@
 schema_version: 1
 id: zeekr-800v-system
 type: technology
+kind: branded
+domain_ids:
+- electrical-architecture
+category_ids:
+- high-voltage-architecture
 names:
   en: ZEEKR 800V / 3×800V Ecosystem
   zh-CN: 极氪800V / 3×800V生态

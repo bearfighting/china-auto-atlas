@@ -1,6 +1,6 @@
 # China Auto Atlas — Technology Model 执行清单
 
-**Status:** Ready for implementation  
+**Status:** PR 2 implemented; PR 3 pending
 **Related design:** `technology-model-implementation-plan.md`  
 **Scope:** Technology taxonomy、Powertrain Architecture、Technology relations、repository、页面和测试  
 **Last updated:** 2026-09-11
@@ -100,56 +100,54 @@
 
 ### 代码修改
 
-- [ ] 在 `src/lib/data/types.ts` 增加 `TechnologyKind`：`generic`、`branded`、`system`、`component`、`process`。
-- [ ] 为 `Technology` 增加可选字段：`kind`、`domain_ids`、`category_ids`、`family_ids`。
-- [ ] 增加 `TechnologyDomain`、`TechnologyCategory`、`TechnologyFamily`、`PowertrainArchitecture` 类型。
-- [ ] 在 `src/lib/data/repositories.ts` 增加：
-  - [ ] `technologyDomainRepository.list/getById`
-  - [ ] `technologyCategoryRepository.list/getById/getChildren`
-  - [ ] `technologyFamilyRepository.list/getById`
-  - [ ] `powertrainArchitectureRepository.list/getById`
-- [ ] Repository 对不存在的单条记录返回 `null`，集合查询返回 `[]`。
-- [ ] Repository 不读取 `data/` YAML，只读取 generated index。
+- [x] 在 `src/lib/data/types.ts` 增加 `TechnologyKind`：`generic`、`branded`、`system`、`component`、`process`。
+- [x] 为 `Technology` 增加可选字段：`kind`、`domain_ids`、`category_ids`、`family_ids`。
+- [x] 复用 PR 1 已增加的 `TechnologyDomain`、`TechnologyCategory`、`TechnologyFamily`、`PowertrainArchitecture` 类型。
+- [x] 在 `src/lib/data/repositories.ts` 增加 taxonomy repositories：
+  - [x] `technologyDomainRepository.list/getById`
+  - [x] `technologyCategoryRepository.list/getById/getChildren`
+  - [x] `technologyFamilyRepository.list/getById`
+  - [x] `powertrainArchitectureRepository.list/getById`
+- [x] Repository 对不存在的单条记录返回 `null`，集合查询返回 `[]`。
+- [x] Repository 不读取 `data/` YAML，只读取 generated index。
 
 ### Technology 数据迁移
 
-- [ ] 为现有 Technology 添加 `kind`。
-- [ ] 为现有 Technology 添加 `domain_ids`。
-- [ ] 为现有 Technology 添加 `category_ids`。
-- [ ] 为证据足够的 Technology 添加 `family_ids`。
-- [ ] 保留 `category` 和 `secondary_categories`。
-- [ ] 不改变 `id`、`slug`、`vehicle_ids`、`event_ids`、`source_ids`。
-- [ ] 不把 800V、5C、1000 kW、容量或具体性能数字建成 Technology。
-- [ ] 不把 Platform、Generation、Trim 或 Product Line 直接加入 taxonomy。
+- [x] 为现有 15 个 Technology 添加 `kind`。
+- [x] 为现有 15 个 Technology 添加 `domain_ids`。
+- [x] 为现有 15 个 Technology 添加 `category_ids`。
+- [x] 为证据足够的 Technology 添加 `family_ids`，证据不足的记录保持为空。
+- [x] 保留 `category` 和 `secondary_categories`。
+- [x] 不改变 `id`、`slug`、`vehicle_ids`、`event_ids`、`source_ids`。
+- [x] 不把 800V、5C、1000 kW、容量或具体性能数字建成 Technology。
+- [x] 不把 Platform、Generation、Trim 或 Product Line 直接加入 taxonomy。
 
 ### 首批迁移核对
 
-- [ ] `byd-blade-battery` → energy-storage / battery-cell + battery-pack + battery-safety / lfp。
-- [ ] `byd-ctb` → energy-storage + vehicle-structure / battery-pack + structural-battery。
-- [ ] `byd-ctc` → energy-storage + vehicle-structure / battery-pack + structural-battery。
-- [ ] `byd-dm-i` → powertrain / plug-in-hybrid-system；仅在来源足够时加入 `series-parallel-hybrid`。
-- [ ] `byd-dm-p` → powertrain / plug-in-hybrid-system；没有证据时不强加 Family。
-- [ ] `byd-dmo` → powertrain / plug-in-hybrid-system；保留其 `platform-technology` 兼容信息。
-- [ ] `byd-disus-p`、`byd-disus-x` → chassis-dynamics / active-suspension。
-- [ ] `zeekr-800v-system` → electrical-architecture / high-voltage-architecture。
-- [ ] `geely-11-in-1-electric-drive` → electric-drive / integrated-electric-drive / highly-integrated-e-drive。
-- [ ] `avatr-800v-sic`、`byd-super-e-platform`、`byd-e4-platform` 完成同样的语义迁移或明确列入下一批。
+- [x] 完成 15 个 Technology 的 `kind`、Domain 和 Category 迁移；保留旧分类字段。
+- [x] `byd-blade-battery`、`geely-short-blade-battery`、`zeekr-golden-battery` → energy-storage / battery-cell + battery-pack + battery-safety / lfp。
+- [x] `byd-ctb`、`byd-ctc` → energy-storage + vehicle-structure / battery-pack + structural-battery / structural-battery-family。
+- [x] `byd-dm-i`、`byd-dm-p`、`byd-dmo` → powertrain / plug-in-hybrid-system；当前来源不足以强加 Family。
+- [x] `byd-disus-p`、`byd-disus-x` → chassis-dynamics / active-suspension。
+- [x] `zeekr-800v-system`、`avatr-800v-sic`、`byd-super-e-platform` → electrical-architecture / high-voltage-architecture。
+- [x] `geely-11-in-1-electric-drive` → electric-drive / integrated-electric-drive；关联 `highly-integrated-e-drive`。
+- [x] `byd-e4-platform` → electric-drive；暂不强加 `integrated-electric-drive` Category。
 
 ### Pipeline 校验
 
-- [ ] `kind` 只能使用受控值。
-- [ ] `domain_ids`、`category_ids`、`family_ids` 必须引用对应 taxonomy 类型。
-- [ ] 每个 Category 必须属于 Technology 声明的 Domain。
-- [ ] 新旧字段冲突时验证失败，并输出具体文件和 ID。
-- [ ] 旧 Technology 缺少新分类字段时仍能通过，直到迁移窗口结束。
+- [x] `kind` 只能使用受控值。
+- [x] `domain_ids`、`category_ids`、`family_ids` 必须引用对应 taxonomy 类型。
+- [x] 每个 Category 必须属于 Technology 声明的 Domain。
+- [x] 新旧字段冲突时验证失败，并输出具体文件和 ID。
+- [x] 旧 Technology 缺少新分类字段时仍能通过，直到迁移窗口结束。
 
 ### 测试与验收
 
-- [ ] 测试 taxonomy repository 的 `list/getById/getChildren`。
-- [ ] 测试 Technology 多 Domain、多 Category、多 Family。
-- [ ] 测试不存在的 taxonomy ID 返回 `null` 或 `[]`。
-- [ ] 测试旧 Technology 查询和 URL 不回归。
-- [ ] 验证 search index 数量和 ID 唯一性不变。
+- [x] 测试 taxonomy repository 的 `list/getById/getChildren`。
+- [x] 测试 Technology 多 Domain、多 Category、多 Family。
+- [x] 测试不存在的 taxonomy ID 返回 `null` 或 `[]`。
+- [x] 测试旧 Technology 查询和 URL 不回归。
+- [x] 验证 search index 数量和 ID 唯一性不变。
 
 ## PR 3 — Technology Relations 与 Vehicle Architecture
 

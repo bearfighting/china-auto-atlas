@@ -1,6 +1,15 @@
 schema_version: 1
 id: byd-ctc
 type: technology
+kind: branded
+domain_ids:
+- energy-storage
+- vehicle-structure
+category_ids:
+- battery-pack
+- structural-battery
+family_ids:
+- structural-battery-family
 names:
   en: CTC (Cell-to-Chassis) integration
   zh-CN: CTC 电池底盘一体化

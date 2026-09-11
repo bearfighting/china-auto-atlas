@@ -1,6 +1,15 @@
 schema_version: 1
 id: byd-blade-battery
 type: technology
+kind: branded
+domain_ids:
+- energy-storage
+category_ids:
+- battery-cell
+- battery-pack
+- battery-safety
+family_ids:
+- lfp
 names:
   en: Blade Battery
   zh-CN: 刀片电池

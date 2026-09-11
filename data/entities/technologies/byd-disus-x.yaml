@@ -1,6 +1,11 @@
 schema_version: 1
 id: byd-disus-x
 type: technology
+kind: branded
+domain_ids:
+- chassis-dynamics
+category_ids:
+- active-suspension
 entity_role: platform-technology
 names:
   en: DiSus-X Intelligent Body Control System

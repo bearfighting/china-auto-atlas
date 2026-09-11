@@ -1,6 +1,11 @@
 schema_version: 1
 id: byd-dm-p
 type: technology
+kind: branded
+domain_ids:
+- powertrain
+category_ids:
+- plug-in-hybrid-system
 names:
   en: BYD DM-p Super Hybrid
   zh-CN: 比亚迪 DM-p 超级混动

@@ -66,7 +66,7 @@ names:
 
 第一批优先建立 battery-cell、battery-pack、battery-safety、integrated-electric-drive、plug-in-hybrid-system、high-voltage-architecture、active-suspension、structural-battery 和 integrated-casting。
 
-Family 表示通用技术路线，Technology 可以关联多个 Family。第一批包括 lfp、sodium-ion、solid-state、structural-cell、module-free-pack、highly-integrated-e-drive 和 series-parallel-hybrid。
+Family 表示通用技术路线，Technology 可以关联多个 Family。完整方案包括 lfp、sodium-ion、solid-state、structural-cell、module-free-pack、highly-integrated-e-drive 和 series-parallel-hybrid-family；PR 1 首批只建立其中已冻结的最小集合。
 
 所有 taxonomy ID 在四类 registry 之间也必须全局唯一；当 Category、Family 和 Architecture 的显示概念同名时，使用类型后缀消歧，例如 `structural-battery-family`、`series-parallel-hybrid-family` 和 `series-parallel-hybrid-architecture`。
 
@@ -96,7 +96,7 @@ family_ids:
 ```text
 BYD Blade Battery       energy-storage / battery-cell + battery-pack + battery-safety / lfp
 BYD CTB / CTC           energy-storage + vehicle-structure / battery-pack + structural-battery
-BYD DM-i / DM-p / DMO   powertrain / plug-in-hybrid-system / series-parallel-hybrid（需来源支持）
+BYD DM-i / DM-p / DMO   powertrain / plug-in-hybrid-system / series-parallel-hybrid-family（需来源支持）
 BYD DiSus-P / DiSus-X   chassis-dynamics / active-suspension
 Zeekr 800V System       electrical-architecture / high-voltage-architecture
 Geely 11-in-1 E-Drive   electric-drive / integrated-electric-drive / highly-integrated-e-drive
@@ -111,13 +111,13 @@ Geely 11-in-1 E-Drive   electric-drive / integrated-electric-drive / highly-inte
 ```yaml
 powertrain_types:
   - phev
-powertrain_architecture_id: series-parallel-hybrid
+powertrain_architecture_id: series-parallel-hybrid-architecture
 motor_positions:
   - p1
   - p3
 ```
 
-第一批 Architecture：ice、battery-electric、series-hybrid、parallel-hybrid、series-parallel-hybrid、power-split-hybrid、range-extended-electric、fuel-cell-electric。
+第一批 Architecture：ice、battery-electric、series-hybrid、parallel-hybrid、series-parallel-hybrid-architecture、power-split-hybrid、range-extended-electric、fuel-cell-electric。
 
 三者职责固定为：`powertrain_types` 表示 PHEV，`powertrain_architecture_id` 表示 Series-Parallel Hybrid，`technology_ids` 表示 BYD DM-i。
 

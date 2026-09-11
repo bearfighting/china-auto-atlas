@@ -1,6 +1,13 @@
 schema_version: 1
 id: zeekr-golden-battery
 type: technology
+kind: branded
+domain_ids:
+- energy-storage
+category_ids:
+- battery-cell
+- battery-pack
+- battery-safety
 names:
   en: Golden Battery
   zh-CN: 金砖电池

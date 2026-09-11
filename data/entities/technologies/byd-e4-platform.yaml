@@ -1,6 +1,10 @@
 schema_version: 1
 id: byd-e4-platform
 type: technology
+kind: branded
+domain_ids:
+- electric-drive
+category_ids: []
 entity_role: platform-technology
 names:
   en: e⁴ Platform

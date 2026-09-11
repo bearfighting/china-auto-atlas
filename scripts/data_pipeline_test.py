@@ -11,6 +11,7 @@ from data_pipeline import (
     validate_product_hierarchy,
     validate_relationship_indexes,
     validate_taxonomy,
+    validate_technology_classification,
 )
 
 
@@ -242,6 +243,86 @@ class TaxonomyValidationTests(unittest.TestCase):
             "powertrain_architectures": [],
         }
         self.assertEqual(validate_taxonomy(taxonomy), [])
+
+
+class TechnologyClassificationValidationTests(unittest.TestCase):
+    def setUp(self):
+        self.taxonomy = {
+            "technology_domains": [record("domain", "technology_domain", names={"en": "Domain"})],
+            "technology_categories": [
+                record("category", "technology_category", domain_id="domain", parent_id=None, names={"en": "Category"}),
+            ],
+            "technology_families": [record("family", "technology_family", names={"en": "Family"})],
+            "powertrain_architectures": [],
+        }
+
+    def test_accepts_valid_classification_and_legacy_fields(self):
+        records = {
+            "technology": [
+                record(
+                    "technology",
+                    "technology",
+                    kind="branded",
+                    domain_ids=["domain"],
+                    category_ids=["category"],
+                    family_ids=["family"],
+                    category="legacy-category",
+                )
+            ]
+        }
+        self.assertEqual(validate_technology_classification(records, self.taxonomy), [])
+
+    def test_rejects_invalid_kind_and_taxonomy_references(self):
+        records = {
+            "technology": [
+                record(
+                    "technology",
+                    "technology",
+                    kind="unknown",
+                    domain_ids=["missing-domain"],
+                    category_ids=["missing-category"],
+                    family_ids=["missing-family"],
+                )
+            ]
+        }
+        errors = validate_technology_classification(records, self.taxonomy)
+        self.assertTrue(any("kind must be one of" in error for error in errors))
+        self.assertTrue(any("missing technology_domain" in error for error in errors))
+        self.assertTrue(any("missing technology_category" in error for error in errors))
+        self.assertTrue(any("missing technology_family" in error for error in errors))
+
+    def test_rejects_non_string_kind_without_crashing(self):
+        taxonomy = self.taxonomy
+        for invalid_kind in (["branded"], {"value": "branded"}):
+            errors = validate_technology_classification(
+                {"technology": [record("technology", "technology", kind=invalid_kind)]},
+                taxonomy,
+            )
+            self.assertTrue(any("kind must be one of" in error for error in errors))
+
+    def test_rejects_category_outside_declared_domain(self):
+        records = {
+            "technology": [
+                record("technology", "technology", domain_ids=[], category_ids=["category"]),
+            ]
+        }
+        errors = validate_technology_classification(records, self.taxonomy)
+        self.assertTrue(any("is not declared in domain_ids" in error for error in errors))
+
+    def test_rejects_legacy_category_conflict_when_it_is_a_new_category_id(self):
+        records = {
+            "technology": [
+                record(
+                    "technology",
+                    "technology",
+                    domain_ids=["domain"],
+                    category_ids=[],
+                    category="category",
+                )
+            ]
+        }
+        errors = validate_technology_classification(records, self.taxonomy)
+        self.assertTrue(any("legacy category category conflicts" in error for error in errors))
 
 
 if __name__ == "__main__":

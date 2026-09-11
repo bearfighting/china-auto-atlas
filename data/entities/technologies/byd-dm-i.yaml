@@ -1,6 +1,11 @@
 schema_version: 1
 id: byd-dm-i
 type: technology
+kind: branded
+domain_ids:
+- powertrain
+category_ids:
+- plug-in-hybrid-system
 names:
   en: DM-i Super Hybrid
   zh-CN: DM-i 超级混动

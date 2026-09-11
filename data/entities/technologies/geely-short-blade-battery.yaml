@@ -1,6 +1,15 @@
 schema_version: 1
 id: geely-short-blade-battery
 type: technology
+kind: branded
+domain_ids:
+- energy-storage
+category_ids:
+- battery-cell
+- battery-pack
+- battery-safety
+family_ids:
+- lfp
 names:
   en: Geely Short Blade Battery / Geely Golden Short Blade Battery
   zh-CN: 吉利短刀电池 / 吉利神盾金砖短刀电池

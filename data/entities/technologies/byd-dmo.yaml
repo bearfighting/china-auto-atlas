@@ -1,6 +1,11 @@
 schema_version: 1
 id: byd-dmo
 type: technology
+kind: branded
+domain_ids:
+- powertrain
+category_ids:
+- plug-in-hybrid-system
 entity_role: platform-technology
 names:
   en: DMO (Dual Mode Off-road) Super Hybrid Platform

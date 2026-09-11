@@ -29,6 +29,10 @@ import type {
   Source,
   Topic,
   Technology,
+  TechnologyCategory,
+  TechnologyDomain,
+  TechnologyFamily,
+  PowertrainArchitecture,
   VehicleSeries,
   Vehicle,
   NewsPage,
@@ -334,8 +338,62 @@ export const manufacturerRepository = {
 
 export const technologyRepository = {
   ...relatedEntityRepository<Technology>("technology"),
+  getDomains(id: string): TechnologyDomain[] {
+    const technology = this.getById(id);
+    const wanted = new Set(technology?.domain_ids ?? []);
+    return loadDataIndex().technology_domains.filter((domain) => wanted.has(domain.id));
+  },
+  getCategories(id: string): TechnologyCategory[] {
+    const technology = this.getById(id);
+    const wanted = new Set(technology?.category_ids ?? []);
+    return loadDataIndex().technology_categories.filter((category) => wanted.has(category.id));
+  },
+  getFamilies(id: string): TechnologyFamily[] {
+    const technology = this.getById(id);
+    const wanted = new Set(technology?.family_ids ?? []);
+    return loadDataIndex().technology_families.filter((family) => wanted.has(family.id));
+  },
   getVehicles(id: string): Vehicle[] {
     return vehiclesRelatedTo(loadDataIndex(), id);
+  },
+};
+
+export const technologyDomainRepository = {
+  list(): TechnologyDomain[] {
+    return loadDataIndex().technology_domains;
+  },
+  getById(id: string): TechnologyDomain | null {
+    return this.list().find((domain) => domain.id === id) ?? null;
+  },
+};
+
+export const technologyCategoryRepository = {
+  list(): TechnologyCategory[] {
+    return loadDataIndex().technology_categories;
+  },
+  getById(id: string): TechnologyCategory | null {
+    return this.list().find((category) => category.id === id) ?? null;
+  },
+  getChildren(parentId: string): TechnologyCategory[] {
+    return this.list().filter((category) => category.parent_id === parentId);
+  },
+};
+
+export const technologyFamilyRepository = {
+  list(): TechnologyFamily[] {
+    return loadDataIndex().technology_families;
+  },
+  getById(id: string): TechnologyFamily | null {
+    return this.list().find((family) => family.id === id) ?? null;
+  },
+};
+
+export const powertrainArchitectureRepository = {
+  list(): PowertrainArchitecture[] {
+    return loadDataIndex().powertrain_architectures;
+  },
+  getById(id: string): PowertrainArchitecture | null {
+    return this.list().find((architecture) => architecture.id === id) ?? null;
   },
 };
 

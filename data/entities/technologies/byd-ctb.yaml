@@ -1,6 +1,15 @@
 schema_version: 1
 id: byd-ctb
 type: technology
+kind: branded
+domain_ids:
+- energy-storage
+- vehicle-structure
+category_ids:
+- battery-pack
+- structural-battery
+family_ids:
+- structural-battery-family
 names:
   en: CTB (Cell-to-Body) Battery Body Integration Technology
   zh-CN: CTB 电池车身一体化技术

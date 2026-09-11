@@ -1,6 +1,13 @@
 schema_version: 1
 id: geely-11-in-1-electric-drive
 type: technology
+kind: branded
+domain_ids:
+- electric-drive
+category_ids:
+- integrated-electric-drive
+family_ids:
+- highly-integrated-e-drive
 names:
   en: 11-in-1 Intelligent Electric Drive
   zh-CN: 十一合一智能电驱
