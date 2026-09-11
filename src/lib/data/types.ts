@@ -96,6 +96,19 @@ export type TechnologyCategory = TaxonomyRecord & {
 export type TechnologyFamily = TaxonomyRecord & { type: "technology_family" };
 export type PowertrainArchitecture = TaxonomyRecord & { type: "powertrain_architecture" };
 
+export type Relationship = {
+  id: string;
+  type: "relationship";
+  from_id: string;
+  to_id: string;
+  relationship: string;
+  source_ids: string[];
+  evidence_status: EvidenceStatus;
+  [key: string]: unknown;
+};
+
+export type MotorPosition = "p0" | "p1" | "p2" | "p3" | "p4" | "e-axle" | "unknown";
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;
@@ -116,6 +129,8 @@ export type Vehicle = Entity & {
   market_spec_ids?: string[];
   media_ids?: string[];
   powertrain_types?: string[];
+  powertrain_architecture_id?: string | null;
+  motor_positions?: MotorPosition[];
   timeline?: Timeline;
 };
 
@@ -279,7 +294,7 @@ export type DataIndex = {
   technology_families: TechnologyFamily[];
   powertrain_architectures: PowertrainArchitecture[];
   market_specifications: MarketSpecification[];
-  relationships: Entity[];
+  relationships: Relationship[];
   events: Event[];
   sources: Source[];
   media: Media[];

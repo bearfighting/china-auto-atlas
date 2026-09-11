@@ -12,6 +12,7 @@ manufacturer_ids:
 - geely-auto-group
 segment: executive-sedan
 body_style: sedan
+powertrain_architecture_id: battery-electric
 powertrain_types:
 - bev
 status: active

@@ -6,6 +6,7 @@ import {
   eventsRelatedTo,
   mediaByIds,
   approvedMedia,
+  relationshipsFor,
   sourcesByIds,
   vehiclesFromIndex,
   vehiclesRelatedTo,
@@ -33,6 +34,7 @@ import type {
   TechnologyDomain,
   TechnologyFamily,
   PowertrainArchitecture,
+  Relationship,
   VehicleSeries,
   Vehicle,
   NewsPage,
@@ -190,6 +192,12 @@ export const vehicleRepository = {
     return (this.getById(id)?.technology_ids ?? [])
       .map((technologyId) => entityOfType<Technology>(technologyId, "technology"))
       .filter((technology): technology is Technology => Boolean(technology));
+  },
+  getPowertrainArchitecture(id: string): PowertrainArchitecture | null {
+    const architectureId = this.getById(id)?.powertrain_architecture_id;
+    return architectureId
+      ? loadDataIndex().powertrain_architectures.find((architecture) => architecture.id === architectureId) ?? null
+      : null;
   },
   getRelatedSources(id: string): Source[] {
     const vehicle = this.getById(id);
@@ -352,6 +360,20 @@ export const technologyRepository = {
     const technology = this.getById(id);
     const wanted = new Set(technology?.family_ids ?? []);
     return loadDataIndex().technology_families.filter((family) => wanted.has(family.id));
+  },
+  getRelatedRelationships(id: string): Relationship[] {
+    return relationshipsFor(loadDataIndex(), id);
+  },
+  getRelatedTechnologies(id: string): Technology[] {
+    const index = loadDataIndex();
+    const relatedIds = new Set(
+      relationshipsFor(index, id).flatMap((relationship) =>
+        relationship.from_id === id ? [relationship.to_id] : [relationship.from_id],
+      ),
+    );
+    return index.entities.filter(
+      (entity): entity is Technology => entity.type === "technology" && relatedIds.has(entity.id),
+    );
   },
   getVehicles(id: string): Vehicle[] {
     return vehiclesRelatedTo(loadDataIndex(), id);

@@ -12,6 +12,7 @@ manufacturer_ids:
 - chongqing-changan-automobile
 segment: mid-size-suv
 body_style: suv
+powertrain_architecture_id: null
 powertrain_types: []
 status: active
 first_announced_at:

@@ -16,6 +16,7 @@ manufacturer_ids:
 - byd-company
 segment: executive-sedan
 body_style: sedan
+powertrain_architecture_id: null
 powertrain_types:
 - bev
 - phev

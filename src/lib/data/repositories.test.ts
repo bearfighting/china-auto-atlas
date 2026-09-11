@@ -106,6 +106,62 @@ describe("generated data repositories", () => {
     expect(technologyRepository.getFamilies("missing-technology")).toEqual([]);
   });
 
+  it("resolves Technology relationships and Vehicle Architecture", () => {
+    const relationships = loadDataIndex().relationships;
+    expect(relationships).toHaveLength(37);
+    const technologyFamilyRelationships = relationships.filter((relationship) =>
+      ["lfp", "structural-battery-family", "highly-integrated-e-drive"].includes(relationship.to_id),
+    );
+    expect(technologyFamilyRelationships).toHaveLength(5);
+    expect(technologyFamilyRelationships).toEqual(expect.arrayContaining([
+        expect.objectContaining({ from_id: "byd-blade-battery", to_id: "lfp", relationship: "based_on" }),
+        expect.objectContaining({ from_id: "byd-ctb", to_id: "structural-battery-family", relationship: "based_on" }),
+        expect.objectContaining({ from_id: "byd-ctc", to_id: "structural-battery-family", relationship: "based_on" }),
+        expect.objectContaining({ from_id: "geely-short-blade-battery", to_id: "lfp", relationship: "based_on" }),
+        expect.objectContaining({
+          from_id: "geely-11-in-1-electric-drive",
+          to_id: "highly-integrated-e-drive",
+          relationship: "based_on",
+        }),
+    ]));
+    expect(technologyRepository.getRelatedRelationships("byd-blade-battery")).toMatchObject([
+      expect.objectContaining({
+        from_id: "byd-blade-battery",
+        to_id: "lfp",
+        relationship: "based_on",
+      }),
+    ]);
+    expect(vehicleRepository.getPowertrainArchitecture("byd-sealion-7")?.id).toBe("battery-electric");
+    expect(vehicleRepository.getPowertrainArchitecture("deepal-s05")).toBeNull();
+  });
+
+  it("resolves Technology to Technology relationships without copying reverse fields", () => {
+    const dataIndex = loadDataIndex();
+    const spy = vi.spyOn(loadIndexModule, "loadDataIndex").mockReturnValue({
+      ...dataIndex,
+      relationships: [
+        ...dataIndex.relationships,
+        {
+          id: "fixture-technology-relationship",
+          type: "relationship",
+          from_id: "byd-blade-battery",
+          to_id: "geely-short-blade-battery",
+          relationship: "complements",
+          source_ids: ["src-byd-blade-tech"],
+          evidence_status: "confirmed",
+        },
+      ],
+    });
+
+    try {
+      expect(technologyRepository.getRelatedTechnologies("byd-blade-battery").map((technology) => technology.id)).toEqual([
+        "geely-short-blade-battery",
+      ]);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
   it("lists news in stable chronological order", () => {
     const news = newsRepository.list();
     expect(news).toHaveLength(23);

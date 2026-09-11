@@ -1,6 +1,6 @@
 # China Auto Atlas — Technology Model 执行清单
 
-**Status:** PR 2 implemented; PR 3 pending
+**Status:** PR 3 implemented; PR 4 pending
 **Related design:** `technology-model-implementation-plan.md`  
 **Scope:** Technology taxonomy、Powertrain Architecture、Technology relations、repository、页面和测试  
 **Last updated:** 2026-09-11
@@ -157,49 +157,49 @@
 
 ### Technology Relations
 
-- [ ] 在现有 `data/relationships/` 下新增或扩展 Technology relationship 文件。
-- [ ] 支持关系类型：`uses`、`integrates`、`based_on`、`evolves_from`、`replaces`、`enables`、`complements`、`related_to`。
-- [ ] 关系继续使用 `from_id`、`to_id`，不在 Technology entity 内维护反向关系数组。
-- [ ] 每条关系包含 `source_ids` 和 `evidence_status`。
-- [ ] 只添加当前来源明确支持的关系；不根据营销文案推导等价关系。
-- [ ] 明确 CTB 与 CTC 仍是两个独立 ID。
+- [x] 在现有 `data/relationships/` 下新增或扩展 Technology relationship 文件。
+- [x] 支持关系类型：`uses`、`integrates`、`based_on`、`evolves_from`、`replaces`、`enables`、`complements`、`related_to`。
+- [x] 关系继续使用 `from_id`、`to_id`，不在 Technology entity 内维护反向关系数组。
+- [x] 每条关系包含 `source_ids` 和 `evidence_status`。
+- [x] 只添加当前来源明确支持的关系；不根据营销文案推导等价关系。
+- [x] 明确 CTB 与 CTC 仍是两个独立 ID。
 
 ### Relationship 类型矩阵
 
-- [ ] Technology → Technology：允许技术组合、演进、替代和相关关系。
-- [ ] Technology → Family：允许 `based_on` 或 `related_to`。
-- [ ] Technology → Category：只在确有必要时使用 `related_to`。
-- [ ] Vehicle → Powertrain Architecture：通过 `powertrain_architecture_id` 表达，不重复建普通关系。
-- [ ] 禁止未知类型两端的关系进入 build。
+- [x] Technology → Technology：允许技术组合、演进、替代和相关关系。
+- [x] Technology → Family：允许 `based_on` 或 `related_to`。
+- [x] Technology → Category：只在确有必要时使用 `related_to`。
+- [x] Vehicle → Powertrain Architecture：通过 `powertrain_architecture_id` 表达，不重复建普通关系。
+- [x] 禁止未知类型两端的关系进入 build。
 
 ### Vehicle 字段
 
-- [ ] 在 `src/lib/data/types.ts` 增加 `powertrain_architecture_id?: string | null`。
-- [ ] 增加 `motor_positions?: MotorPosition[]`。
-- [ ] `MotorPosition` 使用受控值：`p0`、`p1`、`p2`、`p3`、`p4`、`e-axle`、`unknown`。
-- [ ] 保留现有 `powertrain_types` 和 `technology_ids`。
-- [ ] 为有来源的 Vehicle 添加 Architecture；来源不足时保持 `null` 或不添加。
-- [ ] 不在第一版建立复杂的 P0/P1/P2/P3 电机工程模型。
+- [x] 在 `src/lib/data/types.ts` 增加 `powertrain_architecture_id?: string | null`。
+- [x] 增加 `motor_positions?: MotorPosition[]`。
+- [x] `MotorPosition` 使用受控值：`p0`、`p1`、`p2`、`p3`、`p4`、`e-axle`、`unknown`。
+- [x] 保留现有 `powertrain_types` 和 `technology_ids`。
+- [x] 为有来源的 Vehicle 添加 Architecture；来源不足时保持 `null` 或不添加。
+- [x] 不在第一版建立复杂的 P0/P1/P2/P3 电机工程模型。
 
 ### Pipeline 校验
 
-- [ ] 关系两端 ID 必须存在于 entity 或 taxonomy 的统一 ID 集合。
-- [ ] 关系类型必须在允许集合中。
-- [ ] 关系两端类型必须符合关系矩阵。
-- [ ] 关系的 `source_ids` 必须引用 Source。
-- [ ] `powertrain_architecture_id` 必须引用 Architecture。
-- [ ] `motor_positions` 必须使用受控值。
-- [ ] `powertrain_types`、Architecture 和 Technology 之间不强制一一对应，但明显矛盾时给出错误。
+- [x] 关系两端 ID 必须存在于 entity 或 taxonomy 的统一 ID 集合。
+- [x] 关系类型必须在允许集合中。
+- [x] 关系两端类型必须符合关系矩阵。
+- [x] 关系的 `source_ids` 必须引用 Source。
+- [x] `powertrain_architecture_id` 必须引用 Architecture。
+- [x] `motor_positions` 必须使用受控值。
+- [x] `powertrain_types`、Architecture 和 Technology 之间不强制一一对应；当前校验拒绝 `battery-electric` 与 `phev/erev` 的明显冲突。
 
 ### Repository 与测试
 
-- [ ] 增加通用关系 resolver，按 `from_id/to_id` 查询关系。
-- [ ] 增加 `technologyRepository.getRelatedTechnologies(id)`。
-- [ ] 增加 `technologyRepository.getRelatedRelationships(id)`。
-- [ ] 增加 `vehicleRepository.getPowertrainArchitecture(id)`。
-- [ ] 测试 Technology → Technology、Technology → Family 关系。
-- [ ] 测试无效关系类型、无效端点和无来源关系会被拒绝。
-- [ ] 测试 Vehicle Architecture 缺失时返回 `null`。
+- [x] 增加通用关系 resolver，按 `from_id/to_id` 查询关系。
+- [x] 增加 `technologyRepository.getRelatedTechnologies(id)`。
+- [x] 增加 `technologyRepository.getRelatedRelationships(id)`。
+- [x] 增加 `vehicleRepository.getPowertrainArchitecture(id)`。
+- [x] 测试 Technology → Technology、Technology → Family 关系。
+- [x] 测试无效关系类型、无效端点和无来源关系会被拒绝。
+- [x] 测试 Vehicle Architecture 缺失时返回 `null`。
 
 ## PR 4 — Technology 页面和 Vehicle 页面上下文
 

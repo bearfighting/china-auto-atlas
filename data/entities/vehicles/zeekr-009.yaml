@@ -11,6 +11,7 @@ manufacturer_ids:
 - zeekr-group
 segment: luxury-mpv
 body_style: mpv
+powertrain_architecture_id: null
 powertrain_types:
 - bev
 status: active

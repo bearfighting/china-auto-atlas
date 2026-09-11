@@ -12,6 +12,7 @@ manufacturer_ids:
 - byd-company
 segment: supercar
 body_style: coupe
+powertrain_architecture_id: null
 powertrain_types:
 - bev
 status: active

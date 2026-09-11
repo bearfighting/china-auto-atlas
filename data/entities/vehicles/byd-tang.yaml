@@ -15,6 +15,7 @@ manufacturer_ids:
 - byd-company
 segment: large-suv
 body_style: suv
+powertrain_architecture_id: null
 powertrain_types:
 - bev
 - phev

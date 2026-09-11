@@ -11,6 +11,7 @@ manufacturer_ids:
   - saic-motor
 segment: compact-hatchback
 body_style: hatchback
+powertrain_architecture_id: null
 powertrain_types:
   - bev
 status: active

@@ -29,6 +29,16 @@ TAXONOMY_REGISTRIES = {
 }
 TAXONOMY_RECORD_TYPES = {spec[2] for spec in TAXONOMY_REGISTRIES.values()}
 TECHNOLOGY_KINDS = {"generic", "branded", "system", "component", "process"}
+EVIDENCE_STATUSES = {"confirmed", "claimed", "reported", "estimated", "unknown"}
+MOTOR_POSITIONS = {"p0", "p1", "p2", "p3", "p4", "e-axle", "unknown"}
+TECHNOLOGY_RELATION_TYPES = {
+    "uses", "integrates", "based_on", "evolves_from", "replaces", "enables", "complements", "related_to",
+}
+EXISTING_RELATION_TYPES = {
+    "operates", "parent_of", "controls", "strategic_partner_of", "developed_by", "developed_for",
+    "jointly_developed_by", "owns", "invested_in",
+}
+RELATION_TYPES = EXISTING_RELATION_TYPES | TECHNOLOGY_RELATION_TYPES
 REFERENCE_KEYS = {
     "author_ids", "topic_ids", "entity_ids", "event_ids", "source_ids", "news_ids",
     "relationship_ids", "document_ids", "subject_ids", "brand_ids",
@@ -263,6 +273,107 @@ def validate_technology_classification(
                     for family_id in sorted(set(declared_families) - families):
                         errors.append(f"{path}: {technology_id} family_ids references missing technology_family {family_id}")
 
+    return errors
+
+
+def validate_relationships(records: dict[str, list[dict[str, Any]]]) -> list[str]:
+    """Validate relationship endpoints, evidence, and taxonomy-aware type constraints."""
+    errors: list[str] = []
+    by_id = {record_id: values[0] for record_id, values in records.items() if values}
+
+    for values in records.values():
+        for relationship in values:
+            if relationship.get("type") != "relationship":
+                continue
+            path = relationship.get("_file", "relationship")
+            relationship_id = relationship.get("id", "unknown")
+            from_id = relationship.get("from_id")
+            to_id = relationship.get("to_id")
+            from_record = by_id.get(from_id) if isinstance(from_id, str) else None
+            to_record = by_id.get(to_id) if isinstance(to_id, str) else None
+
+            if not from_record:
+                errors.append(f"{path}: {relationship_id} from_id must reference an entity or taxonomy record")
+            if not to_record:
+                errors.append(f"{path}: {relationship_id} to_id must reference an entity or taxonomy record")
+
+            relationship_type = relationship.get("relationship")
+            if not isinstance(relationship_type, str) or relationship_type not in RELATION_TYPES:
+                errors.append(f"{path}: {relationship_id} relationship must be one of {sorted(RELATION_TYPES)}")
+
+            source_ids = relationship.get("source_ids")
+            if not isinstance(source_ids, list) or not source_ids or not all(isinstance(item, str) for item in source_ids):
+                errors.append(f"{path}: {relationship_id} source_ids must be a non-empty list of Source IDs")
+            else:
+                for source_id in source_ids:
+                    source = by_id.get(source_id)
+                    if not source or source.get("type") != "source":
+                        errors.append(f"{path}: {relationship_id} source_ids references missing Source {source_id}")
+
+            evidence_status = relationship.get("evidence_status")
+            if not isinstance(evidence_status, str) or evidence_status not in EVIDENCE_STATUSES:
+                errors.append(f"{path}: {relationship_id} evidence_status must be one of {sorted(EVIDENCE_STATUSES)}")
+
+            if from_record and to_record and isinstance(relationship_type, str):
+                from_type = from_record.get("type")
+                to_type = to_record.get("type")
+                if from_type == "technology" and to_type == "technology_family":
+                    if relationship_type not in {"based_on", "related_to"}:
+                        errors.append(
+                            f"{path}: {relationship_id} Technology to Family relations must use based_on or related_to"
+                        )
+                elif from_type == "technology" and to_type == "technology_category":
+                    if relationship_type != "related_to":
+                        errors.append(
+                            f"{path}: {relationship_id} Technology to Category relations must use related_to"
+                        )
+                elif from_type == "technology" and to_type == "technology":
+                    if relationship_type not in TECHNOLOGY_RELATION_TYPES:
+                        errors.append(f"{path}: {relationship_id} has an invalid Technology relation type")
+                elif from_type in TAXONOMY_RECORD_TYPES or to_type in TAXONOMY_RECORD_TYPES:
+                    errors.append(f"{path}: {relationship_id} has an unsupported taxonomy relation endpoint pair")
+
+    return errors
+
+
+def validate_vehicle_architecture(records: dict[str, list[dict[str, Any]]]) -> list[str]:
+    """Validate optional Vehicle architecture and motor-position fields."""
+    errors: list[str] = []
+    architectures = {
+        record["id"]
+        for values in records.values()
+        for record in values
+        if record.get("type") == "powertrain_architecture"
+    }
+    for values in records.values():
+        for vehicle in values:
+            if vehicle.get("type") != "vehicle":
+                continue
+            path = vehicle.get("_file", "vehicle")
+            vehicle_id = vehicle.get("id", "unknown")
+            architecture_id = vehicle.get("powertrain_architecture_id")
+            if architecture_id is not None:
+                if not isinstance(architecture_id, str) or architecture_id not in architectures:
+                    errors.append(
+                        f"{path}: {vehicle_id} powertrain_architecture_id must reference a Powertrain Architecture or null"
+                    )
+            powertrain_types = vehicle.get("powertrain_types", [])
+            if (
+                architecture_id == "battery-electric"
+                and isinstance(powertrain_types, list)
+                and any(value in {"phev", "erev"} for value in powertrain_types)
+            ):
+                errors.append(
+                    f"{path}: {vehicle_id} has battery-electric architecture but incompatible hybrid powertrain_types"
+                )
+            motor_positions = vehicle.get("motor_positions")
+            if motor_positions is not None:
+                if not isinstance(motor_positions, list) or not all(
+                    isinstance(item, str) and item in MOTOR_POSITIONS for item in motor_positions
+                ):
+                    errors.append(
+                        f"{path}: {vehicle_id} motor_positions must use {sorted(MOTOR_POSITIONS)}"
+                    )
     return errors
 
 
@@ -533,6 +644,8 @@ def validate() -> int:
     }
     errors.extend(validate_taxonomy(taxonomy, entity_ids))
     errors.extend(validate_technology_classification(records, taxonomy))
+    errors.extend(validate_relationships(records))
+    errors.extend(validate_vehicle_architecture(records))
     duplicate_ids = {key: values for key, values in records.items() if len(values) > 1}
     known_ids = set(records)
     missing = [item for item in refs if item[2] not in known_ids]

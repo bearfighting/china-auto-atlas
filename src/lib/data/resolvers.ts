@@ -5,6 +5,7 @@ import type {
   Entity,
   LocalizedName,
   Media,
+  Relationship,
   Source,
   Topic,
   Vehicle,
@@ -59,6 +60,12 @@ export function sourcesByIds(index: DataIndex, ids: string[] | undefined): Sourc
 export function mediaByIds(index: DataIndex, ids: string[] | undefined): Media[] {
   const wanted = new Set(ids ?? []);
   return index.media.filter((media) => wanted.has(media.id));
+}
+
+export function relationshipsFor(index: DataIndex, entityId: string): Relationship[] {
+  return index.relationships.filter(
+    (relationship) => relationship.from_id === entityId || relationship.to_id === entityId,
+  );
 }
 
 export function approvedMedia(media: Media[]) {

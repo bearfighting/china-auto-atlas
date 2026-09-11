@@ -1,0 +1,51 @@
+schema_version: 1
+relationships:
+  - schema_version: 1
+    type: relationship
+    id: rel-byd-blade-battery-based-on-lfp
+    from_id: byd-blade-battery
+    to_id: lfp
+    relationship: based_on
+    evidence_status: confirmed
+    source_ids:
+      - src-byd-blade-tech
+
+  - schema_version: 1
+    type: relationship
+    id: rel-byd-ctb-based-on-structural-battery-family
+    from_id: byd-ctb
+    to_id: structural-battery-family
+    relationship: based_on
+    evidence_status: confirmed
+    source_ids:
+      - src-byd-about-tech
+
+  - schema_version: 1
+    type: relationship
+    id: rel-byd-ctc-based-on-structural-battery-family
+    from_id: byd-ctc
+    to_id: structural-battery-family
+    relationship: based_on
+    evidence_status: confirmed
+    source_ids:
+      - src-byd-about-tech
+
+  - schema_version: 1
+    type: relationship
+    id: rel-geely-short-blade-battery-based-on-lfp
+    from_id: geely-short-blade-battery
+    to_id: lfp
+    relationship: based_on
+    evidence_status: confirmed
+    source_ids:
+      - src-geely-short-blade-2024
+
+  - schema_version: 1
+    type: relationship
+    id: rel-geely-11-in-1-electric-drive-based-on-highly-integrated-e-drive
+    from_id: geely-11-in-1-electric-drive
+    to_id: highly-integrated-e-drive
+    relationship: based_on
+    evidence_status: confirmed
+    source_ids:
+      - src-geely-ex5-tech

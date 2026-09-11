@@ -12,6 +12,7 @@ manufacturer_ids:
 - chongqing-changan-automobile
 segment: executive-hatchback
 body_style: liftback
+powertrain_architecture_id: null
 powertrain_types:
 - bev
 - erev

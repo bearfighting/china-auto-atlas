@@ -10,8 +10,10 @@ from data_pipeline import (
     validate_factory_hierarchy,
     validate_product_hierarchy,
     validate_relationship_indexes,
+    validate_relationships,
     validate_taxonomy,
     validate_technology_classification,
+    validate_vehicle_architecture,
 )
 
 
@@ -323,6 +325,112 @@ class TechnologyClassificationValidationTests(unittest.TestCase):
         }
         errors = validate_technology_classification(records, self.taxonomy)
         self.assertTrue(any("legacy category category conflicts" in error for error in errors))
+
+
+class RelationshipValidationTests(unittest.TestCase):
+    def setUp(self):
+        self.records = {
+            "technology": [record("technology", "technology")],
+            "family": [record("family", "technology_family")],
+            "source": [record("source", "source")],
+        }
+
+    def test_accepts_sourced_technology_to_family_relationship(self):
+        self.records["relationship"] = [
+            record(
+                "relationship",
+                "relationship",
+                from_id="technology",
+                to_id="family",
+                relationship="based_on",
+                source_ids=["source"],
+                evidence_status="confirmed",
+            )
+        ]
+        self.assertEqual(validate_relationships(self.records), [])
+
+    def test_rejects_invalid_endpoint_type_relationship_source_and_evidence(self):
+        self.records["relationship"] = [
+            record(
+                "relationship",
+                "relationship",
+                from_id="missing",
+                to_id="family",
+                relationship="based_on",
+                source_ids=["missing-source"],
+                evidence_status=["confirmed"],
+            )
+        ]
+        errors = validate_relationships(self.records)
+        self.assertTrue(any("from_id must reference" in error for error in errors))
+        self.assertTrue(any("source_ids references missing Source" in error for error in errors))
+        self.assertTrue(any("evidence_status must be one of" in error for error in errors))
+
+    def test_rejects_invalid_technology_family_relation_type(self):
+        self.records["relationship"] = [
+            record(
+                "relationship",
+                "relationship",
+                from_id="technology",
+                to_id="family",
+                relationship="uses",
+                source_ids=["source"],
+                evidence_status="confirmed",
+            )
+        ]
+        errors = validate_relationships(self.records)
+        self.assertTrue(any("Technology to Family relations" in error for error in errors))
+
+
+class VehicleArchitectureValidationTests(unittest.TestCase):
+    def test_accepts_known_architecture_and_motor_positions(self):
+        records = {
+            "architecture": [record("architecture", "powertrain_architecture")],
+            "vehicle": [
+                record(
+                    "vehicle",
+                    "vehicle",
+                    powertrain_architecture_id="architecture",
+                    motor_positions=["p1", "e-axle"],
+                )
+            ],
+        }
+        self.assertEqual(validate_vehicle_architecture(records), [])
+
+    def test_rejects_unknown_architecture_and_motor_positions(self):
+        records = {
+            "architecture": [record("architecture", "powertrain_architecture")],
+            "vehicle": [
+                record(
+                    "vehicle",
+                    "vehicle",
+                    powertrain_architecture_id="missing",
+                    motor_positions=["p5"],
+                )
+            ],
+        }
+        errors = validate_vehicle_architecture(records)
+        self.assertTrue(any("powertrain_architecture_id" in error for error in errors))
+        self.assertTrue(any("motor_positions" in error for error in errors))
+
+    def test_allows_unknown_architecture_as_null(self):
+        records = {"vehicle": [record("vehicle", "vehicle", powertrain_architecture_id=None)]}
+        self.assertEqual(validate_vehicle_architecture(records), [])
+
+    def test_rejects_conflicting_battery_electric_architecture(self):
+        records = {
+            "architecture": [record("battery-electric", "powertrain_architecture")],
+            "vehicle": [
+                record(
+                    "vehicle",
+                    "vehicle",
+                    powertrain_architecture_id="battery-electric",
+                    powertrain_types=["bev", "phev"],
+                )
+            ],
+        }
+        errors = validate_vehicle_architecture(records)
+        self.assertTrue(any("incompatible hybrid" in error for error in errors))
 
 
 if __name__ == "__main__":

@@ -13,6 +13,7 @@ manufacturer_ids:
 - byd-company
 segment: mid-size-off-road-suv
 body_style: suv
+powertrain_architecture_id: null
 powertrain_types:
   - phev
 status: active

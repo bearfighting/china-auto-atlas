@@ -14,6 +14,7 @@ manufacturer_ids:
 - geely-auto-group
 segment: compact-suv
 body_style: suv
+powertrain_architecture_id: null
 powertrain_types:
   - bev
 status: active
