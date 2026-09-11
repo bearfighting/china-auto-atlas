@@ -40,6 +40,8 @@ import type {
   VehicleFilterOptions,
   VehiclePage,
   VehiclePageOptions,
+  BrandPage,
+  BrandPageOptions,
   NewsFilterOptions,
   NewsPage,
   NewsPageOptions,
@@ -291,6 +293,32 @@ export const vehicleRepository = {
 
 export const brandRepository = {
   ...relatedEntityRepository<Brand>("brand"),
+  listPage(options: BrandPageOptions = {}): BrandPage {
+    const page = positiveInteger(options.page, 1);
+    const pageSize = positiveInteger(options.pageSize, 12);
+    const query = options.query?.trim().toLocaleLowerCase();
+    const brands = this.list()
+      .filter((brand) => {
+        if (!query) return true;
+        return [brand.names?.en, brand.names?.["zh-CN"], ...(brand.aliases ?? [])]
+          .filter(Boolean)
+          .some((value) => value?.toLocaleLowerCase().includes(query));
+      })
+      .sort(
+        (a, b) =>
+          displayName(a.names).localeCompare(displayName(b.names)) || a.id.localeCompare(b.id),
+      );
+    const total = brands.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+    return {
+      items: brands.slice(start, start + pageSize),
+      page,
+      pageSize,
+      total,
+      totalPages,
+    };
+  },
   getVehicles(id: string): Vehicle[] {
     return vehiclesRelatedTo(loadDataIndex(), id);
   },

@@ -323,6 +323,31 @@ describe("generated data repositories", () => {
     expect(options.statuses).toEqual(["active"]);
   });
 
+  it("provides stable brand pagination and name search", () => {
+    expect(brandRepository.listPage()).toMatchObject({
+      page: 1,
+      pageSize: 12,
+      total: 10,
+      totalPages: 1,
+    });
+    expect(brandRepository.listPage({ page: 0 })).toMatchObject({ page: 1, pageSize: 12 });
+    expect(brandRepository.listPage({ page: 2 }).items).toEqual([]);
+    expect(brandRepository.listPage({ page: 1, pageSize: 2 }).items.map((brand) => brand.id)).toEqual([
+      "avatr",
+      "byd",
+    ]);
+    expect(brandRepository.listPage({ query: "byd" }).items.map((brand) => brand.id)).toEqual(["byd"]);
+    expect(brandRepository.listPage({ query: "方程豹" }).items.map((brand) => brand.id)).toEqual([
+      "fangchengbao",
+    ]);
+    expect(brandRepository.listPage({ query: "FANG CHENG BAO" }).items.map((brand) => brand.id)).toEqual([
+      "fangchengbao",
+    ]);
+    expect(brandRepository.listPage({ query: "BYD" }).items.map((brand) => brand.id)).toEqual(["byd"]);
+    expect(brandRepository.listPage({ query: "missing-brand" }).items).toEqual([]);
+    expect(brandRepository.listPage({ query: "   " }).total).toBe(10);
+  });
+
   it("resolves the ZEEKR 7X by id and slug", () => {
     expect(vehicleRepository.getById("zeekr-7x")?.id).toBe("zeekr-7x");
     expect(vehicleRepository.getBySlug("zeekr-7x")?.id).toBe("zeekr-7x");

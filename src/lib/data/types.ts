@@ -151,6 +151,20 @@ export type VehiclePage = {
   totalPages: number;
 };
 
+export type BrandPageOptions = {
+  page?: number;
+  pageSize?: number;
+  query?: string;
+};
+
+export type BrandPage = {
+  items: Brand[];
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+};
+
 export type Timeline = {
   announcement_event_id?: string | null;
   preorder_event_id?: string | null;

@@ -127,6 +127,28 @@ test("discovers entity collections from the desktop primary navigation", async (
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/brands$/);
 });
 
+test("searches brands and handles an out-of-range page", async ({ page }) => {
+  await page.goto("/brands");
+  await expect(page.getByText("Showing 1–10 of 10 brands")).toBeVisible();
+  await expect(page.getByRole("searchbox", { name: "Search brands" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Brand pagination" })).toHaveCount(0);
+
+  const brandFilters = page.locator('form[action="/brands"]');
+  await brandFilters.getByRole("searchbox", { name: "Search brands" }).fill("byd");
+  await brandFilters.getByRole("button", { name: "Search" }).click();
+  await expect(page).toHaveURL(/\/brands\?q=byd$/);
+  await expect(page.getByText("Showing 1–1 of 1 brands")).toBeVisible();
+  await expect(page.getByRole("link", { name: "BYD", exact: true })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Clear search" })).toHaveAttribute("href", "/brands");
+
+  await page.goto("/brands?q=byd&page=2");
+  await expect(page.getByText("No brands on this page")).toBeVisible();
+
+  await page.goto("/brands?page=99");
+  await expect(page.getByText("No brands on this page")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Brand pagination" })).toHaveCount(0);
+});
+
 test("opens and closes the mobile navigation", async ({ page }) => {
   test.skip(test.info().project.name === "chromium", "mobile navigation coverage");
 
