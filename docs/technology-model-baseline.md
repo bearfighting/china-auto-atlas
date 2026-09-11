@@ -3,7 +3,10 @@
 **Date:** 2026-09-11  
 **Branch:** `main`  
 **Baseline commit:** `02e95c2` (`docs: add technology model implementation plan`)  
-**Purpose:** Record the pre-migration behavior for Technology Model PR 0.
+**Purpose:** Record the Technology Model baseline and subsequent compatibility verification.
+
+The generated-index counts below include the post-PR audit correction that makes
+validated supplier entities available to runtime repositories.
 
 ## Validation environment
 
@@ -22,8 +25,8 @@ Generated from `build/data-index.json` and `build/search-index.json` after `pnpm
 - Technology entities: 15
 - Technology slug fields: 0
 - Vehicle entities: 25
-- All entities: 74
-- Relationships: 32
+- All entities: 76
+- Relationships: 37
 - Events: 71
 - Sources: 111
 - Market specifications: 20
@@ -59,11 +62,11 @@ zeekr-golden-battery
 - Legacy classification fields: `category`, `secondary_categories`
 - Vehicle → Technology field: `technology_ids`
 - Technology → Vehicle reverse field: `vehicle_ids`
-- Technology relations: existing generic records under `data/relationships/`; no new Technology relations were added in PR 0
+- Technology relations: existing generic records under `data/relationships/`; five sourced Technology → Family relations are currently indexed
 - Technology route: `/technologies/:slug`
 - Technology list route: `/technologies`
 - Current Technology URL resolution: `slug ?? id`; all current Technology URLs therefore use the Technology ID
-- Technology-to-Technology relations: none currently collected; the 32 existing relationships are primarily for other entity types
+- Technology-to-Technology relations: none currently collected; the five Technology → Family relations are not Technology-to-Technology relations
 - Taxonomy routes: none
 - Taxonomy search type: none
 - Taxonomy sitemap entries: none
@@ -97,15 +100,15 @@ Verification sources:
 
 | Command | Result |
 | --- | --- |
-| `pnpm data:validate` | PASS — 380 IDs, 929 references |
-| `pnpm data:build` | PASS — 74 entities, 71 events, 23 documents, 28 media records |
+| `pnpm data:validate` | PASS — 413 IDs, 953 references |
+| `pnpm data:build` | PASS — 76 entities, 71 events, 23 documents, 28 media records |
 | `pnpm typecheck` | PASS |
 | `pnpm lint` | PASS |
 | `pnpm format:check` | PASS |
-| `pnpm test` | PASS — 5 files, 36 tests |
+| `pnpm test` | PASS — 7 files, 58 tests |
 | `pnpm build` | PASS — 166 static pages generated |
-| `pnpm test:e2e` | PASS — 65 passed, 7 skipped, 72 total |
-| `pnpm quality:check` | PASS — 65 passed, 7 skipped, 72 E2E total |
+| `pnpm test:e2e` | NOT VERIFIED — Playwright server/browser run hangs before reporting results in the current environment |
+| `pnpm quality:check` | NOT RUN — it includes the same E2E gate, which is blocked by the environment hang |
 
 The first sandboxed E2E attempt could not bind `127.0.0.1:3001` because local server listening was restricted. The same suite was rerun with the required local-server permission and passed. This is an execution-environment constraint, not an application failure.
 
@@ -127,7 +130,7 @@ The E2E server logged Next.js `NoFallbackError` messages while exercising expect
 
 - No taxonomy files were added.
 - No Technology or Vehicle TypeScript types were changed.
-- `scripts/data_pipeline.py` was not changed.
+- `scripts/data_pipeline.py` was not changed in PR 0; the current build includes the later audit fix for supplier entities.
 - No Technology or Vehicle YAML records were migrated.
 - No Technology relations were added.
 - No page, repository, search or sitemap logic was changed.

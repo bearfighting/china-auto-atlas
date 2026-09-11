@@ -712,7 +712,7 @@ def build() -> int:
     flat = [record for values in records.values() for record in values]
     index = {
         "schema_version": 1,
-        "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "platform", "technology", "vehicle", "product_line", "vehicle_series", "factory", "production_line"}), key=lambda r: r["id"]),
+        "entities": sorted((r for r in flat if r.get("type") in {"brand", "manufacturer", "organization", "supplier", "platform", "technology", "vehicle", "product_line", "vehicle_series", "factory", "production_line"}), key=lambda r: r["id"]),
         "technology_domains": sorted(taxonomy["technology_domains"], key=lambda r: r["id"]),
         "technology_categories": sorted(taxonomy["technology_categories"], key=lambda r: r["id"]),
         "technology_families": sorted(taxonomy["technology_families"], key=lambda r: r["id"]),

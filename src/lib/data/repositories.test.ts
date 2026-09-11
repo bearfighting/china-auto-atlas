@@ -564,7 +564,7 @@ describe("generated data repositories", () => {
 
   it("preserves evidence boundaries during stabilization", () => {
     const dataIndex = loadDataIndex();
-    expect(dataIndex.entities).toHaveLength(74);
+    expect(dataIndex.entities).toHaveLength(76);
     expect(dataIndex.events).toHaveLength(71);
     expect(dataIndex.sources).toHaveLength(111);
     expect(dataIndex.market_specifications).toHaveLength(20);
@@ -621,6 +621,8 @@ describe("generated data repositories", () => {
     expect(manufacturerRepository.getById("zeekr-group")?.type).toBe("manufacturer");
     expect(manufacturerRepository.getVehicles("zeekr-group").map((vehicle) => vehicle.id)).toContain("zeekr-7x");
     expect(organizationById("zeekr-group")?.type).toBe("manufacturer");
+    expect(organizationById("catl")?.type).toBe("supplier");
+    expect(organizationById("huawei")?.type).toBe("supplier");
 
     expect(technologyRepository.getById("zeekr-800v-system")?.type).toBe("technology");
     expect(technologyRepository.getVehicles("zeekr-800v-system").map((vehicle) => vehicle.id)).toContain("zeekr-7x");
@@ -660,6 +662,12 @@ describe("generated data repositories", () => {
     expect(eventRepository.getRelatedEntities("does-not-exist")).toEqual([]);
     expect(eventRepository.getRelatedNews("does-not-exist")).toEqual([]);
     expect(eventRepository.getRelatedSources("does-not-exist")).toEqual([]);
+  });
+
+  it("resolves supplier subjects in event relationships", () => {
+    expect(eventRepository.getRelatedEntities("event-avatr-chn-platform-launch-2022").map((entity) => entity.id)).toEqual(
+      expect.arrayContaining(["avatr-chn", "avatr-11", "chongqing-changan-automobile", "huawei", "catl"]),
+    );
   });
 
   it("provides stable event pagination, sorting, filters, and options", () => {

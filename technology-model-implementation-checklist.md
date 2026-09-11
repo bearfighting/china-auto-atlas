@@ -280,7 +280,7 @@
 ### PR 5 baseline
 
 ```text
-entities: 74
+entities: 76
 technologies: 15
 vehicles: 25
 relationships: 37
@@ -293,8 +293,8 @@ technology_categories: 9
 technology_families: 5
 powertrain_architectures: 8
 data validation: pass (413 IDs, 953 references)
-unit tests: pass (42 Vitest tests, 33 data tests)
-E2E: pass (71 passed, 7 skipped)
+unit tests: pass (58 Vitest tests, 33 data tests)
+E2E: not verified in current environment (Playwright server/browser run hangs before reporting results)
 production build: pass (166 static pages)
 ```
 
