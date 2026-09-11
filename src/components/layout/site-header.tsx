@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { primaryNavigationItems } from "@/components/atlas-navigation";
-import { MobileNavigation } from "@/components/mobile-navigation";
-import { SearchCommand } from "@/components/search-command";
+import { primaryNavigationItems } from "@/components/navigation/atlas-navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
+import { SearchCommand } from "@/components/navigation/search-command";
 import { Separator } from "@/components/ui/separator";
 export function SiteHeader() {
   const pathname = usePathname() ?? "";

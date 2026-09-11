@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { EntityFacts, EntityFact } from "@/components/entity-facts";
-import { EntityHeader } from "@/components/entity-header";
-import { RelatedNewsList } from "@/components/related-news-list";
-import { SourceList } from "@/components/source-list";
-import { TaxonomyFact } from "@/components/taxonomy-facts";
-import { Timeline } from "@/components/timeline";
-import { UnknownState } from "@/components/states";
-import { VehicleCard } from "@/components/vehicle-card";
-import { PageContainer } from "@/components/page-container";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { EntityFacts, EntityFact } from "@/components/entity/entity-facts";
+import { EntityHeader } from "@/components/entity/entity-header";
+import { RelatedNewsList } from "@/components/content/related-news-list";
+import { SourceList } from "@/components/content/source-list";
+import { TaxonomyFact } from "@/components/entity/taxonomy-facts";
+import { Timeline } from "@/components/content/timeline";
+import { UnknownState } from "@/components/content/states";
+import { VehicleCard } from "@/components/entity/vehicle-card";
+import { PageContainer } from "@/components/layout/page-container";
 import { displayName, slugFor } from "@/lib/data/resolvers";
 import { technologyRepository } from "@/lib/data/repositories";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { StructuredData } from "@/components/structured-data";
+import { StructuredData } from "@/components/content/structured-data";
 import { absoluteUrl } from "@/lib/site";
 
 export type BreadcrumbItem = {

@@ -1,6 +1,6 @@
 "use client";
 
-import { ErrorState } from "@/components/states";
+import { ErrorState } from "@/components/content/states";
 
 export default function GlobalError({ reset }: { reset: () => void }) {
   return (

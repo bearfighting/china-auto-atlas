@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { EvidenceBadge } from "@/components/source-list";
+import { EvidenceBadge } from "@/components/content/source-list";
 
 export function ArticleHeader({
   title,

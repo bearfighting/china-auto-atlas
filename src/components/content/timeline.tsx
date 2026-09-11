@@ -1,7 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import type { Event } from "@/lib/data/types";
 
 export function Timeline({ events }: { events: Event[] }) {

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { EventCard } from "@/components/event-card";
-import { EventFilters } from "@/components/event-filters";
-import { EventPagination } from "@/components/event-pagination";
-import { EmptyState } from "@/components/states";
-import { PageContainer } from "@/components/page-container";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { EventCard } from "@/app/events/_components/card";
+import { EventFilters } from "@/app/events/_components/filters";
+import { EventPagination } from "@/app/events/_components/pagination";
+import { EmptyState } from "@/components/content/states";
+import { PageContainer } from "@/components/layout/page-container";
 import { eventRepository } from "@/lib/data/repositories";
 
 export const metadata: Metadata = {

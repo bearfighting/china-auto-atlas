@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PageContainer } from "@/components/page-container";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { ArticleHeader } from "@/components/article-header";
-import { SourceList } from "@/components/source-list";
+import { PageContainer } from "@/components/layout/page-container";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { ArticleHeader } from "@/components/content/article-header";
+import { SourceList } from "@/components/content/source-list";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import { newsRepository } from "@/lib/data/repositories";
 import { displayName } from "@/lib/data/resolvers";
-import { StructuredData } from "@/components/structured-data";
+import { StructuredData } from "@/components/content/structured-data";
 import { absoluteUrl } from "@/lib/site";
 
 export function generateStaticParams() {

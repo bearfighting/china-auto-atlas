@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { EmptyState } from "@/components/states";
-import { PageContainer } from "@/components/page-container";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { EmptyState } from "@/components/content/states";
+import { PageContainer } from "@/components/layout/page-container";
 import { Card, CardContent } from "@/components/ui/card";
-import { SearchPagination } from "@/components/search-pagination";
+import { SearchPagination } from "@/app/search/_components/pagination";
 import { searchRepository } from "@/lib/data/repositories";
 import type { SearchType } from "@/lib/data/types";
 

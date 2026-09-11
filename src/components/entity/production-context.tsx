@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { displayName, slugFor } from "@/lib/data/resolvers";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import type { Factory, ProductionLine, Vehicle } from "@/lib/data/types";
 
 export function ProductionContext({

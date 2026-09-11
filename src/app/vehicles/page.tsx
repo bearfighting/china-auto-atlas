@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { EmptyState } from "@/components/states";
-import { PageContainer } from "@/components/page-container";
-import { VehicleCard } from "@/components/vehicle-card";
-import { VehicleFilters } from "@/components/vehicle-filters";
-import { VehiclePagination } from "@/components/vehicle-pagination";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { EmptyState } from "@/components/content/states";
+import { PageContainer } from "@/components/layout/page-container";
+import { VehicleCard } from "@/components/entity/vehicle-card";
+import { VehicleFilters } from "@/app/vehicles/_components/filters";
+import { VehiclePagination } from "@/app/vehicles/_components/pagination";
 import { vehicleRepository } from "@/lib/data/repositories";
 import type { PowertrainType } from "@/lib/data/types";
 

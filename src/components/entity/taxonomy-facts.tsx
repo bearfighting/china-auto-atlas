@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import { displayName } from "@/lib/data/resolvers";
 import type { LocalizedName } from "@/lib/data/types";
 

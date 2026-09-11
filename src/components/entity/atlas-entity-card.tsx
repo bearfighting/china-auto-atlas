@@ -43,7 +43,7 @@ export function AtlasEntityCard({
         {description ? (
           <p className="line-clamp-3 text-sm text-muted-foreground">{description}</p>
         ) : null}
-        {meta ? <p className="text-xs text-muted-foreground">{meta}</p> : null}
+        {meta ? <div className="text-xs text-muted-foreground">{meta}</div> : null}
         <Link
           className="text-sm font-medium text-primary underline-offset-4 hover:underline"
           href={href}

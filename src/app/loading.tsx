@@ -1,4 +1,4 @@
-import { PageContainer } from "@/components/page-container";
+import { PageContainer } from "@/components/layout/page-container";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {

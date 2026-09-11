@@ -1,4 +1,4 @@
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 
 export function EntityFacts({ children }: { children: React.ReactNode }) {
   return <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{children}</dl>;

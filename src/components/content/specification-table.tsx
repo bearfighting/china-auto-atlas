@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import type { MarketSpecification, Price, RangeValue, Variant } from "@/lib/data/types";
 
 function value(value: unknown) {

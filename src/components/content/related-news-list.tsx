@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import type { NewsDocument } from "@/lib/data/types";
 
 export function RelatedNewsList({ documents }: { documents: NewsDocument[] }) {

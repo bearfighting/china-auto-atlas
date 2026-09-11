@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { MutableRefObject } from "react";
 import { useRef } from "react";
 import { usePathname } from "next/navigation";
-import { primaryNavigationItems } from "@/components/atlas-navigation";
+import { primaryNavigationItems } from "@/components/navigation/atlas-navigation";
 import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { atlasNavigationItems } from "@/components/atlas-navigation";
-import { PageContainer } from "@/components/page-container";
+import { atlasNavigationItems } from "@/components/navigation/atlas-navigation";
+import { PageContainer } from "@/components/layout/page-container";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { newsRepository } from "@/lib/data/repositories";

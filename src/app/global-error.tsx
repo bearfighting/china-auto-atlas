@@ -2,8 +2,8 @@
 
 import "./globals.css";
 import Link from "next/link";
-import { ErrorState } from "@/components/states";
-import { SiteFooter } from "@/components/site-footer";
+import { ErrorState } from "@/components/content/states";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export default function GlobalError({ reset }: { reset: () => void }) {
   return (

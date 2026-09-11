@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { AtlasEntityCard } from "@/components/atlas-entity-card";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { EmptyState } from "@/components/states";
-import { PageContainer } from "@/components/page-container";
+import { AtlasEntityCard } from "@/components/entity/atlas-entity-card";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { EmptyState } from "@/components/content/states";
+import { PageContainer } from "@/components/layout/page-container";
 import { manufacturerRepository } from "@/lib/data/repositories";
 import { displayName, slugFor } from "@/lib/data/resolvers";
 

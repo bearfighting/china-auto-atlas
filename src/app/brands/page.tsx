@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AtlasEntityCard } from "@/components/atlas-entity-card";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { BrandFilters } from "@/components/brand-filters";
-import { BrandPagination } from "@/components/brand-pagination";
-import { EmptyState } from "@/components/states";
-import { PageContainer } from "@/components/page-container";
+import { AtlasEntityCard } from "@/components/entity/atlas-entity-card";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { BrandFilters } from "@/app/brands/_components/filters";
+import { BrandPagination } from "@/app/brands/_components/pagination";
+import { EmptyState } from "@/components/content/states";
+import { PageContainer } from "@/components/layout/page-container";
 import { brandRepository } from "@/lib/data/repositories";
 import { displayName, slugFor } from "@/lib/data/resolvers";
 

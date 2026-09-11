@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { UnknownState } from "@/components/states";
+import { UnknownState } from "@/components/content/states";
 import { publicMediaAlt, publicMediaPath } from "@/lib/media";
 import type { Media } from "@/lib/data/types";
 

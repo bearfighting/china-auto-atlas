@@ -1,5 +1,5 @@
-import { PageContainer } from "@/components/page-container";
-import { NotFoundState } from "@/components/states";
+import { PageContainer } from "@/components/layout/page-container";
+import { NotFoundState } from "@/components/content/states";
 
 export default function EventNotFound() {
   return (

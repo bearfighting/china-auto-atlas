@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { EventCard } from "./event-card";
+import { EventCard } from "./card";
 import type { Entity, Event } from "@/lib/data/types";
 
 const event: Event = {

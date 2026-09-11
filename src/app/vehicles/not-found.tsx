@@ -1,4 +1,4 @@
-import { NotFoundState } from "@/components/states";
+import { NotFoundState } from "@/components/content/states";
 
 export default function VehiclesNotFound() {
   return (
